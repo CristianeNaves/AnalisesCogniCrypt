@@ -1,0 +1,467 @@
+public class org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier extends org.apache.xml.security.stax.ext.AbstractInputProcessor
+{
+    private org.apache.xml.security.binding.xmldsig.ReferenceType referenceType;
+    private org.apache.xml.security.stax.ext.Transformer transformer;
+    private org.apache.xml.security.stax.impl.util.DigestOutputStream digestOutputStream;
+    private java.io.OutputStream bufferedDigestOutputStream;
+    private java.util.List startElementPath;
+    private org.apache.xml.security.stax.ext.stax.XMLSecStartElement startElement;
+    private int elementCounter;
+    private boolean finished;
+    final org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor this$0;
+
+    public void <init>(org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor, org.apache.xml.security.stax.ext.XMLSecurityProperties, org.apache.xml.security.stax.ext.InputProcessorChain, org.apache.xml.security.binding.xmldsig.ReferenceType, org.apache.xml.security.stax.ext.stax.XMLSecStartElement) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier r0;
+        org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor r1;
+        org.apache.xml.security.stax.ext.XMLSecurityProperties r2;
+        org.apache.xml.security.stax.ext.stax.XMLSecStartElement r3;
+        org.apache.xml.security.binding.xmldsig.ReferenceType r4;
+        org.apache.xml.security.stax.ext.InputProcessorChain r5;
+        org.apache.xml.security.stax.ext.InboundSecurityContext $r6;
+        org.apache.xml.security.stax.impl.util.DigestOutputStream $r7, $r9;
+        org.apache.xml.security.stax.impl.util.UnsynchronizedBufferedOutputStream $r8;
+        java.io.OutputStream $r10;
+        org.apache.xml.security.stax.ext.Transformer $r11;
+        int varReplacer4579, varReplacer4580;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier;
+
+        r1 := @parameter0: org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor;
+
+        r2 := @parameter1: org.apache.xml.security.stax.ext.XMLSecurityProperties;
+
+        r5 := @parameter2: org.apache.xml.security.stax.ext.InputProcessorChain;
+
+        r4 := @parameter3: org.apache.xml.security.binding.xmldsig.ReferenceType;
+
+        r3 := @parameter4: org.apache.xml.security.stax.ext.stax.XMLSecStartElement;
+
+        r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor this$0> = r1;
+
+        specialinvoke r0.<org.apache.xml.security.stax.ext.AbstractInputProcessor: void <init>(org.apache.xml.security.stax.ext.XMLSecurityProperties)>(r2);
+
+        varReplacer4580 = 0;
+
+        r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: int elementCounter> = varReplacer4580;
+
+        varReplacer4579 = 0;
+
+        r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: boolean finished> = varReplacer4579;
+
+        virtualinvoke r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: void setStartElement(org.apache.xml.security.stax.ext.stax.XMLSecStartElement)>(r3);
+
+        virtualinvoke r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: void setReferenceType(org.apache.xml.security.binding.xmldsig.ReferenceType)>(r4);
+
+        $r6 = interfaceinvoke r5.<org.apache.xml.security.stax.ext.InputProcessorChain: org.apache.xml.security.stax.ext.InboundSecurityContext getSecurityContext()>();
+
+        $r7 = virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor: org.apache.xml.security.stax.impl.util.DigestOutputStream createMessageDigestOutputStream(org.apache.xml.security.binding.xmldsig.ReferenceType,org.apache.xml.security.stax.ext.InboundSecurityContext)>(r4, $r6);
+
+        r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: org.apache.xml.security.stax.impl.util.DigestOutputStream digestOutputStream> = $r7;
+
+        $r8 = new org.apache.xml.security.stax.impl.util.UnsynchronizedBufferedOutputStream;
+
+        $r9 = virtualinvoke r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: org.apache.xml.security.stax.impl.util.DigestOutputStream getDigestOutputStream()>();
+
+        specialinvoke $r8.<org.apache.xml.security.stax.impl.util.UnsynchronizedBufferedOutputStream: void <init>(java.io.OutputStream)>($r9);
+
+        r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: java.io.OutputStream bufferedDigestOutputStream> = $r8;
+
+        $r10 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: java.io.OutputStream bufferedDigestOutputStream>;
+
+        $r11 = virtualinvoke r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: org.apache.xml.security.stax.ext.Transformer buildTransformerChain(org.apache.xml.security.binding.xmldsig.ReferenceType,java.io.OutputStream,org.apache.xml.security.stax.ext.InputProcessorChain)>(r4, $r10, r5);
+
+        r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: org.apache.xml.security.stax.ext.Transformer transformer> = $r11;
+
+        return;
+    }
+
+    public org.apache.xml.security.stax.ext.Transformer buildTransformerChain(org.apache.xml.security.binding.xmldsig.ReferenceType, java.io.OutputStream, org.apache.xml.security.stax.ext.InputProcessorChain) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier r0;
+        org.apache.xml.security.binding.xmldsig.ReferenceType r1;
+        java.io.OutputStream r2;
+        org.apache.xml.security.stax.ext.InputProcessorChain r3;
+        org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor $r4;
+        org.apache.xml.security.stax.ext.Transformer $r5;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier;
+
+        r1 := @parameter0: org.apache.xml.security.binding.xmldsig.ReferenceType;
+
+        r2 := @parameter1: java.io.OutputStream;
+
+        r3 := @parameter2: org.apache.xml.security.stax.ext.InputProcessorChain;
+
+        $r4 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor this$0>;
+
+        $r5 = virtualinvoke $r4.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor: org.apache.xml.security.stax.ext.Transformer buildTransformerChain(org.apache.xml.security.binding.xmldsig.ReferenceType,java.io.OutputStream,org.apache.xml.security.stax.ext.InputProcessorChain,org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier)>(r1, r2, r3, r0);
+
+        return $r5;
+    }
+
+    public org.apache.xml.security.stax.ext.stax.XMLSecEvent processNextHeaderEvent(org.apache.xml.security.stax.ext.InputProcessorChain) throws javax.xml.stream.XMLStreamException, org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.stax.ext.InputProcessorChain r0;
+        org.apache.xml.security.stax.ext.stax.XMLSecEvent $r1;
+        org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier r2;
+
+        nop;
+
+        r2 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier;
+
+        r0 := @parameter0: org.apache.xml.security.stax.ext.InputProcessorChain;
+
+        $r1 = interfaceinvoke r0.<org.apache.xml.security.stax.ext.InputProcessorChain: org.apache.xml.security.stax.ext.stax.XMLSecEvent processHeaderEvent()>();
+
+        return $r1;
+    }
+
+    public org.apache.xml.security.stax.ext.stax.XMLSecEvent processNextEvent(org.apache.xml.security.stax.ext.InputProcessorChain) throws javax.xml.stream.XMLStreamException, org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.stax.ext.InputProcessorChain r0;
+        org.apache.xml.security.stax.ext.stax.XMLSecEvent r1;
+        org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier r2;
+
+        nop;
+
+        r2 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier;
+
+        r0 := @parameter0: org.apache.xml.security.stax.ext.InputProcessorChain;
+
+        r1 = interfaceinvoke r0.<org.apache.xml.security.stax.ext.InputProcessorChain: org.apache.xml.security.stax.ext.stax.XMLSecEvent processEvent()>();
+
+        virtualinvoke r2.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: void processEvent(org.apache.xml.security.stax.ext.stax.XMLSecEvent,org.apache.xml.security.stax.ext.InputProcessorChain)>(r1, r0);
+
+        return r1;
+    }
+
+    public void processEvent(org.apache.xml.security.stax.ext.stax.XMLSecEvent, org.apache.xml.security.stax.ext.InputProcessorChain) throws javax.xml.stream.XMLStreamException, org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier r0;
+        org.apache.xml.security.stax.ext.Transformer $r1, $r7;
+        org.apache.xml.security.stax.ext.stax.XMLSecEvent r2;
+        int $i0, $i1, $i2, $i3, $i4, $i5, varReplacer4581;
+        org.apache.xml.security.stax.ext.stax.XMLSecEndElement r3;
+        javax.xml.namespace.QName $r4, $r6;
+        org.apache.xml.security.stax.ext.stax.XMLSecStartElement $r5;
+        boolean $z0;
+        java.io.OutputStream $r8;
+        org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor $r9;
+        org.apache.xml.security.stax.impl.util.DigestOutputStream $r10;
+        byte[] $r11;
+        org.apache.xml.security.binding.xmldsig.ReferenceType $r12;
+        org.apache.xml.security.stax.ext.InputProcessorChain r13;
+        org.apache.xml.security.stax.ext.DocumentContext $r14;
+        java.lang.Throwable $r15, r16;
+        org.apache.xml.security.exceptions.XMLSecurityException $r18;
+        java.lang.Exception $r19;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier;
+
+        r2 := @parameter0: org.apache.xml.security.stax.ext.stax.XMLSecEvent;
+
+        r13 := @parameter1: org.apache.xml.security.stax.ext.InputProcessorChain;
+
+        $r1 = virtualinvoke r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: org.apache.xml.security.stax.ext.Transformer getTransformer()>();
+
+        interfaceinvoke $r1.<org.apache.xml.security.stax.ext.Transformer: void transform(org.apache.xml.security.stax.ext.stax.XMLSecEvent)>(r2);
+
+        $i0 = interfaceinvoke r2.<org.apache.xml.security.stax.ext.stax.XMLSecEvent: int getEventType()>();
+
+        lookupswitch($i0)
+        {
+            case 1: goto label1;
+            case 2: goto label2;
+            default: goto label7;
+        };
+
+     label1:
+        $i4 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: int elementCounter>;
+
+        $i5 = $i4 + 1;
+
+        r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: int elementCounter> = $i5;
+
+        goto label7;
+
+     label2:
+        r3 = interfaceinvoke r2.<org.apache.xml.security.stax.ext.stax.XMLSecEvent: org.apache.xml.security.stax.ext.stax.XMLSecEndElement asEndElement()>();
+
+        $i1 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: int elementCounter>;
+
+        $i2 = $i1 - 1;
+
+        r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: int elementCounter> = $i2;
+
+        $i3 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: int elementCounter>;
+
+        if $i3 != 0 goto label7;
+
+        $r4 = interfaceinvoke r3.<org.apache.xml.security.stax.ext.stax.XMLSecEndElement: javax.xml.namespace.QName getName()>();
+
+        $r5 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: org.apache.xml.security.stax.ext.stax.XMLSecStartElement startElement>;
+
+        $r6 = interfaceinvoke $r5.<org.apache.xml.security.stax.ext.stax.XMLSecStartElement: javax.xml.namespace.QName getName()>();
+
+        $z0 = virtualinvoke $r4.<javax.xml.namespace.QName: boolean equals(java.lang.Object)>($r6);
+
+        if $z0 == 0 goto label7;
+
+        $r7 = virtualinvoke r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: org.apache.xml.security.stax.ext.Transformer getTransformer()>();
+
+        interfaceinvoke $r7.<org.apache.xml.security.stax.ext.Transformer: void doFinal()>();
+
+     label3:
+        $r8 = virtualinvoke r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: java.io.OutputStream getBufferedDigestOutputStream()>();
+
+        virtualinvoke $r8.<java.io.OutputStream: void close()>();
+
+     label4:
+        goto label6;
+
+     label5:
+        $r15 := @caughtexception;
+
+        r16 = $r15;
+
+        $r18 = new org.apache.xml.security.exceptions.XMLSecurityException;
+
+        $r19 = (java.lang.Exception) r16;
+
+        specialinvoke $r18.<org.apache.xml.security.exceptions.XMLSecurityException: void <init>(java.lang.Exception)>($r19);
+
+        throw $r18;
+
+     label6:
+        $r9 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor this$0>;
+
+        $r10 = virtualinvoke r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: org.apache.xml.security.stax.impl.util.DigestOutputStream getDigestOutputStream()>();
+
+        $r11 = virtualinvoke $r10.<org.apache.xml.security.stax.impl.util.DigestOutputStream: byte[] getDigestValue()>();
+
+        $r12 = virtualinvoke r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: org.apache.xml.security.binding.xmldsig.ReferenceType getReferenceType()>();
+
+        virtualinvoke $r9.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor: void compareDigest(byte[],org.apache.xml.security.binding.xmldsig.ReferenceType)>($r11, $r12);
+
+        interfaceinvoke r13.<org.apache.xml.security.stax.ext.InputProcessorChain: void removeProcessor(org.apache.xml.security.stax.ext.InputProcessor)>(r0);
+
+        $r14 = interfaceinvoke r13.<org.apache.xml.security.stax.ext.InputProcessorChain: org.apache.xml.security.stax.ext.DocumentContext getDocumentContext()>();
+
+        interfaceinvoke $r14.<org.apache.xml.security.stax.ext.DocumentContext: void unsetIsInSignedContent(java.lang.Object)>(r0);
+
+        varReplacer4581 = 1;
+
+        virtualinvoke r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: void setFinished(boolean)>(varReplacer4581);
+
+     label7:
+        return;
+
+        catch java.io.IOException from label3 to label4 with label5;
+    }
+
+    public boolean isFinished()
+    {
+        org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier r0;
+        boolean $z0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier;
+
+        $z0 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: boolean finished>;
+
+        return $z0;
+    }
+
+    public void setFinished(boolean)
+    {
+        org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier r0;
+        boolean z0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier;
+
+        z0 := @parameter0: boolean;
+
+        r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: boolean finished> = z0;
+
+        return;
+    }
+
+    public org.apache.xml.security.binding.xmldsig.ReferenceType getReferenceType()
+    {
+        org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier r0;
+        org.apache.xml.security.binding.xmldsig.ReferenceType $r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier;
+
+        $r1 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: org.apache.xml.security.binding.xmldsig.ReferenceType referenceType>;
+
+        return $r1;
+    }
+
+    public void setReferenceType(org.apache.xml.security.binding.xmldsig.ReferenceType)
+    {
+        org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier r0;
+        org.apache.xml.security.binding.xmldsig.ReferenceType r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier;
+
+        r1 := @parameter0: org.apache.xml.security.binding.xmldsig.ReferenceType;
+
+        r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: org.apache.xml.security.binding.xmldsig.ReferenceType referenceType> = r1;
+
+        return;
+    }
+
+    public org.apache.xml.security.stax.ext.Transformer getTransformer()
+    {
+        org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier r0;
+        org.apache.xml.security.stax.ext.Transformer $r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier;
+
+        $r1 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: org.apache.xml.security.stax.ext.Transformer transformer>;
+
+        return $r1;
+    }
+
+    public void setTransformer(org.apache.xml.security.stax.ext.Transformer)
+    {
+        org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier r0;
+        org.apache.xml.security.stax.ext.Transformer r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier;
+
+        r1 := @parameter0: org.apache.xml.security.stax.ext.Transformer;
+
+        r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: org.apache.xml.security.stax.ext.Transformer transformer> = r1;
+
+        return;
+    }
+
+    public org.apache.xml.security.stax.impl.util.DigestOutputStream getDigestOutputStream()
+    {
+        org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier r0;
+        org.apache.xml.security.stax.impl.util.DigestOutputStream $r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier;
+
+        $r1 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: org.apache.xml.security.stax.impl.util.DigestOutputStream digestOutputStream>;
+
+        return $r1;
+    }
+
+    public void setDigestOutputStream(org.apache.xml.security.stax.impl.util.DigestOutputStream)
+    {
+        org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier r0;
+        org.apache.xml.security.stax.impl.util.DigestOutputStream r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier;
+
+        r1 := @parameter0: org.apache.xml.security.stax.impl.util.DigestOutputStream;
+
+        r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: org.apache.xml.security.stax.impl.util.DigestOutputStream digestOutputStream> = r1;
+
+        return;
+    }
+
+    public java.io.OutputStream getBufferedDigestOutputStream()
+    {
+        org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier r0;
+        java.io.OutputStream $r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier;
+
+        $r1 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: java.io.OutputStream bufferedDigestOutputStream>;
+
+        return $r1;
+    }
+
+    public void setBufferedDigestOutputStream(java.io.OutputStream)
+    {
+        org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier r0;
+        java.io.OutputStream r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier;
+
+        r1 := @parameter0: java.io.OutputStream;
+
+        r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: java.io.OutputStream bufferedDigestOutputStream> = r1;
+
+        return;
+    }
+
+    public org.apache.xml.security.stax.ext.stax.XMLSecStartElement getStartElement()
+    {
+        org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier r0;
+        org.apache.xml.security.stax.ext.stax.XMLSecStartElement $r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier;
+
+        $r1 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: org.apache.xml.security.stax.ext.stax.XMLSecStartElement startElement>;
+
+        return $r1;
+    }
+
+    public void setStartElement(org.apache.xml.security.stax.ext.stax.XMLSecStartElement)
+    {
+        org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier r0;
+        org.apache.xml.security.stax.ext.stax.XMLSecStartElement r1;
+        java.util.List $r2;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier;
+
+        r1 := @parameter0: org.apache.xml.security.stax.ext.stax.XMLSecStartElement;
+
+        $r2 = interfaceinvoke r1.<org.apache.xml.security.stax.ext.stax.XMLSecStartElement: java.util.List getElementPath()>();
+
+        r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: java.util.List startElementPath> = $r2;
+
+        r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: org.apache.xml.security.stax.ext.stax.XMLSecStartElement startElement> = r1;
+
+        return;
+    }
+
+    public java.util.List getStartElementPath()
+    {
+        org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier r0;
+        java.util.List $r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier;
+
+        $r1 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractSignatureReferenceVerifyInputProcessor$InternalSignatureReferenceVerifier: java.util.List startElementPath>;
+
+        return $r1;
+    }
+}

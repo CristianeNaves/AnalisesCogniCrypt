@@ -1,0 +1,30 @@
+public class org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA256MGF1 extends org.apache.xml.security.algorithms.implementations.SignatureBaseRSA
+{
+
+    public void <init>() throws org.apache.xml.security.signature.XMLSignatureException
+    {
+        org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA256MGF1 r0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA256MGF1;
+
+        specialinvoke r0.<org.apache.xml.security.algorithms.implementations.SignatureBaseRSA: void <init>()>();
+
+        return;
+    }
+
+    public java.lang.String engineGetURI()
+    {
+        org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA256MGF1 r0;
+        java.lang.String varReplacer1956;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA256MGF1;
+
+        varReplacer1956 = "http://www.w3.org/2007/05/xmldsig-more#sha256-rsa-MGF1";
+
+        return varReplacer1956;
+    }
+}

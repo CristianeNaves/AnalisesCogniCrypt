@@ -1,0 +1,308 @@
+public class org.apache.sshd.common.kex.ECDH extends org.apache.sshd.common.kex.AbstractDH
+{
+    private java.security.spec.ECParameterSpec params;
+    private java.security.spec.ECPoint e;
+    private byte[] e_array;
+    private java.security.spec.ECPoint f;
+    private java.security.KeyPairGenerator myKpairGen;
+    private javax.crypto.KeyAgreement myKeyAgree;
+
+    public void <init>() throws java.lang.Exception
+    {
+        org.apache.sshd.common.kex.ECDH r0;
+        java.security.spec.ECParameterSpec $r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.kex.ECDH;
+
+        $r1 = (java.security.spec.ECParameterSpec) null;
+
+        specialinvoke r0.<org.apache.sshd.common.kex.ECDH: void <init>(java.security.spec.ECParameterSpec)>($r1);
+
+        return;
+    }
+
+    public void <init>(java.lang.String) throws java.lang.Exception
+    {
+        org.apache.sshd.common.kex.ECDH r0;
+        java.lang.String r1, varReplacer2813;
+        org.apache.sshd.common.cipher.ECCurves $r2, $r4;
+        java.lang.Object $r3;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.kex.ECDH;
+
+        r1 := @parameter0: java.lang.String;
+
+        $r2 = staticinvoke <org.apache.sshd.common.cipher.ECCurves: org.apache.sshd.common.cipher.ECCurves fromCurveName(java.lang.String)>(r1);
+
+        varReplacer2813 = "Unknown curve name: %s";
+
+        $r3 = staticinvoke <org.apache.sshd.common.util.ValidateUtils: java.lang.Object checkNotNull(java.lang.Object,java.lang.String,java.lang.Object)>($r2, varReplacer2813, r1);
+
+        $r4 = (org.apache.sshd.common.cipher.ECCurves) $r3;
+
+        specialinvoke r0.<org.apache.sshd.common.kex.ECDH: void <init>(org.apache.sshd.common.cipher.ECCurves)>($r4);
+
+        return;
+    }
+
+    public void <init>(org.apache.sshd.common.cipher.ECCurves) throws java.lang.Exception
+    {
+        org.apache.sshd.common.kex.ECDH r0;
+        org.apache.sshd.common.cipher.ECCurves r1, $r3;
+        java.lang.Object $r2;
+        java.security.spec.ECParameterSpec $r4;
+        java.lang.String varReplacer2814;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.kex.ECDH;
+
+        r1 := @parameter0: org.apache.sshd.common.cipher.ECCurves;
+
+        varReplacer2814 = "No known curve instance provided";
+
+        $r2 = staticinvoke <org.apache.sshd.common.util.ValidateUtils: java.lang.Object checkNotNull(java.lang.Object,java.lang.String)>(r1, varReplacer2814);
+
+        $r3 = (org.apache.sshd.common.cipher.ECCurves) $r2;
+
+        $r4 = virtualinvoke $r3.<org.apache.sshd.common.cipher.ECCurves: java.security.spec.ECParameterSpec getParameters()>();
+
+        specialinvoke r0.<org.apache.sshd.common.kex.ECDH: void <init>(java.security.spec.ECParameterSpec)>($r4);
+
+        return;
+    }
+
+    public void <init>(java.security.spec.ECParameterSpec) throws java.lang.Exception
+    {
+        org.apache.sshd.common.kex.ECDH r0;
+        java.security.KeyPairGenerator $r1;
+        javax.crypto.KeyAgreement $r2;
+        java.security.spec.ECParameterSpec r3;
+        java.lang.String varReplacer2815, varReplacer2816;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.kex.ECDH;
+
+        r3 := @parameter0: java.security.spec.ECParameterSpec;
+
+        specialinvoke r0.<org.apache.sshd.common.kex.AbstractDH: void <init>()>();
+
+        varReplacer2816 = "EC";
+
+        $r1 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.security.KeyPairGenerator getKeyPairGenerator(java.lang.String)>(varReplacer2816);
+
+        r0.<org.apache.sshd.common.kex.ECDH: java.security.KeyPairGenerator myKpairGen> = $r1;
+
+        varReplacer2815 = "ECDH";
+
+        $r2 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: javax.crypto.KeyAgreement getKeyAgreement(java.lang.String)>(varReplacer2815);
+
+        r0.<org.apache.sshd.common.kex.ECDH: javax.crypto.KeyAgreement myKeyAgree> = $r2;
+
+        r0.<org.apache.sshd.common.kex.ECDH: java.security.spec.ECParameterSpec params> = r3;
+
+        return;
+    }
+
+    public byte[] getE() throws java.lang.Exception
+    {
+        org.apache.sshd.common.kex.ECDH r0;
+        java.security.spec.ECPoint $r1, $r13, $r15;
+        byte[] $r2, $r16;
+        java.security.spec.ECParameterSpec $r3, $r5, $r14;
+        java.security.KeyPairGenerator $r6, $r7;
+        java.security.KeyPair r8;
+        javax.crypto.KeyAgreement $r9;
+        java.security.PrivateKey $r10;
+        java.security.PublicKey $r11;
+        java.security.interfaces.ECPublicKey $r12;
+        java.lang.String varReplacer2817;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.kex.ECDH;
+
+        $r1 = r0.<org.apache.sshd.common.kex.ECDH: java.security.spec.ECPoint e>;
+
+        if $r1 != null goto label1;
+
+        $r3 = r0.<org.apache.sshd.common.kex.ECDH: java.security.spec.ECParameterSpec params>;
+
+        varReplacer2817 = "No ECParameterSpec(s)";
+
+        staticinvoke <org.apache.sshd.common.util.ValidateUtils: java.lang.Object checkNotNull(java.lang.Object,java.lang.String)>($r3, varReplacer2817);
+
+        $r6 = r0.<org.apache.sshd.common.kex.ECDH: java.security.KeyPairGenerator myKpairGen>;
+
+        $r5 = r0.<org.apache.sshd.common.kex.ECDH: java.security.spec.ECParameterSpec params>;
+
+        virtualinvoke $r6.<java.security.KeyPairGenerator: void initialize(java.security.spec.AlgorithmParameterSpec)>($r5);
+
+        $r7 = r0.<org.apache.sshd.common.kex.ECDH: java.security.KeyPairGenerator myKpairGen>;
+
+        r8 = virtualinvoke $r7.<java.security.KeyPairGenerator: java.security.KeyPair generateKeyPair()>();
+
+        $r9 = r0.<org.apache.sshd.common.kex.ECDH: javax.crypto.KeyAgreement myKeyAgree>;
+
+        $r10 = virtualinvoke r8.<java.security.KeyPair: java.security.PrivateKey getPrivate()>();
+
+        virtualinvoke $r9.<javax.crypto.KeyAgreement: void init(java.security.Key)>($r10);
+
+        $r11 = virtualinvoke r8.<java.security.KeyPair: java.security.PublicKey getPublic()>();
+
+        $r12 = (java.security.interfaces.ECPublicKey) $r11;
+
+        $r13 = interfaceinvoke $r12.<java.security.interfaces.ECPublicKey: java.security.spec.ECPoint getW()>();
+
+        r0.<org.apache.sshd.common.kex.ECDH: java.security.spec.ECPoint e> = $r13;
+
+        $r15 = r0.<org.apache.sshd.common.kex.ECDH: java.security.spec.ECPoint e>;
+
+        $r14 = r0.<org.apache.sshd.common.kex.ECDH: java.security.spec.ECParameterSpec params>;
+
+        $r16 = staticinvoke <org.apache.sshd.common.cipher.ECCurves: byte[] encodeECPoint(java.security.spec.ECPoint,java.security.spec.ECParameterSpec)>($r15, $r14);
+
+        r0.<org.apache.sshd.common.kex.ECDH: byte[] e_array> = $r16;
+
+     label1:
+        $r2 = r0.<org.apache.sshd.common.kex.ECDH: byte[] e_array>;
+
+        return $r2;
+    }
+
+    protected byte[] calculateK() throws java.lang.Exception
+    {
+        org.apache.sshd.common.kex.ECDH r0;
+        java.security.spec.ECParameterSpec $r1, $r5;
+        java.security.KeyFactory r3;
+        java.security.spec.ECPublicKeySpec $r4, r7;
+        java.security.spec.ECPoint $r6;
+        java.security.PublicKey r8;
+        javax.crypto.KeyAgreement $r9, $r11;
+        byte[] $r12, $r13;
+        int varReplacer2818;
+        java.lang.String varReplacer2819, varReplacer2820;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.kex.ECDH;
+
+        $r1 = r0.<org.apache.sshd.common.kex.ECDH: java.security.spec.ECParameterSpec params>;
+
+        varReplacer2820 = "No ECParameterSpec(s)";
+
+        staticinvoke <org.apache.sshd.common.util.ValidateUtils: java.lang.Object checkNotNull(java.lang.Object,java.lang.String)>($r1, varReplacer2820);
+
+        varReplacer2819 = "EC";
+
+        r3 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.security.KeyFactory getKeyFactory(java.lang.String)>(varReplacer2819);
+
+        $r4 = new java.security.spec.ECPublicKeySpec;
+
+        $r6 = r0.<org.apache.sshd.common.kex.ECDH: java.security.spec.ECPoint f>;
+
+        $r5 = r0.<org.apache.sshd.common.kex.ECDH: java.security.spec.ECParameterSpec params>;
+
+        specialinvoke $r4.<java.security.spec.ECPublicKeySpec: void <init>(java.security.spec.ECPoint,java.security.spec.ECParameterSpec)>($r6, $r5);
+
+        r7 = $r4;
+
+        r8 = virtualinvoke r3.<java.security.KeyFactory: java.security.PublicKey generatePublic(java.security.spec.KeySpec)>(r7);
+
+        $r9 = r0.<org.apache.sshd.common.kex.ECDH: javax.crypto.KeyAgreement myKeyAgree>;
+
+        varReplacer2818 = 1;
+
+        virtualinvoke $r9.<javax.crypto.KeyAgreement: java.security.Key doPhase(java.security.Key,boolean)>(r8, varReplacer2818);
+
+        $r11 = r0.<org.apache.sshd.common.kex.ECDH: javax.crypto.KeyAgreement myKeyAgree>;
+
+        $r12 = virtualinvoke $r11.<javax.crypto.KeyAgreement: byte[] generateSecret()>();
+
+        $r13 = staticinvoke <org.apache.sshd.common.kex.ECDH: byte[] stripLeadingZeroes(byte[])>($r12);
+
+        return $r13;
+    }
+
+    public void setCurveParameters(java.security.spec.ECParameterSpec)
+    {
+        org.apache.sshd.common.kex.ECDH r0;
+        java.security.spec.ECParameterSpec r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.kex.ECDH;
+
+        r1 := @parameter0: java.security.spec.ECParameterSpec;
+
+        r0.<org.apache.sshd.common.kex.ECDH: java.security.spec.ECParameterSpec params> = r1;
+
+        return;
+    }
+
+    public void setF(byte[])
+    {
+        org.apache.sshd.common.kex.ECDH r0;
+        java.security.spec.ECParameterSpec $r1;
+        byte[] r3;
+        java.security.spec.ECPoint $r4;
+        java.lang.String varReplacer2821;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.kex.ECDH;
+
+        r3 := @parameter0: byte[];
+
+        $r1 = r0.<org.apache.sshd.common.kex.ECDH: java.security.spec.ECParameterSpec params>;
+
+        varReplacer2821 = "No ECParameterSpec(s)";
+
+        staticinvoke <org.apache.sshd.common.util.ValidateUtils: java.lang.Object checkNotNull(java.lang.Object,java.lang.String)>($r1, varReplacer2821);
+
+        $r4 = staticinvoke <org.apache.sshd.common.config.keys.ECDSAPublicKeyEntryDecoder: java.security.spec.ECPoint octetStringToEcPoint(byte[])>(r3);
+
+        r0.<org.apache.sshd.common.kex.ECDH: java.security.spec.ECPoint f> = $r4;
+
+        return;
+    }
+
+    public org.apache.sshd.common.digest.Digest getHash() throws java.lang.Exception
+    {
+        org.apache.sshd.common.kex.ECDH r0;
+        java.security.spec.ECParameterSpec $r1, $r3;
+        org.apache.sshd.common.cipher.ECCurves $r4, r6;
+        java.lang.Object $r5;
+        org.apache.sshd.common.digest.Digest $r7;
+        java.lang.String varReplacer2822, varReplacer2823;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.kex.ECDH;
+
+        $r1 = r0.<org.apache.sshd.common.kex.ECDH: java.security.spec.ECParameterSpec params>;
+
+        varReplacer2823 = "No ECParameterSpec(s)";
+
+        staticinvoke <org.apache.sshd.common.util.ValidateUtils: java.lang.Object checkNotNull(java.lang.Object,java.lang.String)>($r1, varReplacer2823);
+
+        $r3 = r0.<org.apache.sshd.common.kex.ECDH: java.security.spec.ECParameterSpec params>;
+
+        $r4 = staticinvoke <org.apache.sshd.common.cipher.ECCurves: org.apache.sshd.common.cipher.ECCurves fromCurveParameters(java.security.spec.ECParameterSpec)>($r3);
+
+        varReplacer2822 = "Unknown curve parameters";
+
+        $r5 = staticinvoke <org.apache.sshd.common.util.ValidateUtils: java.lang.Object checkNotNull(java.lang.Object,java.lang.String)>($r4, varReplacer2822);
+
+        r6 = (org.apache.sshd.common.cipher.ECCurves) $r5;
+
+        $r7 = virtualinvoke r6.<org.apache.sshd.common.cipher.ECCurves: org.apache.sshd.common.digest.Digest getDigestForParams()>();
+
+        return $r7;
+    }
+}

@@ -1,0 +1,811 @@
+public class org.apache.sshd.SshBuilder$BaseBuilder extends java.lang.Object
+{
+    protected org.apache.sshd.common.Factory factory;
+    protected java.util.List keyExchangeFactories;
+    protected java.util.List cipherFactories;
+    protected java.util.List compressionFactories;
+    protected java.util.List macFactories;
+    protected java.util.List signatureFactories;
+    protected org.apache.sshd.common.Factory randomFactory;
+    protected java.util.List channelFactories;
+    protected org.apache.sshd.common.file.FileSystemFactory fileSystemFactory;
+    protected org.apache.sshd.common.TcpipForwarderFactory tcpipForwarderFactory;
+    protected java.util.List globalRequestHandlers;
+
+    protected void <init>()
+    {
+        org.apache.sshd.SshBuilder$BaseBuilder r0;
+        null_type varReplacer55, varReplacer56, varReplacer57, varReplacer58, varReplacer59, varReplacer60, varReplacer61, varReplacer62, varReplacer63, varReplacer64, varReplacer65;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.SshBuilder$BaseBuilder;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        varReplacer56 = null;
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.common.Factory factory> = varReplacer56;
+
+        varReplacer62 = null;
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List keyExchangeFactories> = varReplacer62;
+
+        varReplacer63 = null;
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List cipherFactories> = varReplacer63;
+
+        varReplacer55 = null;
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List compressionFactories> = varReplacer55;
+
+        varReplacer57 = null;
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List macFactories> = varReplacer57;
+
+        varReplacer58 = null;
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List signatureFactories> = varReplacer58;
+
+        varReplacer65 = null;
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.common.Factory randomFactory> = varReplacer65;
+
+        varReplacer61 = null;
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List channelFactories> = varReplacer61;
+
+        varReplacer59 = null;
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.common.file.FileSystemFactory fileSystemFactory> = varReplacer59;
+
+        varReplacer64 = null;
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.common.TcpipForwarderFactory tcpipForwarderFactory> = varReplacer64;
+
+        varReplacer60 = null;
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List globalRequestHandlers> = varReplacer60;
+
+        return;
+    }
+
+    protected org.apache.sshd.SshBuilder$BaseBuilder fillWithDefaultValues()
+    {
+        boolean $z0, $z1;
+        org.apache.sshd.SshBuilder$BaseBuilder r0, $r7;
+        java.util.List $r1, $r3, $r4, $r17, $r20, $r21, $r27, $r28, $r38, $r39, $r49, $r50;
+        org.apache.sshd.common.Factory $r2, $r29, $r40;
+        org.apache.sshd.common.file.FileSystemFactory $r5;
+        org.apache.sshd.common.TcpipForwarderFactory $r6;
+        org.apache.sshd.common.forward.DefaultTcpipForwarderFactory $r8;
+        org.apache.sshd.common.file.nativefs.NativeFileSystemFactory $r9;
+        org.apache.sshd.common.NamedFactory[] $r10, $r18, $r24, $r32, $r43;
+        org.apache.sshd.common.mac.HMACSHA256$Factory $r11;
+        org.apache.sshd.common.mac.HMACSHA512$Factory $r12;
+        org.apache.sshd.common.mac.HMACSHA1$Factory $r13;
+        org.apache.sshd.common.mac.HMACMD5$Factory $r14;
+        org.apache.sshd.common.mac.HMACSHA196$Factory $r15;
+        org.apache.sshd.common.mac.HMACMD596$Factory $r16;
+        org.apache.sshd.common.compression.CompressionNone$Factory $r19;
+        org.apache.sshd.common.random.SingletonRandomFactory $r22, $r30, $r41;
+        org.apache.sshd.common.random.JceRandom$Factory $r23, $r31;
+        org.apache.sshd.common.signature.SignatureDSA$Factory $r25, $r36, $r47;
+        org.apache.sshd.common.signature.SignatureRSA$Factory $r26, $r37, $r48;
+        org.apache.sshd.common.signature.SignatureECDSA$NISTP256Factory $r33, $r44;
+        org.apache.sshd.common.signature.SignatureECDSA$NISTP384Factory $r34, $r45;
+        org.apache.sshd.common.signature.SignatureECDSA$NISTP521Factory $r35, $r46;
+        org.apache.sshd.common.random.BouncyCastleRandom$Factory $r42;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.SshBuilder$BaseBuilder;
+
+        $z0 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: boolean isBouncyCastleRegistered()>();
+
+        if $z0 == 0 goto label02;
+
+        $r39 = r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List signatureFactories>;
+
+        if $r39 != null goto label01;
+
+        $r43 = newarray (org.apache.sshd.common.NamedFactory)[5];
+
+        $r44 = new org.apache.sshd.common.signature.SignatureECDSA$NISTP256Factory;
+
+        specialinvoke $r44.<org.apache.sshd.common.signature.SignatureECDSA$NISTP256Factory: void <init>()>();
+
+        $r43[0] = $r44;
+
+        $r45 = new org.apache.sshd.common.signature.SignatureECDSA$NISTP384Factory;
+
+        specialinvoke $r45.<org.apache.sshd.common.signature.SignatureECDSA$NISTP384Factory: void <init>()>();
+
+        $r43[1] = $r45;
+
+        $r46 = new org.apache.sshd.common.signature.SignatureECDSA$NISTP521Factory;
+
+        specialinvoke $r46.<org.apache.sshd.common.signature.SignatureECDSA$NISTP521Factory: void <init>()>();
+
+        $r43[2] = $r46;
+
+        $r47 = new org.apache.sshd.common.signature.SignatureDSA$Factory;
+
+        specialinvoke $r47.<org.apache.sshd.common.signature.SignatureDSA$Factory: void <init>()>();
+
+        $r43[3] = $r47;
+
+        $r48 = new org.apache.sshd.common.signature.SignatureRSA$Factory;
+
+        specialinvoke $r48.<org.apache.sshd.common.signature.SignatureRSA$Factory: void <init>()>();
+
+        $r43[4] = $r48;
+
+        $r49 = staticinvoke <java.util.Arrays: java.util.List asList(java.lang.Object[])>($r43);
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List signatureFactories> = $r49;
+
+     label01:
+        $r40 = r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.common.Factory randomFactory>;
+
+        if $r40 != null goto label06;
+
+        $r41 = new org.apache.sshd.common.random.SingletonRandomFactory;
+
+        $r42 = new org.apache.sshd.common.random.BouncyCastleRandom$Factory;
+
+        specialinvoke $r42.<org.apache.sshd.common.random.BouncyCastleRandom$Factory: void <init>()>();
+
+        specialinvoke $r41.<org.apache.sshd.common.random.SingletonRandomFactory: void <init>(org.apache.sshd.common.NamedFactory)>($r42);
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.common.Factory randomFactory> = $r41;
+
+        goto label06;
+
+     label02:
+        $z1 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: boolean hasEcc()>();
+
+        if $z1 == 0 goto label04;
+
+        $r28 = r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List signatureFactories>;
+
+        if $r28 != null goto label03;
+
+        $r32 = newarray (org.apache.sshd.common.NamedFactory)[5];
+
+        $r33 = new org.apache.sshd.common.signature.SignatureECDSA$NISTP256Factory;
+
+        specialinvoke $r33.<org.apache.sshd.common.signature.SignatureECDSA$NISTP256Factory: void <init>()>();
+
+        $r32[0] = $r33;
+
+        $r34 = new org.apache.sshd.common.signature.SignatureECDSA$NISTP384Factory;
+
+        specialinvoke $r34.<org.apache.sshd.common.signature.SignatureECDSA$NISTP384Factory: void <init>()>();
+
+        $r32[1] = $r34;
+
+        $r35 = new org.apache.sshd.common.signature.SignatureECDSA$NISTP521Factory;
+
+        specialinvoke $r35.<org.apache.sshd.common.signature.SignatureECDSA$NISTP521Factory: void <init>()>();
+
+        $r32[2] = $r35;
+
+        $r36 = new org.apache.sshd.common.signature.SignatureDSA$Factory;
+
+        specialinvoke $r36.<org.apache.sshd.common.signature.SignatureDSA$Factory: void <init>()>();
+
+        $r32[3] = $r36;
+
+        $r37 = new org.apache.sshd.common.signature.SignatureRSA$Factory;
+
+        specialinvoke $r37.<org.apache.sshd.common.signature.SignatureRSA$Factory: void <init>()>();
+
+        $r32[4] = $r37;
+
+        $r38 = staticinvoke <java.util.Arrays: java.util.List asList(java.lang.Object[])>($r32);
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List signatureFactories> = $r38;
+
+     label03:
+        $r29 = r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.common.Factory randomFactory>;
+
+        if $r29 != null goto label06;
+
+        $r30 = new org.apache.sshd.common.random.SingletonRandomFactory;
+
+        $r31 = new org.apache.sshd.common.random.JceRandom$Factory;
+
+        specialinvoke $r31.<org.apache.sshd.common.random.JceRandom$Factory: void <init>()>();
+
+        specialinvoke $r30.<org.apache.sshd.common.random.SingletonRandomFactory: void <init>(org.apache.sshd.common.NamedFactory)>($r31);
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.common.Factory randomFactory> = $r30;
+
+        goto label06;
+
+     label04:
+        $r1 = r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List signatureFactories>;
+
+        if $r1 != null goto label05;
+
+        $r24 = newarray (org.apache.sshd.common.NamedFactory)[2];
+
+        $r25 = new org.apache.sshd.common.signature.SignatureDSA$Factory;
+
+        specialinvoke $r25.<org.apache.sshd.common.signature.SignatureDSA$Factory: void <init>()>();
+
+        $r24[0] = $r25;
+
+        $r26 = new org.apache.sshd.common.signature.SignatureRSA$Factory;
+
+        specialinvoke $r26.<org.apache.sshd.common.signature.SignatureRSA$Factory: void <init>()>();
+
+        $r24[1] = $r26;
+
+        $r27 = staticinvoke <java.util.Arrays: java.util.List asList(java.lang.Object[])>($r24);
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List signatureFactories> = $r27;
+
+     label05:
+        $r2 = r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.common.Factory randomFactory>;
+
+        if $r2 != null goto label06;
+
+        $r22 = new org.apache.sshd.common.random.SingletonRandomFactory;
+
+        $r23 = new org.apache.sshd.common.random.JceRandom$Factory;
+
+        specialinvoke $r23.<org.apache.sshd.common.random.JceRandom$Factory: void <init>()>();
+
+        specialinvoke $r22.<org.apache.sshd.common.random.SingletonRandomFactory: void <init>(org.apache.sshd.common.NamedFactory)>($r23);
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.common.Factory randomFactory> = $r22;
+
+     label06:
+        $r50 = r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List cipherFactories>;
+
+        if $r50 != null goto label07;
+
+        $r21 = staticinvoke <org.apache.sshd.SshBuilder$BaseBuilder: java.util.List setUpDefaultCiphers()>();
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List cipherFactories> = $r21;
+
+     label07:
+        $r3 = r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List compressionFactories>;
+
+        if $r3 != null goto label08;
+
+        $r18 = newarray (org.apache.sshd.common.NamedFactory)[1];
+
+        $r19 = new org.apache.sshd.common.compression.CompressionNone$Factory;
+
+        specialinvoke $r19.<org.apache.sshd.common.compression.CompressionNone$Factory: void <init>()>();
+
+        $r18[0] = $r19;
+
+        $r20 = staticinvoke <java.util.Arrays: java.util.List asList(java.lang.Object[])>($r18);
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List compressionFactories> = $r20;
+
+     label08:
+        $r4 = r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List macFactories>;
+
+        if $r4 != null goto label09;
+
+        $r10 = newarray (org.apache.sshd.common.NamedFactory)[6];
+
+        $r11 = new org.apache.sshd.common.mac.HMACSHA256$Factory;
+
+        specialinvoke $r11.<org.apache.sshd.common.mac.HMACSHA256$Factory: void <init>()>();
+
+        $r10[0] = $r11;
+
+        $r12 = new org.apache.sshd.common.mac.HMACSHA512$Factory;
+
+        specialinvoke $r12.<org.apache.sshd.common.mac.HMACSHA512$Factory: void <init>()>();
+
+        $r10[1] = $r12;
+
+        $r13 = new org.apache.sshd.common.mac.HMACSHA1$Factory;
+
+        specialinvoke $r13.<org.apache.sshd.common.mac.HMACSHA1$Factory: void <init>()>();
+
+        $r10[2] = $r13;
+
+        $r14 = new org.apache.sshd.common.mac.HMACMD5$Factory;
+
+        specialinvoke $r14.<org.apache.sshd.common.mac.HMACMD5$Factory: void <init>()>();
+
+        $r10[3] = $r14;
+
+        $r15 = new org.apache.sshd.common.mac.HMACSHA196$Factory;
+
+        specialinvoke $r15.<org.apache.sshd.common.mac.HMACSHA196$Factory: void <init>()>();
+
+        $r10[4] = $r15;
+
+        $r16 = new org.apache.sshd.common.mac.HMACMD596$Factory;
+
+        specialinvoke $r16.<org.apache.sshd.common.mac.HMACMD596$Factory: void <init>()>();
+
+        $r10[5] = $r16;
+
+        $r17 = staticinvoke <java.util.Arrays: java.util.List asList(java.lang.Object[])>($r10);
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List macFactories> = $r17;
+
+     label09:
+        $r5 = r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.common.file.FileSystemFactory fileSystemFactory>;
+
+        if $r5 != null goto label10;
+
+        $r9 = new org.apache.sshd.common.file.nativefs.NativeFileSystemFactory;
+
+        specialinvoke $r9.<org.apache.sshd.common.file.nativefs.NativeFileSystemFactory: void <init>()>();
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.common.file.FileSystemFactory fileSystemFactory> = $r9;
+
+     label10:
+        $r6 = r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.common.TcpipForwarderFactory tcpipForwarderFactory>;
+
+        if $r6 != null goto label11;
+
+        $r8 = new org.apache.sshd.common.forward.DefaultTcpipForwarderFactory;
+
+        specialinvoke $r8.<org.apache.sshd.common.forward.DefaultTcpipForwarderFactory: void <init>()>();
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.common.TcpipForwarderFactory tcpipForwarderFactory> = $r8;
+
+     label11:
+        $r7 = virtualinvoke r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.SshBuilder$BaseBuilder me()>();
+
+        return $r7;
+    }
+
+    public org.apache.sshd.SshBuilder$BaseBuilder keyExchangeFactories(java.util.List)
+    {
+        org.apache.sshd.SshBuilder$BaseBuilder r0, $r2;
+        java.util.List r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.SshBuilder$BaseBuilder;
+
+        r1 := @parameter0: java.util.List;
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List keyExchangeFactories> = r1;
+
+        $r2 = virtualinvoke r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.SshBuilder$BaseBuilder me()>();
+
+        return $r2;
+    }
+
+    public org.apache.sshd.SshBuilder$BaseBuilder signatureFactories(java.util.List)
+    {
+        org.apache.sshd.SshBuilder$BaseBuilder r0, $r2;
+        java.util.List r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.SshBuilder$BaseBuilder;
+
+        r1 := @parameter0: java.util.List;
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List signatureFactories> = r1;
+
+        $r2 = virtualinvoke r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.SshBuilder$BaseBuilder me()>();
+
+        return $r2;
+    }
+
+    public org.apache.sshd.SshBuilder$BaseBuilder randomFactory(org.apache.sshd.common.Factory)
+    {
+        org.apache.sshd.SshBuilder$BaseBuilder r0, $r2;
+        org.apache.sshd.common.Factory r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.SshBuilder$BaseBuilder;
+
+        r1 := @parameter0: org.apache.sshd.common.Factory;
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.common.Factory randomFactory> = r1;
+
+        $r2 = virtualinvoke r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.SshBuilder$BaseBuilder me()>();
+
+        return $r2;
+    }
+
+    public org.apache.sshd.SshBuilder$BaseBuilder cipherFactories(java.util.List)
+    {
+        org.apache.sshd.SshBuilder$BaseBuilder r0, $r2;
+        java.util.List r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.SshBuilder$BaseBuilder;
+
+        r1 := @parameter0: java.util.List;
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List cipherFactories> = r1;
+
+        $r2 = virtualinvoke r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.SshBuilder$BaseBuilder me()>();
+
+        return $r2;
+    }
+
+    public org.apache.sshd.SshBuilder$BaseBuilder compressionFactories(java.util.List)
+    {
+        org.apache.sshd.SshBuilder$BaseBuilder r0, $r2;
+        java.util.List r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.SshBuilder$BaseBuilder;
+
+        r1 := @parameter0: java.util.List;
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List compressionFactories> = r1;
+
+        $r2 = virtualinvoke r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.SshBuilder$BaseBuilder me()>();
+
+        return $r2;
+    }
+
+    public org.apache.sshd.SshBuilder$BaseBuilder macFactories(java.util.List)
+    {
+        org.apache.sshd.SshBuilder$BaseBuilder r0, $r2;
+        java.util.List r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.SshBuilder$BaseBuilder;
+
+        r1 := @parameter0: java.util.List;
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List macFactories> = r1;
+
+        $r2 = virtualinvoke r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.SshBuilder$BaseBuilder me()>();
+
+        return $r2;
+    }
+
+    public org.apache.sshd.SshBuilder$BaseBuilder channelFactories(java.util.List)
+    {
+        org.apache.sshd.SshBuilder$BaseBuilder r0, $r2;
+        java.util.List r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.SshBuilder$BaseBuilder;
+
+        r1 := @parameter0: java.util.List;
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List channelFactories> = r1;
+
+        $r2 = virtualinvoke r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.SshBuilder$BaseBuilder me()>();
+
+        return $r2;
+    }
+
+    public org.apache.sshd.SshBuilder$BaseBuilder fileSystemFactory(org.apache.sshd.common.file.FileSystemFactory)
+    {
+        org.apache.sshd.SshBuilder$BaseBuilder r0, $r2;
+        org.apache.sshd.common.file.FileSystemFactory r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.SshBuilder$BaseBuilder;
+
+        r1 := @parameter0: org.apache.sshd.common.file.FileSystemFactory;
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.common.file.FileSystemFactory fileSystemFactory> = r1;
+
+        $r2 = virtualinvoke r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.SshBuilder$BaseBuilder me()>();
+
+        return $r2;
+    }
+
+    public org.apache.sshd.SshBuilder$BaseBuilder tcpipForwarderFactory(org.apache.sshd.common.TcpipForwarderFactory)
+    {
+        org.apache.sshd.SshBuilder$BaseBuilder r0, $r2;
+        org.apache.sshd.common.TcpipForwarderFactory r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.SshBuilder$BaseBuilder;
+
+        r1 := @parameter0: org.apache.sshd.common.TcpipForwarderFactory;
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.common.TcpipForwarderFactory tcpipForwarderFactory> = r1;
+
+        $r2 = virtualinvoke r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.SshBuilder$BaseBuilder me()>();
+
+        return $r2;
+    }
+
+    public org.apache.sshd.SshBuilder$BaseBuilder globalRequestHandlers(java.util.List)
+    {
+        org.apache.sshd.SshBuilder$BaseBuilder r0, $r2;
+        java.util.List r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.SshBuilder$BaseBuilder;
+
+        r1 := @parameter0: java.util.List;
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List globalRequestHandlers> = r1;
+
+        $r2 = virtualinvoke r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.SshBuilder$BaseBuilder me()>();
+
+        return $r2;
+    }
+
+    public org.apache.sshd.SshBuilder$BaseBuilder factory(org.apache.sshd.common.Factory)
+    {
+        org.apache.sshd.SshBuilder$BaseBuilder r0, $r2;
+        org.apache.sshd.common.Factory r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.SshBuilder$BaseBuilder;
+
+        r1 := @parameter0: org.apache.sshd.common.Factory;
+
+        r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.common.Factory factory> = r1;
+
+        $r2 = virtualinvoke r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.SshBuilder$BaseBuilder me()>();
+
+        return $r2;
+    }
+
+    public org.apache.sshd.common.AbstractFactoryManager build(boolean)
+    {
+        boolean z0;
+        org.apache.sshd.SshBuilder$BaseBuilder r0;
+        org.apache.sshd.common.Factory $r1, $r6;
+        java.lang.Object $r2;
+        org.apache.sshd.common.AbstractFactoryManager r3;
+        java.util.List $r4, $r5, $r7, $r8, $r9, $r10, $r13;
+        org.apache.sshd.common.file.FileSystemFactory $r11;
+        org.apache.sshd.common.TcpipForwarderFactory $r12;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.SshBuilder$BaseBuilder;
+
+        z0 := @parameter0: boolean;
+
+        if z0 == 0 goto label1;
+
+        virtualinvoke r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.SshBuilder$BaseBuilder fillWithDefaultValues()>();
+
+     label1:
+        $r1 = r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.common.Factory factory>;
+
+        $r2 = interfaceinvoke $r1.<org.apache.sshd.common.Factory: java.lang.Object create()>();
+
+        r3 = (org.apache.sshd.common.AbstractFactoryManager) $r2;
+
+        $r4 = r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List keyExchangeFactories>;
+
+        virtualinvoke r3.<org.apache.sshd.common.AbstractFactoryManager: void setKeyExchangeFactories(java.util.List)>($r4);
+
+        $r5 = r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List signatureFactories>;
+
+        virtualinvoke r3.<org.apache.sshd.common.AbstractFactoryManager: void setSignatureFactories(java.util.List)>($r5);
+
+        $r6 = r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.common.Factory randomFactory>;
+
+        virtualinvoke r3.<org.apache.sshd.common.AbstractFactoryManager: void setRandomFactory(org.apache.sshd.common.Factory)>($r6);
+
+        $r7 = r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List cipherFactories>;
+
+        virtualinvoke r3.<org.apache.sshd.common.AbstractFactoryManager: void setCipherFactories(java.util.List)>($r7);
+
+        $r8 = r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List compressionFactories>;
+
+        virtualinvoke r3.<org.apache.sshd.common.AbstractFactoryManager: void setCompressionFactories(java.util.List)>($r8);
+
+        $r9 = r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List macFactories>;
+
+        virtualinvoke r3.<org.apache.sshd.common.AbstractFactoryManager: void setMacFactories(java.util.List)>($r9);
+
+        $r10 = r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List channelFactories>;
+
+        virtualinvoke r3.<org.apache.sshd.common.AbstractFactoryManager: void setChannelFactories(java.util.List)>($r10);
+
+        $r11 = r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.common.file.FileSystemFactory fileSystemFactory>;
+
+        virtualinvoke r3.<org.apache.sshd.common.AbstractFactoryManager: void setFileSystemFactory(org.apache.sshd.common.file.FileSystemFactory)>($r11);
+
+        $r12 = r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.common.TcpipForwarderFactory tcpipForwarderFactory>;
+
+        virtualinvoke r3.<org.apache.sshd.common.AbstractFactoryManager: void setTcpipForwarderFactory(org.apache.sshd.common.TcpipForwarderFactory)>($r12);
+
+        $r13 = r0.<org.apache.sshd.SshBuilder$BaseBuilder: java.util.List globalRequestHandlers>;
+
+        virtualinvoke r3.<org.apache.sshd.common.AbstractFactoryManager: void setGlobalRequestHandlers(java.util.List)>($r13);
+
+        return r3;
+    }
+
+    public org.apache.sshd.common.AbstractFactoryManager build()
+    {
+        org.apache.sshd.SshBuilder$BaseBuilder r0;
+        org.apache.sshd.common.AbstractFactoryManager $r1;
+        int varReplacer66;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.SshBuilder$BaseBuilder;
+
+        varReplacer66 = 1;
+
+        $r1 = virtualinvoke r0.<org.apache.sshd.SshBuilder$BaseBuilder: org.apache.sshd.common.AbstractFactoryManager build(boolean)>(varReplacer66);
+
+        return $r1;
+    }
+
+    protected org.apache.sshd.SshBuilder$BaseBuilder me()
+    {
+        org.apache.sshd.SshBuilder$BaseBuilder r0;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.SshBuilder$BaseBuilder;
+
+        return r0;
+    }
+
+    protected static java.util.List setUpDefaultCiphers()
+    {
+        java.util.LinkedList $r0, r1;
+        org.apache.sshd.common.cipher.AES128CTR$Factory $r2;
+        org.apache.sshd.common.cipher.AES192CTR$Factory $r3;
+        org.apache.sshd.common.cipher.AES256CTR$Factory $r4;
+        org.apache.sshd.common.cipher.ARCFOUR128$Factory $r5;
+        org.apache.sshd.common.cipher.ARCFOUR256$Factory $r6;
+        org.apache.sshd.common.cipher.AES128CBC$Factory $r7;
+        org.apache.sshd.common.cipher.TripleDESCBC$Factory $r8;
+        org.apache.sshd.common.cipher.BlowfishCBC$Factory $r9;
+        org.apache.sshd.common.cipher.AES192CBC$Factory $r10;
+        org.apache.sshd.common.cipher.AES256CBC$Factory $r11;
+        java.util.Iterator r12;
+        boolean $z10;
+        java.lang.Object $r13, $r15;
+        org.apache.sshd.common.NamedFactory r14;
+        int $i0, $i1;
+        byte[] r16, r17;
+        org.apache.sshd.common.Cipher$Mode $r18;
+        java.lang.Exception $r19, r23;
+        java.lang.Throwable $r20, r22;
+        org.apache.sshd.common.Cipher r21;
+
+        nop;
+
+        $r0 = new java.util.LinkedList;
+
+        specialinvoke $r0.<java.util.LinkedList: void <init>()>();
+
+        r1 = $r0;
+
+        $r2 = new org.apache.sshd.common.cipher.AES128CTR$Factory;
+
+        specialinvoke $r2.<org.apache.sshd.common.cipher.AES128CTR$Factory: void <init>()>();
+
+        interfaceinvoke r1.<java.util.List: boolean add(java.lang.Object)>($r2);
+
+        $r3 = new org.apache.sshd.common.cipher.AES192CTR$Factory;
+
+        specialinvoke $r3.<org.apache.sshd.common.cipher.AES192CTR$Factory: void <init>()>();
+
+        interfaceinvoke r1.<java.util.List: boolean add(java.lang.Object)>($r3);
+
+        $r4 = new org.apache.sshd.common.cipher.AES256CTR$Factory;
+
+        specialinvoke $r4.<org.apache.sshd.common.cipher.AES256CTR$Factory: void <init>()>();
+
+        interfaceinvoke r1.<java.util.List: boolean add(java.lang.Object)>($r4);
+
+        $r5 = new org.apache.sshd.common.cipher.ARCFOUR128$Factory;
+
+        specialinvoke $r5.<org.apache.sshd.common.cipher.ARCFOUR128$Factory: void <init>()>();
+
+        interfaceinvoke r1.<java.util.List: boolean add(java.lang.Object)>($r5);
+
+        $r6 = new org.apache.sshd.common.cipher.ARCFOUR256$Factory;
+
+        specialinvoke $r6.<org.apache.sshd.common.cipher.ARCFOUR256$Factory: void <init>()>();
+
+        interfaceinvoke r1.<java.util.List: boolean add(java.lang.Object)>($r6);
+
+        $r7 = new org.apache.sshd.common.cipher.AES128CBC$Factory;
+
+        specialinvoke $r7.<org.apache.sshd.common.cipher.AES128CBC$Factory: void <init>()>();
+
+        interfaceinvoke r1.<java.util.List: boolean add(java.lang.Object)>($r7);
+
+        $r8 = new org.apache.sshd.common.cipher.TripleDESCBC$Factory;
+
+        specialinvoke $r8.<org.apache.sshd.common.cipher.TripleDESCBC$Factory: void <init>()>();
+
+        interfaceinvoke r1.<java.util.List: boolean add(java.lang.Object)>($r8);
+
+        $r9 = new org.apache.sshd.common.cipher.BlowfishCBC$Factory;
+
+        specialinvoke $r9.<org.apache.sshd.common.cipher.BlowfishCBC$Factory: void <init>()>();
+
+        interfaceinvoke r1.<java.util.List: boolean add(java.lang.Object)>($r9);
+
+        $r10 = new org.apache.sshd.common.cipher.AES192CBC$Factory;
+
+        specialinvoke $r10.<org.apache.sshd.common.cipher.AES192CBC$Factory: void <init>()>();
+
+        interfaceinvoke r1.<java.util.List: boolean add(java.lang.Object)>($r10);
+
+        $r11 = new org.apache.sshd.common.cipher.AES256CBC$Factory;
+
+        specialinvoke $r11.<org.apache.sshd.common.cipher.AES256CBC$Factory: void <init>()>();
+
+        interfaceinvoke r1.<java.util.List: boolean add(java.lang.Object)>($r11);
+
+        r12 = interfaceinvoke r1.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $z10 = interfaceinvoke r12.<java.util.Iterator: boolean hasNext()>();
+
+        if $z10 == 0 goto label7;
+
+        $r13 = interfaceinvoke r12.<java.util.Iterator: java.lang.Object next()>();
+
+        r14 = (org.apache.sshd.common.NamedFactory) $r13;
+
+     label2:
+        $r15 = interfaceinvoke r14.<org.apache.sshd.common.NamedFactory: java.lang.Object create()>();
+
+        r21 = (org.apache.sshd.common.Cipher) $r15;
+
+        $i0 = interfaceinvoke r21.<org.apache.sshd.common.Cipher: int getBlockSize()>();
+
+        r16 = newarray (byte)[$i0];
+
+        $i1 = interfaceinvoke r21.<org.apache.sshd.common.Cipher: int getIVSize()>();
+
+        r17 = newarray (byte)[$i1];
+
+        $r18 = <org.apache.sshd.common.Cipher$Mode: org.apache.sshd.common.Cipher$Mode Encrypt>;
+
+        interfaceinvoke r21.<org.apache.sshd.common.Cipher: void init(org.apache.sshd.common.Cipher$Mode,byte[],byte[])>($r18, r16, r17);
+
+     label3:
+        goto label6;
+
+     label4:
+        $r20 := @caughtexception;
+
+        r22 = $r20;
+
+        interfaceinvoke r12.<java.util.Iterator: void remove()>();
+
+        goto label6;
+
+     label5:
+        $r19 := @caughtexception;
+
+        r23 = $r19;
+
+        interfaceinvoke r12.<java.util.Iterator: void remove()>();
+
+     label6:
+        goto label1;
+
+     label7:
+        return r1;
+
+        catch java.security.InvalidKeyException from label2 to label3 with label4;
+        catch java.lang.Exception from label2 to label3 with label5;
+    }
+}

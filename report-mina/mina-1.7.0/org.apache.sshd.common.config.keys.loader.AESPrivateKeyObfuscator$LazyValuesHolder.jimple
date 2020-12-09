@@ -1,0 +1,131 @@
+class org.apache.sshd.common.config.keys.loader.AESPrivateKeyObfuscator$LazyValuesHolder extends java.lang.Object
+{
+    private static final java.util.List KEY_LENGTHS;
+
+    private void <init>()
+    {
+        org.apache.sshd.common.config.keys.loader.AESPrivateKeyObfuscator$LazyValuesHolder r0;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.config.keys.loader.AESPrivateKeyObfuscator$LazyValuesHolder;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    private static java.util.List detectSupportedKeySizes()
+    {
+        java.util.ArrayList $r0, r1;
+        java.lang.IllegalStateException $r2;
+        java.lang.StringBuilder $r3, $r4, $r5;
+        java.lang.String $r6, varReplacer2974, varReplacer2975, varReplacer2976;
+        int $i0, i1, varReplacer2973;
+        javax.crypto.spec.SecretKeySpec $r7, r8;
+        javax.crypto.Cipher r9;
+        java.lang.Integer $r10;
+        java.lang.Throwable $r11, r13;
+        byte[] r12;
+
+        nop;
+
+        $r0 = new java.util.ArrayList;
+
+        specialinvoke $r0.<java.util.ArrayList: void <init>()>();
+
+        r1 = $r0;
+
+        i1 = 128;
+
+     label1:
+        if i1 >= 32767 goto label6;
+
+     label2:
+        $i0 = i1 / 8;
+
+        r12 = newarray (byte)[$i0];
+
+        $r7 = new javax.crypto.spec.SecretKeySpec;
+
+        varReplacer2975 = "AES";
+
+        specialinvoke $r7.<javax.crypto.spec.SecretKeySpec: void <init>(byte[],java.lang.String)>(r12, varReplacer2975);
+
+        r8 = $r7;
+
+        varReplacer2976 = "AES";
+
+        r9 = staticinvoke <org.apache.sshd.common.util.security.SecurityUtils: javax.crypto.Cipher getCipher(java.lang.String)>(varReplacer2976);
+
+        varReplacer2973 = 2;
+
+        virtualinvoke r9.<javax.crypto.Cipher: void init(int,java.security.Key)>(varReplacer2973, r8);
+
+        $r10 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(i1);
+
+        interfaceinvoke r1.<java.util.List: boolean add(java.lang.Object)>($r10);
+
+     label3:
+        goto label5;
+
+     label4:
+        $r11 := @caughtexception;
+
+        r13 = $r11;
+
+        return r1;
+
+     label5:
+        i1 = i1 + 64;
+
+        goto label1;
+
+     label6:
+        $r2 = new java.lang.IllegalStateException;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer2974 = "No limit encountered: ";
+
+        $r4 = virtualinvoke $r3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2974);
+
+        $r5 = virtualinvoke $r4.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(r1);
+
+        $r6 = virtualinvoke $r5.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $r2.<java.lang.IllegalStateException: void <init>(java.lang.String)>($r6);
+
+        throw $r2;
+
+        catch java.security.GeneralSecurityException from label2 to label3 with label4;
+    }
+
+    static java.util.List access$000()
+    {
+        java.util.List $r0;
+
+        nop;
+
+        $r0 = <org.apache.sshd.common.config.keys.loader.AESPrivateKeyObfuscator$LazyValuesHolder: java.util.List KEY_LENGTHS>;
+
+        return $r0;
+    }
+
+    static void <clinit>()
+    {
+        java.util.List $r0, $r1;
+
+        nop;
+
+        $r0 = staticinvoke <org.apache.sshd.common.config.keys.loader.AESPrivateKeyObfuscator$LazyValuesHolder: java.util.List detectSupportedKeySizes()>();
+
+        $r1 = staticinvoke <java.util.Collections: java.util.List unmodifiableList(java.util.List)>($r0);
+
+        <org.apache.sshd.common.config.keys.loader.AESPrivateKeyObfuscator$LazyValuesHolder: java.util.List KEY_LENGTHS> = $r1;
+
+        return;
+    }
+}

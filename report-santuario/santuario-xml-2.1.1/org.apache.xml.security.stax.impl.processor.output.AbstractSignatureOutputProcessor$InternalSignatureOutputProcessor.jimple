@@ -1,0 +1,237 @@
+public class org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor extends org.apache.xml.security.stax.ext.AbstractOutputProcessor
+{
+    private org.apache.xml.security.stax.impl.SignaturePartDef signaturePartDef;
+    private org.apache.xml.security.stax.ext.stax.XMLSecStartElement xmlSecStartElement;
+    private int elementCounter;
+    private java.io.OutputStream bufferedDigestOutputStream;
+    private org.apache.xml.security.stax.impl.util.DigestOutputStream digestOutputStream;
+    private org.apache.xml.security.stax.ext.Transformer transformer;
+    final org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor this$0;
+
+    public void <init>(org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor, org.apache.xml.security.stax.impl.SignaturePartDef, org.apache.xml.security.stax.ext.stax.XMLSecStartElement) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor r0;
+        org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor r1;
+        java.lang.Class $r2;
+        java.lang.String $r3;
+        org.apache.xml.security.stax.impl.SignaturePartDef r4;
+        org.apache.xml.security.stax.ext.stax.XMLSecStartElement r5;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor;
+
+        r1 := @parameter0: org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor;
+
+        r4 := @parameter1: org.apache.xml.security.stax.impl.SignaturePartDef;
+
+        r5 := @parameter2: org.apache.xml.security.stax.ext.stax.XMLSecStartElement;
+
+        r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor: org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor this$0> = r1;
+
+        specialinvoke r0.<org.apache.xml.security.stax.ext.AbstractOutputProcessor: void <init>()>();
+
+        $r2 = class "Lorg/apache/xml/security/stax/impl/processor/output/AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor;";
+
+        $r3 = virtualinvoke $r2.<java.lang.Class: java.lang.String getName()>();
+
+        virtualinvoke r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor: void addBeforeProcessor(java.lang.Object)>($r3);
+
+        r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor: org.apache.xml.security.stax.impl.SignaturePartDef signaturePartDef> = r4;
+
+        r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor: org.apache.xml.security.stax.ext.stax.XMLSecStartElement xmlSecStartElement> = r5;
+
+        return;
+    }
+
+    public void init(org.apache.xml.security.stax.ext.OutputProcessorChain) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor r0;
+        org.apache.xml.security.stax.impl.SignaturePartDef $r1, $r8;
+        org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor $r2, $r10;
+        java.lang.String $r3;
+        org.apache.xml.security.stax.impl.util.DigestOutputStream $r4, $r6;
+        org.apache.xml.security.utils.UnsyncBufferedOutputStream $r5;
+        org.apache.xml.security.stax.ext.stax.XMLSecStartElement $r7;
+        java.io.OutputStream $r9;
+        org.apache.xml.security.stax.ext.Transformer $r11;
+        org.apache.xml.security.stax.ext.OutputProcessorChain r12;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor;
+
+        r12 := @parameter0: org.apache.xml.security.stax.ext.OutputProcessorChain;
+
+        $r2 = r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor: org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor this$0>;
+
+        $r1 = r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor: org.apache.xml.security.stax.impl.SignaturePartDef signaturePartDef>;
+
+        $r3 = virtualinvoke $r1.<org.apache.xml.security.stax.impl.SignaturePartDef: java.lang.String getDigestAlgo()>();
+
+        $r4 = virtualinvoke $r2.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor: org.apache.xml.security.stax.impl.util.DigestOutputStream createMessageDigestOutputStream(java.lang.String)>($r3);
+
+        r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor: org.apache.xml.security.stax.impl.util.DigestOutputStream digestOutputStream> = $r4;
+
+        $r5 = new org.apache.xml.security.utils.UnsyncBufferedOutputStream;
+
+        $r6 = r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor: org.apache.xml.security.stax.impl.util.DigestOutputStream digestOutputStream>;
+
+        specialinvoke $r5.<org.apache.xml.security.utils.UnsyncBufferedOutputStream: void <init>(java.io.OutputStream)>($r6);
+
+        r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor: java.io.OutputStream bufferedDigestOutputStream> = $r5;
+
+        $r10 = r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor: org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor this$0>;
+
+        $r9 = r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor: java.io.OutputStream bufferedDigestOutputStream>;
+
+        $r8 = r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor: org.apache.xml.security.stax.impl.SignaturePartDef signaturePartDef>;
+
+        $r7 = r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor: org.apache.xml.security.stax.ext.stax.XMLSecStartElement xmlSecStartElement>;
+
+        $r11 = virtualinvoke $r10.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor: org.apache.xml.security.stax.ext.Transformer buildTransformerChain(java.io.OutputStream,org.apache.xml.security.stax.impl.SignaturePartDef,org.apache.xml.security.stax.ext.stax.XMLSecStartElement)>($r9, $r8, $r7);
+
+        r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor: org.apache.xml.security.stax.ext.Transformer transformer> = $r11;
+
+        specialinvoke r0.<org.apache.xml.security.stax.ext.AbstractOutputProcessor: void init(org.apache.xml.security.stax.ext.OutputProcessorChain)>(r12);
+
+        return;
+    }
+
+    public void processEvent(org.apache.xml.security.stax.ext.stax.XMLSecEvent, org.apache.xml.security.stax.ext.OutputProcessorChain) throws javax.xml.stream.XMLStreamException, org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor r0;
+        org.apache.xml.security.stax.ext.stax.XMLSecEvent r1;
+        org.apache.xml.security.stax.ext.Transformer $r2, $r8;
+        int $i0, $i1, $i2, $i3, $i4, $i5;
+        org.apache.xml.security.stax.ext.OutputProcessorChain r3;
+        org.apache.xml.security.stax.ext.stax.XMLSecEndElement $r4;
+        javax.xml.namespace.QName $r5, $r7;
+        org.apache.xml.security.stax.ext.stax.XMLSecStartElement $r6;
+        boolean $z0;
+        java.io.OutputStream $r9;
+        java.util.Base64$Encoder $r10;
+        org.apache.xml.security.stax.impl.util.DigestOutputStream $r11;
+        byte[] $r12;
+        org.slf4j.Logger $r13;
+        org.apache.xml.security.stax.impl.SignaturePartDef $r14;
+        org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor $r15;
+        java.lang.Throwable $r16, r18;
+        java.lang.String r19, varReplacer4493;
+        org.apache.xml.security.exceptions.XMLSecurityException $r20;
+        java.lang.Exception $r21;
+        null_type varReplacer4492;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor;
+
+        r1 := @parameter0: org.apache.xml.security.stax.ext.stax.XMLSecEvent;
+
+        r3 := @parameter1: org.apache.xml.security.stax.ext.OutputProcessorChain;
+
+        $r2 = r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor: org.apache.xml.security.stax.ext.Transformer transformer>;
+
+        interfaceinvoke $r2.<org.apache.xml.security.stax.ext.Transformer: void transform(org.apache.xml.security.stax.ext.stax.XMLSecEvent)>(r1);
+
+        $i0 = interfaceinvoke r1.<org.apache.xml.security.stax.ext.stax.XMLSecEvent: int getEventType()>();
+
+        lookupswitch($i0)
+        {
+            case 1: goto label1;
+            case 2: goto label2;
+            default: goto label7;
+        };
+
+     label1:
+        $i4 = r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor: int elementCounter>;
+
+        $i5 = $i4 + 1;
+
+        r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor: int elementCounter> = $i5;
+
+        goto label7;
+
+     label2:
+        $i1 = r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor: int elementCounter>;
+
+        $i2 = $i1 - 1;
+
+        r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor: int elementCounter> = $i2;
+
+        $i3 = r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor: int elementCounter>;
+
+        if $i3 != 0 goto label7;
+
+        $r4 = interfaceinvoke r1.<org.apache.xml.security.stax.ext.stax.XMLSecEvent: org.apache.xml.security.stax.ext.stax.XMLSecEndElement asEndElement()>();
+
+        $r5 = interfaceinvoke $r4.<org.apache.xml.security.stax.ext.stax.XMLSecEndElement: javax.xml.namespace.QName getName()>();
+
+        $r6 = r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor: org.apache.xml.security.stax.ext.stax.XMLSecStartElement xmlSecStartElement>;
+
+        $r7 = interfaceinvoke $r6.<org.apache.xml.security.stax.ext.stax.XMLSecStartElement: javax.xml.namespace.QName getName()>();
+
+        $z0 = virtualinvoke $r5.<javax.xml.namespace.QName: boolean equals(java.lang.Object)>($r7);
+
+        if $z0 == 0 goto label7;
+
+        $r8 = r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor: org.apache.xml.security.stax.ext.Transformer transformer>;
+
+        interfaceinvoke $r8.<org.apache.xml.security.stax.ext.Transformer: void doFinal()>();
+
+     label3:
+        $r9 = r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor: java.io.OutputStream bufferedDigestOutputStream>;
+
+        virtualinvoke $r9.<java.io.OutputStream: void close()>();
+
+     label4:
+        goto label6;
+
+     label5:
+        $r16 := @caughtexception;
+
+        r18 = $r16;
+
+        $r20 = new org.apache.xml.security.exceptions.XMLSecurityException;
+
+        $r21 = (java.lang.Exception) r18;
+
+        specialinvoke $r20.<org.apache.xml.security.exceptions.XMLSecurityException: void <init>(java.lang.Exception)>($r21);
+
+        throw $r20;
+
+     label6:
+        $r10 = staticinvoke <java.util.Base64: java.util.Base64$Encoder getMimeEncoder()>();
+
+        $r11 = r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor: org.apache.xml.security.stax.impl.util.DigestOutputStream digestOutputStream>;
+
+        $r12 = virtualinvoke $r11.<org.apache.xml.security.stax.impl.util.DigestOutputStream: byte[] getDigestValue()>();
+
+        r19 = virtualinvoke $r10.<java.util.Base64$Encoder: java.lang.String encodeToString(byte[])>($r12);
+
+        $r13 = staticinvoke <org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor: org.slf4j.Logger access$000()>();
+
+        varReplacer4493 = "Calculated Digest: {}";
+
+        interfaceinvoke $r13.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object)>(varReplacer4493, r19);
+
+        $r14 = r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor: org.apache.xml.security.stax.impl.SignaturePartDef signaturePartDef>;
+
+        virtualinvoke $r14.<org.apache.xml.security.stax.impl.SignaturePartDef: void setDigestValue(java.lang.String)>(r19);
+
+        interfaceinvoke r3.<org.apache.xml.security.stax.ext.OutputProcessorChain: void removeProcessor(org.apache.xml.security.stax.ext.OutputProcessor)>(r0);
+
+        $r15 = r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor: org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor this$0>;
+
+        varReplacer4492 = null;
+
+        virtualinvoke $r15.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor: void setActiveInternalSignatureOutputProcessor(org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor$InternalSignatureOutputProcessor)>(varReplacer4492);
+
+     label7:
+        interfaceinvoke r3.<org.apache.xml.security.stax.ext.OutputProcessorChain: void processEvent(org.apache.xml.security.stax.ext.stax.XMLSecEvent)>(r1);
+
+        return;
+
+        catch java.io.IOException from label3 to label4 with label5;
+    }
+}

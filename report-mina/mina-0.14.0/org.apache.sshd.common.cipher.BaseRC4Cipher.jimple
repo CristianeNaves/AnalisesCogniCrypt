@@ -1,0 +1,124 @@
+public class org.apache.sshd.common.cipher.BaseRC4Cipher extends org.apache.sshd.common.cipher.BaseCipher
+{
+    public static final int SKIP_SIZE;
+
+    public void <init>(int, int)
+    {
+        org.apache.sshd.common.cipher.BaseRC4Cipher r0;
+        int i0, i1;
+        java.lang.String varReplacer2238, varReplacer2239;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.cipher.BaseRC4Cipher;
+
+        i0 := @parameter0: int;
+
+        i1 := @parameter1: int;
+
+        varReplacer2238 = "ARCFOUR";
+
+        varReplacer2239 = "RC4";
+
+        specialinvoke r0.<org.apache.sshd.common.cipher.BaseCipher: void <init>(int,int,java.lang.String,java.lang.String)>(i0, i1, varReplacer2238, varReplacer2239);
+
+        return;
+    }
+
+    public void init(org.apache.sshd.common.Cipher$Mode, byte[], byte[]) throws java.lang.Exception
+    {
+        org.apache.sshd.common.cipher.BaseRC4Cipher r0;
+        int $i0, i3, varReplacer2240, varReplacer2241, varReplacer2242;
+        java.lang.String $r1, $r6;
+        javax.crypto.Cipher $r2, $r7, $r8;
+        org.apache.sshd.common.Cipher$Mode r3, $r4;
+        javax.crypto.spec.SecretKeySpec $r5;
+        java.lang.Exception $r9, r14;
+        byte[] r10, r11, r12, r13;
+        byte $b2;
+        null_type varReplacer2243;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.cipher.BaseRC4Cipher;
+
+        r3 := @parameter0: org.apache.sshd.common.Cipher$Mode;
+
+        r11 := @parameter1: byte[];
+
+        r10 := @parameter2: byte[];
+
+        $i0 = r0.<org.apache.sshd.common.cipher.BaseRC4Cipher: int bsize>;
+
+        r12 = staticinvoke <org.apache.sshd.common.cipher.BaseRC4Cipher: byte[] resize(byte[],int)>(r11, $i0);
+
+     label1:
+        $r1 = r0.<org.apache.sshd.common.cipher.BaseRC4Cipher: java.lang.String transformation>;
+
+        $r2 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: javax.crypto.Cipher getCipher(java.lang.String)>($r1);
+
+        r0.<org.apache.sshd.common.cipher.BaseRC4Cipher: javax.crypto.Cipher cipher> = $r2;
+
+        $r7 = r0.<org.apache.sshd.common.cipher.BaseRC4Cipher: javax.crypto.Cipher cipher>;
+
+        $r4 = <org.apache.sshd.common.Cipher$Mode: org.apache.sshd.common.Cipher$Mode Encrypt>;
+
+        if r3 != $r4 goto label2;
+
+        $b2 = 1;
+
+        goto label3;
+
+     label2:
+        $b2 = 2;
+
+     label3:
+        $r5 = new javax.crypto.spec.SecretKeySpec;
+
+        $r6 = r0.<org.apache.sshd.common.cipher.BaseRC4Cipher: java.lang.String algorithm>;
+
+        specialinvoke $r5.<javax.crypto.spec.SecretKeySpec: void <init>(byte[],java.lang.String)>(r12, $r6);
+
+        virtualinvoke $r7.<javax.crypto.Cipher: void init(int,java.security.Key)>($b2, $r5);
+
+        r13 = newarray (byte)[1];
+
+        i3 = 0;
+
+     label4:
+        if i3 >= 1536 goto label5;
+
+        $r8 = r0.<org.apache.sshd.common.cipher.BaseRC4Cipher: javax.crypto.Cipher cipher>;
+
+        varReplacer2240 = 0;
+
+        varReplacer2241 = 1;
+
+        varReplacer2242 = 0;
+
+        virtualinvoke $r8.<javax.crypto.Cipher: int update(byte[],int,int,byte[],int)>(r13, varReplacer2240, varReplacer2241, r13, varReplacer2240);
+
+        i3 = i3 + 1;
+
+        goto label4;
+
+     label5:
+        goto label7;
+
+     label6:
+        $r9 := @caughtexception;
+
+        r14 = $r9;
+
+        varReplacer2243 = null;
+
+        r0.<org.apache.sshd.common.cipher.BaseRC4Cipher: javax.crypto.Cipher cipher> = varReplacer2243;
+
+        throw r14;
+
+     label7:
+        return;
+
+        catch java.lang.Exception from label1 to label5 with label6;
+    }
+}

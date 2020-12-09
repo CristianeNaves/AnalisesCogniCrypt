@@ -1,0 +1,275 @@
+class org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl extends java.lang.Object implements org.apache.xml.security.encryption.ReferenceList
+{
+    private java.lang.Class sentry;
+    private java.util.List references;
+    final org.apache.xml.security.encryption.XMLCipher$Factory this$1;
+
+    public void <init>(org.apache.xml.security.encryption.XMLCipher$Factory, int)
+    {
+        org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl r0;
+        org.apache.xml.security.encryption.XMLCipher$Factory r1;
+        int i0;
+        java.lang.IllegalArgumentException $r2;
+        java.util.LinkedList $r3;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl;
+
+        r1 := @parameter0: org.apache.xml.security.encryption.XMLCipher$Factory;
+
+        i0 := @parameter1: int;
+
+        r0.<org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl: org.apache.xml.security.encryption.XMLCipher$Factory this$1> = r1;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        if i0 != 1 goto label1;
+
+        r0.<org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl: java.lang.Class sentry> = class "Lorg/apache/xml/security/encryption/XMLCipher$Factory$ReferenceListImpl$DataReference;";
+
+        goto label3;
+
+     label1:
+        if i0 != 2 goto label2;
+
+        r0.<org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl: java.lang.Class sentry> = class "Lorg/apache/xml/security/encryption/XMLCipher$Factory$ReferenceListImpl$KeyReference;";
+
+        goto label3;
+
+     label2:
+        $r2 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $r2.<java.lang.IllegalArgumentException: void <init>()>();
+
+        throw $r2;
+
+     label3:
+        $r3 = new java.util.LinkedList;
+
+        specialinvoke $r3.<java.util.LinkedList: void <init>()>();
+
+        r0.<org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl: java.util.List references> = $r3;
+
+        return;
+    }
+
+    public void add(org.apache.xml.security.encryption.Reference)
+    {
+        org.apache.xml.security.encryption.Reference r0;
+        java.lang.Class $r1, $r3;
+        org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl r2;
+        boolean $z0;
+        java.util.List $r4;
+        java.lang.IllegalArgumentException $r5;
+
+        nop;
+
+        r2 := @this: org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl;
+
+        r0 := @parameter0: org.apache.xml.security.encryption.Reference;
+
+        $r1 = virtualinvoke r0.<java.lang.Object: java.lang.Class getClass()>();
+
+        $r3 = r2.<org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl: java.lang.Class sentry>;
+
+        $z0 = virtualinvoke $r1.<java.lang.Object: boolean equals(java.lang.Object)>($r3);
+
+        if $z0 != 0 goto label1;
+
+        $r5 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $r5.<java.lang.IllegalArgumentException: void <init>()>();
+
+        throw $r5;
+
+     label1:
+        $r4 = r2.<org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl: java.util.List references>;
+
+        interfaceinvoke $r4.<java.util.List: boolean add(java.lang.Object)>(r0);
+
+        return;
+    }
+
+    public void remove(org.apache.xml.security.encryption.Reference)
+    {
+        org.apache.xml.security.encryption.Reference r0;
+        java.lang.Class $r1, $r3;
+        org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl r2;
+        boolean $z0;
+        java.util.List $r4;
+        java.lang.IllegalArgumentException $r5;
+
+        nop;
+
+        r2 := @this: org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl;
+
+        r0 := @parameter0: org.apache.xml.security.encryption.Reference;
+
+        $r1 = virtualinvoke r0.<java.lang.Object: java.lang.Class getClass()>();
+
+        $r3 = r2.<org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl: java.lang.Class sentry>;
+
+        $z0 = virtualinvoke $r1.<java.lang.Object: boolean equals(java.lang.Object)>($r3);
+
+        if $z0 != 0 goto label1;
+
+        $r5 = new java.lang.IllegalArgumentException;
+
+        specialinvoke $r5.<java.lang.IllegalArgumentException: void <init>()>();
+
+        throw $r5;
+
+     label1:
+        $r4 = r2.<org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl: java.util.List references>;
+
+        interfaceinvoke $r4.<java.util.List: boolean remove(java.lang.Object)>(r0);
+
+        return;
+    }
+
+    public int size()
+    {
+        org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl r0;
+        java.util.List $r1;
+        int $i0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl;
+
+        $r1 = r0.<org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl: java.util.List references>;
+
+        $i0 = interfaceinvoke $r1.<java.util.List: int size()>();
+
+        return $i0;
+    }
+
+    public boolean isEmpty()
+    {
+        org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl r0;
+        java.util.List $r1;
+        boolean $z0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl;
+
+        $r1 = r0.<org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl: java.util.List references>;
+
+        $z0 = interfaceinvoke $r1.<java.util.List: boolean isEmpty()>();
+
+        return $z0;
+    }
+
+    public java.util.Iterator getReferences()
+    {
+        org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl r0;
+        java.util.List $r1;
+        java.util.Iterator $r2;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl;
+
+        $r1 = r0.<org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl: java.util.List references>;
+
+        $r2 = interfaceinvoke $r1.<java.util.List: java.util.Iterator iterator()>();
+
+        return $r2;
+    }
+
+    org.w3c.dom.Element toElement()
+    {
+        org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl r0;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r1;
+        org.apache.xml.security.encryption.XMLCipher $r2;
+        org.w3c.dom.Document $r3;
+        org.w3c.dom.Element r4, $r10;
+        java.util.List $r5;
+        java.util.Iterator r6;
+        boolean $z0;
+        java.lang.Object $r7;
+        org.apache.xml.security.encryption.Reference r8;
+        org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl$ReferenceImpl $r9;
+        java.lang.String varReplacer2645, varReplacer2646;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl;
+
+        $r1 = r0.<org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl: org.apache.xml.security.encryption.XMLCipher$Factory this$1>;
+
+        $r2 = $r1.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.XMLCipher this$0>;
+
+        $r3 = staticinvoke <org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document access$500(org.apache.xml.security.encryption.XMLCipher)>($r2);
+
+        varReplacer2645 = "http://www.w3.org/2001/04/xmlenc#";
+
+        varReplacer2646 = "ReferenceList";
+
+        r4 = staticinvoke <org.apache.xml.security.utils.ElementProxy: org.w3c.dom.Element createElementForFamily(org.w3c.dom.Document,java.lang.String,java.lang.String)>($r3, varReplacer2645, varReplacer2646);
+
+        $r5 = r0.<org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl: java.util.List references>;
+
+        r6 = interfaceinvoke $r5.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $z0 = interfaceinvoke r6.<java.util.Iterator: boolean hasNext()>();
+
+        if $z0 == 0 goto label2;
+
+        $r7 = interfaceinvoke r6.<java.util.Iterator: java.lang.Object next()>();
+
+        r8 = (org.apache.xml.security.encryption.Reference) $r7;
+
+        $r9 = (org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl$ReferenceImpl) r8;
+
+        $r10 = virtualinvoke $r9.<org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl$ReferenceImpl: org.w3c.dom.Element toElement()>();
+
+        interfaceinvoke r4.<org.w3c.dom.Element: org.w3c.dom.Node appendChild(org.w3c.dom.Node)>($r10);
+
+        goto label1;
+
+     label2:
+        return r4;
+    }
+
+    public org.apache.xml.security.encryption.Reference newDataReference(java.lang.String)
+    {
+        org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl$DataReference $r0;
+        org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl r1;
+        java.lang.String r2;
+
+        nop;
+
+        r1 := @this: org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl;
+
+        r2 := @parameter0: java.lang.String;
+
+        $r0 = new org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl$DataReference;
+
+        specialinvoke $r0.<org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl$DataReference: void <init>(org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl,java.lang.String)>(r1, r2);
+
+        return $r0;
+    }
+
+    public org.apache.xml.security.encryption.Reference newKeyReference(java.lang.String)
+    {
+        org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl$KeyReference $r0;
+        org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl r1;
+        java.lang.String r2;
+
+        nop;
+
+        r1 := @this: org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl;
+
+        r2 := @parameter0: java.lang.String;
+
+        $r0 = new org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl$KeyReference;
+
+        specialinvoke $r0.<org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl$KeyReference: void <init>(org.apache.xml.security.encryption.XMLCipher$Factory$ReferenceListImpl,java.lang.String)>(r1, r2);
+
+        return $r0;
+    }
+}

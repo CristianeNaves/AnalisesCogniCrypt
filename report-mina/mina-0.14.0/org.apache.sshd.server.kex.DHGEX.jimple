@@ -1,0 +1,1030 @@
+public class org.apache.sshd.server.kex.DHGEX extends java.lang.Object implements org.apache.sshd.common.KeyExchange
+{
+    private final org.slf4j.Logger log;
+    private org.apache.sshd.server.session.ServerSession session;
+    private byte[] V_S;
+    private byte[] V_C;
+    private byte[] I_S;
+    private byte[] I_C;
+    private org.apache.sshd.common.Digest hash;
+    private org.apache.sshd.common.kex.DH dh;
+    private byte[] e;
+    private byte[] f;
+    private byte[] K;
+    private byte[] H;
+    int min;
+    int prf;
+    int max;
+    private byte expected;
+    boolean oldRequest;
+
+    public void <init>()
+    {
+        org.apache.sshd.server.kex.DHGEX r0;
+        java.lang.Class $r1;
+        org.slf4j.Logger $r2;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.kex.DHGEX;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        $r1 = virtualinvoke r0.<java.lang.Object: java.lang.Class getClass()>();
+
+        $r2 = staticinvoke <org.slf4j.LoggerFactory: org.slf4j.Logger getLogger(java.lang.Class)>($r1);
+
+        r0.<org.apache.sshd.server.kex.DHGEX: org.slf4j.Logger log> = $r2;
+
+        return;
+    }
+
+    public void init(org.apache.sshd.common.session.AbstractSession, byte[], byte[], byte[], byte[]) throws java.lang.Exception
+    {
+        org.apache.sshd.common.session.AbstractSession r0;
+        boolean $z0;
+        org.apache.sshd.server.kex.DHGEX r1;
+        org.apache.sshd.server.session.ServerSession $r2;
+        byte[] r3, r4, r5, r6;
+        java.lang.IllegalStateException $r7;
+        java.lang.String varReplacer2503;
+        int varReplacer2504;
+
+        nop;
+
+        r1 := @this: org.apache.sshd.server.kex.DHGEX;
+
+        r0 := @parameter0: org.apache.sshd.common.session.AbstractSession;
+
+        r3 := @parameter1: byte[];
+
+        r4 := @parameter2: byte[];
+
+        r5 := @parameter3: byte[];
+
+        r6 := @parameter4: byte[];
+
+        $z0 = r0 instanceof org.apache.sshd.server.session.ServerSession;
+
+        if $z0 != 0 goto label1;
+
+        $r7 = new java.lang.IllegalStateException;
+
+        varReplacer2503 = "Using a server side KeyExchange on a client";
+
+        specialinvoke $r7.<java.lang.IllegalStateException: void <init>(java.lang.String)>(varReplacer2503);
+
+        throw $r7;
+
+     label1:
+        $r2 = (org.apache.sshd.server.session.ServerSession) r0;
+
+        r1.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.server.session.ServerSession session> = $r2;
+
+        r1.<org.apache.sshd.server.kex.DHGEX: byte[] V_S> = r3;
+
+        r1.<org.apache.sshd.server.kex.DHGEX: byte[] V_C> = r4;
+
+        r1.<org.apache.sshd.server.kex.DHGEX: byte[] I_S> = r5;
+
+        r1.<org.apache.sshd.server.kex.DHGEX: byte[] I_C> = r6;
+
+        varReplacer2504 = 34;
+
+        r1.<org.apache.sshd.server.kex.DHGEX: byte expected> = varReplacer2504;
+
+        return;
+    }
+
+    public boolean next(org.apache.sshd.common.util.Buffer) throws java.lang.Exception
+    {
+        byte b0, $b1, $b12, $b13, $b26;
+        org.apache.sshd.server.kex.DHGEX r0;
+        org.slf4j.Logger $r1, $r40, $r41, $r45, $r48, $r50, $r59, $r66, $r74, $r81;
+        byte[] $r2, $r3, $r6, r20, $r21, $r22, $r23, $r24, $r29, $r30, $r31, $r33, $r35, $r36, $r37, $r38, r39, $r42, $r47, $r62, $r77;
+        org.apache.sshd.common.kex.DH $r4, $r5, $r25, $r27, $r60, $r61, $r63, $r68, $r70, $r75, $r76, $r78, $r83, $r85;
+        org.apache.sshd.server.session.ServerSession $r7, $r9, $r11, $r43, $r67, $r72, $r82, $r87;
+        java.security.KeyPair r8;
+        java.lang.String r10, $r46, $r49, $r51, $r58, $r98, $r108, varReplacer2506, varReplacer2507, varReplacer2508, varReplacer2509, varReplacer2514, varReplacer2516, varReplacer2519, varReplacer2520, varReplacer2523, varReplacer2524, varReplacer2526, varReplacer2528, varReplacer2529, varReplacer2530, varReplacer2531, varReplacer2538, varReplacer2539;
+        org.apache.sshd.server.ServerFactoryManager $r12;
+        java.util.List $r13;
+        java.lang.Object $r14;
+        org.apache.sshd.common.Signature r15;
+        java.security.PublicKey $r16, $r19;
+        java.security.PrivateKey $r17;
+        org.apache.sshd.common.util.Buffer $r18, r89, r99, r109, r110;
+        boolean $z0, $z1;
+        int $i2, $i4, $i6, $i8, $i9, $i10, $i14, $i15, $i16, $i17, $i18, $i19, $i20, $i21, $i22, $i23, $i24, $i25, $i27, $i28, $i29, $i30, $i31, $i32, $i33, $i34, $i35, $i36, $i37, $i38, $i39, $i40, $i41, $i42, varReplacer2505, varReplacer2510, varReplacer2511, varReplacer2512, varReplacer2513, varReplacer2515, varReplacer2517, varReplacer2518, varReplacer2521, varReplacer2522, varReplacer2525, varReplacer2527, varReplacer2532, varReplacer2533, varReplacer2534, varReplacer2535, varReplacer2536, varReplacer2537, varReplacer2540, varReplacer2541;
+        long $l3, $l5, $l7, $l11;
+        java.math.BigInteger $r26, $r28, $r69, $r71, $r84, $r86;
+        org.apache.sshd.common.Digest $r32, $r34, $r64, $r65, $r79, $r80;
+        org.apache.sshd.common.SshException $r52, $r90, $r100;
+        java.lang.StringBuilder $r53, $r54, $r55, $r56, $r57, $r91, $r92, $r93, $r94, $r95, $r96, $r97, $r101, $r102, $r103, $r104, $r105, $r106, $r107;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.kex.DHGEX;
+
+        r89 := @parameter0: org.apache.sshd.common.util.Buffer;
+
+        b0 = virtualinvoke r89.<org.apache.sshd.common.util.Buffer: byte getByte()>();
+
+        if b0 != 30 goto label03;
+
+        $b26 = r0.<org.apache.sshd.server.kex.DHGEX: byte expected>;
+
+        if $b26 != 34 goto label03;
+
+        $r74 = r0.<org.apache.sshd.server.kex.DHGEX: org.slf4j.Logger log>;
+
+        varReplacer2508 = "Received SSH_MSG_KEX_DH_GEX_REQUEST_OLD";
+
+        interfaceinvoke $r74.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2508);
+
+        varReplacer2510 = 1;
+
+        r0.<org.apache.sshd.server.kex.DHGEX: boolean oldRequest> = varReplacer2510;
+
+        varReplacer2505 = 1024;
+
+        r0.<org.apache.sshd.server.kex.DHGEX: int min> = varReplacer2505;
+
+        $i27 = virtualinvoke r89.<org.apache.sshd.common.util.Buffer: int getInt()>();
+
+        r0.<org.apache.sshd.server.kex.DHGEX: int prf> = $i27;
+
+        varReplacer2533 = 8192;
+
+        r0.<org.apache.sshd.server.kex.DHGEX: int max> = varReplacer2533;
+
+        $i29 = r0.<org.apache.sshd.server.kex.DHGEX: int max>;
+
+        $i28 = r0.<org.apache.sshd.server.kex.DHGEX: int min>;
+
+        if $i29 < $i28 goto label01;
+
+        $i31 = r0.<org.apache.sshd.server.kex.DHGEX: int prf>;
+
+        $i30 = r0.<org.apache.sshd.server.kex.DHGEX: int min>;
+
+        if $i31 < $i30 goto label01;
+
+        $i33 = r0.<org.apache.sshd.server.kex.DHGEX: int max>;
+
+        $i32 = r0.<org.apache.sshd.server.kex.DHGEX: int prf>;
+
+        if $i33 >= $i32 goto label02;
+
+     label01:
+        $r90 = new org.apache.sshd.common.SshException;
+
+        $r91 = new java.lang.StringBuilder;
+
+        specialinvoke $r91.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer2514 = "Protocol error: bad parameters ";
+
+        $r92 = virtualinvoke $r91.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2514);
+
+        $i37 = r0.<org.apache.sshd.server.kex.DHGEX: int min>;
+
+        $r93 = virtualinvoke $r92.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($i37);
+
+        varReplacer2516 = " !< ";
+
+        $r94 = virtualinvoke $r93.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2516);
+
+        $i38 = r0.<org.apache.sshd.server.kex.DHGEX: int prf>;
+
+        $r95 = virtualinvoke $r94.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($i38);
+
+        varReplacer2539 = " !< ";
+
+        $r96 = virtualinvoke $r95.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2539);
+
+        $i39 = r0.<org.apache.sshd.server.kex.DHGEX: int max>;
+
+        $r97 = virtualinvoke $r96.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($i39);
+
+        $r98 = virtualinvoke $r97.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        varReplacer2517 = 3;
+
+        specialinvoke $r90.<org.apache.sshd.common.SshException: void <init>(int,java.lang.String)>(varReplacer2517, $r98);
+
+        throw $r90;
+
+     label02:
+        $i36 = r0.<org.apache.sshd.server.kex.DHGEX: int min>;
+
+        $i35 = r0.<org.apache.sshd.server.kex.DHGEX: int prf>;
+
+        $i34 = r0.<org.apache.sshd.server.kex.DHGEX: int max>;
+
+        $r75 = specialinvoke r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.common.kex.DH chooseDH(int,int,int)>($i36, $i35, $i34);
+
+        r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.common.kex.DH dh> = $r75;
+
+        $r76 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.common.kex.DH dh>;
+
+        $r77 = virtualinvoke $r76.<org.apache.sshd.common.kex.DH: byte[] getE()>();
+
+        r0.<org.apache.sshd.server.kex.DHGEX: byte[] f> = $r77;
+
+        $r78 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.common.kex.DH dh>;
+
+        $r79 = virtualinvoke $r78.<org.apache.sshd.common.kex.DH: org.apache.sshd.common.Digest getHash()>();
+
+        r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.common.Digest hash> = $r79;
+
+        $r80 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.common.Digest hash>;
+
+        interfaceinvoke $r80.<org.apache.sshd.common.Digest: void init()>();
+
+        $r81 = r0.<org.apache.sshd.server.kex.DHGEX: org.slf4j.Logger log>;
+
+        varReplacer2523 = "Send SSH_MSG_KEX_DH_GEX_GROUP";
+
+        interfaceinvoke $r81.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2523);
+
+        $r82 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.server.session.ServerSession session>;
+
+        varReplacer2535 = 31;
+
+        r99 = virtualinvoke $r82.<org.apache.sshd.server.session.ServerSession: org.apache.sshd.common.util.Buffer createBuffer(byte)>(varReplacer2535);
+
+        $r83 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.common.kex.DH dh>;
+
+        $r84 = virtualinvoke $r83.<org.apache.sshd.common.kex.DH: java.math.BigInteger getP()>();
+
+        virtualinvoke r99.<org.apache.sshd.common.util.Buffer: void putMPInt(java.math.BigInteger)>($r84);
+
+        $r85 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.common.kex.DH dh>;
+
+        $r86 = virtualinvoke $r85.<org.apache.sshd.common.kex.DH: java.math.BigInteger getG()>();
+
+        virtualinvoke r99.<org.apache.sshd.common.util.Buffer: void putMPInt(java.math.BigInteger)>($r86);
+
+        $r87 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.server.session.ServerSession session>;
+
+        virtualinvoke $r87.<org.apache.sshd.server.session.ServerSession: org.apache.sshd.common.io.IoWriteFuture writePacket(org.apache.sshd.common.util.Buffer)>(r99);
+
+        varReplacer2540 = 32;
+
+        r0.<org.apache.sshd.server.kex.DHGEX: byte expected> = varReplacer2540;
+
+        varReplacer2536 = 0;
+
+        return varReplacer2536;
+
+     label03:
+        if b0 != 34 goto label06;
+
+        $b13 = r0.<org.apache.sshd.server.kex.DHGEX: byte expected>;
+
+        if $b13 != 34 goto label06;
+
+        $r59 = r0.<org.apache.sshd.server.kex.DHGEX: org.slf4j.Logger log>;
+
+        varReplacer2520 = "Received SSH_MSG_KEX_DH_GEX_REQUEST";
+
+        interfaceinvoke $r59.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2520);
+
+        $i14 = virtualinvoke r89.<org.apache.sshd.common.util.Buffer: int getInt()>();
+
+        r0.<org.apache.sshd.server.kex.DHGEX: int min> = $i14;
+
+        $i15 = virtualinvoke r89.<org.apache.sshd.common.util.Buffer: int getInt()>();
+
+        r0.<org.apache.sshd.server.kex.DHGEX: int prf> = $i15;
+
+        $i16 = virtualinvoke r89.<org.apache.sshd.common.util.Buffer: int getInt()>();
+
+        r0.<org.apache.sshd.server.kex.DHGEX: int max> = $i16;
+
+        $i18 = r0.<org.apache.sshd.server.kex.DHGEX: int max>;
+
+        $i17 = r0.<org.apache.sshd.server.kex.DHGEX: int min>;
+
+        if $i18 < $i17 goto label04;
+
+        $i20 = r0.<org.apache.sshd.server.kex.DHGEX: int prf>;
+
+        $i19 = r0.<org.apache.sshd.server.kex.DHGEX: int min>;
+
+        if $i20 < $i19 goto label04;
+
+        $i22 = r0.<org.apache.sshd.server.kex.DHGEX: int max>;
+
+        $i21 = r0.<org.apache.sshd.server.kex.DHGEX: int prf>;
+
+        if $i22 >= $i21 goto label05;
+
+     label04:
+        $r100 = new org.apache.sshd.common.SshException;
+
+        $r101 = new java.lang.StringBuilder;
+
+        specialinvoke $r101.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer2529 = "Protocol error: bad parameters ";
+
+        $r102 = virtualinvoke $r101.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2529);
+
+        $i40 = r0.<org.apache.sshd.server.kex.DHGEX: int min>;
+
+        $r103 = virtualinvoke $r102.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($i40);
+
+        varReplacer2526 = " !< ";
+
+        $r104 = virtualinvoke $r103.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2526);
+
+        $i41 = r0.<org.apache.sshd.server.kex.DHGEX: int prf>;
+
+        $r105 = virtualinvoke $r104.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($i41);
+
+        varReplacer2538 = " !< ";
+
+        $r106 = virtualinvoke $r105.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2538);
+
+        $i42 = r0.<org.apache.sshd.server.kex.DHGEX: int max>;
+
+        $r107 = virtualinvoke $r106.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($i42);
+
+        $r108 = virtualinvoke $r107.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        varReplacer2541 = 3;
+
+        specialinvoke $r100.<org.apache.sshd.common.SshException: void <init>(int,java.lang.String)>(varReplacer2541, $r108);
+
+        throw $r100;
+
+     label05:
+        $i25 = r0.<org.apache.sshd.server.kex.DHGEX: int min>;
+
+        $i24 = r0.<org.apache.sshd.server.kex.DHGEX: int prf>;
+
+        $i23 = r0.<org.apache.sshd.server.kex.DHGEX: int max>;
+
+        $r60 = specialinvoke r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.common.kex.DH chooseDH(int,int,int)>($i25, $i24, $i23);
+
+        r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.common.kex.DH dh> = $r60;
+
+        $r61 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.common.kex.DH dh>;
+
+        $r62 = virtualinvoke $r61.<org.apache.sshd.common.kex.DH: byte[] getE()>();
+
+        r0.<org.apache.sshd.server.kex.DHGEX: byte[] f> = $r62;
+
+        $r63 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.common.kex.DH dh>;
+
+        $r64 = virtualinvoke $r63.<org.apache.sshd.common.kex.DH: org.apache.sshd.common.Digest getHash()>();
+
+        r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.common.Digest hash> = $r64;
+
+        $r65 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.common.Digest hash>;
+
+        interfaceinvoke $r65.<org.apache.sshd.common.Digest: void init()>();
+
+        $r66 = r0.<org.apache.sshd.server.kex.DHGEX: org.slf4j.Logger log>;
+
+        varReplacer2530 = "Send SSH_MSG_KEX_DH_GEX_GROUP";
+
+        interfaceinvoke $r66.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2530);
+
+        $r67 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.server.session.ServerSession session>;
+
+        varReplacer2534 = 31;
+
+        r109 = virtualinvoke $r67.<org.apache.sshd.server.session.ServerSession: org.apache.sshd.common.util.Buffer createBuffer(byte)>(varReplacer2534);
+
+        $r68 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.common.kex.DH dh>;
+
+        $r69 = virtualinvoke $r68.<org.apache.sshd.common.kex.DH: java.math.BigInteger getP()>();
+
+        virtualinvoke r109.<org.apache.sshd.common.util.Buffer: void putMPInt(java.math.BigInteger)>($r69);
+
+        $r70 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.common.kex.DH dh>;
+
+        $r71 = virtualinvoke $r70.<org.apache.sshd.common.kex.DH: java.math.BigInteger getG()>();
+
+        virtualinvoke r109.<org.apache.sshd.common.util.Buffer: void putMPInt(java.math.BigInteger)>($r71);
+
+        $r72 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.server.session.ServerSession session>;
+
+        virtualinvoke $r72.<org.apache.sshd.server.session.ServerSession: org.apache.sshd.common.io.IoWriteFuture writePacket(org.apache.sshd.common.util.Buffer)>(r109);
+
+        varReplacer2527 = 32;
+
+        r0.<org.apache.sshd.server.kex.DHGEX: byte expected> = varReplacer2527;
+
+        varReplacer2522 = 0;
+
+        return varReplacer2522;
+
+     label06:
+        $b1 = r0.<org.apache.sshd.server.kex.DHGEX: byte expected>;
+
+        if b0 == $b1 goto label07;
+
+        $r52 = new org.apache.sshd.common.SshException;
+
+        $r53 = new java.lang.StringBuilder;
+
+        specialinvoke $r53.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer2524 = "Protocol error: expected packet ";
+
+        $r54 = virtualinvoke $r53.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2524);
+
+        $b12 = r0.<org.apache.sshd.server.kex.DHGEX: byte expected>;
+
+        $r55 = virtualinvoke $r54.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($b12);
+
+        varReplacer2528 = ", got ";
+
+        $r56 = virtualinvoke $r55.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2528);
+
+        $r57 = virtualinvoke $r56.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(b0);
+
+        $r58 = virtualinvoke $r57.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        varReplacer2512 = 3;
+
+        specialinvoke $r52.<org.apache.sshd.common.SshException: void <init>(int,java.lang.String)>(varReplacer2512, $r58);
+
+        throw $r52;
+
+     label07:
+        if b0 != 32 goto label11;
+
+        $r1 = r0.<org.apache.sshd.server.kex.DHGEX: org.slf4j.Logger log>;
+
+        varReplacer2519 = "Received SSH_MSG_KEX_DH_GEX_INIT";
+
+        interfaceinvoke $r1.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2519);
+
+        $r2 = virtualinvoke r89.<org.apache.sshd.common.util.Buffer: byte[] getMPIntAsBytes()>();
+
+        r0.<org.apache.sshd.server.kex.DHGEX: byte[] e> = $r2;
+
+        $r4 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.common.kex.DH dh>;
+
+        $r3 = r0.<org.apache.sshd.server.kex.DHGEX: byte[] e>;
+
+        virtualinvoke $r4.<org.apache.sshd.common.kex.DH: void setF(byte[])>($r3);
+
+        $r5 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.common.kex.DH dh>;
+
+        $r6 = virtualinvoke $r5.<org.apache.sshd.common.kex.DH: byte[] getK()>();
+
+        r0.<org.apache.sshd.server.kex.DHGEX: byte[] K> = $r6;
+
+        $r7 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.server.session.ServerSession session>;
+
+        r8 = virtualinvoke $r7.<org.apache.sshd.server.session.ServerSession: java.security.KeyPair getHostKey()>();
+
+        $r9 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.server.session.ServerSession session>;
+
+        varReplacer2518 = 1;
+
+        r10 = virtualinvoke $r9.<org.apache.sshd.server.session.ServerSession: java.lang.String getNegotiated(int)>(varReplacer2518);
+
+        $r11 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.server.session.ServerSession session>;
+
+        $r12 = virtualinvoke $r11.<org.apache.sshd.server.session.ServerSession: org.apache.sshd.server.ServerFactoryManager getFactoryManager()>();
+
+        $r13 = interfaceinvoke $r12.<org.apache.sshd.server.ServerFactoryManager: java.util.List getSignatureFactories()>();
+
+        $r14 = staticinvoke <org.apache.sshd.common.NamedFactory$Utils: java.lang.Object create(java.util.List,java.lang.String)>($r13, r10);
+
+        r15 = (org.apache.sshd.common.Signature) $r14;
+
+        $r16 = virtualinvoke r8.<java.security.KeyPair: java.security.PublicKey getPublic()>();
+
+        $r17 = virtualinvoke r8.<java.security.KeyPair: java.security.PrivateKey getPrivate()>();
+
+        interfaceinvoke r15.<org.apache.sshd.common.Signature: void init(java.security.PublicKey,java.security.PrivateKey)>($r16, $r17);
+
+        $r18 = new org.apache.sshd.common.util.Buffer;
+
+        specialinvoke $r18.<org.apache.sshd.common.util.Buffer: void <init>()>();
+
+        r110 = $r18;
+
+        $r19 = virtualinvoke r8.<java.security.KeyPair: java.security.PublicKey getPublic()>();
+
+        virtualinvoke r110.<org.apache.sshd.common.util.Buffer: void putRawPublicKey(java.security.PublicKey)>($r19);
+
+        r20 = virtualinvoke r110.<org.apache.sshd.common.util.Buffer: byte[] getCompactData()>();
+
+        virtualinvoke r110.<org.apache.sshd.common.util.Buffer: void clear()>();
+
+        $r21 = r0.<org.apache.sshd.server.kex.DHGEX: byte[] V_C>;
+
+        virtualinvoke r110.<org.apache.sshd.common.util.Buffer: void putString(byte[])>($r21);
+
+        $r22 = r0.<org.apache.sshd.server.kex.DHGEX: byte[] V_S>;
+
+        virtualinvoke r110.<org.apache.sshd.common.util.Buffer: void putString(byte[])>($r22);
+
+        $r23 = r0.<org.apache.sshd.server.kex.DHGEX: byte[] I_C>;
+
+        virtualinvoke r110.<org.apache.sshd.common.util.Buffer: void putString(byte[])>($r23);
+
+        $r24 = r0.<org.apache.sshd.server.kex.DHGEX: byte[] I_S>;
+
+        virtualinvoke r110.<org.apache.sshd.common.util.Buffer: void putString(byte[])>($r24);
+
+        virtualinvoke r110.<org.apache.sshd.common.util.Buffer: void putString(byte[])>(r20);
+
+        $z0 = r0.<org.apache.sshd.server.kex.DHGEX: boolean oldRequest>;
+
+        if $z0 == 0 goto label08;
+
+        $i10 = r0.<org.apache.sshd.server.kex.DHGEX: int prf>;
+
+        $l11 = (long) $i10;
+
+        virtualinvoke r110.<org.apache.sshd.common.util.Buffer: void putInt(long)>($l11);
+
+        goto label09;
+
+     label08:
+        $i2 = r0.<org.apache.sshd.server.kex.DHGEX: int min>;
+
+        $l3 = (long) $i2;
+
+        virtualinvoke r110.<org.apache.sshd.common.util.Buffer: void putInt(long)>($l3);
+
+        $i4 = r0.<org.apache.sshd.server.kex.DHGEX: int prf>;
+
+        $l5 = (long) $i4;
+
+        virtualinvoke r110.<org.apache.sshd.common.util.Buffer: void putInt(long)>($l5);
+
+        $i6 = r0.<org.apache.sshd.server.kex.DHGEX: int max>;
+
+        $l7 = (long) $i6;
+
+        virtualinvoke r110.<org.apache.sshd.common.util.Buffer: void putInt(long)>($l7);
+
+     label09:
+        $r25 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.common.kex.DH dh>;
+
+        $r26 = virtualinvoke $r25.<org.apache.sshd.common.kex.DH: java.math.BigInteger getP()>();
+
+        virtualinvoke r110.<org.apache.sshd.common.util.Buffer: void putMPInt(java.math.BigInteger)>($r26);
+
+        $r27 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.common.kex.DH dh>;
+
+        $r28 = virtualinvoke $r27.<org.apache.sshd.common.kex.DH: java.math.BigInteger getG()>();
+
+        virtualinvoke r110.<org.apache.sshd.common.util.Buffer: void putMPInt(java.math.BigInteger)>($r28);
+
+        $r29 = r0.<org.apache.sshd.server.kex.DHGEX: byte[] e>;
+
+        virtualinvoke r110.<org.apache.sshd.common.util.Buffer: void putMPInt(byte[])>($r29);
+
+        $r30 = r0.<org.apache.sshd.server.kex.DHGEX: byte[] f>;
+
+        virtualinvoke r110.<org.apache.sshd.common.util.Buffer: void putMPInt(byte[])>($r30);
+
+        $r31 = r0.<org.apache.sshd.server.kex.DHGEX: byte[] K>;
+
+        virtualinvoke r110.<org.apache.sshd.common.util.Buffer: void putMPInt(byte[])>($r31);
+
+        $r32 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.common.Digest hash>;
+
+        $r33 = virtualinvoke r110.<org.apache.sshd.common.util.Buffer: byte[] array()>();
+
+        $i8 = virtualinvoke r110.<org.apache.sshd.common.util.Buffer: int available()>();
+
+        varReplacer2513 = 0;
+
+        interfaceinvoke $r32.<org.apache.sshd.common.Digest: void update(byte[],int,int)>($r33, varReplacer2513, $i8);
+
+        $r34 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.common.Digest hash>;
+
+        $r35 = interfaceinvoke $r34.<org.apache.sshd.common.Digest: byte[] digest()>();
+
+        r0.<org.apache.sshd.server.kex.DHGEX: byte[] H> = $r35;
+
+        virtualinvoke r110.<org.apache.sshd.common.util.Buffer: void clear()>();
+
+        $r37 = r0.<org.apache.sshd.server.kex.DHGEX: byte[] H>;
+
+        $r36 = r0.<org.apache.sshd.server.kex.DHGEX: byte[] H>;
+
+        $i9 = lengthof $r36;
+
+        varReplacer2511 = 0;
+
+        interfaceinvoke r15.<org.apache.sshd.common.Signature: void update(byte[],int,int)>($r37, varReplacer2511, $i9);
+
+        virtualinvoke r110.<org.apache.sshd.common.util.Buffer: void putString(java.lang.String)>(r10);
+
+        $r38 = interfaceinvoke r15.<org.apache.sshd.common.Signature: byte[] sign()>();
+
+        virtualinvoke r110.<org.apache.sshd.common.util.Buffer: void putString(byte[])>($r38);
+
+        r39 = virtualinvoke r110.<org.apache.sshd.common.util.Buffer: byte[] getCompactData()>();
+
+        $r40 = r0.<org.apache.sshd.server.kex.DHGEX: org.slf4j.Logger log>;
+
+        $z1 = interfaceinvoke $r40.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z1 == 0 goto label10;
+
+        $r45 = r0.<org.apache.sshd.server.kex.DHGEX: org.slf4j.Logger log>;
+
+        $r46 = staticinvoke <org.apache.sshd.common.util.BufferUtils: java.lang.String printHex(byte[])>(r20);
+
+        varReplacer2506 = "K_S:  {}";
+
+        interfaceinvoke $r45.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object)>(varReplacer2506, $r46);
+
+        $r48 = r0.<org.apache.sshd.server.kex.DHGEX: org.slf4j.Logger log>;
+
+        $r47 = r0.<org.apache.sshd.server.kex.DHGEX: byte[] f>;
+
+        $r49 = staticinvoke <org.apache.sshd.common.util.BufferUtils: java.lang.String printHex(byte[])>($r47);
+
+        varReplacer2509 = "f:    {}";
+
+        interfaceinvoke $r48.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object)>(varReplacer2509, $r49);
+
+        $r50 = r0.<org.apache.sshd.server.kex.DHGEX: org.slf4j.Logger log>;
+
+        $r51 = staticinvoke <org.apache.sshd.common.util.BufferUtils: java.lang.String printHex(byte[])>(r39);
+
+        varReplacer2507 = "sigH: {}";
+
+        interfaceinvoke $r50.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object)>(varReplacer2507, $r51);
+
+     label10:
+        $r41 = r0.<org.apache.sshd.server.kex.DHGEX: org.slf4j.Logger log>;
+
+        varReplacer2531 = "Send SSH_MSG_KEX_DH_GEX_REPLY";
+
+        interfaceinvoke $r41.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2531);
+
+        virtualinvoke r110.<org.apache.sshd.common.util.Buffer: void clear()>();
+
+        varReplacer2537 = 5;
+
+        virtualinvoke r110.<org.apache.sshd.common.util.Buffer: void rpos(int)>(varReplacer2537);
+
+        varReplacer2515 = 5;
+
+        virtualinvoke r110.<org.apache.sshd.common.util.Buffer: void wpos(int)>(varReplacer2515);
+
+        varReplacer2521 = 33;
+
+        virtualinvoke r110.<org.apache.sshd.common.util.Buffer: void putByte(byte)>(varReplacer2521);
+
+        virtualinvoke r110.<org.apache.sshd.common.util.Buffer: void putString(byte[])>(r20);
+
+        $r42 = r0.<org.apache.sshd.server.kex.DHGEX: byte[] f>;
+
+        virtualinvoke r110.<org.apache.sshd.common.util.Buffer: void putString(byte[])>($r42);
+
+        virtualinvoke r110.<org.apache.sshd.common.util.Buffer: void putString(byte[])>(r39);
+
+        $r43 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.server.session.ServerSession session>;
+
+        virtualinvoke $r43.<org.apache.sshd.server.session.ServerSession: org.apache.sshd.common.io.IoWriteFuture writePacket(org.apache.sshd.common.util.Buffer)>(r110);
+
+        varReplacer2525 = 1;
+
+        return varReplacer2525;
+
+     label11:
+        varReplacer2532 = 0;
+
+        return varReplacer2532;
+    }
+
+    private org.apache.sshd.common.kex.DH chooseDH(int, int, int) throws java.lang.Exception
+    {
+        org.apache.sshd.server.kex.DHGEX r0;
+        org.apache.sshd.server.session.ServerSession $r1, $r8;
+        org.apache.sshd.server.ServerFactoryManager $r2, $r9;
+        java.util.Map $r3;
+        java.lang.Object $r4, $r11, $r12, $r23;
+        java.lang.String r5, varReplacer2542, varReplacer2545, varReplacer2546, varReplacer2547;
+        boolean $z0, $z1, $z3;
+        java.util.ArrayList $r6, r7;
+        org.apache.sshd.common.Factory $r10;
+        int $i0, $i1, $i2, $i3, $i4, $i5, i7, i8, i9, i10, i11, i13, i14, i15, $i16, i17, varReplacer2543, varReplacer2544, varReplacer2548;
+        org.apache.sshd.server.kex.Moduli$DhGroup r13, r33;
+        java.math.BigInteger $r14, $r15, $r18, $r20;
+        org.apache.sshd.common.kex.DH $r16, $r22;
+        org.slf4j.Logger $r17, $r27;
+        byte[] $r19, $r21;
+        java.lang.Class $r24;
+        java.net.URL $r25, r29, r31;
+        java.lang.Throwable $r26, r30;
+        java.util.List r28;
+        short $s12;
+        java.util.Iterator r32;
+        org.apache.sshd.common.Random r34;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.kex.DHGEX;
+
+        i7 := @parameter0: int;
+
+        i8 := @parameter1: int;
+
+        i9 := @parameter2: int;
+
+        r28 = null;
+
+        $r1 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.server.session.ServerSession session>;
+
+        $r2 = virtualinvoke $r1.<org.apache.sshd.server.session.ServerSession: org.apache.sshd.server.ServerFactoryManager getFactoryManager()>();
+
+        $r3 = interfaceinvoke $r2.<org.apache.sshd.server.ServerFactoryManager: java.util.Map getProperties()>();
+
+        varReplacer2545 = "moduli-url";
+
+        $r4 = interfaceinvoke $r3.<java.util.Map: java.lang.Object get(java.lang.Object)>(varReplacer2545);
+
+        r5 = (java.lang.String) $r4;
+
+        if r5 == null goto label04;
+
+     label01:
+        $r25 = new java.net.URL;
+
+        specialinvoke $r25.<java.net.URL: void <init>(java.lang.String)>(r5);
+
+        r29 = $r25;
+
+        r28 = staticinvoke <org.apache.sshd.server.kex.Moduli: java.util.List parseModuli(java.net.URL)>(r29);
+
+     label02:
+        goto label04;
+
+     label03:
+        $r26 := @caughtexception;
+
+        r30 = $r26;
+
+        $r27 = r0.<org.apache.sshd.server.kex.DHGEX: org.slf4j.Logger log>;
+
+        varReplacer2546 = "Error loading external moduli";
+
+        interfaceinvoke $r27.<org.slf4j.Logger: void warn(java.lang.String,java.lang.Throwable)>(varReplacer2546, r30);
+
+     label04:
+        if r28 != null goto label05;
+
+        $r24 = virtualinvoke r0.<java.lang.Object: java.lang.Class getClass()>();
+
+        varReplacer2547 = "/org/apache/sshd/moduli";
+
+        r31 = virtualinvoke $r24.<java.lang.Class: java.net.URL getResource(java.lang.String)>(varReplacer2547);
+
+        r28 = staticinvoke <org.apache.sshd.server.kex.Moduli: java.util.List parseModuli(java.net.URL)>(r31);
+
+     label05:
+        varReplacer2544 = 1024;
+
+        i10 = staticinvoke <java.lang.Math: int max(int,int)>(i7, varReplacer2544);
+
+        varReplacer2548 = 1024;
+
+        i11 = staticinvoke <java.lang.Math: int max(int,int)>(i8, varReplacer2548);
+
+        $z0 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: boolean isBouncyCastleRegistered()>();
+
+        if $z0 == 0 goto label06;
+
+        $s12 = 8192;
+
+        goto label07;
+
+     label06:
+        $s12 = 1024;
+
+     label07:
+        i13 = staticinvoke <java.lang.Math: int min(int,int)>(i11, $s12);
+
+        varReplacer2543 = 8192;
+
+        i14 = staticinvoke <java.lang.Math: int min(int,int)>(i9, varReplacer2543);
+
+        i15 = 0;
+
+        $r6 = new java.util.ArrayList;
+
+        specialinvoke $r6.<java.util.ArrayList: void <init>()>();
+
+        r7 = $r6;
+
+        r32 = interfaceinvoke r28.<java.util.List: java.util.Iterator iterator()>();
+
+     label08:
+        $z3 = interfaceinvoke r32.<java.util.Iterator: boolean hasNext()>();
+
+        if $z3 == 0 goto label14;
+
+        $r23 = interfaceinvoke r32.<java.util.Iterator: java.lang.Object next()>();
+
+        r33 = (org.apache.sshd.server.kex.Moduli$DhGroup) $r23;
+
+        $i1 = r33.<org.apache.sshd.server.kex.Moduli$DhGroup: int size>;
+
+        if $i1 < i10 goto label08;
+
+        $i2 = r33.<org.apache.sshd.server.kex.Moduli$DhGroup: int size>;
+
+        if $i2 <= i14 goto label09;
+
+        goto label08;
+
+     label09:
+        $i3 = r33.<org.apache.sshd.server.kex.Moduli$DhGroup: int size>;
+
+        if $i3 <= i13 goto label10;
+
+        $i5 = r33.<org.apache.sshd.server.kex.Moduli$DhGroup: int size>;
+
+        if $i5 < i15 goto label11;
+
+     label10:
+        $i4 = r33.<org.apache.sshd.server.kex.Moduli$DhGroup: int size>;
+
+        if $i4 <= i15 goto label12;
+
+        if i15 >= i13 goto label12;
+
+     label11:
+        i15 = r33.<org.apache.sshd.server.kex.Moduli$DhGroup: int size>;
+
+        interfaceinvoke r7.<java.util.List: void clear()>();
+
+     label12:
+        $i16 = r33.<org.apache.sshd.server.kex.Moduli$DhGroup: int size>;
+
+        if $i16 != i15 goto label13;
+
+        interfaceinvoke r7.<java.util.List: boolean add(java.lang.Object)>(r33);
+
+     label13:
+        goto label08;
+
+     label14:
+        $z1 = interfaceinvoke r7.<java.util.List: boolean isEmpty()>();
+
+        if $z1 == 0 goto label15;
+
+        $r17 = r0.<org.apache.sshd.server.kex.DHGEX: org.slf4j.Logger log>;
+
+        varReplacer2542 = "No suitable primes found, defaulting to DHG1";
+
+        interfaceinvoke $r17.<org.slf4j.Logger: void warn(java.lang.String)>(varReplacer2542);
+
+        $r18 = new java.math.BigInteger;
+
+        $r19 = staticinvoke <org.apache.sshd.common.kex.DHGroupData: byte[] getP1()>();
+
+        specialinvoke $r18.<java.math.BigInteger: void <init>(byte[])>($r19);
+
+        $r20 = new java.math.BigInteger;
+
+        $r21 = staticinvoke <org.apache.sshd.common.kex.DHGroupData: byte[] getG()>();
+
+        specialinvoke $r20.<java.math.BigInteger: void <init>(byte[])>($r21);
+
+        $r22 = virtualinvoke r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.common.kex.DH getDH(java.math.BigInteger,java.math.BigInteger)>($r18, $r20);
+
+        return $r22;
+
+     label15:
+        $r8 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.server.session.ServerSession session>;
+
+        $r9 = virtualinvoke $r8.<org.apache.sshd.server.session.ServerSession: org.apache.sshd.server.ServerFactoryManager getFactoryManager()>();
+
+        $r10 = interfaceinvoke $r9.<org.apache.sshd.server.ServerFactoryManager: org.apache.sshd.common.Factory getRandomFactory()>();
+
+        $r11 = interfaceinvoke $r10.<org.apache.sshd.common.Factory: java.lang.Object create()>();
+
+        r34 = (org.apache.sshd.common.Random) $r11;
+
+        $i0 = interfaceinvoke r7.<java.util.List: int size()>();
+
+        i17 = interfaceinvoke r34.<org.apache.sshd.common.Random: int random(int)>($i0);
+
+        $r12 = interfaceinvoke r7.<java.util.List: java.lang.Object get(int)>(i17);
+
+        r13 = (org.apache.sshd.server.kex.Moduli$DhGroup) $r12;
+
+        $r15 = r13.<org.apache.sshd.server.kex.Moduli$DhGroup: java.math.BigInteger p>;
+
+        $r14 = r13.<org.apache.sshd.server.kex.Moduli$DhGroup: java.math.BigInteger g>;
+
+        $r16 = virtualinvoke r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.common.kex.DH getDH(java.math.BigInteger,java.math.BigInteger)>($r15, $r14);
+
+        return $r16;
+
+        catch java.io.IOException from label01 to label02 with label03;
+    }
+
+    protected org.apache.sshd.common.kex.DH getDH(java.math.BigInteger, java.math.BigInteger) throws java.lang.Exception
+    {
+        org.apache.sshd.common.kex.DH $r0, r2;
+        org.apache.sshd.common.digest.SHA1$Factory $r1;
+        java.math.BigInteger r3, r4;
+        org.apache.sshd.server.kex.DHGEX r5;
+
+        nop;
+
+        r5 := @this: org.apache.sshd.server.kex.DHGEX;
+
+        r3 := @parameter0: java.math.BigInteger;
+
+        r4 := @parameter1: java.math.BigInteger;
+
+        $r0 = new org.apache.sshd.common.kex.DH;
+
+        $r1 = new org.apache.sshd.common.digest.SHA1$Factory;
+
+        specialinvoke $r1.<org.apache.sshd.common.digest.SHA1$Factory: void <init>()>();
+
+        specialinvoke $r0.<org.apache.sshd.common.kex.DH: void <init>(org.apache.sshd.common.Factory)>($r1);
+
+        r2 = $r0;
+
+        virtualinvoke r2.<org.apache.sshd.common.kex.DH: void setP(java.math.BigInteger)>(r3);
+
+        virtualinvoke r2.<org.apache.sshd.common.kex.DH: void setG(java.math.BigInteger)>(r4);
+
+        return r2;
+    }
+
+    public org.apache.sshd.common.Digest getHash()
+    {
+        org.apache.sshd.server.kex.DHGEX r0;
+        org.apache.sshd.common.Digest $r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.kex.DHGEX;
+
+        $r1 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.common.Digest hash>;
+
+        return $r1;
+    }
+
+    public byte[] getH()
+    {
+        org.apache.sshd.server.kex.DHGEX r0;
+        byte[] $r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.kex.DHGEX;
+
+        $r1 = r0.<org.apache.sshd.server.kex.DHGEX: byte[] H>;
+
+        return $r1;
+    }
+
+    public byte[] getK()
+    {
+        org.apache.sshd.server.kex.DHGEX r0;
+        byte[] $r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.kex.DHGEX;
+
+        $r1 = r0.<org.apache.sshd.server.kex.DHGEX: byte[] K>;
+
+        return $r1;
+    }
+
+    public java.security.PublicKey getServerKey()
+    {
+        org.apache.sshd.server.kex.DHGEX r0;
+        org.apache.sshd.server.session.ServerSession $r1;
+        java.security.KeyPair $r2;
+        java.security.PublicKey $r3;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.kex.DHGEX;
+
+        $r1 = r0.<org.apache.sshd.server.kex.DHGEX: org.apache.sshd.server.session.ServerSession session>;
+
+        $r2 = virtualinvoke $r1.<org.apache.sshd.server.session.ServerSession: java.security.KeyPair getHostKey()>();
+
+        $r3 = virtualinvoke $r2.<java.security.KeyPair: java.security.PublicKey getPublic()>();
+
+        return $r3;
+    }
+}

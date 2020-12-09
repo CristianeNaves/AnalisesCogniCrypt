@@ -1,0 +1,381 @@
+public class org.apache.sshd.common.cipher.BaseCipher extends java.lang.Object implements org.apache.sshd.common.cipher.Cipher
+{
+    protected javax.crypto.Cipher cipher;
+    private final int ivsize;
+    private final int bsize;
+    private final java.lang.String algorithm;
+    private final java.lang.String transformation;
+    private java.lang.String s;
+
+    public void <init>(int, int, java.lang.String, java.lang.String)
+    {
+        org.apache.sshd.common.cipher.BaseCipher r0;
+        int i0, i1;
+        java.lang.String r1, $r2, r3, $r4, varReplacer5799, varReplacer5800;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.cipher.BaseCipher;
+
+        i0 := @parameter0: int;
+
+        i1 := @parameter1: int;
+
+        r1 := @parameter2: java.lang.String;
+
+        r3 := @parameter3: java.lang.String;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        r0.<org.apache.sshd.common.cipher.BaseCipher: int ivsize> = i0;
+
+        r0.<org.apache.sshd.common.cipher.BaseCipher: int bsize> = i1;
+
+        varReplacer5799 = "No algorithm";
+
+        $r2 = staticinvoke <org.apache.sshd.common.util.ValidateUtils: java.lang.String checkNotNullAndNotEmpty(java.lang.String,java.lang.String)>(r1, varReplacer5799);
+
+        r0.<org.apache.sshd.common.cipher.BaseCipher: java.lang.String algorithm> = $r2;
+
+        varReplacer5800 = "No transformation";
+
+        $r4 = staticinvoke <org.apache.sshd.common.util.ValidateUtils: java.lang.String checkNotNullAndNotEmpty(java.lang.String,java.lang.String)>(r3, varReplacer5800);
+
+        r0.<org.apache.sshd.common.cipher.BaseCipher: java.lang.String transformation> = $r4;
+
+        return;
+    }
+
+    public java.lang.String getAlgorithm()
+    {
+        org.apache.sshd.common.cipher.BaseCipher r0;
+        java.lang.String $r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.cipher.BaseCipher;
+
+        $r1 = r0.<org.apache.sshd.common.cipher.BaseCipher: java.lang.String algorithm>;
+
+        return $r1;
+    }
+
+    public java.lang.String getTransformation()
+    {
+        org.apache.sshd.common.cipher.BaseCipher r0;
+        java.lang.String $r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.cipher.BaseCipher;
+
+        $r1 = r0.<org.apache.sshd.common.cipher.BaseCipher: java.lang.String transformation>;
+
+        return $r1;
+    }
+
+    public int getIVSize()
+    {
+        org.apache.sshd.common.cipher.BaseCipher r0;
+        int $i0;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.cipher.BaseCipher;
+
+        $i0 = r0.<org.apache.sshd.common.cipher.BaseCipher: int ivsize>;
+
+        return $i0;
+    }
+
+    public int getBlockSize()
+    {
+        org.apache.sshd.common.cipher.BaseCipher r0;
+        int $i0;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.cipher.BaseCipher;
+
+        $i0 = r0.<org.apache.sshd.common.cipher.BaseCipher: int bsize>;
+
+        return $i0;
+    }
+
+    public void init(org.apache.sshd.common.cipher.Cipher$Mode, byte[], byte[]) throws java.lang.Exception
+    {
+        org.apache.sshd.common.cipher.BaseCipher r0;
+        int $i0, $i1;
+        java.lang.String $r1, $r7, $r15, varReplacer5801;
+        javax.crypto.Cipher $r2, $r5;
+        org.apache.sshd.common.cipher.Cipher$Mode r3, $r4;
+        boolean $z0;
+        javax.crypto.spec.SecretKeySpec $r6;
+        javax.crypto.spec.IvParameterSpec $r8;
+        java.lang.Exception $r9, r10;
+        org.apache.sshd.common.SshException $r11;
+        java.lang.StringBuilder $r12, $r13, $r14;
+        byte[] r16, r17, r18, r19;
+        byte $b2;
+        null_type varReplacer5802;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.cipher.BaseCipher;
+
+        r3 := @parameter0: org.apache.sshd.common.cipher.Cipher$Mode;
+
+        r16 := @parameter1: byte[];
+
+        r17 := @parameter2: byte[];
+
+        $i0 = virtualinvoke r0.<org.apache.sshd.common.cipher.BaseCipher: int getBlockSize()>();
+
+        r18 = staticinvoke <org.apache.sshd.common.cipher.BaseCipher: byte[] resize(byte[],int)>(r16, $i0);
+
+        $i1 = virtualinvoke r0.<org.apache.sshd.common.cipher.BaseCipher: int getIVSize()>();
+
+        r19 = staticinvoke <org.apache.sshd.common.cipher.BaseCipher: byte[] resize(byte[],int)>(r17, $i1);
+
+     label1:
+        $r1 = virtualinvoke r0.<org.apache.sshd.common.cipher.BaseCipher: java.lang.String getTransformation()>();
+
+        $r2 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: javax.crypto.Cipher getCipher(java.lang.String)>($r1);
+
+        r0.<org.apache.sshd.common.cipher.BaseCipher: javax.crypto.Cipher cipher> = $r2;
+
+        $r5 = r0.<org.apache.sshd.common.cipher.BaseCipher: javax.crypto.Cipher cipher>;
+
+        $r4 = <org.apache.sshd.common.cipher.Cipher$Mode: org.apache.sshd.common.cipher.Cipher$Mode Encrypt>;
+
+        $z0 = virtualinvoke $r4.<org.apache.sshd.common.cipher.Cipher$Mode: boolean equals(java.lang.Object)>(r3);
+
+        if $z0 == 0 goto label2;
+
+        $b2 = 1;
+
+        goto label3;
+
+     label2:
+        $b2 = 2;
+
+     label3:
+        $r6 = new javax.crypto.spec.SecretKeySpec;
+
+        $r7 = virtualinvoke r0.<org.apache.sshd.common.cipher.BaseCipher: java.lang.String getAlgorithm()>();
+
+        specialinvoke $r6.<javax.crypto.spec.SecretKeySpec: void <init>(byte[],java.lang.String)>(r18, $r7);
+
+        $r8 = new javax.crypto.spec.IvParameterSpec;
+
+        specialinvoke $r8.<javax.crypto.spec.IvParameterSpec: void <init>(byte[])>(r19);
+
+        virtualinvoke $r5.<javax.crypto.Cipher: void init(int,java.security.Key,java.security.spec.AlgorithmParameterSpec)>($b2, $r6, $r8);
+
+     label4:
+        goto label6;
+
+     label5:
+        $r9 := @caughtexception;
+
+        r10 = $r9;
+
+        varReplacer5802 = null;
+
+        r0.<org.apache.sshd.common.cipher.BaseCipher: javax.crypto.Cipher cipher> = varReplacer5802;
+
+        $r11 = new org.apache.sshd.common.SshException;
+
+        $r12 = new java.lang.StringBuilder;
+
+        specialinvoke $r12.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer5801 = "Unable to initialize cipher ";
+
+        $r13 = virtualinvoke $r12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer5801);
+
+        $r14 = virtualinvoke $r13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(r0);
+
+        $r15 = virtualinvoke $r14.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $r11.<org.apache.sshd.common.SshException: void <init>(java.lang.String,java.lang.Throwable)>($r15, r10);
+
+        throw $r11;
+
+     label6:
+        return;
+
+        catch java.lang.Exception from label1 to label4 with label5;
+    }
+
+    public void update(byte[]) throws java.lang.Exception
+    {
+        org.apache.sshd.common.cipher.BaseCipher r0;
+        byte[] r1;
+        int $i0, varReplacer5803;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.cipher.BaseCipher;
+
+        r1 := @parameter0: byte[];
+
+        $i0 = staticinvoke <org.apache.sshd.common.util.NumberUtils: int length(byte[])>(r1);
+
+        varReplacer5803 = 0;
+
+        virtualinvoke r0.<org.apache.sshd.common.cipher.BaseCipher: void update(byte[],int,int)>(r1, varReplacer5803, $i0);
+
+        return;
+    }
+
+    public void update(byte[], int, int) throws java.lang.Exception
+    {
+        org.apache.sshd.common.cipher.BaseCipher r0;
+        byte[] r1;
+        int i0, i1;
+        javax.crypto.Cipher $r2;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.cipher.BaseCipher;
+
+        r1 := @parameter0: byte[];
+
+        i0 := @parameter1: int;
+
+        i1 := @parameter2: int;
+
+        $r2 = r0.<org.apache.sshd.common.cipher.BaseCipher: javax.crypto.Cipher cipher>;
+
+        virtualinvoke $r2.<javax.crypto.Cipher: int update(byte[],int,int,byte[],int)>(r1, i0, i1, r1, i0);
+
+        return;
+    }
+
+    protected static byte[] resize(byte[], int)
+    {
+        int i0, $i1, varReplacer5804, varReplacer5805;
+        byte[] r0, r1;
+
+        nop;
+
+        r1 := @parameter0: byte[];
+
+        i0 := @parameter1: int;
+
+        $i1 = lengthof r1;
+
+        if $i1 <= i0 goto label1;
+
+        r0 = newarray (byte)[i0];
+
+        varReplacer5804 = 0;
+
+        varReplacer5805 = 0;
+
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>(r1, varReplacer5804, r0, varReplacer5804, i0);
+
+        r1 = r0;
+
+     label1:
+        return r1;
+    }
+
+    public java.lang.String toString()
+    {
+        org.apache.sshd.common.cipher.BaseCipher r0, r1;
+        java.lang.String $r3, $r4, $r7, $r10, $r17, $r20, varReplacer5806, varReplacer5807, varReplacer5808, varReplacer5809, varReplacer5810;
+        java.lang.StringBuilder $r5, $r8, $r9, $r11, $r12, $r13, $r14, $r15, $r16, $r18, $r19;
+        java.lang.Class $r6;
+        int $i0, $i1;
+        java.lang.Throwable $r21, r22;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.cipher.BaseCipher;
+
+        r1 = r0;
+
+        entermonitor r0;
+
+     label1:
+        $r3 = r0.<org.apache.sshd.common.cipher.BaseCipher: java.lang.String s>;
+
+        if $r3 != null goto label2;
+
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<java.lang.StringBuilder: void <init>()>();
+
+        $r6 = virtualinvoke r0.<java.lang.Object: java.lang.Class getClass()>();
+
+        $r7 = virtualinvoke $r6.<java.lang.Class: java.lang.String getSimpleName()>();
+
+        $r8 = virtualinvoke $r5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r7);
+
+        varReplacer5809 = "[";
+
+        $r9 = virtualinvoke $r8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer5809);
+
+        $r10 = virtualinvoke r0.<org.apache.sshd.common.cipher.BaseCipher: java.lang.String getAlgorithm()>();
+
+        $r11 = virtualinvoke $r9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r10);
+
+        varReplacer5806 = ",";
+
+        $r12 = virtualinvoke $r11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer5806);
+
+        $i0 = virtualinvoke r0.<org.apache.sshd.common.cipher.BaseCipher: int getIVSize()>();
+
+        $r13 = virtualinvoke $r12.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($i0);
+
+        varReplacer5810 = ",";
+
+        $r14 = virtualinvoke $r13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer5810);
+
+        $i1 = virtualinvoke r0.<org.apache.sshd.common.cipher.BaseCipher: int getBlockSize()>();
+
+        $r15 = virtualinvoke $r14.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($i1);
+
+        varReplacer5808 = ",";
+
+        $r16 = virtualinvoke $r15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer5808);
+
+        $r17 = virtualinvoke r0.<org.apache.sshd.common.cipher.BaseCipher: java.lang.String getTransformation()>();
+
+        $r18 = virtualinvoke $r16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r17);
+
+        varReplacer5807 = "]";
+
+        $r19 = virtualinvoke $r18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer5807);
+
+        $r20 = virtualinvoke $r19.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        r0.<org.apache.sshd.common.cipher.BaseCipher: java.lang.String s> = $r20;
+
+     label2:
+        exitmonitor r1;
+
+     label3:
+        goto label6;
+
+     label4:
+        $r21 := @caughtexception;
+
+        r22 = $r21;
+
+        exitmonitor r1;
+
+     label5:
+        throw r22;
+
+     label6:
+        $r4 = r0.<org.apache.sshd.common.cipher.BaseCipher: java.lang.String s>;
+
+        return $r4;
+
+        catch java.lang.Throwable from label1 to label3 with label4;
+        catch java.lang.Throwable from label4 to label5 with label4;
+    }
+}

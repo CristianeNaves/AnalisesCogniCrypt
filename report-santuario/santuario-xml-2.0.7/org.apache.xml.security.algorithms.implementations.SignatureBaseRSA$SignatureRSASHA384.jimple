@@ -1,0 +1,30 @@
+public class org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA384 extends org.apache.xml.security.algorithms.implementations.SignatureBaseRSA
+{
+
+    public void <init>() throws org.apache.xml.security.signature.XMLSignatureException
+    {
+        org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA384 r0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA384;
+
+        specialinvoke r0.<org.apache.xml.security.algorithms.implementations.SignatureBaseRSA: void <init>()>();
+
+        return;
+    }
+
+    public java.lang.String engineGetURI()
+    {
+        org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA384 r0;
+        java.lang.String varReplacer2005;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSASHA384;
+
+        varReplacer2005 = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384";
+
+        return varReplacer2005;
+    }
+}

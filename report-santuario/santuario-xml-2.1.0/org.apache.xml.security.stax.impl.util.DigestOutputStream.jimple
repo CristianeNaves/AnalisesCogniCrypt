@@ -1,0 +1,210 @@
+public class org.apache.xml.security.stax.impl.util.DigestOutputStream extends java.io.OutputStream
+{
+    protected static final transient org.slf4j.Logger LOG;
+    protected static final transient boolean isDebugEnabled;
+    private final java.security.MessageDigest messageDigest;
+    private java.lang.StringBuilder stringBuilder;
+
+    public void <init>(java.security.MessageDigest)
+    {
+        org.apache.xml.security.stax.impl.util.DigestOutputStream r0;
+        java.security.MessageDigest r1;
+        boolean $z0;
+        java.lang.StringBuilder $r2;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.util.DigestOutputStream;
+
+        r1 := @parameter0: java.security.MessageDigest;
+
+        specialinvoke r0.<java.io.OutputStream: void <init>()>();
+
+        r0.<org.apache.xml.security.stax.impl.util.DigestOutputStream: java.security.MessageDigest messageDigest> = r1;
+
+        $z0 = <org.apache.xml.security.stax.impl.util.DigestOutputStream: boolean isDebugEnabled>;
+
+        if $z0 == 0 goto label1;
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<java.lang.StringBuilder: void <init>()>();
+
+        r0.<org.apache.xml.security.stax.impl.util.DigestOutputStream: java.lang.StringBuilder stringBuilder> = $r2;
+
+     label1:
+        return;
+    }
+
+    public void write(byte[])
+    {
+        org.apache.xml.security.stax.impl.util.DigestOutputStream r0;
+        byte[] r1;
+        int $i0, varReplacer4836;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.util.DigestOutputStream;
+
+        r1 := @parameter0: byte[];
+
+        $i0 = lengthof r1;
+
+        varReplacer4836 = 0;
+
+        virtualinvoke r0.<org.apache.xml.security.stax.impl.util.DigestOutputStream: void write(byte[],int,int)>(r1, varReplacer4836, $i0);
+
+        return;
+    }
+
+    public void write(int)
+    {
+        int i0;
+        byte b1;
+        org.apache.xml.security.stax.impl.util.DigestOutputStream r0;
+        java.security.MessageDigest $r1;
+        boolean $z0;
+        char $c2;
+        java.lang.StringBuilder $r2;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.util.DigestOutputStream;
+
+        i0 := @parameter0: int;
+
+        b1 = (byte) i0;
+
+        $r1 = r0.<org.apache.xml.security.stax.impl.util.DigestOutputStream: java.security.MessageDigest messageDigest>;
+
+        virtualinvoke $r1.<java.security.MessageDigest: void update(byte)>(b1);
+
+        $z0 = <org.apache.xml.security.stax.impl.util.DigestOutputStream: boolean isDebugEnabled>;
+
+        if $z0 == 0 goto label1;
+
+        $r2 = r0.<org.apache.xml.security.stax.impl.util.DigestOutputStream: java.lang.StringBuilder stringBuilder>;
+
+        $c2 = (char) b1;
+
+        virtualinvoke $r2.<java.lang.StringBuilder: java.lang.StringBuilder append(char)>($c2);
+
+     label1:
+        return;
+    }
+
+    public void write(byte[], int, int)
+    {
+        org.apache.xml.security.stax.impl.util.DigestOutputStream r0;
+        byte[] r1;
+        int i0, i1;
+        java.security.MessageDigest $r2;
+        boolean $z0;
+        java.lang.String $r3;
+        java.nio.charset.Charset $r4;
+        java.lang.StringBuilder $r5;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.util.DigestOutputStream;
+
+        r1 := @parameter0: byte[];
+
+        i0 := @parameter1: int;
+
+        i1 := @parameter2: int;
+
+        $r2 = r0.<org.apache.xml.security.stax.impl.util.DigestOutputStream: java.security.MessageDigest messageDigest>;
+
+        virtualinvoke $r2.<java.security.MessageDigest: void update(byte[],int,int)>(r1, i0, i1);
+
+        $z0 = <org.apache.xml.security.stax.impl.util.DigestOutputStream: boolean isDebugEnabled>;
+
+        if $z0 == 0 goto label1;
+
+        $r5 = r0.<org.apache.xml.security.stax.impl.util.DigestOutputStream: java.lang.StringBuilder stringBuilder>;
+
+        $r3 = new java.lang.String;
+
+        $r4 = <java.nio.charset.StandardCharsets: java.nio.charset.Charset UTF_8>;
+
+        specialinvoke $r3.<java.lang.String: void <init>(byte[],int,int,java.nio.charset.Charset)>(r1, i0, i1, $r4);
+
+        virtualinvoke $r5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r3);
+
+     label1:
+        return;
+    }
+
+    public byte[] getDigestValue()
+    {
+        boolean $z0;
+        org.apache.xml.security.stax.impl.util.DigestOutputStream r0;
+        java.security.MessageDigest $r1;
+        byte[] $r2;
+        org.slf4j.Logger $r3, $r5, $r7;
+        java.lang.StringBuilder $r4, $r8;
+        java.lang.String $r6, varReplacer4837, varReplacer4838;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.util.DigestOutputStream;
+
+        $z0 = <org.apache.xml.security.stax.impl.util.DigestOutputStream: boolean isDebugEnabled>;
+
+        if $z0 == 0 goto label1;
+
+        $r3 = <org.apache.xml.security.stax.impl.util.DigestOutputStream: org.slf4j.Logger LOG>;
+
+        varReplacer4837 = "Pre Digest: ";
+
+        interfaceinvoke $r3.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer4837);
+
+        $r5 = <org.apache.xml.security.stax.impl.util.DigestOutputStream: org.slf4j.Logger LOG>;
+
+        $r4 = r0.<org.apache.xml.security.stax.impl.util.DigestOutputStream: java.lang.StringBuilder stringBuilder>;
+
+        $r6 = virtualinvoke $r4.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r5.<org.slf4j.Logger: void debug(java.lang.String)>($r6);
+
+        $r7 = <org.apache.xml.security.stax.impl.util.DigestOutputStream: org.slf4j.Logger LOG>;
+
+        varReplacer4838 = "End pre Digest ";
+
+        interfaceinvoke $r7.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer4838);
+
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<java.lang.StringBuilder: void <init>()>();
+
+        r0.<org.apache.xml.security.stax.impl.util.DigestOutputStream: java.lang.StringBuilder stringBuilder> = $r8;
+
+     label1:
+        $r1 = r0.<org.apache.xml.security.stax.impl.util.DigestOutputStream: java.security.MessageDigest messageDigest>;
+
+        $r2 = virtualinvoke $r1.<java.security.MessageDigest: byte[] digest()>();
+
+        return $r2;
+    }
+
+    static void <clinit>()
+    {
+        org.slf4j.Logger $r0, $r1;
+        boolean $z0;
+
+        nop;
+
+        $r0 = staticinvoke <org.slf4j.LoggerFactory: org.slf4j.Logger getLogger(java.lang.Class)>(class "Lorg/apache/xml/security/stax/impl/util/DigestOutputStream;");
+
+        <org.apache.xml.security.stax.impl.util.DigestOutputStream: org.slf4j.Logger LOG> = $r0;
+
+        $r1 = <org.apache.xml.security.stax.impl.util.DigestOutputStream: org.slf4j.Logger LOG>;
+
+        $z0 = interfaceinvoke $r1.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        <org.apache.xml.security.stax.impl.util.DigestOutputStream: boolean isDebugEnabled> = $z0;
+
+        return;
+    }
+}

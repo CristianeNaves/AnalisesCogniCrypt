@@ -1,0 +1,204 @@
+2_19_0.txt
+
+Release 2.18.0
+2018-11-30
+
+/home/caio/MC/vai_dar_certo/jackrabbit-jackrabbit-2.18.0/jackrabbit-jcr-tests/target/jackrabbit-jcr-tests-2.18.0.jar
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 3
+
+	CogniCrypt found the following violations. For details see description above.
+	ConstraintError: 1
+=====================================================================
+
+
+
+/home/caio/MC/vai_dar_certo/jackrabbit-jackrabbit-2.18.0/jackrabbit-jcr-commons/target/jackrabbit-jcr-commons-2.18.0.jar
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 3
+
+	CogniCrypt found the following violations. For details see description above.
+	ConstraintError: 1
+=====================================================================
+
+
+
+/home/caio/MC/vai_dar_certo/jackrabbit-jackrabbit-2.18.0/jackrabbit-jca/target/jackrabbit-jca-2.18.0/commons-io-2.6.jar
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 2
+
+	CogniCrypt found the following violations. For details see description above.
+	ConstraintError: 1
+	IncompleteOperationError: 2
+=====================================================================
+
+
+
+/home/caio/MC/vai_dar_certo/jackrabbit-jackrabbit-2.18.0/jackrabbit-jca/target/jackrabbit-jca-2.18.0/httpcore-4.4.10.jar
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 11
+
+	CogniCrypt found the following violations. For details see description above.
+	ForbiddenMethodError: 1
+	ConstraintError: 3
+	RequiredPredicateError: 3
+=====================================================================
+
+
+
+/home/caio/MC/vai_dar_certo/jackrabbit-jackrabbit-2.18.0/jackrabbit-jca/target/jackrabbit-jca-2.18.0/tika-core-1.19.1.jar
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 6
+
+	CogniCrypt found the following violations. For details see description above.
+	TypestateError: 2
+	IncompleteOperationError: 6
+	ForbiddenMethodError: 1
+	RequiredPredicateError: 3
+=====================================================================
+
+
+
+/home/caio/MC/vai_dar_certo/jackrabbit-jackrabbit-2.18.0/jackrabbit-jca/target/jackrabbit-jca-2.18.0/commons-codec-1.11.jar
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 30
+
+	CogniCrypt found the following violations. For details see description above.
+	ConstraintError: 3
+	RequiredPredicateError: 2
+	TypestateError: 9
+	IncompleteOperationError: 14
+=====================================================================
+
+
+
+/home/caio/MC/vai_dar_certo/jackrabbit-jackrabbit-2.18.0/jackrabbit-jca/target/jackrabbit-jca-2.18.0/httpservices-4.5.5.jar
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 15
+
+	CogniCrypt found the following violations. For details see description above.
+	ConstraintError: 6
+	RequiredPredicateError: 12
+	NeverTypeOfError: 2
+	HardCodedError: 2
+	IncompleteOperationError: 4
+=====================================================================
+
+
+
+/home/caio/MC/vai_dar_certo/jackrabbit-jackrabbit-2.18.0/jackrabbit-jca/target/jackrabbit-jca-2.18.0/logback-core-1.2.3.jar
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 12
+
+	CogniCrypt found the following violations. For details see description above.
+	HardCodedError: 2
+	RequiredPredicateError: 4
+	NeverTypeOfError: 2
+=====================================================================
+
+
+
+/home/caio/MC/vai_dar_certo/jackrabbit-jackrabbit-2.18.0/jackrabbit-jca/target/jackrabbit-jca-2.18.0/bcmail-jdk15on-1.60.jar
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 26
+
+	CogniCrypt found the following violations. For details see description above.
+	RequiredPredicateError: 1
+	NeverTypeOfError: 5
+	ConstraintError: 4
+	HardCodedError: 5
+	TypestateError: 3
+=====================================================================
+
+
+
+/home/caio/MC/vai_dar_certo/jackrabbit-jackrabbit-2.18.0/jackrabbit-jca/target/jackrabbit-jca-2.18.0/opennlp-tools-1.9.0.jar
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 1
+
+	CogniCrypt found the following violations. For details see description above.
+	IncompleteOperationError: 2
+	ConstraintError: 1
+=====================================================================
+
+
+
+/home/caio/MC/vai_dar_certo/jackrabbit-jackrabbit-2.18.0/jackrabbit-jca/target/jackrabbit-jca-2.18.0/tika-parsers-1.19.1.jar
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 3
+
+	CogniCrypt found the following violations. For details see description above.
+	IncompleteOperationError: 3
+=====================================================================
+
+
+
+/home/caio/MC/vai_dar_certo/jackrabbit-jackrabbit-2.18.0/jackrabbit-jca/target/jackrabbit-jca-2.18.0/logback-classic-1.2.3.jar
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 0
+
+	CogniCrypt found the following violations. For details see description above.
+	ForbiddenMethodError: 1
+=====================================================================
+
+
+
+/home/caio/MC/vai_dar_certo/jackrabbit-jackrabbit-2.18.0/jackrabbit-jca/target/jackrabbit-jca-2.18.0/cxf-rt-rs-client-3.2.6.jar
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 4
+
+	CogniCrypt found the following violations. For details see description above.
+	RequiredPredicateError: 2
+=====================================================================
+
+
+
+/home/caio/MC/vai_dar_certo/jackrabbit-jackrabbit-2.18.0/jackrabbit-jca/target/jackrabbit-jca-2.18.0/cxf-rt-transports-http-3.2.6.jar
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 14
+
+	CogniCrypt found the following violations. For details see description above.
+	ConstraintError: 4
+	IncompleteOperationError: 1
+	RequiredPredicateError: 3
+=====================================================================
+
+
+
+/home/caio/MC/vai_dar_certo/jackrabbit-jackrabbit-2.18.0/jackrabbit-jca/target/jackrabbit-jca-2.18.0/jackrabbit-jcr-commons-2.18.0.jar
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 3
+
+	CogniCrypt found the following violations. For details see description above.
+	ConstraintError: 1
+=====================================================================

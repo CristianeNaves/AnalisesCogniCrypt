@@ -1,0 +1,408 @@
+class org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread extends java.lang.Object implements java.lang.Runnable
+{
+    private final org.apache.xml.security.stax.ext.InputProcessorChain inputProcessorChain;
+    private final boolean header;
+    private final java.io.PipedOutputStream pipedOutputStream;
+    private final java.io.PipedInputStream pipedInputStream;
+    private javax.crypto.Cipher symmetricCipher;
+    private int ivLength;
+    private java.security.Key secretKey;
+
+    protected void <init>(org.apache.xml.security.stax.ext.InputProcessorChain, boolean) throws javax.xml.stream.XMLStreamException, org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread r0;
+        org.apache.xml.security.stax.ext.InputProcessorChain r1;
+        boolean z0;
+        java.io.PipedInputStream $r2, $r4;
+        java.io.PipedOutputStream $r3;
+        java.lang.Throwable $r5, r6;
+        javax.xml.stream.XMLStreamException $r7;
+        int varReplacer4287;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread;
+
+        r1 := @parameter0: org.apache.xml.security.stax.ext.InputProcessorChain;
+
+        z0 := @parameter1: boolean;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        r0.<org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread: org.apache.xml.security.stax.ext.InputProcessorChain inputProcessorChain> = r1;
+
+        r0.<org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread: boolean header> = z0;
+
+        $r2 = new java.io.PipedInputStream;
+
+        varReplacer4287 = 40960;
+
+        specialinvoke $r2.<java.io.PipedInputStream: void <init>(int)>(varReplacer4287);
+
+        r0.<org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread: java.io.PipedInputStream pipedInputStream> = $r2;
+
+     label1:
+        $r3 = new java.io.PipedOutputStream;
+
+        $r4 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread: java.io.PipedInputStream pipedInputStream>;
+
+        specialinvoke $r3.<java.io.PipedOutputStream: void <init>(java.io.PipedInputStream)>($r4);
+
+        r0.<org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread: java.io.PipedOutputStream pipedOutputStream> = $r3;
+
+     label2:
+        goto label4;
+
+     label3:
+        $r5 := @caughtexception;
+
+        r6 = $r5;
+
+        $r7 = new javax.xml.stream.XMLStreamException;
+
+        specialinvoke $r7.<javax.xml.stream.XMLStreamException: void <init>(java.lang.Throwable)>(r6);
+
+        throw $r7;
+
+     label4:
+        return;
+
+        catch java.io.IOException from label1 to label2 with label3;
+    }
+
+    public java.io.PipedInputStream getPipedInputStream()
+    {
+        org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread r0;
+        java.io.PipedInputStream $r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread;
+
+        $r1 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread: java.io.PipedInputStream pipedInputStream>;
+
+        return $r1;
+    }
+
+    private org.apache.xml.security.stax.ext.stax.XMLSecEvent processNextEvent() throws org.apache.xml.security.exceptions.XMLSecurityException, javax.xml.stream.XMLStreamException
+    {
+        org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread r0;
+        org.apache.xml.security.stax.ext.InputProcessorChain $r1, $r2, $r4;
+        boolean $z0;
+        org.apache.xml.security.stax.ext.stax.XMLSecEvent $r3, $r5;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread;
+
+        $r1 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread: org.apache.xml.security.stax.ext.InputProcessorChain inputProcessorChain>;
+
+        interfaceinvoke $r1.<org.apache.xml.security.stax.ext.InputProcessorChain: void reset()>();
+
+        $z0 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread: boolean header>;
+
+        if $z0 == 0 goto label1;
+
+        $r4 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread: org.apache.xml.security.stax.ext.InputProcessorChain inputProcessorChain>;
+
+        $r5 = interfaceinvoke $r4.<org.apache.xml.security.stax.ext.InputProcessorChain: org.apache.xml.security.stax.ext.stax.XMLSecEvent processHeaderEvent()>();
+
+        return $r5;
+
+     label1:
+        $r2 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread: org.apache.xml.security.stax.ext.InputProcessorChain inputProcessorChain>;
+
+        $r3 = interfaceinvoke $r2.<org.apache.xml.security.stax.ext.InputProcessorChain: org.apache.xml.security.stax.ext.stax.XMLSecEvent processEvent()>();
+
+        return $r3;
+    }
+
+    public void run()
+    {
+        org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread r0;
+        java.lang.String $r1, $r2, $r15, $r24, varReplacer4288, varReplacer4289, varReplacer4291;
+        boolean $z0;
+        org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread$1 r4, $r36;
+        java.security.Key $r6;
+        int $i0, $i1, varReplacer4290;
+        org.apache.xml.security.stax.impl.util.IVSplittingOutputStream r7, $r37;
+        org.apache.xml.security.stax.impl.util.ReplaceableOuputStream r9, $r38;
+        org.apache.commons.codec.binary.Base64OutputStream r11, $r39;
+        org.apache.xml.security.stax.ext.InputProcessorChain $r13;
+        org.apache.xml.security.stax.ext.DocumentContext $r14;
+        java.nio.charset.Charset $r16;
+        java.io.OutputStreamWriter r17, $r40;
+        org.apache.xml.security.stax.ext.stax.XMLSecEvent r18;
+        org.apache.xml.security.stax.ext.stax.XMLSecCharacters $r19;
+        char[] r20;
+        org.slf4j.Logger $r21;
+        java.lang.Object[] $r23;
+        java.io.PipedOutputStream $r26, $r30;
+        java.lang.Throwable $r27, r34;
+        java.lang.Exception $r29, r33;
+        javax.crypto.Cipher r31;
+        java.lang.Object r32;
+        org.apache.xml.security.stax.impl.util.FullyBufferedOutputStream $r35;
+        org.apache.xml.security.exceptions.XMLSecurityException $r41;
+        org.apache.xml.security.stax.ext.UncheckedXMLSecurityException $r42;
+        java.io.OutputStream $r43, $r44, $r45;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread;
+
+     label01:
+        r31 = virtualinvoke r0.<org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread: javax.crypto.Cipher getSymmetricCipher()>();
+
+        $r1 = virtualinvoke r31.<javax.crypto.Cipher: java.lang.String getAlgorithm()>();
+
+        $r2 = virtualinvoke $r1.<java.lang.String: java.lang.String toUpperCase()>();
+
+        varReplacer4288 = "GCM";
+
+        $z0 = virtualinvoke $r2.<java.lang.String: boolean contains(java.lang.CharSequence)>(varReplacer4288);
+
+        if $z0 == 0 goto label02;
+
+        $r35 = new org.apache.xml.security.stax.impl.util.FullyBufferedOutputStream;
+
+        $r26 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread: java.io.PipedOutputStream pipedOutputStream>;
+
+        specialinvoke $r35.<org.apache.xml.security.stax.impl.util.FullyBufferedOutputStream: void <init>(java.io.OutputStream)>($r26);
+
+        r32 = $r35;
+
+        goto label03;
+
+     label02:
+        r32 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread: java.io.PipedOutputStream pipedOutputStream>;
+
+     label03:
+        $r36 = new org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread$1;
+
+        $r43 = (java.io.OutputStream) r32;
+
+        $r44 = (java.io.OutputStream) r32;
+
+        specialinvoke $r36.<org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread$1: void <init>(org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread,java.io.OutputStream,javax.crypto.Cipher,javax.crypto.Cipher,java.io.OutputStream)>(r0, $r43, r31, r31, $r44);
+
+        r4 = $r36;
+
+        $r37 = new org.apache.xml.security.stax.impl.util.IVSplittingOutputStream;
+
+        $r6 = virtualinvoke r0.<org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread: java.security.Key getSecretKey()>();
+
+        $i0 = virtualinvoke r0.<org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread: int getIvLength()>();
+
+        specialinvoke $r37.<org.apache.xml.security.stax.impl.util.IVSplittingOutputStream: void <init>(java.io.OutputStream,javax.crypto.Cipher,java.security.Key,int)>(r4, r31, $r6, $i0);
+
+        r7 = $r37;
+
+        $r38 = new org.apache.xml.security.stax.impl.util.ReplaceableOuputStream;
+
+        specialinvoke $r38.<org.apache.xml.security.stax.impl.util.ReplaceableOuputStream: void <init>(java.io.OutputStream)>(r7);
+
+        r9 = $r38;
+
+        $r39 = new org.apache.commons.codec.binary.Base64OutputStream;
+
+        varReplacer4290 = 0;
+
+        specialinvoke $r39.<org.apache.commons.codec.binary.Base64OutputStream: void <init>(java.io.OutputStream,boolean)>(r9, varReplacer4290);
+
+        r11 = $r39;
+
+        virtualinvoke r7.<org.apache.xml.security.stax.impl.util.IVSplittingOutputStream: void setParentOutputStream(org.apache.xml.security.stax.impl.util.ReplaceableOuputStream)>(r9);
+
+        $r40 = new java.io.OutputStreamWriter;
+
+        $r13 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread: org.apache.xml.security.stax.ext.InputProcessorChain inputProcessorChain>;
+
+        $r14 = interfaceinvoke $r13.<org.apache.xml.security.stax.ext.InputProcessorChain: org.apache.xml.security.stax.ext.DocumentContext getDocumentContext()>();
+
+        $r15 = interfaceinvoke $r14.<org.apache.xml.security.stax.ext.DocumentContext: java.lang.String getEncoding()>();
+
+        $r16 = staticinvoke <java.nio.charset.Charset: java.nio.charset.Charset forName(java.lang.String)>($r15);
+
+        $r45 = (java.io.OutputStream) r11;
+
+        specialinvoke $r40.<java.io.OutputStreamWriter: void <init>(java.io.OutputStream,java.nio.charset.Charset)>($r45, $r16);
+
+        r17 = $r40;
+
+     label04:
+        r18 = specialinvoke r0.<org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread: org.apache.xml.security.stax.ext.stax.XMLSecEvent processNextEvent()>();
+
+        $i1 = interfaceinvoke r18.<org.apache.xml.security.stax.ext.stax.XMLSecEvent: int getEventType()>();
+
+        lookupswitch($i1)
+        {
+            case 2: goto label05;
+            case 4: goto label06;
+            default: goto label07;
+        };
+
+     label05:
+        goto label09;
+
+     label06:
+        $r19 = interfaceinvoke r18.<org.apache.xml.security.stax.ext.stax.XMLSecEvent: org.apache.xml.security.stax.ext.stax.XMLSecCharacters asCharacters()>();
+
+        r20 = interfaceinvoke $r19.<org.apache.xml.security.stax.ext.stax.XMLSecCharacters: char[] getText()>();
+
+        virtualinvoke r17.<java.io.OutputStreamWriter: void write(char[])>(r20);
+
+        goto label08;
+
+     label07:
+        $r41 = new org.apache.xml.security.exceptions.XMLSecurityException;
+
+        $r23 = newarray (java.lang.Object)[1];
+
+        $r24 = staticinvoke <org.apache.xml.security.stax.ext.XMLSecurityUtils: java.lang.String getXMLEventAsString(org.apache.xml.security.stax.ext.stax.XMLSecEvent)>(r18);
+
+        $r23[0] = $r24;
+
+        varReplacer4289 = "stax.unexpectedXMLEvent";
+
+        specialinvoke $r41.<org.apache.xml.security.exceptions.XMLSecurityException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer4289, $r23);
+
+        throw $r41;
+
+     label08:
+        goto label04;
+
+     label09:
+        virtualinvoke r17.<java.io.OutputStreamWriter: void close()>();
+
+        $r21 = staticinvoke <org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor: org.slf4j.Logger access$100()>();
+
+        varReplacer4291 = "Decryption thread finished";
+
+        interfaceinvoke $r21.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer4291);
+
+     label10:
+        goto label16;
+
+     label11:
+        $r29 := @caughtexception;
+
+        r33 = $r29;
+
+     label12:
+        $r30 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread: java.io.PipedOutputStream pipedOutputStream>;
+
+        virtualinvoke $r30.<java.io.PipedOutputStream: void close()>();
+
+     label13:
+        goto label15;
+
+     label14:
+        $r27 := @caughtexception;
+
+        r34 = $r27;
+
+     label15:
+        $r42 = new org.apache.xml.security.stax.ext.UncheckedXMLSecurityException;
+
+        specialinvoke $r42.<org.apache.xml.security.stax.ext.UncheckedXMLSecurityException: void <init>(java.lang.Throwable)>(r33);
+
+        throw $r42;
+
+     label16:
+        return;
+
+        catch java.lang.Exception from label01 to label10 with label11;
+        catch java.io.IOException from label12 to label13 with label14;
+    }
+
+    protected javax.crypto.Cipher getSymmetricCipher()
+    {
+        org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread r0;
+        javax.crypto.Cipher $r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread;
+
+        $r1 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread: javax.crypto.Cipher symmetricCipher>;
+
+        return $r1;
+    }
+
+    protected void setSymmetricCipher(javax.crypto.Cipher)
+    {
+        org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread r0;
+        javax.crypto.Cipher r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread;
+
+        r1 := @parameter0: javax.crypto.Cipher;
+
+        r0.<org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread: javax.crypto.Cipher symmetricCipher> = r1;
+
+        return;
+    }
+
+    int getIvLength()
+    {
+        org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread r0;
+        int $i0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread;
+
+        $i0 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread: int ivLength>;
+
+        return $i0;
+    }
+
+    void setIvLength(int)
+    {
+        org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread r0;
+        int i0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread;
+
+        i0 := @parameter0: int;
+
+        r0.<org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread: int ivLength> = i0;
+
+        return;
+    }
+
+    protected java.security.Key getSecretKey()
+    {
+        org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread r0;
+        java.security.Key $r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread;
+
+        $r1 = r0.<org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread: java.security.Key secretKey>;
+
+        return $r1;
+    }
+
+    protected void setSecretKey(java.security.Key)
+    {
+        org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread r0;
+        java.security.Key r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread;
+
+        r1 := @parameter0: java.security.Key;
+
+        r0.<org.apache.xml.security.stax.impl.processor.input.AbstractDecryptInputProcessor$DecryptionThread: java.security.Key secretKey> = r1;
+
+        return;
+    }
+}

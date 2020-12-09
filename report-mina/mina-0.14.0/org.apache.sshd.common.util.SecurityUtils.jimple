@@ -1,0 +1,476 @@
+public class org.apache.sshd.common.util.SecurityUtils extends java.lang.Object
+{
+    public static final java.lang.String BOUNCY_CASTLE;
+    private static final org.slf4j.Logger LOG;
+    private static java.lang.String securityProvider;
+    private static java.lang.Boolean registerBouncyCastle;
+    private static boolean registrationDone;
+    private static java.lang.Boolean hasEcc;
+
+    public void <init>()
+    {
+        org.apache.sshd.common.util.SecurityUtils r0;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.util.SecurityUtils;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static boolean hasEcc()
+    {
+        java.lang.Boolean $r0, $r2, $r5, $r6;
+        java.lang.Throwable $r3, r4;
+        boolean $z0;
+        int varReplacer973, varReplacer974;
+        java.lang.String varReplacer975;
+
+        nop;
+
+        $r0 = <org.apache.sshd.common.util.SecurityUtils: java.lang.Boolean hasEcc>;
+
+        if $r0 != null goto label4;
+
+     label1:
+        varReplacer975 = "EC";
+
+        staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.security.KeyPairGenerator getKeyPairGenerator(java.lang.String)>(varReplacer975);
+
+        varReplacer973 = 1;
+
+        $r2 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(varReplacer973);
+
+        <org.apache.sshd.common.util.SecurityUtils: java.lang.Boolean hasEcc> = $r2;
+
+     label2:
+        goto label4;
+
+     label3:
+        $r3 := @caughtexception;
+
+        r4 = $r3;
+
+        varReplacer974 = 0;
+
+        $r5 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(varReplacer974);
+
+        <org.apache.sshd.common.util.SecurityUtils: java.lang.Boolean hasEcc> = $r5;
+
+     label4:
+        $r6 = <org.apache.sshd.common.util.SecurityUtils: java.lang.Boolean hasEcc>;
+
+        $z0 = virtualinvoke $r6.<java.lang.Boolean: boolean booleanValue()>();
+
+        return $z0;
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+    }
+
+    public static synchronized void setSecurityProvider(java.lang.String)
+    {
+        java.lang.String r0;
+        int varReplacer976;
+
+        nop;
+
+        r0 := @parameter0: java.lang.String;
+
+        <org.apache.sshd.common.util.SecurityUtils: java.lang.String securityProvider> = r0;
+
+        varReplacer976 = 0;
+
+        <org.apache.sshd.common.util.SecurityUtils: boolean registrationDone> = varReplacer976;
+
+        return;
+    }
+
+    public static synchronized void setRegisterBouncyCastle(boolean)
+    {
+        boolean z0;
+        java.lang.Boolean $r0;
+        int varReplacer977;
+
+        nop;
+
+        z0 := @parameter0: boolean;
+
+        $r0 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(z0);
+
+        <org.apache.sshd.common.util.SecurityUtils: java.lang.Boolean registerBouncyCastle> = $r0;
+
+        varReplacer977 = 0;
+
+        <org.apache.sshd.common.util.SecurityUtils: boolean registrationDone> = varReplacer977;
+
+        return;
+    }
+
+    public static synchronized java.lang.String getSecurityProvider()
+    {
+        java.lang.String $r0;
+
+        nop;
+
+        staticinvoke <org.apache.sshd.common.util.SecurityUtils: void register()>();
+
+        $r0 = <org.apache.sshd.common.util.SecurityUtils: java.lang.String securityProvider>;
+
+        return $r0;
+    }
+
+    public static synchronized boolean isBouncyCastleRegistered()
+    {
+        java.lang.String $r0, $r1;
+        boolean $z0;
+
+        nop;
+
+        staticinvoke <org.apache.sshd.common.util.SecurityUtils: void register()>();
+
+        $r1 = "BC";
+
+        $r0 = <org.apache.sshd.common.util.SecurityUtils: java.lang.String securityProvider>;
+
+        $z0 = virtualinvoke $r1.<java.lang.String: boolean equals(java.lang.Object)>($r0);
+
+        return $z0;
+    }
+
+    private static void register()
+    {
+        boolean $z0, $z1, $z2;
+        java.lang.Boolean $r0, $r1, $r3, $r4, $r6;
+        org.apache.sshd.common.util.SecurityUtils$BouncyCastleRegistration $r2;
+        java.lang.Throwable $r5, r12;
+        org.slf4j.Logger $r7, $r9;
+        java.lang.RuntimeException $r8;
+        java.lang.String r10, $r11, varReplacer978, varReplacer979, varReplacer982, varReplacer983;
+        int varReplacer980;
+        null_type varReplacer981;
+
+        nop;
+
+        $z0 = <org.apache.sshd.common.util.SecurityUtils: boolean registrationDone>;
+
+        if $z0 != 0 goto label7;
+
+        $r0 = <org.apache.sshd.common.util.SecurityUtils: java.lang.Boolean registerBouncyCastle>;
+
+        if $r0 != null goto label1;
+
+        varReplacer978 = "org.apache.sshd.registerBouncyCastle";
+
+        r10 = staticinvoke <java.lang.System: java.lang.String getProperty(java.lang.String)>(varReplacer978);
+
+        if r10 == null goto label1;
+
+        $z2 = staticinvoke <java.lang.Boolean: boolean parseBoolean(java.lang.String)>(r10);
+
+        $r4 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>($z2);
+
+        <org.apache.sshd.common.util.SecurityUtils: java.lang.Boolean registerBouncyCastle> = $r4;
+
+     label1:
+        $r11 = <org.apache.sshd.common.util.SecurityUtils: java.lang.String securityProvider>;
+
+        if $r11 != null goto label6;
+
+        $r1 = <org.apache.sshd.common.util.SecurityUtils: java.lang.Boolean registerBouncyCastle>;
+
+        if $r1 == null goto label2;
+
+        $r3 = <org.apache.sshd.common.util.SecurityUtils: java.lang.Boolean registerBouncyCastle>;
+
+        $z1 = virtualinvoke $r3.<java.lang.Boolean: boolean booleanValue()>();
+
+        if $z1 == 0 goto label6;
+
+     label2:
+        $r2 = new org.apache.sshd.common.util.SecurityUtils$BouncyCastleRegistration;
+
+        varReplacer981 = null;
+
+        specialinvoke $r2.<org.apache.sshd.common.util.SecurityUtils$BouncyCastleRegistration: void <init>(org.apache.sshd.common.util.SecurityUtils$1)>(varReplacer981);
+
+        virtualinvoke $r2.<org.apache.sshd.common.util.SecurityUtils$BouncyCastleRegistration: void run()>();
+
+     label3:
+        goto label6;
+
+     label4:
+        $r5 := @caughtexception;
+
+        r12 = $r5;
+
+        $r6 = <org.apache.sshd.common.util.SecurityUtils: java.lang.Boolean registerBouncyCastle>;
+
+        if $r6 != null goto label5;
+
+        $r9 = <org.apache.sshd.common.util.SecurityUtils: org.slf4j.Logger LOG>;
+
+        varReplacer982 = "BouncyCastle not registered, using the default JCE provider";
+
+        interfaceinvoke $r9.<org.slf4j.Logger: void info(java.lang.String)>(varReplacer982);
+
+        goto label6;
+
+     label5:
+        $r7 = <org.apache.sshd.common.util.SecurityUtils: org.slf4j.Logger LOG>;
+
+        varReplacer983 = "Failed to register BouncyCastle as the defaut JCE provider";
+
+        interfaceinvoke $r7.<org.slf4j.Logger: void error(java.lang.String)>(varReplacer983);
+
+        $r8 = new java.lang.RuntimeException;
+
+        varReplacer979 = "Failed to register BouncyCastle as the defaut JCE provider";
+
+        specialinvoke $r8.<java.lang.RuntimeException: void <init>(java.lang.String,java.lang.Throwable)>(varReplacer979, r12);
+
+        throw $r8;
+
+     label6:
+        varReplacer980 = 1;
+
+        <org.apache.sshd.common.util.SecurityUtils: boolean registrationDone> = varReplacer980;
+
+     label7:
+        return;
+
+        catch java.lang.Throwable from label2 to label3 with label4;
+    }
+
+    public static synchronized java.security.KeyFactory getKeyFactory(java.lang.String) throws java.security.NoSuchAlgorithmException, java.security.NoSuchProviderException
+    {
+        java.lang.String $r0, r1, $r2;
+        java.security.KeyFactory $r3, $r4;
+
+        nop;
+
+        r1 := @parameter0: java.lang.String;
+
+        staticinvoke <org.apache.sshd.common.util.SecurityUtils: void register()>();
+
+        $r0 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.lang.String getSecurityProvider()>();
+
+        if $r0 != null goto label1;
+
+        $r4 = staticinvoke <java.security.KeyFactory: java.security.KeyFactory getInstance(java.lang.String)>(r1);
+
+        return $r4;
+
+     label1:
+        $r2 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.lang.String getSecurityProvider()>();
+
+        $r3 = staticinvoke <java.security.KeyFactory: java.security.KeyFactory getInstance(java.lang.String,java.lang.String)>(r1, $r2);
+
+        return $r3;
+    }
+
+    public static synchronized javax.crypto.Cipher getCipher(java.lang.String) throws java.security.NoSuchAlgorithmException, javax.crypto.NoSuchPaddingException, java.security.NoSuchProviderException
+    {
+        java.lang.String $r0, r1, $r2;
+        javax.crypto.Cipher $r3, $r4;
+
+        nop;
+
+        r1 := @parameter0: java.lang.String;
+
+        staticinvoke <org.apache.sshd.common.util.SecurityUtils: void register()>();
+
+        $r0 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.lang.String getSecurityProvider()>();
+
+        if $r0 != null goto label1;
+
+        $r4 = staticinvoke <javax.crypto.Cipher: javax.crypto.Cipher getInstance(java.lang.String)>(r1);
+
+        return $r4;
+
+     label1:
+        $r2 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.lang.String getSecurityProvider()>();
+
+        $r3 = staticinvoke <javax.crypto.Cipher: javax.crypto.Cipher getInstance(java.lang.String,java.lang.String)>(r1, $r2);
+
+        return $r3;
+    }
+
+    public static synchronized java.security.MessageDigest getMessageDigest(java.lang.String) throws java.security.NoSuchAlgorithmException, java.security.NoSuchProviderException
+    {
+        java.lang.String $r0, r1, $r2;
+        java.security.MessageDigest $r3, $r4;
+
+        nop;
+
+        r1 := @parameter0: java.lang.String;
+
+        staticinvoke <org.apache.sshd.common.util.SecurityUtils: void register()>();
+
+        $r0 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.lang.String getSecurityProvider()>();
+
+        if $r0 != null goto label1;
+
+        $r4 = staticinvoke <java.security.MessageDigest: java.security.MessageDigest getInstance(java.lang.String)>(r1);
+
+        return $r4;
+
+     label1:
+        $r2 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.lang.String getSecurityProvider()>();
+
+        $r3 = staticinvoke <java.security.MessageDigest: java.security.MessageDigest getInstance(java.lang.String,java.lang.String)>(r1, $r2);
+
+        return $r3;
+    }
+
+    public static synchronized java.security.KeyPairGenerator getKeyPairGenerator(java.lang.String) throws java.security.NoSuchAlgorithmException, java.security.NoSuchProviderException
+    {
+        java.lang.String $r0, r1, $r2;
+        java.security.KeyPairGenerator $r3, $r4;
+
+        nop;
+
+        r1 := @parameter0: java.lang.String;
+
+        staticinvoke <org.apache.sshd.common.util.SecurityUtils: void register()>();
+
+        $r0 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.lang.String getSecurityProvider()>();
+
+        if $r0 != null goto label1;
+
+        $r4 = staticinvoke <java.security.KeyPairGenerator: java.security.KeyPairGenerator getInstance(java.lang.String)>(r1);
+
+        return $r4;
+
+     label1:
+        $r2 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.lang.String getSecurityProvider()>();
+
+        $r3 = staticinvoke <java.security.KeyPairGenerator: java.security.KeyPairGenerator getInstance(java.lang.String,java.lang.String)>(r1, $r2);
+
+        return $r3;
+    }
+
+    public static synchronized javax.crypto.KeyAgreement getKeyAgreement(java.lang.String) throws java.security.NoSuchAlgorithmException, java.security.NoSuchProviderException
+    {
+        java.lang.String $r0, r1, $r2;
+        javax.crypto.KeyAgreement $r3, $r4;
+
+        nop;
+
+        r1 := @parameter0: java.lang.String;
+
+        staticinvoke <org.apache.sshd.common.util.SecurityUtils: void register()>();
+
+        $r0 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.lang.String getSecurityProvider()>();
+
+        if $r0 != null goto label1;
+
+        $r4 = staticinvoke <javax.crypto.KeyAgreement: javax.crypto.KeyAgreement getInstance(java.lang.String)>(r1);
+
+        return $r4;
+
+     label1:
+        $r2 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.lang.String getSecurityProvider()>();
+
+        $r3 = staticinvoke <javax.crypto.KeyAgreement: javax.crypto.KeyAgreement getInstance(java.lang.String,java.lang.String)>(r1, $r2);
+
+        return $r3;
+    }
+
+    public static synchronized javax.crypto.Mac getMac(java.lang.String) throws java.security.NoSuchAlgorithmException, java.security.NoSuchProviderException
+    {
+        java.lang.String $r0, r1, $r2;
+        javax.crypto.Mac $r3, $r4;
+
+        nop;
+
+        r1 := @parameter0: java.lang.String;
+
+        staticinvoke <org.apache.sshd.common.util.SecurityUtils: void register()>();
+
+        $r0 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.lang.String getSecurityProvider()>();
+
+        if $r0 != null goto label1;
+
+        $r4 = staticinvoke <javax.crypto.Mac: javax.crypto.Mac getInstance(java.lang.String)>(r1);
+
+        return $r4;
+
+     label1:
+        $r2 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.lang.String getSecurityProvider()>();
+
+        $r3 = staticinvoke <javax.crypto.Mac: javax.crypto.Mac getInstance(java.lang.String,java.lang.String)>(r1, $r2);
+
+        return $r3;
+    }
+
+    public static synchronized java.security.Signature getSignature(java.lang.String) throws java.security.NoSuchAlgorithmException, java.security.NoSuchProviderException
+    {
+        java.lang.String $r0, r1, $r2;
+        java.security.Signature $r3, $r4;
+
+        nop;
+
+        r1 := @parameter0: java.lang.String;
+
+        staticinvoke <org.apache.sshd.common.util.SecurityUtils: void register()>();
+
+        $r0 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.lang.String getSecurityProvider()>();
+
+        if $r0 != null goto label1;
+
+        $r4 = staticinvoke <java.security.Signature: java.security.Signature getInstance(java.lang.String)>(r1);
+
+        return $r4;
+
+     label1:
+        $r2 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.lang.String getSecurityProvider()>();
+
+        $r3 = staticinvoke <java.security.Signature: java.security.Signature getInstance(java.lang.String,java.lang.String)>(r1, $r2);
+
+        return $r3;
+    }
+
+    static org.slf4j.Logger access$100()
+    {
+        org.slf4j.Logger $r0;
+
+        nop;
+
+        $r0 = <org.apache.sshd.common.util.SecurityUtils: org.slf4j.Logger LOG>;
+
+        return $r0;
+    }
+
+    static java.lang.String access$202(java.lang.String)
+    {
+        java.lang.String r0;
+
+        nop;
+
+        r0 := @parameter0: java.lang.String;
+
+        <org.apache.sshd.common.util.SecurityUtils: java.lang.String securityProvider> = r0;
+
+        return r0;
+    }
+
+    static void <clinit>()
+    {
+        org.slf4j.Logger $r0;
+        null_type varReplacer984;
+
+        nop;
+
+        $r0 = staticinvoke <org.slf4j.LoggerFactory: org.slf4j.Logger getLogger(java.lang.Class)>(class "Lorg/apache/sshd/common/util/SecurityUtils;");
+
+        <org.apache.sshd.common.util.SecurityUtils: org.slf4j.Logger LOG> = $r0;
+
+        varReplacer984 = null;
+
+        <org.apache.sshd.common.util.SecurityUtils: java.lang.String securityProvider> = varReplacer984;
+
+        return;
+    }
+}

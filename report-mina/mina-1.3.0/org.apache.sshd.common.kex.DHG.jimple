@@ -1,0 +1,349 @@
+public class org.apache.sshd.common.kex.DHG extends org.apache.sshd.common.kex.AbstractDH
+{
+    private java.math.BigInteger p;
+    private java.math.BigInteger g;
+    private java.math.BigInteger e;
+    private byte[] e_array;
+    private java.math.BigInteger f;
+    private java.security.KeyPairGenerator myKpairGen;
+    private javax.crypto.KeyAgreement myKeyAgree;
+    private org.apache.sshd.common.Factory factory;
+
+    public void <init>(org.apache.sshd.common.Factory) throws java.lang.Exception
+    {
+        org.apache.sshd.common.kex.DHG r0;
+        org.apache.sshd.common.Factory r1;
+        null_type varReplacer2825, varReplacer2826;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.kex.DHG;
+
+        r1 := @parameter0: org.apache.sshd.common.Factory;
+
+        varReplacer2825 = null;
+
+        varReplacer2826 = null;
+
+        specialinvoke r0.<org.apache.sshd.common.kex.DHG: void <init>(org.apache.sshd.common.Factory,java.math.BigInteger,java.math.BigInteger)>(r1, varReplacer2825, varReplacer2825);
+
+        return;
+    }
+
+    public void <init>(org.apache.sshd.common.Factory, java.math.BigInteger, java.math.BigInteger) throws java.lang.Exception
+    {
+        org.apache.sshd.common.kex.DHG r0;
+        java.security.KeyPairGenerator $r1;
+        javax.crypto.KeyAgreement $r2;
+        org.apache.sshd.common.Factory r3;
+        java.math.BigInteger r4, r5;
+        java.lang.String varReplacer2827, varReplacer2828;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.kex.DHG;
+
+        r3 := @parameter0: org.apache.sshd.common.Factory;
+
+        r4 := @parameter1: java.math.BigInteger;
+
+        r5 := @parameter2: java.math.BigInteger;
+
+        specialinvoke r0.<org.apache.sshd.common.kex.AbstractDH: void <init>()>();
+
+        varReplacer2828 = "DH";
+
+        $r1 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.security.KeyPairGenerator getKeyPairGenerator(java.lang.String)>(varReplacer2828);
+
+        r0.<org.apache.sshd.common.kex.DHG: java.security.KeyPairGenerator myKpairGen> = $r1;
+
+        varReplacer2827 = "DH";
+
+        $r2 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: javax.crypto.KeyAgreement getKeyAgreement(java.lang.String)>(varReplacer2827);
+
+        r0.<org.apache.sshd.common.kex.DHG: javax.crypto.KeyAgreement myKeyAgree> = $r2;
+
+        r0.<org.apache.sshd.common.kex.DHG: org.apache.sshd.common.Factory factory> = r3;
+
+        r0.<org.apache.sshd.common.kex.DHG: java.math.BigInteger p> = r4;
+
+        r0.<org.apache.sshd.common.kex.DHG: java.math.BigInteger g> = r5;
+
+        return;
+    }
+
+    public byte[] getE() throws java.lang.Exception
+    {
+        org.apache.sshd.common.kex.DHG r0;
+        java.math.BigInteger $r1, $r4, $r5, $r15, $r16;
+        byte[] $r2, $r17;
+        javax.crypto.spec.DHParameterSpec $r3, r6;
+        java.security.KeyPairGenerator $r7, $r8;
+        java.security.KeyPair r9;
+        javax.crypto.KeyAgreement $r10;
+        java.security.PrivateKey $r11;
+        java.security.PublicKey $r12;
+        javax.crypto.interfaces.DHPublicKey $r13, $r14;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.kex.DHG;
+
+        $r1 = r0.<org.apache.sshd.common.kex.DHG: java.math.BigInteger e>;
+
+        if $r1 != null goto label1;
+
+        $r3 = new javax.crypto.spec.DHParameterSpec;
+
+        $r5 = r0.<org.apache.sshd.common.kex.DHG: java.math.BigInteger p>;
+
+        $r4 = r0.<org.apache.sshd.common.kex.DHG: java.math.BigInteger g>;
+
+        specialinvoke $r3.<javax.crypto.spec.DHParameterSpec: void <init>(java.math.BigInteger,java.math.BigInteger)>($r5, $r4);
+
+        r6 = $r3;
+
+        $r7 = r0.<org.apache.sshd.common.kex.DHG: java.security.KeyPairGenerator myKpairGen>;
+
+        virtualinvoke $r7.<java.security.KeyPairGenerator: void initialize(java.security.spec.AlgorithmParameterSpec)>(r6);
+
+        $r8 = r0.<org.apache.sshd.common.kex.DHG: java.security.KeyPairGenerator myKpairGen>;
+
+        r9 = virtualinvoke $r8.<java.security.KeyPairGenerator: java.security.KeyPair generateKeyPair()>();
+
+        $r10 = r0.<org.apache.sshd.common.kex.DHG: javax.crypto.KeyAgreement myKeyAgree>;
+
+        $r11 = virtualinvoke r9.<java.security.KeyPair: java.security.PrivateKey getPrivate()>();
+
+        virtualinvoke $r10.<javax.crypto.KeyAgreement: void init(java.security.Key)>($r11);
+
+        $r12 = virtualinvoke r9.<java.security.KeyPair: java.security.PublicKey getPublic()>();
+
+        $r13 = (javax.crypto.interfaces.DHPublicKey) $r12;
+
+        $r14 = (javax.crypto.interfaces.DHPublicKey) $r13;
+
+        $r15 = interfaceinvoke $r14.<javax.crypto.interfaces.DHPublicKey: java.math.BigInteger getY()>();
+
+        r0.<org.apache.sshd.common.kex.DHG: java.math.BigInteger e> = $r15;
+
+        $r16 = r0.<org.apache.sshd.common.kex.DHG: java.math.BigInteger e>;
+
+        $r17 = virtualinvoke $r16.<java.math.BigInteger: byte[] toByteArray()>();
+
+        r0.<org.apache.sshd.common.kex.DHG: byte[] e_array> = $r17;
+
+     label1:
+        $r2 = r0.<org.apache.sshd.common.kex.DHG: byte[] e_array>;
+
+        return $r2;
+    }
+
+    protected byte[] calculateK() throws java.lang.Exception
+    {
+        java.security.KeyFactory r0;
+        javax.crypto.spec.DHPublicKeySpec $r1, r6;
+        org.apache.sshd.common.kex.DHG r2;
+        java.math.BigInteger $r3, $r4, $r5;
+        java.security.PublicKey r7;
+        javax.crypto.KeyAgreement $r8, $r10;
+        byte[] $r11, $r12;
+        int varReplacer2829;
+        java.lang.String varReplacer2830;
+
+        nop;
+
+        r2 := @this: org.apache.sshd.common.kex.DHG;
+
+        varReplacer2830 = "DH";
+
+        r0 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.security.KeyFactory getKeyFactory(java.lang.String)>(varReplacer2830);
+
+        $r1 = new javax.crypto.spec.DHPublicKeySpec;
+
+        $r5 = r2.<org.apache.sshd.common.kex.DHG: java.math.BigInteger f>;
+
+        $r4 = r2.<org.apache.sshd.common.kex.DHG: java.math.BigInteger p>;
+
+        $r3 = r2.<org.apache.sshd.common.kex.DHG: java.math.BigInteger g>;
+
+        specialinvoke $r1.<javax.crypto.spec.DHPublicKeySpec: void <init>(java.math.BigInteger,java.math.BigInteger,java.math.BigInteger)>($r5, $r4, $r3);
+
+        r6 = $r1;
+
+        r7 = virtualinvoke r0.<java.security.KeyFactory: java.security.PublicKey generatePublic(java.security.spec.KeySpec)>(r6);
+
+        $r8 = r2.<org.apache.sshd.common.kex.DHG: javax.crypto.KeyAgreement myKeyAgree>;
+
+        varReplacer2829 = 1;
+
+        virtualinvoke $r8.<javax.crypto.KeyAgreement: java.security.Key doPhase(java.security.Key,boolean)>(r7, varReplacer2829);
+
+        $r10 = r2.<org.apache.sshd.common.kex.DHG: javax.crypto.KeyAgreement myKeyAgree>;
+
+        $r11 = virtualinvoke $r10.<javax.crypto.KeyAgreement: byte[] generateSecret()>();
+
+        $r12 = staticinvoke <org.apache.sshd.common.kex.DHG: byte[] stripLeadingZeroes(byte[])>($r11);
+
+        return $r12;
+    }
+
+    public void setP(byte[])
+    {
+        org.apache.sshd.common.kex.DHG r0;
+        java.math.BigInteger $r1;
+        byte[] r2;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.kex.DHG;
+
+        r2 := @parameter0: byte[];
+
+        $r1 = new java.math.BigInteger;
+
+        specialinvoke $r1.<java.math.BigInteger: void <init>(byte[])>(r2);
+
+        virtualinvoke r0.<org.apache.sshd.common.kex.DHG: void setP(java.math.BigInteger)>($r1);
+
+        return;
+    }
+
+    public void setG(byte[])
+    {
+        org.apache.sshd.common.kex.DHG r0;
+        java.math.BigInteger $r1;
+        byte[] r2;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.kex.DHG;
+
+        r2 := @parameter0: byte[];
+
+        $r1 = new java.math.BigInteger;
+
+        specialinvoke $r1.<java.math.BigInteger: void <init>(byte[])>(r2);
+
+        virtualinvoke r0.<org.apache.sshd.common.kex.DHG: void setG(java.math.BigInteger)>($r1);
+
+        return;
+    }
+
+    public void setF(byte[])
+    {
+        org.apache.sshd.common.kex.DHG r0;
+        java.math.BigInteger $r1;
+        byte[] r2;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.kex.DHG;
+
+        r2 := @parameter0: byte[];
+
+        $r1 = new java.math.BigInteger;
+
+        specialinvoke $r1.<java.math.BigInteger: void <init>(byte[])>(r2);
+
+        virtualinvoke r0.<org.apache.sshd.common.kex.DHG: void setF(java.math.BigInteger)>($r1);
+
+        return;
+    }
+
+    public java.math.BigInteger getP()
+    {
+        org.apache.sshd.common.kex.DHG r0;
+        java.math.BigInteger $r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.kex.DHG;
+
+        $r1 = r0.<org.apache.sshd.common.kex.DHG: java.math.BigInteger p>;
+
+        return $r1;
+    }
+
+    public void setP(java.math.BigInteger)
+    {
+        org.apache.sshd.common.kex.DHG r0;
+        java.math.BigInteger r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.kex.DHG;
+
+        r1 := @parameter0: java.math.BigInteger;
+
+        r0.<org.apache.sshd.common.kex.DHG: java.math.BigInteger p> = r1;
+
+        return;
+    }
+
+    public java.math.BigInteger getG()
+    {
+        org.apache.sshd.common.kex.DHG r0;
+        java.math.BigInteger $r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.kex.DHG;
+
+        $r1 = r0.<org.apache.sshd.common.kex.DHG: java.math.BigInteger g>;
+
+        return $r1;
+    }
+
+    public void setG(java.math.BigInteger)
+    {
+        org.apache.sshd.common.kex.DHG r0;
+        java.math.BigInteger r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.kex.DHG;
+
+        r1 := @parameter0: java.math.BigInteger;
+
+        r0.<org.apache.sshd.common.kex.DHG: java.math.BigInteger g> = r1;
+
+        return;
+    }
+
+    public void setF(java.math.BigInteger)
+    {
+        org.apache.sshd.common.kex.DHG r0;
+        java.math.BigInteger r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.kex.DHG;
+
+        r1 := @parameter0: java.math.BigInteger;
+
+        r0.<org.apache.sshd.common.kex.DHG: java.math.BigInteger f> = r1;
+
+        return;
+    }
+
+    public org.apache.sshd.common.digest.Digest getHash() throws java.lang.Exception
+    {
+        org.apache.sshd.common.kex.DHG r0;
+        org.apache.sshd.common.Factory $r1;
+        java.lang.Object $r2;
+        org.apache.sshd.common.digest.Digest $r3;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.kex.DHG;
+
+        $r1 = r0.<org.apache.sshd.common.kex.DHG: org.apache.sshd.common.Factory factory>;
+
+        $r2 = interfaceinvoke $r1.<org.apache.sshd.common.Factory: java.lang.Object create()>();
+
+        $r3 = (org.apache.sshd.common.digest.Digest) $r2;
+
+        return $r3;
+    }
+}

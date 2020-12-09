@@ -1,0 +1,638 @@
+public abstract class org.apache.sshd.common.config.keys.loader.AbstractPrivateKeyObfuscator extends java.lang.Object implements org.apache.sshd.common.config.keys.loader.PrivateKeyObfuscator
+{
+    private final java.lang.String algName;
+
+    protected void <init>(java.lang.String)
+    {
+        org.apache.sshd.common.config.keys.loader.AbstractPrivateKeyObfuscator r0;
+        java.lang.String r1, $r2, varReplacer3545;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.config.keys.loader.AbstractPrivateKeyObfuscator;
+
+        r1 := @parameter0: java.lang.String;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        varReplacer3545 = "No name specified";
+
+        $r2 = staticinvoke <org.apache.sshd.common.util.ValidateUtils: java.lang.String checkNotNullAndNotEmpty(java.lang.String,java.lang.String)>(r1, varReplacer3545);
+
+        r0.<org.apache.sshd.common.config.keys.loader.AbstractPrivateKeyObfuscator: java.lang.String algName> = $r2;
+
+        return;
+    }
+
+    public final java.lang.String getCipherName()
+    {
+        org.apache.sshd.common.config.keys.loader.AbstractPrivateKeyObfuscator r0;
+        java.lang.String $r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.config.keys.loader.AbstractPrivateKeyObfuscator;
+
+        $r1 = r0.<org.apache.sshd.common.config.keys.loader.AbstractPrivateKeyObfuscator: java.lang.String algName>;
+
+        return $r1;
+    }
+
+    public byte[] generateInitializationVector(org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext) throws java.security.GeneralSecurityException
+    {
+        org.apache.sshd.common.config.keys.loader.AbstractPrivateKeyObfuscator r0;
+        org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext r1;
+        int $i0;
+        byte[] $r2;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.config.keys.loader.AbstractPrivateKeyObfuscator;
+
+        r1 := @parameter0: org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext;
+
+        $i0 = virtualinvoke r0.<org.apache.sshd.common.config.keys.loader.AbstractPrivateKeyObfuscator: int resolveKeyLength(org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext)>(r1);
+
+        $r2 = virtualinvoke r0.<org.apache.sshd.common.config.keys.loader.AbstractPrivateKeyObfuscator: byte[] generateInitializationVector(int)>($i0);
+
+        return $r2;
+    }
+
+    public java.lang.Appendable appendPrivateKeyEncryptionContext(java.lang.Appendable, org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext) throws java.io.IOException
+    {
+        org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext r0;
+        java.lang.Appendable r1, $r2, $r4, $r5, $r7, $r8, $r13;
+        java.lang.String $r3, $r6, $r9, $r15, varReplacer3547, varReplacer3550, varReplacer3552;
+        byte[] r11;
+        int $i0, varReplacer3546, varReplacer3548, varReplacer3549, varReplacer3551;
+        org.apache.sshd.common.config.keys.loader.AbstractPrivateKeyObfuscator r17;
+        boolean $z0;
+
+        nop;
+
+        r17 := @this: org.apache.sshd.common.config.keys.loader.AbstractPrivateKeyObfuscator;
+
+        r1 := @parameter0: java.lang.Appendable;
+
+        r0 := @parameter1: org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext;
+
+        if r0 != null goto label1;
+
+        return r1;
+
+     label1:
+        varReplacer3547 = "DEK-Info: ";
+
+        $r2 = interfaceinvoke r1.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>(varReplacer3547);
+
+        $r3 = virtualinvoke r0.<org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext: java.lang.String getCipherName()>();
+
+        $r4 = interfaceinvoke $r2.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>($r3);
+
+        varReplacer3548 = 45;
+
+        $r5 = interfaceinvoke $r4.<java.lang.Appendable: java.lang.Appendable append(char)>(varReplacer3548);
+
+        $r6 = virtualinvoke r0.<org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext: java.lang.String getCipherType()>();
+
+        $r7 = interfaceinvoke $r5.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>($r6);
+
+        varReplacer3549 = 45;
+
+        $r8 = interfaceinvoke $r7.<java.lang.Appendable: java.lang.Appendable append(char)>(varReplacer3549);
+
+        $r9 = virtualinvoke r0.<org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext: java.lang.String getCipherMode()>();
+
+        interfaceinvoke $r8.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>($r9);
+
+        r11 = virtualinvoke r0.<org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext: byte[] getInitVector()>();
+
+        varReplacer3550 = "No encryption init vector";
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object,java.lang.String)>(r11, varReplacer3550);
+
+        $i0 = lengthof r11;
+
+        if $i0 <= 0 goto label2;
+
+        $z0 = 1;
+
+        goto label3;
+
+     label2:
+        $z0 = 0;
+
+     label3:
+        varReplacer3552 = "Empty encryption init vector";
+
+        staticinvoke <org.apache.sshd.common.util.ValidateUtils: void checkTrue(boolean,java.lang.String)>($z0, varReplacer3552);
+
+        varReplacer3546 = 44;
+
+        $r13 = interfaceinvoke r1.<java.lang.Appendable: java.lang.Appendable append(char)>(varReplacer3546);
+
+        varReplacer3551 = 0;
+
+        staticinvoke <org.apache.sshd.common.util.buffer.BufferUtils: java.lang.Appendable appendHex(java.lang.Appendable,char,byte[])>($r13, varReplacer3551, r11);
+
+        $r15 = staticinvoke <java.lang.System: java.lang.String lineSeparator()>();
+
+        interfaceinvoke r1.<java.lang.Appendable: java.lang.Appendable append(java.lang.CharSequence)>($r15);
+
+        return r1;
+    }
+
+    protected byte[] generateInitializationVector(int)
+    {
+        int i0, $i1, i2;
+        byte[] r0;
+        java.security.SecureRandom $r1, r2;
+        org.apache.sshd.common.config.keys.loader.AbstractPrivateKeyObfuscator r3;
+
+        nop;
+
+        r3 := @this: org.apache.sshd.common.config.keys.loader.AbstractPrivateKeyObfuscator;
+
+        i0 := @parameter0: int;
+
+        i2 = i0 / 8;
+
+        $i1 = i0 % 8;
+
+        if $i1 == 0 goto label1;
+
+        i2 = i2 + 1;
+
+     label1:
+        r0 = newarray (byte)[i2];
+
+        $r1 = new java.security.SecureRandom;
+
+        specialinvoke $r1.<java.security.SecureRandom: void <init>()>();
+
+        r2 = $r1;
+
+        virtualinvoke r2.<java.util.Random: void nextBytes(byte[])>(r0);
+
+        return r0;
+    }
+
+    protected abstract int resolveKeyLength(org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext) throws java.security.GeneralSecurityException;
+
+    protected byte[] deriveEncryptionKey(org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext, int) throws java.security.GeneralSecurityException
+    {
+        org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext r0;
+        java.lang.String $r2, $r4, $r6, $r11, r12, varReplacer3554, varReplacer3555, varReplacer3557, varReplacer3558, varReplacer3559, varReplacer3560, varReplacer3563, varReplacer3564;
+        byte[] $r8, r10, r14, r15, r18;
+        java.lang.Object $r9;
+        int $i0, i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, i10, i11, $i12, varReplacer3553, varReplacer3556, varReplacer3561, varReplacer3562, varReplacer3565;
+        java.nio.charset.Charset $r13;
+        java.security.MessageDigest r16;
+        org.apache.sshd.common.config.keys.loader.AbstractPrivateKeyObfuscator r17;
+        boolean $z0;
+
+        nop;
+
+        r17 := @this: org.apache.sshd.common.config.keys.loader.AbstractPrivateKeyObfuscator;
+
+        r0 := @parameter0: org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext;
+
+        i1 := @parameter1: int;
+
+        varReplacer3564 = "No encryption context";
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object,java.lang.String)>(r0, varReplacer3564);
+
+        $r2 = virtualinvoke r0.<org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext: java.lang.String getCipherName()>();
+
+        varReplacer3560 = "No cipher name";
+
+        staticinvoke <org.apache.sshd.common.util.ValidateUtils: java.lang.String checkNotNullAndNotEmpty(java.lang.String,java.lang.String)>($r2, varReplacer3560);
+
+        $r4 = virtualinvoke r0.<org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext: java.lang.String getCipherType()>();
+
+        varReplacer3563 = "No cipher type";
+
+        staticinvoke <org.apache.sshd.common.util.ValidateUtils: java.lang.String checkNotNullAndNotEmpty(java.lang.String,java.lang.String)>($r4, varReplacer3563);
+
+        $r6 = virtualinvoke r0.<org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext: java.lang.String getCipherMode()>();
+
+        varReplacer3555 = "No cipher mode";
+
+        staticinvoke <org.apache.sshd.common.util.ValidateUtils: java.lang.String checkNotNullAndNotEmpty(java.lang.String,java.lang.String)>($r6, varReplacer3555);
+
+        $r8 = virtualinvoke r0.<org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext: byte[] getInitVector()>();
+
+        varReplacer3557 = "No encryption init vector";
+
+        $r9 = staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object,java.lang.String)>($r8, varReplacer3557);
+
+        r10 = (byte[]) $r9;
+
+        $i0 = lengthof r10;
+
+        if $i0 <= 0 goto label1;
+
+        $z0 = 1;
+
+        goto label2;
+
+     label1:
+        $z0 = 0;
+
+     label2:
+        varReplacer3559 = "Empty encryption init vector";
+
+        staticinvoke <org.apache.sshd.common.util.ValidateUtils: void checkTrue(boolean,java.lang.String)>($z0, varReplacer3559);
+
+        $r11 = virtualinvoke r0.<org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext: java.lang.String getPassword()>();
+
+        varReplacer3554 = "No encryption password";
+
+        r12 = staticinvoke <org.apache.sshd.common.util.ValidateUtils: java.lang.String checkNotNullAndNotEmpty(java.lang.String,java.lang.String)>($r11, varReplacer3554);
+
+        $r13 = <java.nio.charset.StandardCharsets: java.nio.charset.Charset UTF_8>;
+
+        r14 = virtualinvoke r12.<java.lang.String: byte[] getBytes(java.nio.charset.Charset)>($r13);
+
+        r15 = newarray (byte)[i1];
+
+        varReplacer3558 = "md5";
+
+        r16 = staticinvoke <org.apache.sshd.common.util.security.SecurityUtils: java.security.MessageDigest getMessageDigest(java.lang.String)>(varReplacer3558);
+
+        r18 = <org.apache.sshd.common.util.GenericUtils: byte[] EMPTY_BYTE_ARRAY>;
+
+        i10 = 0;
+
+        i11 = lengthof r15;
+
+     label3:
+        $i12 = lengthof r15;
+
+        if i10 >= $i12 goto label4;
+
+        virtualinvoke r16.<java.security.MessageDigest: void reset()>();
+
+        $i2 = lengthof r18;
+
+        varReplacer3553 = 0;
+
+        virtualinvoke r16.<java.security.MessageDigest: void update(byte[],int,int)>(r18, varReplacer3553, $i2);
+
+        $i3 = lengthof r14;
+
+        varReplacer3561 = 0;
+
+        virtualinvoke r16.<java.security.MessageDigest: void update(byte[],int,int)>(r14, varReplacer3561, $i3);
+
+        $i4 = lengthof r10;
+
+        varReplacer3556 = 8;
+
+        $i5 = staticinvoke <java.lang.Math: int min(int,int)>($i4, varReplacer3556);
+
+        varReplacer3562 = 0;
+
+        virtualinvoke r16.<java.security.MessageDigest: void update(byte[],int,int)>(r10, varReplacer3562, $i5);
+
+        r18 = virtualinvoke r16.<java.security.MessageDigest: byte[] digest()>();
+
+        $i6 = lengthof r18;
+
+        $i7 = staticinvoke <java.lang.Math: int min(int,int)>(i11, $i6);
+
+        varReplacer3565 = 0;
+
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>(r18, varReplacer3565, r15, i10, $i7);
+
+        $i8 = lengthof r18;
+
+        i10 = i10 + $i8;
+
+        $i9 = lengthof r18;
+
+        i11 = i11 - $i9;
+
+        goto label3;
+
+     label4:
+        return r15;
+    }
+
+    protected byte[] applyPrivateKeyCipher(byte[], org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext, int, byte[], boolean) throws java.security.GeneralSecurityException
+    {
+        org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext r0;
+        java.lang.String $r2, r3, $r4, $r6, r7, r20, $r43, $r53, $r56, $r58, varReplacer3566, varReplacer3567, varReplacer3568, varReplacer3569, varReplacer3571, varReplacer3572, varReplacer3573, varReplacer3575, varReplacer3576, varReplacer3577, varReplacer3578, varReplacer3579, varReplacer3581, varReplacer3582, varReplacer3583, varReplacer3584, varReplacer3585, varReplacer3586, varReplacer3587;
+        byte[] r8, r10, $r12, r14, r26, $r29, $r30, $r31, r62, r63;
+        int $i0, $i1, i2, i3, i4, i5, i6, i7, varReplacer3570, varReplacer3574, varReplacer3580;
+        java.lang.Object $r13;
+        java.lang.StringBuilder $r16, $r17, $r18, $r19, $r35, $r36, $r37, $r38, $r39, $r40, $r41, $r42, $r47, $r48, $r49, $r50, $r51, $r54, $r55, $r57, $r65, $r66, $r71;
+        javax.crypto.spec.SecretKeySpec r22, $r68;
+        javax.crypto.spec.IvParameterSpec r24, $r69;
+        javax.crypto.Cipher r25;
+        boolean z0, $z1, $z2;
+        java.io.ByteArrayOutputStream r28, $r70;
+        java.lang.Throwable $r44, $r59, r60, r64;
+        java.lang.Class $r52;
+        org.apache.sshd.common.config.keys.loader.AbstractPrivateKeyObfuscator r61;
+        byte $b8;
+        java.security.spec.InvalidKeySpecException $r67;
+        java.security.GeneralSecurityException $r72;
+        java.io.IOException $r73;
+
+        nop;
+
+        r61 := @this: org.apache.sshd.common.config.keys.loader.AbstractPrivateKeyObfuscator;
+
+        r8 := @parameter0: byte[];
+
+        r0 := @parameter1: org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext;
+
+        i3 := @parameter2: int;
+
+        r10 := @parameter3: byte[];
+
+        z0 := @parameter4: boolean;
+
+        varReplacer3575 = "No encryption context";
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object,java.lang.String)>(r0, varReplacer3575);
+
+        $r2 = virtualinvoke r0.<org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext: java.lang.String getCipherName()>();
+
+        varReplacer3578 = "No cipher name";
+
+        r3 = staticinvoke <org.apache.sshd.common.util.ValidateUtils: java.lang.String checkNotNullAndNotEmpty(java.lang.String,java.lang.String)>($r2, varReplacer3578);
+
+        $r4 = virtualinvoke r0.<org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext: java.lang.String getCipherType()>();
+
+        varReplacer3572 = "No cipher type";
+
+        staticinvoke <org.apache.sshd.common.util.ValidateUtils: java.lang.String checkNotNullAndNotEmpty(java.lang.String,java.lang.String)>($r4, varReplacer3572);
+
+        $r6 = virtualinvoke r0.<org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext: java.lang.String getCipherMode()>();
+
+        varReplacer3582 = "No cipher mode";
+
+        r7 = staticinvoke <org.apache.sshd.common.util.ValidateUtils: java.lang.String checkNotNullAndNotEmpty(java.lang.String,java.lang.String)>($r6, varReplacer3582);
+
+        varReplacer3583 = "No source data";
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object,java.lang.String)>(r8, varReplacer3583);
+
+        varReplacer3586 = "No encryption key";
+
+        staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object,java.lang.String)>(r10, varReplacer3586);
+
+        $i0 = lengthof r10;
+
+        if $i0 <= 0 goto label01;
+
+        $z1 = 1;
+
+        goto label02;
+
+     label01:
+        $z1 = 0;
+
+     label02:
+        varReplacer3587 = "Empty encryption key";
+
+        staticinvoke <org.apache.sshd.common.util.ValidateUtils: void checkTrue(boolean,java.lang.String)>($z1, varReplacer3587);
+
+        $r12 = virtualinvoke r0.<org.apache.sshd.common.config.keys.loader.PrivateKeyEncryptionContext: byte[] getInitVector()>();
+
+        varReplacer3581 = "No encryption init vector";
+
+        $r13 = staticinvoke <java.util.Objects: java.lang.Object requireNonNull(java.lang.Object,java.lang.String)>($r12, varReplacer3581);
+
+        r14 = (byte[]) $r13;
+
+        $i1 = lengthof r14;
+
+        if $i1 <= 0 goto label03;
+
+        $z2 = 1;
+
+        goto label04;
+
+     label03:
+        $z2 = 0;
+
+     label04:
+        varReplacer3568 = "Empty encryption init vector";
+
+        staticinvoke <org.apache.sshd.common.util.ValidateUtils: void checkTrue(boolean,java.lang.String)>($z2, varReplacer3568);
+
+        $r65 = new java.lang.StringBuilder;
+
+        specialinvoke $r65.<java.lang.StringBuilder: void <init>()>();
+
+        $r16 = virtualinvoke $r65.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r3);
+
+        varReplacer3576 = "/";
+
+        $r17 = virtualinvoke $r16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer3576);
+
+        $r18 = virtualinvoke $r17.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r7);
+
+        varReplacer3579 = "/NoPadding";
+
+        $r19 = virtualinvoke $r18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer3579);
+
+        r20 = virtualinvoke $r19.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        i2 = staticinvoke <javax.crypto.Cipher: int getMaxAllowedKeyLength(java.lang.String)>(r20);
+
+        if i3 <= i2 goto label05;
+
+        $r67 = new java.security.spec.InvalidKeySpecException;
+
+        $r66 = new java.lang.StringBuilder;
+
+        specialinvoke $r66.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer3577 = "applyPrivateKeyCipher(";
+
+        $r35 = virtualinvoke $r66.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer3577);
+
+        $r36 = virtualinvoke $r35.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r20);
+
+        varReplacer3573 = ")[encrypt=";
+
+        $r37 = virtualinvoke $r36.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer3573);
+
+        $r38 = virtualinvoke $r37.<java.lang.StringBuilder: java.lang.StringBuilder append(boolean)>(z0);
+
+        varReplacer3567 = "] required key length (";
+
+        $r39 = virtualinvoke $r38.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer3567);
+
+        $r40 = virtualinvoke $r39.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(i3);
+
+        varReplacer3584 = ") exceeds max. available: ";
+
+        $r41 = virtualinvoke $r40.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer3584);
+
+        $r42 = virtualinvoke $r41.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(i2);
+
+        $r43 = virtualinvoke $r42.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $r67.<java.security.spec.InvalidKeySpecException: void <init>(java.lang.String)>($r43);
+
+        throw $r67;
+
+     label05:
+        $r68 = new javax.crypto.spec.SecretKeySpec;
+
+        specialinvoke $r68.<javax.crypto.spec.SecretKeySpec: void <init>(byte[],java.lang.String)>(r10, r3);
+
+        r22 = $r68;
+
+        $r69 = new javax.crypto.spec.IvParameterSpec;
+
+        specialinvoke $r69.<javax.crypto.spec.IvParameterSpec: void <init>(byte[])>(r14);
+
+        r24 = $r69;
+
+        r25 = staticinvoke <org.apache.sshd.common.util.security.SecurityUtils: javax.crypto.Cipher getCipher(java.lang.String)>(r20);
+
+        i4 = virtualinvoke r25.<javax.crypto.Cipher: int getBlockSize()>();
+
+        i5 = lengthof r8;
+
+        if z0 == 0 goto label06;
+
+        $b8 = 1;
+
+        goto label07;
+
+     label06:
+        $b8 = 2;
+
+     label07:
+        virtualinvoke r25.<javax.crypto.Cipher: void init(int,java.security.Key,java.security.spec.AlgorithmParameterSpec)>($b8, r22, r24);
+
+        if i4 > 0 goto label08;
+
+        $r31 = virtualinvoke r25.<javax.crypto.Cipher: byte[] doFinal(byte[])>(r8);
+
+        return $r31;
+
+     label08:
+        i6 = i5 % i4;
+
+        if i6 > 0 goto label09;
+
+        $r30 = virtualinvoke r25.<javax.crypto.Cipher: byte[] doFinal(byte[])>(r8);
+
+        return $r30;
+
+     label09:
+        i7 = i5 - i6;
+
+        r26 = newarray (byte)[i4];
+
+        varReplacer3570 = 10;
+
+        staticinvoke <java.util.Arrays: void fill(byte[],byte)>(r26, varReplacer3570);
+
+        varReplacer3580 = 0;
+
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>(r8, i7, r26, varReplacer3580, i6);
+
+        $r70 = new java.io.ByteArrayOutputStream;
+
+        specialinvoke $r70.<java.io.ByteArrayOutputStream: void <init>(int)>(i5);
+
+        r28 = $r70;
+
+     label10:
+        varReplacer3574 = 0;
+
+        r62 = virtualinvoke r25.<javax.crypto.Cipher: byte[] update(byte[],int,int)>(r8, varReplacer3574, i7);
+
+        virtualinvoke r28.<java.io.ByteArrayOutputStream: void write(byte[])>(r62);
+
+        r63 = virtualinvoke r25.<javax.crypto.Cipher: byte[] doFinal(byte[])>(r26);
+
+        virtualinvoke r28.<java.io.ByteArrayOutputStream: void write(byte[])>(r63);
+
+     label11:
+        virtualinvoke r28.<java.io.ByteArrayOutputStream: void close()>();
+
+        goto label14;
+
+     label12:
+        $r59 := @caughtexception;
+
+        r60 = $r59;
+
+     label13:
+        virtualinvoke r28.<java.io.ByteArrayOutputStream: void close()>();
+
+        throw r60;
+
+     label14:
+        goto label16;
+
+     label15:
+        $r44 := @caughtexception;
+
+        r64 = $r44;
+
+        $r72 = new java.security.GeneralSecurityException;
+
+        $r71 = new java.lang.StringBuilder;
+
+        specialinvoke $r71.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer3585 = "applyPrivateKeyCipher(";
+
+        $r47 = virtualinvoke $r71.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer3585);
+
+        $r48 = virtualinvoke $r47.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r20);
+
+        varReplacer3569 = ")[encrypt=";
+
+        $r49 = virtualinvoke $r48.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer3569);
+
+        $r50 = virtualinvoke $r49.<java.lang.StringBuilder: java.lang.StringBuilder append(boolean)>(z0);
+
+        varReplacer3571 = "] failed (";
+
+        $r51 = virtualinvoke $r50.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer3571);
+
+        $r52 = virtualinvoke r64.<java.lang.Object: java.lang.Class getClass()>();
+
+        $r53 = virtualinvoke $r52.<java.lang.Class: java.lang.String getSimpleName()>();
+
+        $r54 = virtualinvoke $r51.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r53);
+
+        varReplacer3566 = ") to split-write: ";
+
+        $r55 = virtualinvoke $r54.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer3566);
+
+        $r73 = (java.io.IOException) r64;
+
+        $r56 = virtualinvoke $r73.<java.io.IOException: java.lang.String getMessage()>();
+
+        $r57 = virtualinvoke $r55.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r56);
+
+        $r58 = virtualinvoke $r57.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $r72.<java.security.GeneralSecurityException: void <init>(java.lang.String,java.lang.Throwable)>($r58, r64);
+
+        throw $r72;
+
+     label16:
+        $r29 = virtualinvoke r28.<java.io.ByteArrayOutputStream: byte[] toByteArray()>();
+
+        return $r29;
+
+        catch java.lang.Throwable from label10 to label11 with label12;
+        catch java.lang.Throwable from label12 to label13 with label12;
+        catch java.io.IOException from label10 to label14 with label15;
+    }
+}

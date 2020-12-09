@@ -1,0 +1,847 @@
+public class org.apache.xml.security.signature.SignedInfo extends org.apache.xml.security.signature.Manifest
+{
+    private org.apache.xml.security.algorithms.SignatureAlgorithm signatureAlgorithm;
+    private byte[] c14nizedBytes;
+    private org.w3c.dom.Element c14nMethod;
+    private org.w3c.dom.Element signatureMethod;
+
+    public void <init>(org.w3c.dom.Document) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.signature.SignedInfo r0;
+        org.w3c.dom.Document r1;
+        java.lang.String varReplacer3499, varReplacer3500;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.signature.SignedInfo;
+
+        r1 := @parameter0: org.w3c.dom.Document;
+
+        varReplacer3499 = "http://www.w3.org/2000/09/xmldsig#dsa-sha1";
+
+        varReplacer3500 = "http://www.w3.org/TR/2001/REC-xml-c14n-20010315";
+
+        specialinvoke r0.<org.apache.xml.security.signature.SignedInfo: void <init>(org.w3c.dom.Document,java.lang.String,java.lang.String)>(r1, varReplacer3499, varReplacer3500);
+
+        return;
+    }
+
+    public void <init>(org.w3c.dom.Document, java.lang.String, java.lang.String) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.signature.SignedInfo r0;
+        org.w3c.dom.Document r1;
+        java.lang.String r2, r3;
+        int varReplacer3501;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.signature.SignedInfo;
+
+        r1 := @parameter0: org.w3c.dom.Document;
+
+        r2 := @parameter1: java.lang.String;
+
+        r3 := @parameter2: java.lang.String;
+
+        varReplacer3501 = 0;
+
+        specialinvoke r0.<org.apache.xml.security.signature.SignedInfo: void <init>(org.w3c.dom.Document,java.lang.String,int,java.lang.String)>(r1, r2, varReplacer3501, r3);
+
+        return;
+    }
+
+    public void <init>(org.w3c.dom.Document, java.lang.String, int, java.lang.String) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.signature.SignedInfo r0;
+        org.w3c.dom.Document r1, $r2, $r8, $r14;
+        org.w3c.dom.Element $r3, $r5, $r6, $r11, $r12;
+        java.lang.String r4, r9, varReplacer3502, varReplacer3504;
+        int i0;
+        org.apache.xml.security.algorithms.SignatureAlgorithm $r7, $r10, $r13;
+        null_type varReplacer3503;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.signature.SignedInfo;
+
+        r1 := @parameter0: org.w3c.dom.Document;
+
+        r9 := @parameter1: java.lang.String;
+
+        i0 := @parameter2: int;
+
+        r4 := @parameter3: java.lang.String;
+
+        specialinvoke r0.<org.apache.xml.security.signature.Manifest: void <init>(org.w3c.dom.Document)>(r1);
+
+        $r2 = virtualinvoke r0.<org.apache.xml.security.signature.SignedInfo: org.w3c.dom.Document getDocument()>();
+
+        varReplacer3502 = "CanonicalizationMethod";
+
+        $r3 = staticinvoke <org.apache.xml.security.utils.XMLUtils: org.w3c.dom.Element createElementInSignatureSpace(org.w3c.dom.Document,java.lang.String)>($r2, varReplacer3502);
+
+        r0.<org.apache.xml.security.signature.SignedInfo: org.w3c.dom.Element c14nMethod> = $r3;
+
+        $r5 = r0.<org.apache.xml.security.signature.SignedInfo: org.w3c.dom.Element c14nMethod>;
+
+        varReplacer3503 = null;
+
+        varReplacer3504 = "Algorithm";
+
+        interfaceinvoke $r5.<org.w3c.dom.Element: void setAttributeNS(java.lang.String,java.lang.String,java.lang.String)>(varReplacer3503, varReplacer3504, r4);
+
+        $r6 = r0.<org.apache.xml.security.signature.SignedInfo: org.w3c.dom.Element c14nMethod>;
+
+        virtualinvoke r0.<org.apache.xml.security.signature.SignedInfo: void appendSelf(org.w3c.dom.Node)>($r6);
+
+        virtualinvoke r0.<org.apache.xml.security.signature.SignedInfo: void addReturnToSelf()>();
+
+        if i0 <= 0 goto label1;
+
+        $r13 = new org.apache.xml.security.algorithms.SignatureAlgorithm;
+
+        $r14 = virtualinvoke r0.<org.apache.xml.security.signature.SignedInfo: org.w3c.dom.Document getDocument()>();
+
+        specialinvoke $r13.<org.apache.xml.security.algorithms.SignatureAlgorithm: void <init>(org.w3c.dom.Document,java.lang.String,int)>($r14, r9, i0);
+
+        r0.<org.apache.xml.security.signature.SignedInfo: org.apache.xml.security.algorithms.SignatureAlgorithm signatureAlgorithm> = $r13;
+
+        goto label2;
+
+     label1:
+        $r7 = new org.apache.xml.security.algorithms.SignatureAlgorithm;
+
+        $r8 = virtualinvoke r0.<org.apache.xml.security.signature.SignedInfo: org.w3c.dom.Document getDocument()>();
+
+        specialinvoke $r7.<org.apache.xml.security.algorithms.SignatureAlgorithm: void <init>(org.w3c.dom.Document,java.lang.String)>($r8, r9);
+
+        r0.<org.apache.xml.security.signature.SignedInfo: org.apache.xml.security.algorithms.SignatureAlgorithm signatureAlgorithm> = $r7;
+
+     label2:
+        $r10 = r0.<org.apache.xml.security.signature.SignedInfo: org.apache.xml.security.algorithms.SignatureAlgorithm signatureAlgorithm>;
+
+        $r11 = virtualinvoke $r10.<org.apache.xml.security.algorithms.SignatureAlgorithm: org.w3c.dom.Element getElement()>();
+
+        r0.<org.apache.xml.security.signature.SignedInfo: org.w3c.dom.Element signatureMethod> = $r11;
+
+        $r12 = r0.<org.apache.xml.security.signature.SignedInfo: org.w3c.dom.Element signatureMethod>;
+
+        virtualinvoke r0.<org.apache.xml.security.signature.SignedInfo: void appendSelf(org.w3c.dom.Node)>($r12);
+
+        virtualinvoke r0.<org.apache.xml.security.signature.SignedInfo: void addReturnToSelf()>();
+
+        return;
+    }
+
+    public void <init>(org.w3c.dom.Document, org.w3c.dom.Element, org.w3c.dom.Element) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.signature.SignedInfo r0;
+        org.w3c.dom.Document r1;
+        org.w3c.dom.Element r2, $r3, r5, $r7, $r8;
+        org.apache.xml.security.algorithms.SignatureAlgorithm $r4, $r6;
+        null_type varReplacer3505;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.signature.SignedInfo;
+
+        r1 := @parameter0: org.w3c.dom.Document;
+
+        r5 := @parameter1: org.w3c.dom.Element;
+
+        r2 := @parameter2: org.w3c.dom.Element;
+
+        specialinvoke r0.<org.apache.xml.security.signature.Manifest: void <init>(org.w3c.dom.Document)>(r1);
+
+        r0.<org.apache.xml.security.signature.SignedInfo: org.w3c.dom.Element c14nMethod> = r2;
+
+        $r3 = r0.<org.apache.xml.security.signature.SignedInfo: org.w3c.dom.Element c14nMethod>;
+
+        virtualinvoke r0.<org.apache.xml.security.signature.SignedInfo: void appendSelf(org.w3c.dom.Node)>($r3);
+
+        virtualinvoke r0.<org.apache.xml.security.signature.SignedInfo: void addReturnToSelf()>();
+
+        $r4 = new org.apache.xml.security.algorithms.SignatureAlgorithm;
+
+        varReplacer3505 = null;
+
+        specialinvoke $r4.<org.apache.xml.security.algorithms.SignatureAlgorithm: void <init>(org.w3c.dom.Element,java.lang.String)>(r5, varReplacer3505);
+
+        r0.<org.apache.xml.security.signature.SignedInfo: org.apache.xml.security.algorithms.SignatureAlgorithm signatureAlgorithm> = $r4;
+
+        $r6 = r0.<org.apache.xml.security.signature.SignedInfo: org.apache.xml.security.algorithms.SignatureAlgorithm signatureAlgorithm>;
+
+        $r7 = virtualinvoke $r6.<org.apache.xml.security.algorithms.SignatureAlgorithm: org.w3c.dom.Element getElement()>();
+
+        r0.<org.apache.xml.security.signature.SignedInfo: org.w3c.dom.Element signatureMethod> = $r7;
+
+        $r8 = r0.<org.apache.xml.security.signature.SignedInfo: org.w3c.dom.Element signatureMethod>;
+
+        virtualinvoke r0.<org.apache.xml.security.signature.SignedInfo: void appendSelf(org.w3c.dom.Node)>($r8);
+
+        virtualinvoke r0.<org.apache.xml.security.signature.SignedInfo: void addReturnToSelf()>();
+
+        return;
+    }
+
+    public void <init>(org.w3c.dom.Element, java.lang.String) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.signature.SignedInfo r0;
+        org.w3c.dom.Element r1;
+        java.lang.String r2;
+        int varReplacer3506;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.signature.SignedInfo;
+
+        r1 := @parameter0: org.w3c.dom.Element;
+
+        r2 := @parameter1: java.lang.String;
+
+        varReplacer3506 = 1;
+
+        specialinvoke r0.<org.apache.xml.security.signature.SignedInfo: void <init>(org.w3c.dom.Element,java.lang.String,boolean)>(r1, r2, varReplacer3506);
+
+        return;
+    }
+
+    public void <init>(org.w3c.dom.Element, java.lang.String, boolean) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.signature.SignedInfo r0;
+        org.w3c.dom.Element r1, $r2, $r5, $r6, $r8, $r10;
+        boolean z0;
+        java.lang.String r3, $r11;
+        org.w3c.dom.Node $r4, $r7;
+        org.apache.xml.security.algorithms.SignatureAlgorithm $r9;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.signature.SignedInfo;
+
+        r1 := @parameter0: org.w3c.dom.Element;
+
+        r3 := @parameter1: java.lang.String;
+
+        z0 := @parameter2: boolean;
+
+        $r2 = staticinvoke <org.apache.xml.security.signature.SignedInfo: org.w3c.dom.Element reparseSignedInfoElem(org.w3c.dom.Element,boolean)>(r1, z0);
+
+        specialinvoke r0.<org.apache.xml.security.signature.Manifest: void <init>(org.w3c.dom.Element,java.lang.String,boolean)>($r2, r3, z0);
+
+        $r4 = interfaceinvoke r1.<org.w3c.dom.Element: org.w3c.dom.Node getFirstChild()>();
+
+        $r5 = staticinvoke <org.apache.xml.security.utils.XMLUtils: org.w3c.dom.Element getNextElement(org.w3c.dom.Node)>($r4);
+
+        r0.<org.apache.xml.security.signature.SignedInfo: org.w3c.dom.Element c14nMethod> = $r5;
+
+        $r6 = r0.<org.apache.xml.security.signature.SignedInfo: org.w3c.dom.Element c14nMethod>;
+
+        $r7 = interfaceinvoke $r6.<org.w3c.dom.Element: org.w3c.dom.Node getNextSibling()>();
+
+        $r8 = staticinvoke <org.apache.xml.security.utils.XMLUtils: org.w3c.dom.Element getNextElement(org.w3c.dom.Node)>($r7);
+
+        r0.<org.apache.xml.security.signature.SignedInfo: org.w3c.dom.Element signatureMethod> = $r8;
+
+        $r9 = new org.apache.xml.security.algorithms.SignatureAlgorithm;
+
+        $r10 = r0.<org.apache.xml.security.signature.SignedInfo: org.w3c.dom.Element signatureMethod>;
+
+        $r11 = virtualinvoke r0.<org.apache.xml.security.signature.SignedInfo: java.lang.String getBaseURI()>();
+
+        specialinvoke $r9.<org.apache.xml.security.algorithms.SignatureAlgorithm: void <init>(org.w3c.dom.Element,java.lang.String,boolean)>($r10, $r11, z0);
+
+        r0.<org.apache.xml.security.signature.SignedInfo: org.apache.xml.security.algorithms.SignatureAlgorithm signatureAlgorithm> = $r9;
+
+        return;
+    }
+
+    private static org.w3c.dom.Element reparseSignedInfoElem(org.w3c.dom.Element, boolean) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.w3c.dom.Element r0, r2, $r9, r13;
+        org.w3c.dom.Node $r1, r10, $r11;
+        java.lang.String r3, varReplacer3508, varReplacer3509, varReplacer3511, varReplacer3512, varReplacer3514, varReplacer3515, varReplacer3516;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, z6;
+        byte[] r4;
+        javax.xml.parsers.DocumentBuilder r5;
+        java.io.ByteArrayInputStream r7, $r36;
+        org.w3c.dom.Document $r8, r31;
+        java.lang.Throwable $r14, $r16, $r18, $r20, r21, $r22, r23, r24, $r25, $r26, $r27, r28, r30, r32, r33, r34, r35;
+        org.apache.xml.security.c14n.Canonicalizer r29;
+        org.apache.xml.security.exceptions.XMLSecurityException $r37, $r38, $r39;
+        java.lang.Exception $r40, $r41, $r42;
+        int varReplacer3507, varReplacer3513;
+        null_type varReplacer3510;
+
+        nop;
+
+        r0 := @parameter0: org.w3c.dom.Element;
+
+        z6 := @parameter1: boolean;
+
+        $r1 = interfaceinvoke r0.<org.w3c.dom.Element: org.w3c.dom.Node getFirstChild()>();
+
+        r2 = staticinvoke <org.apache.xml.security.utils.XMLUtils: org.w3c.dom.Element getNextElement(org.w3c.dom.Node)>($r1);
+
+        varReplacer3510 = null;
+
+        varReplacer3511 = "Algorithm";
+
+        r3 = interfaceinvoke r2.<org.w3c.dom.Element: java.lang.String getAttributeNS(java.lang.String,java.lang.String)>(varReplacer3510, varReplacer3511);
+
+        varReplacer3509 = "http://www.w3.org/TR/2001/REC-xml-c14n-20010315";
+
+        $z0 = virtualinvoke r3.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer3509);
+
+        if $z0 != 0 goto label24;
+
+        varReplacer3514 = "http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments";
+
+        $z1 = virtualinvoke r3.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer3514);
+
+        if $z1 != 0 goto label24;
+
+        varReplacer3512 = "http://www.w3.org/2001/10/xml-exc-c14n#";
+
+        $z2 = virtualinvoke r3.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer3512);
+
+        if $z2 != 0 goto label24;
+
+        varReplacer3515 = "http://www.w3.org/2001/10/xml-exc-c14n#WithComments";
+
+        $z3 = virtualinvoke r3.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer3515);
+
+        if $z3 != 0 goto label24;
+
+        varReplacer3508 = "http://www.w3.org/2006/12/xml-c14n11";
+
+        $z4 = virtualinvoke r3.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer3508);
+
+        if $z4 != 0 goto label24;
+
+        varReplacer3516 = "http://www.w3.org/2006/12/xml-c14n11#WithComments";
+
+        $z5 = virtualinvoke r3.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer3516);
+
+        if $z5 != 0 goto label24;
+
+     label01:
+        r29 = staticinvoke <org.apache.xml.security.c14n.Canonicalizer: org.apache.xml.security.c14n.Canonicalizer getInstance(java.lang.String)>(r3);
+
+        virtualinvoke r29.<org.apache.xml.security.c14n.Canonicalizer: void setSecureValidation(boolean)>(z6);
+
+        r4 = virtualinvoke r29.<org.apache.xml.security.c14n.Canonicalizer: byte[] canonicalizeSubtree(org.w3c.dom.Node)>(r0);
+
+        varReplacer3513 = 0;
+
+        r5 = staticinvoke <org.apache.xml.security.utils.XMLUtils: javax.xml.parsers.DocumentBuilder createDocumentBuilder(boolean,boolean)>(varReplacer3513, z6);
+
+     label02:
+        $r36 = new java.io.ByteArrayInputStream;
+
+        specialinvoke $r36.<java.io.ByteArrayInputStream: void <init>(byte[])>(r4);
+
+        r7 = $r36;
+
+        r30 = null;
+
+     label03:
+        r31 = virtualinvoke r5.<javax.xml.parsers.DocumentBuilder: org.w3c.dom.Document parse(java.io.InputStream)>(r7);
+
+        $r8 = interfaceinvoke r0.<org.w3c.dom.Element: org.w3c.dom.Document getOwnerDocument()>();
+
+        $r9 = interfaceinvoke r31.<org.w3c.dom.Document: org.w3c.dom.Element getDocumentElement()>();
+
+        varReplacer3507 = 1;
+
+        r10 = interfaceinvoke $r8.<org.w3c.dom.Document: org.w3c.dom.Node importNode(org.w3c.dom.Node,boolean)>($r9, varReplacer3507);
+
+        $r11 = interfaceinvoke r0.<org.w3c.dom.Element: org.w3c.dom.Node getParentNode()>();
+
+        interfaceinvoke $r11.<org.w3c.dom.Node: org.w3c.dom.Node replaceChild(org.w3c.dom.Node,org.w3c.dom.Node)>(r10, r0);
+
+        r13 = (org.w3c.dom.Element) r10;
+
+     label04:
+        if r30 == null goto label08;
+
+     label05:
+        virtualinvoke r7.<java.io.InputStream: void close()>();
+
+     label06:
+        goto label09;
+
+     label07:
+        $r27 := @caughtexception;
+
+        r28 = $r27;
+
+        virtualinvoke r30.<java.lang.Throwable: void addSuppressed(java.lang.Throwable)>(r28);
+
+        goto label09;
+
+     label08:
+        virtualinvoke r7.<java.io.InputStream: void close()>();
+
+     label09:
+        staticinvoke <org.apache.xml.security.utils.XMLUtils: boolean repoolDocumentBuilder(javax.xml.parsers.DocumentBuilder)>(r5);
+
+     label10:
+        return r13;
+
+     label11:
+        $r26 := @caughtexception;
+
+        r32 = $r26;
+
+        r30 = r32;
+
+        throw r32;
+
+     label12:
+        $r25 := @caughtexception;
+
+        r24 = $r25;
+
+     label13:
+        if r30 == null goto label17;
+
+     label14:
+        virtualinvoke r7.<java.io.InputStream: void close()>();
+
+     label15:
+        goto label18;
+
+     label16:
+        $r22 := @caughtexception;
+
+        r23 = $r22;
+
+        virtualinvoke r30.<java.lang.Throwable: void addSuppressed(java.lang.Throwable)>(r23);
+
+        goto label18;
+
+     label17:
+        virtualinvoke r7.<java.io.InputStream: void close()>();
+
+     label18:
+        throw r24;
+
+     label19:
+        $r20 := @caughtexception;
+
+        r21 = $r20;
+
+     label20:
+        staticinvoke <org.apache.xml.security.utils.XMLUtils: boolean repoolDocumentBuilder(javax.xml.parsers.DocumentBuilder)>(r5);
+
+        throw r21;
+
+     label21:
+        $r18 := @caughtexception;
+
+        r33 = $r18;
+
+        $r37 = new org.apache.xml.security.exceptions.XMLSecurityException;
+
+        $r40 = (java.lang.Exception) r33;
+
+        specialinvoke $r37.<org.apache.xml.security.exceptions.XMLSecurityException: void <init>(java.lang.Exception)>($r40);
+
+        throw $r37;
+
+     label22:
+        $r16 := @caughtexception;
+
+        r34 = $r16;
+
+        $r38 = new org.apache.xml.security.exceptions.XMLSecurityException;
+
+        $r41 = (java.lang.Exception) r34;
+
+        specialinvoke $r38.<org.apache.xml.security.exceptions.XMLSecurityException: void <init>(java.lang.Exception)>($r41);
+
+        throw $r38;
+
+     label23:
+        $r14 := @caughtexception;
+
+        r35 = $r14;
+
+        $r39 = new org.apache.xml.security.exceptions.XMLSecurityException;
+
+        $r42 = (java.lang.Exception) r35;
+
+        specialinvoke $r39.<org.apache.xml.security.exceptions.XMLSecurityException: void <init>(java.lang.Exception)>($r42);
+
+        throw $r39;
+
+     label24:
+        return r0;
+
+        catch java.lang.Throwable from label05 to label06 with label07;
+        catch java.lang.Throwable from label03 to label04 with label11;
+        catch java.lang.Throwable from label14 to label15 with label16;
+        catch java.lang.Throwable from label11 to label13 with label12;
+        catch java.lang.Throwable from label02 to label09 with label19;
+        catch java.lang.Throwable from label11 to label20 with label19;
+        catch javax.xml.parsers.ParserConfigurationException from label01 to label10 with label21;
+        catch javax.xml.parsers.ParserConfigurationException from label11 to label21 with label21;
+        catch java.io.IOException from label01 to label10 with label22;
+        catch java.io.IOException from label11 to label21 with label22;
+        catch org.xml.sax.SAXException from label01 to label10 with label23;
+        catch org.xml.sax.SAXException from label11 to label21 with label23;
+    }
+
+    public boolean verify() throws org.apache.xml.security.signature.MissingResourceFailureException, org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.signature.SignedInfo r0;
+        boolean $z0;
+        int varReplacer3517;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.signature.SignedInfo;
+
+        varReplacer3517 = 0;
+
+        $z0 = specialinvoke r0.<org.apache.xml.security.signature.Manifest: boolean verifyReferences(boolean)>(varReplacer3517);
+
+        return $z0;
+    }
+
+    public boolean verify(boolean) throws org.apache.xml.security.signature.MissingResourceFailureException, org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.signature.SignedInfo r0;
+        boolean z0, $z1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.signature.SignedInfo;
+
+        z0 := @parameter0: boolean;
+
+        $z1 = specialinvoke r0.<org.apache.xml.security.signature.Manifest: boolean verifyReferences(boolean)>(z0);
+
+        return $z1;
+    }
+
+    public byte[] getCanonicalizedOctetStream() throws org.apache.xml.security.c14n.CanonicalizationException, org.apache.xml.security.c14n.InvalidCanonicalizerException, org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.signature.SignedInfo r0;
+        byte[] $r1, $r6, $r8, $r9, $r11;
+        java.lang.String $r2, r4;
+        org.apache.xml.security.c14n.Canonicalizer r3;
+        boolean $z0;
+        org.w3c.dom.Element $r5, $r7;
+        java.lang.Object $r10;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.signature.SignedInfo;
+
+        $r1 = r0.<org.apache.xml.security.signature.SignedInfo: byte[] c14nizedBytes>;
+
+        if $r1 != null goto label2;
+
+        $r2 = virtualinvoke r0.<org.apache.xml.security.signature.SignedInfo: java.lang.String getCanonicalizationMethodURI()>();
+
+        r3 = staticinvoke <org.apache.xml.security.c14n.Canonicalizer: org.apache.xml.security.c14n.Canonicalizer getInstance(java.lang.String)>($r2);
+
+        $z0 = virtualinvoke r0.<org.apache.xml.security.signature.SignedInfo: boolean isSecureValidation()>();
+
+        virtualinvoke r3.<org.apache.xml.security.c14n.Canonicalizer: void setSecureValidation(boolean)>($z0);
+
+        r4 = virtualinvoke r0.<org.apache.xml.security.signature.SignedInfo: java.lang.String getInclusiveNamespaces()>();
+
+        if r4 != null goto label1;
+
+        $r7 = virtualinvoke r0.<org.apache.xml.security.signature.SignedInfo: org.w3c.dom.Element getElement()>();
+
+        $r8 = virtualinvoke r3.<org.apache.xml.security.c14n.Canonicalizer: byte[] canonicalizeSubtree(org.w3c.dom.Node)>($r7);
+
+        r0.<org.apache.xml.security.signature.SignedInfo: byte[] c14nizedBytes> = $r8;
+
+        goto label2;
+
+     label1:
+        $r5 = virtualinvoke r0.<org.apache.xml.security.signature.SignedInfo: org.w3c.dom.Element getElement()>();
+
+        $r6 = virtualinvoke r3.<org.apache.xml.security.c14n.Canonicalizer: byte[] canonicalizeSubtree(org.w3c.dom.Node,java.lang.String)>($r5, r4);
+
+        r0.<org.apache.xml.security.signature.SignedInfo: byte[] c14nizedBytes> = $r6;
+
+     label2:
+        $r9 = r0.<org.apache.xml.security.signature.SignedInfo: byte[] c14nizedBytes>;
+
+        $r10 = virtualinvoke $r9.<java.lang.Object: java.lang.Object clone()>();
+
+        $r11 = (byte[]) $r10;
+
+        return $r11;
+    }
+
+    public void signInOctetStream(java.io.OutputStream) throws org.apache.xml.security.c14n.CanonicalizationException, org.apache.xml.security.c14n.InvalidCanonicalizerException, org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.signature.SignedInfo r0;
+        byte[] $r1, $r3;
+        java.io.OutputStream r2;
+        java.lang.String $r4, r5;
+        boolean $z0;
+        org.w3c.dom.Element $r6, $r8;
+        java.lang.Throwable $r10, r13;
+        java.lang.RuntimeException $r11;
+        org.apache.xml.security.c14n.Canonicalizer r12;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.signature.SignedInfo;
+
+        r2 := @parameter0: java.io.OutputStream;
+
+        $r1 = r0.<org.apache.xml.security.signature.SignedInfo: byte[] c14nizedBytes>;
+
+        if $r1 != null goto label3;
+
+        $r4 = virtualinvoke r0.<org.apache.xml.security.signature.SignedInfo: java.lang.String getCanonicalizationMethodURI()>();
+
+        r12 = staticinvoke <org.apache.xml.security.c14n.Canonicalizer: org.apache.xml.security.c14n.Canonicalizer getInstance(java.lang.String)>($r4);
+
+        $z0 = virtualinvoke r0.<org.apache.xml.security.signature.SignedInfo: boolean isSecureValidation()>();
+
+        virtualinvoke r12.<org.apache.xml.security.c14n.Canonicalizer: void setSecureValidation(boolean)>($z0);
+
+        virtualinvoke r12.<org.apache.xml.security.c14n.Canonicalizer: void setWriter(java.io.OutputStream)>(r2);
+
+        r5 = virtualinvoke r0.<org.apache.xml.security.signature.SignedInfo: java.lang.String getInclusiveNamespaces()>();
+
+        if r5 != null goto label1;
+
+        $r8 = virtualinvoke r0.<org.apache.xml.security.signature.SignedInfo: org.w3c.dom.Element getElement()>();
+
+        virtualinvoke r12.<org.apache.xml.security.c14n.Canonicalizer: byte[] canonicalizeSubtree(org.w3c.dom.Node)>($r8);
+
+        goto label2;
+
+     label1:
+        $r6 = virtualinvoke r0.<org.apache.xml.security.signature.SignedInfo: org.w3c.dom.Element getElement()>();
+
+        virtualinvoke r12.<org.apache.xml.security.c14n.Canonicalizer: byte[] canonicalizeSubtree(org.w3c.dom.Node,java.lang.String)>($r6, r5);
+
+     label2:
+        goto label6;
+
+     label3:
+        $r3 = r0.<org.apache.xml.security.signature.SignedInfo: byte[] c14nizedBytes>;
+
+        virtualinvoke r2.<java.io.OutputStream: void write(byte[])>($r3);
+
+     label4:
+        goto label6;
+
+     label5:
+        $r10 := @caughtexception;
+
+        r13 = $r10;
+
+        $r11 = new java.lang.RuntimeException;
+
+        specialinvoke $r11.<java.lang.RuntimeException: void <init>(java.lang.Throwable)>(r13);
+
+        throw $r11;
+
+     label6:
+        return;
+
+        catch java.io.IOException from label3 to label4 with label5;
+    }
+
+    public java.lang.String getCanonicalizationMethodURI()
+    {
+        org.apache.xml.security.signature.SignedInfo r0;
+        org.w3c.dom.Element $r1;
+        java.lang.String $r2, varReplacer3519;
+        null_type varReplacer3518;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.signature.SignedInfo;
+
+        $r1 = r0.<org.apache.xml.security.signature.SignedInfo: org.w3c.dom.Element c14nMethod>;
+
+        varReplacer3518 = null;
+
+        varReplacer3519 = "Algorithm";
+
+        $r2 = interfaceinvoke $r1.<org.w3c.dom.Element: java.lang.String getAttributeNS(java.lang.String,java.lang.String)>(varReplacer3518, varReplacer3519);
+
+        return $r2;
+    }
+
+    public java.lang.String getSignatureMethodURI()
+    {
+        org.apache.xml.security.signature.SignedInfo r0;
+        org.w3c.dom.Element r1;
+        java.lang.String $r2, varReplacer3522;
+        null_type varReplacer3520, varReplacer3521;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.signature.SignedInfo;
+
+        r1 = virtualinvoke r0.<org.apache.xml.security.signature.SignedInfo: org.w3c.dom.Element getSignatureMethodElement()>();
+
+        if r1 == null goto label1;
+
+        varReplacer3521 = null;
+
+        varReplacer3522 = "Algorithm";
+
+        $r2 = interfaceinvoke r1.<org.w3c.dom.Element: java.lang.String getAttributeNS(java.lang.String,java.lang.String)>(varReplacer3521, varReplacer3522);
+
+        return $r2;
+
+     label1:
+        varReplacer3520 = null;
+
+        return varReplacer3520;
+    }
+
+    public org.w3c.dom.Element getSignatureMethodElement()
+    {
+        org.apache.xml.security.signature.SignedInfo r0;
+        org.w3c.dom.Element $r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.signature.SignedInfo;
+
+        $r1 = r0.<org.apache.xml.security.signature.SignedInfo: org.w3c.dom.Element signatureMethod>;
+
+        return $r1;
+    }
+
+    public javax.crypto.SecretKey createSecretKey(byte[])
+    {
+        javax.crypto.spec.SecretKeySpec $r0;
+        byte[] r1;
+        org.apache.xml.security.signature.SignedInfo r2;
+        org.apache.xml.security.algorithms.SignatureAlgorithm $r3;
+        java.lang.String $r4;
+
+        nop;
+
+        r2 := @this: org.apache.xml.security.signature.SignedInfo;
+
+        r1 := @parameter0: byte[];
+
+        $r0 = new javax.crypto.spec.SecretKeySpec;
+
+        $r3 = r2.<org.apache.xml.security.signature.SignedInfo: org.apache.xml.security.algorithms.SignatureAlgorithm signatureAlgorithm>;
+
+        $r4 = virtualinvoke $r3.<org.apache.xml.security.algorithms.SignatureAlgorithm: java.lang.String getJCEAlgorithmString()>();
+
+        specialinvoke $r0.<javax.crypto.spec.SecretKeySpec: void <init>(byte[],java.lang.String)>(r1, $r4);
+
+        return $r0;
+    }
+
+    public org.apache.xml.security.algorithms.SignatureAlgorithm getSignatureAlgorithm()
+    {
+        org.apache.xml.security.signature.SignedInfo r0;
+        org.apache.xml.security.algorithms.SignatureAlgorithm $r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.signature.SignedInfo;
+
+        $r1 = r0.<org.apache.xml.security.signature.SignedInfo: org.apache.xml.security.algorithms.SignatureAlgorithm signatureAlgorithm>;
+
+        return $r1;
+    }
+
+    public java.lang.String getBaseLocalName()
+    {
+        org.apache.xml.security.signature.SignedInfo r0;
+        java.lang.String varReplacer3523;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.signature.SignedInfo;
+
+        varReplacer3523 = "SignedInfo";
+
+        return varReplacer3523;
+    }
+
+    public java.lang.String getInclusiveNamespaces()
+    {
+        org.apache.xml.security.signature.SignedInfo r0;
+        java.lang.String r1, r7, varReplacer3524, varReplacer3528, varReplacer3529;
+        boolean $z0, $z1;
+        org.w3c.dom.Element $r2, r4;
+        org.w3c.dom.Node $r3;
+        org.apache.xml.security.transforms.params.InclusiveNamespaces $r5;
+        org.apache.xml.security.exceptions.XMLSecurityException $r6, r8;
+        null_type varReplacer3525, varReplacer3526, varReplacer3527;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.signature.SignedInfo;
+
+        r1 = virtualinvoke r0.<org.apache.xml.security.signature.SignedInfo: java.lang.String getCanonicalizationMethodURI()>();
+
+        varReplacer3529 = "http://www.w3.org/2001/10/xml-exc-c14n#";
+
+        $z0 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer3529);
+
+        if $z0 != 0 goto label1;
+
+        varReplacer3524 = "http://www.w3.org/2001/10/xml-exc-c14n#WithComments";
+
+        $z1 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer3524);
+
+        if $z1 != 0 goto label1;
+
+        varReplacer3525 = null;
+
+        return varReplacer3525;
+
+     label1:
+        $r2 = r0.<org.apache.xml.security.signature.SignedInfo: org.w3c.dom.Element c14nMethod>;
+
+        $r3 = interfaceinvoke $r2.<org.w3c.dom.Element: org.w3c.dom.Node getFirstChild()>();
+
+        r4 = staticinvoke <org.apache.xml.security.utils.XMLUtils: org.w3c.dom.Element getNextElement(org.w3c.dom.Node)>($r3);
+
+        if r4 == null goto label5;
+
+     label2:
+        $r5 = new org.apache.xml.security.transforms.params.InclusiveNamespaces;
+
+        varReplacer3528 = "http://www.w3.org/2001/10/xml-exc-c14n#";
+
+        specialinvoke $r5.<org.apache.xml.security.transforms.params.InclusiveNamespaces: void <init>(org.w3c.dom.Element,java.lang.String)>(r4, varReplacer3528);
+
+        r7 = virtualinvoke $r5.<org.apache.xml.security.transforms.params.InclusiveNamespaces: java.lang.String getInclusiveNamespaces()>();
+
+     label3:
+        return r7;
+
+     label4:
+        $r6 := @caughtexception;
+
+        r8 = $r6;
+
+        varReplacer3526 = null;
+
+        return varReplacer3526;
+
+     label5:
+        varReplacer3527 = null;
+
+        return varReplacer3527;
+
+        catch org.apache.xml.security.exceptions.XMLSecurityException from label2 to label3 with label4;
+    }
+}

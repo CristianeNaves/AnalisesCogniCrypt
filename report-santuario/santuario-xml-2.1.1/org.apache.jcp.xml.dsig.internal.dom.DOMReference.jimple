@@ -1,0 +1,2295 @@
+public final class org.apache.jcp.xml.dsig.internal.dom.DOMReference extends org.apache.jcp.xml.dsig.internal.dom.DOMStructure implements javax.xml.crypto.dsig.Reference, javax.xml.crypto.dom.DOMURIReference
+{
+    public static final int MAXIMUM_TRANSFORM_COUNT;
+    private static boolean useC14N11;
+    private static final org.slf4j.Logger LOG;
+    private final javax.xml.crypto.dsig.DigestMethod digestMethod;
+    private final java.lang.String id;
+    private final java.util.List transforms;
+    private java.util.List allTransforms;
+    private final javax.xml.crypto.Data appliedTransformData;
+    private org.w3c.dom.Attr here;
+    private final java.lang.String uri;
+    private final java.lang.String type;
+    private byte[] digestValue;
+    private byte[] calcDigestValue;
+    private org.w3c.dom.Element refElem;
+    private boolean digested;
+    private boolean validated;
+    private boolean validationStatus;
+    private javax.xml.crypto.Data derefData;
+    private java.io.InputStream dis;
+    private java.security.MessageDigest md;
+    private java.security.Provider provider;
+
+    public void <init>(java.lang.String, java.lang.String, javax.xml.crypto.dsig.DigestMethod, java.util.List, java.lang.String, java.security.Provider)
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMReference r0;
+        java.lang.String r1, r2, r5;
+        javax.xml.crypto.dsig.DigestMethod r3;
+        java.util.List r4;
+        java.security.Provider r6;
+        null_type varReplacer370, varReplacer371, varReplacer372;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMReference;
+
+        r1 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: java.lang.String;
+
+        r3 := @parameter2: javax.xml.crypto.dsig.DigestMethod;
+
+        r4 := @parameter3: java.util.List;
+
+        r5 := @parameter4: java.lang.String;
+
+        r6 := @parameter5: java.security.Provider;
+
+        varReplacer370 = null;
+
+        varReplacer371 = null;
+
+        varReplacer372 = null;
+
+        specialinvoke r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: void <init>(java.lang.String,java.lang.String,javax.xml.crypto.dsig.DigestMethod,java.util.List,javax.xml.crypto.Data,java.util.List,java.lang.String,byte[],java.security.Provider)>(r1, r2, r3, varReplacer370, varReplacer370, r4, r5, varReplacer370, r6);
+
+        return;
+    }
+
+    public void <init>(java.lang.String, java.lang.String, javax.xml.crypto.dsig.DigestMethod, java.util.List, javax.xml.crypto.Data, java.util.List, java.lang.String, java.security.Provider)
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMReference r0;
+        java.lang.String r1, r2, r7;
+        javax.xml.crypto.dsig.DigestMethod r3;
+        java.util.List r4, r6;
+        javax.xml.crypto.Data r5;
+        java.security.Provider r8;
+        null_type varReplacer373;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMReference;
+
+        r1 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: java.lang.String;
+
+        r3 := @parameter2: javax.xml.crypto.dsig.DigestMethod;
+
+        r4 := @parameter3: java.util.List;
+
+        r5 := @parameter4: javax.xml.crypto.Data;
+
+        r6 := @parameter5: java.util.List;
+
+        r7 := @parameter6: java.lang.String;
+
+        r8 := @parameter7: java.security.Provider;
+
+        varReplacer373 = null;
+
+        specialinvoke r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: void <init>(java.lang.String,java.lang.String,javax.xml.crypto.dsig.DigestMethod,java.util.List,javax.xml.crypto.Data,java.util.List,java.lang.String,byte[],java.security.Provider)>(r1, r2, r3, r4, r5, r6, r7, varReplacer373, r8);
+
+        return;
+    }
+
+    public void <init>(java.lang.String, java.lang.String, javax.xml.crypto.dsig.DigestMethod, java.util.List, javax.xml.crypto.Data, java.util.List, java.lang.String, byte[], java.security.Provider)
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMReference r0;
+        javax.xml.crypto.dsig.DigestMethod r1;
+        java.util.List r2, $r4, r5, $r7, $r8, $r9, $r19, $r27, $r28;
+        java.lang.String r10, r11, r12, $r26, $r35, $r40, varReplacer375, varReplacer376, varReplacer379, varReplacer380, varReplacer381, varReplacer382;
+        byte[] r13, $r17;
+        javax.xml.crypto.Data r14;
+        java.security.Provider r15;
+        java.lang.Object $r16, $r20, $r29;
+        boolean $z1, $z2, $z3;
+        java.lang.StringBuilder $r23, $r24, $r25, $r32, $r33, $r34, $r45, $r48;
+        java.lang.Throwable $r38, r41;
+        int i0, i1, i2, i3, varReplacer374, varReplacer377, varReplacer378;
+        java.lang.NullPointerException $r42;
+        java.util.ArrayList $r43, $r44, $r47;
+        java.lang.ClassCastException $r46, $r49;
+        java.net.URI $r50;
+        java.lang.IllegalArgumentException $r51;
+        java.net.URISyntaxException $r52;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMReference;
+
+        r10 := @parameter0: java.lang.String;
+
+        r11 := @parameter1: java.lang.String;
+
+        r1 := @parameter2: javax.xml.crypto.dsig.DigestMethod;
+
+        r2 := @parameter3: java.util.List;
+
+        r14 := @parameter4: javax.xml.crypto.Data;
+
+        r5 := @parameter5: java.util.List;
+
+        r12 := @parameter6: java.lang.String;
+
+        r13 := @parameter7: byte[];
+
+        r15 := @parameter8: java.security.Provider;
+
+        specialinvoke r0.<org.apache.jcp.xml.dsig.internal.dom.DOMStructure: void <init>()>();
+
+        varReplacer374 = 0;
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: boolean digested> = varReplacer374;
+
+        varReplacer377 = 0;
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: boolean validated> = varReplacer377;
+
+        if r1 != null goto label01;
+
+        $r42 = new java.lang.NullPointerException;
+
+        varReplacer382 = "DigestMethod must be non-null";
+
+        specialinvoke $r42.<java.lang.NullPointerException: void <init>(java.lang.String)>(varReplacer382);
+
+        throw $r42;
+
+     label01:
+        if r2 != null goto label02;
+
+        $r43 = new java.util.ArrayList;
+
+        specialinvoke $r43.<java.util.ArrayList: void <init>()>();
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.util.List allTransforms> = $r43;
+
+        goto label05;
+
+     label02:
+        $r44 = new java.util.ArrayList;
+
+        specialinvoke $r44.<java.util.ArrayList: void <init>(java.util.Collection)>(r2);
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.util.List allTransforms> = $r44;
+
+        i0 = 0;
+
+        $r4 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.util.List allTransforms>;
+
+        i1 = interfaceinvoke $r4.<java.util.List: int size()>();
+
+     label03:
+        if i0 >= i1 goto label05;
+
+        $r28 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.util.List allTransforms>;
+
+        $r29 = interfaceinvoke $r28.<java.util.List: java.lang.Object get(int)>(i0);
+
+        $z3 = $r29 instanceof javax.xml.crypto.dsig.Transform;
+
+        if $z3 != 0 goto label04;
+
+        $r46 = new java.lang.ClassCastException;
+
+        $r45 = new java.lang.StringBuilder;
+
+        specialinvoke $r45.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer379 = "appliedTransforms[";
+
+        $r32 = virtualinvoke $r45.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer379);
+
+        $r33 = virtualinvoke $r32.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(i0);
+
+        varReplacer375 = "] is not a valid type";
+
+        $r34 = virtualinvoke $r33.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer375);
+
+        $r35 = virtualinvoke $r34.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $r46.<java.lang.ClassCastException: void <init>(java.lang.String)>($r35);
+
+        throw $r46;
+
+     label04:
+        i0 = i0 + 1;
+
+        goto label03;
+
+     label05:
+        if r5 != null goto label06;
+
+        $r27 = staticinvoke <java.util.Collections: java.util.List emptyList()>();
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.util.List transforms> = $r27;
+
+        goto label10;
+
+     label06:
+        $r47 = new java.util.ArrayList;
+
+        specialinvoke $r47.<java.util.ArrayList: void <init>(java.util.Collection)>(r5);
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.util.List transforms> = $r47;
+
+        i2 = 0;
+
+        $r7 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.util.List transforms>;
+
+        i3 = interfaceinvoke $r7.<java.util.List: int size()>();
+
+     label07:
+        if i2 >= i3 goto label09;
+
+        $r19 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.util.List transforms>;
+
+        $r20 = interfaceinvoke $r19.<java.util.List: java.lang.Object get(int)>(i2);
+
+        $z2 = $r20 instanceof javax.xml.crypto.dsig.Transform;
+
+        if $z2 != 0 goto label08;
+
+        $r49 = new java.lang.ClassCastException;
+
+        $r48 = new java.lang.StringBuilder;
+
+        specialinvoke $r48.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer380 = "transforms[";
+
+        $r23 = virtualinvoke $r48.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer380);
+
+        $r24 = virtualinvoke $r23.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(i2);
+
+        varReplacer381 = "] is not a valid type";
+
+        $r25 = virtualinvoke $r24.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer381);
+
+        $r26 = virtualinvoke $r25.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $r49.<java.lang.ClassCastException: void <init>(java.lang.String)>($r26);
+
+        throw $r49;
+
+     label08:
+        i2 = i2 + 1;
+
+        goto label07;
+
+     label09:
+        $r9 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.util.List allTransforms>;
+
+        $r8 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.util.List transforms>;
+
+        interfaceinvoke $r9.<java.util.List: boolean addAll(java.util.Collection)>($r8);
+
+     label10:
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: javax.xml.crypto.dsig.DigestMethod digestMethod> = r1;
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.lang.String uri> = r10;
+
+        if r10 == null goto label14;
+
+        varReplacer376 = "";
+
+        $z1 = virtualinvoke r10.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer376);
+
+        if $z1 != 0 goto label14;
+
+     label11:
+        $r50 = new java.net.URI;
+
+        specialinvoke $r50.<java.net.URI: void <init>(java.lang.String)>(r10);
+
+     label12:
+        goto label14;
+
+     label13:
+        $r38 := @caughtexception;
+
+        r41 = $r38;
+
+        $r51 = new java.lang.IllegalArgumentException;
+
+        $r52 = (java.net.URISyntaxException) r41;
+
+        $r40 = virtualinvoke $r52.<java.net.URISyntaxException: java.lang.String getMessage()>();
+
+        specialinvoke $r51.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($r40);
+
+        throw $r51;
+
+     label14:
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.lang.String type> = r11;
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.lang.String id> = r12;
+
+        if r13 == null goto label15;
+
+        $r16 = virtualinvoke r13.<java.lang.Object: java.lang.Object clone()>();
+
+        $r17 = (byte[]) $r16;
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: byte[] digestValue> = $r17;
+
+        varReplacer378 = 1;
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: boolean digested> = varReplacer378;
+
+     label15:
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: javax.xml.crypto.Data appliedTransformData> = r14;
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.security.Provider provider> = r15;
+
+        return;
+
+        catch java.net.URISyntaxException from label11 to label12 with label13;
+    }
+
+    public void <init>(org.w3c.dom.Element, javax.xml.crypto.XMLCryptoContext, java.security.Provider) throws javax.xml.crypto.MarshalException
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMReference r0;
+        javax.xml.crypto.XMLCryptoContext r1;
+        boolean z0, $z1, $z2, $z3, $z4, $z6, $z7, $z9;
+        org.w3c.dom.Element r2, $r10, r48, r49, r50, r55, r57;
+        java.util.ArrayList $r3, r4;
+        java.lang.String $r5, $r11, $r12, $r13, $r18, $r25, $r26, $r27, $r31, $r34, $r35, $r36, $r38, $r44, $r45, r51, r52, r53, $r54, r56, r58, varReplacer383, varReplacer384, varReplacer385, varReplacer386, varReplacer387, varReplacer390, varReplacer391, varReplacer393, varReplacer394, varReplacer395, varReplacer396, varReplacer398, varReplacer399, varReplacer400, varReplacer401, varReplacer402, varReplacer404;
+        javax.xml.crypto.dsig.DigestMethod $r6, $r7, $r22;
+        java.util.Base64$Decoder $r8;
+        byte[] $r9;
+        org.w3c.dom.Attr $r14;
+        java.util.List $r15;
+        java.security.Provider r16;
+        javax.xml.crypto.MarshalException $r17, $r19, $r28, $r39, $r47;
+        java.lang.StringBuilder $r20, $r21, $r23, $r24, $r29, $r30, $r32, $r33, $r40, $r41, $r42, $r43;
+        org.apache.jcp.xml.dsig.internal.dom.DOMTransform $r37, $r46;
+        int $i0, varReplacer388, varReplacer392, varReplacer403;
+        null_type varReplacer389, varReplacer397;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMReference;
+
+        r2 := @parameter0: org.w3c.dom.Element;
+
+        r1 := @parameter1: javax.xml.crypto.XMLCryptoContext;
+
+        r16 := @parameter2: java.security.Provider;
+
+        specialinvoke r0.<org.apache.jcp.xml.dsig.internal.dom.DOMStructure: void <init>()>();
+
+        varReplacer388 = 0;
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: boolean digested> = varReplacer388;
+
+        varReplacer392 = 0;
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: boolean validated> = varReplacer392;
+
+        z0 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.Utils: boolean secureValidation(javax.xml.crypto.XMLCryptoContext)>(r1);
+
+        r48 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMUtils: org.w3c.dom.Element getFirstChildElement(org.w3c.dom.Node)>(r2);
+
+        $r3 = new java.util.ArrayList;
+
+        varReplacer403 = 5;
+
+        specialinvoke $r3.<java.util.ArrayList: void <init>(int)>(varReplacer403);
+
+        r4 = $r3;
+
+        $r5 = interfaceinvoke r48.<org.w3c.dom.Element: java.lang.String getLocalName()>();
+
+        varReplacer390 = "Transforms";
+
+        $z1 = virtualinvoke $r5.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer390);
+
+        if $z1 == 0 goto label6;
+
+        $r35 = "http://www.w3.org/2000/09/xmldsig#";
+
+        $r36 = interfaceinvoke r48.<org.w3c.dom.Element: java.lang.String getNamespaceURI()>();
+
+        $z4 = virtualinvoke $r35.<java.lang.String: boolean equals(java.lang.Object)>($r36);
+
+        if $z4 == 0 goto label6;
+
+        varReplacer399 = "Transform";
+
+        varReplacer400 = "http://www.w3.org/2000/09/xmldsig#";
+
+        r49 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMUtils: org.w3c.dom.Element getFirstChildElement(org.w3c.dom.Node,java.lang.String,java.lang.String)>(r48, varReplacer399, varReplacer400);
+
+        $r37 = new org.apache.jcp.xml.dsig.internal.dom.DOMTransform;
+
+        specialinvoke $r37.<org.apache.jcp.xml.dsig.internal.dom.DOMTransform: void <init>(org.w3c.dom.Element,javax.xml.crypto.XMLCryptoContext,java.security.Provider)>(r49, r1, r16);
+
+        interfaceinvoke r4.<java.util.List: boolean add(java.lang.Object)>($r37);
+
+        r50 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMUtils: org.w3c.dom.Element getNextSiblingElement(org.w3c.dom.Node)>(r49);
+
+     label1:
+        if r50 == null goto label5;
+
+        r51 = interfaceinvoke r50.<org.w3c.dom.Element: java.lang.String getLocalName()>();
+
+        r52 = interfaceinvoke r50.<org.w3c.dom.Element: java.lang.String getNamespaceURI()>();
+
+        $r38 = "Transform";
+
+        $z6 = virtualinvoke $r38.<java.lang.String: boolean equals(java.lang.Object)>(r51);
+
+        if $z6 == 0 goto label2;
+
+        $r45 = "http://www.w3.org/2000/09/xmldsig#";
+
+        $z7 = virtualinvoke $r45.<java.lang.String: boolean equals(java.lang.Object)>(r52);
+
+        if $z7 != 0 goto label3;
+
+     label2:
+        $r39 = new javax.xml.crypto.MarshalException;
+
+        $r40 = new java.lang.StringBuilder;
+
+        specialinvoke $r40.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer402 = "Invalid element name: ";
+
+        $r41 = virtualinvoke $r40.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer402);
+
+        $r42 = virtualinvoke $r41.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r51);
+
+        varReplacer385 = ", expected Transform";
+
+        $r43 = virtualinvoke $r42.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer385);
+
+        $r44 = virtualinvoke $r43.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $r39.<javax.xml.crypto.MarshalException: void <init>(java.lang.String)>($r44);
+
+        throw $r39;
+
+     label3:
+        $r46 = new org.apache.jcp.xml.dsig.internal.dom.DOMTransform;
+
+        specialinvoke $r46.<org.apache.jcp.xml.dsig.internal.dom.DOMTransform: void <init>(org.w3c.dom.Element,javax.xml.crypto.XMLCryptoContext,java.security.Provider)>(r50, r1, r16);
+
+        interfaceinvoke r4.<java.util.List: boolean add(java.lang.Object)>($r46);
+
+        if z0 == 0 goto label4;
+
+        $i0 = interfaceinvoke r4.<java.util.List: int size()>();
+
+        if $i0 <= 5 goto label4;
+
+        r53 = "A maxiumum of 5 transforms per Reference are allowed with secure validation";
+
+        $r47 = new javax.xml.crypto.MarshalException;
+
+        specialinvoke $r47.<javax.xml.crypto.MarshalException: void <init>(java.lang.String)>(r53);
+
+        throw $r47;
+
+     label4:
+        r50 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMUtils: org.w3c.dom.Element getNextSiblingElement(org.w3c.dom.Node)>(r50);
+
+        goto label1;
+
+     label5:
+        r48 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMUtils: org.w3c.dom.Element getNextSiblingElement(org.w3c.dom.Node)>(r48);
+
+     label6:
+        $r54 = interfaceinvoke r48.<org.w3c.dom.Element: java.lang.String getLocalName()>();
+
+        varReplacer401 = "DigestMethod";
+
+        $z9 = virtualinvoke $r54.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer401);
+
+        if $z9 != 0 goto label7;
+
+        $r26 = "http://www.w3.org/2000/09/xmldsig#";
+
+        $r27 = interfaceinvoke r48.<org.w3c.dom.Element: java.lang.String getNamespaceURI()>();
+
+        $z3 = virtualinvoke $r26.<java.lang.String: boolean equals(java.lang.Object)>($r27);
+
+        if $z3 == 0 goto label7;
+
+        $r28 = new javax.xml.crypto.MarshalException;
+
+        $r29 = new java.lang.StringBuilder;
+
+        specialinvoke $r29.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer384 = "Invalid element name: ";
+
+        $r30 = virtualinvoke $r29.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer384);
+
+        $r31 = interfaceinvoke r48.<org.w3c.dom.Element: java.lang.String getLocalName()>();
+
+        $r32 = virtualinvoke $r30.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r31);
+
+        varReplacer393 = ", expected DigestMethod";
+
+        $r33 = virtualinvoke $r32.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer393);
+
+        $r34 = virtualinvoke $r33.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $r28.<javax.xml.crypto.MarshalException: void <init>(java.lang.String)>($r34);
+
+        throw $r28;
+
+     label7:
+        r55 = r48;
+
+        $r6 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMDigestMethod: javax.xml.crypto.dsig.DigestMethod unmarshal(org.w3c.dom.Element)>(r55);
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: javax.xml.crypto.dsig.DigestMethod digestMethod> = $r6;
+
+        $r7 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: javax.xml.crypto.dsig.DigestMethod digestMethod>;
+
+        r56 = interfaceinvoke $r7.<javax.xml.crypto.dsig.DigestMethod: java.lang.String getAlgorithm()>();
+
+        if z0 == 0 goto label8;
+
+        $r18 = "http://www.w3.org/2001/04/xmldsig-more#md5";
+
+        $z2 = virtualinvoke $r18.<java.lang.String: boolean equals(java.lang.Object)>(r56);
+
+        if $z2 == 0 goto label8;
+
+        $r19 = new javax.xml.crypto.MarshalException;
+
+        $r20 = new java.lang.StringBuilder;
+
+        specialinvoke $r20.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer404 = "It is forbidden to use algorithm ";
+
+        $r21 = virtualinvoke $r20.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer404);
+
+        $r22 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: javax.xml.crypto.dsig.DigestMethod digestMethod>;
+
+        $r23 = virtualinvoke $r21.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>($r22);
+
+        varReplacer386 = " when secure validation is enabled";
+
+        $r24 = virtualinvoke $r23.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer386);
+
+        $r25 = virtualinvoke $r24.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $r19.<javax.xml.crypto.MarshalException: void <init>(java.lang.String)>($r25);
+
+        throw $r19;
+
+     label8:
+        varReplacer395 = "DigestValue";
+
+        varReplacer396 = "http://www.w3.org/2000/09/xmldsig#";
+
+        r57 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMUtils: org.w3c.dom.Element getNextSiblingElement(org.w3c.dom.Node,java.lang.String,java.lang.String)>(r55, varReplacer395, varReplacer396);
+
+        r58 = staticinvoke <org.apache.xml.security.utils.XMLUtils: java.lang.String getFullTextChildrenFromElement(org.w3c.dom.Element)>(r57);
+
+        $r8 = staticinvoke <java.util.Base64: java.util.Base64$Decoder getMimeDecoder()>();
+
+        $r9 = virtualinvoke $r8.<java.util.Base64$Decoder: byte[] decode(java.lang.String)>(r58);
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: byte[] digestValue> = $r9;
+
+        $r10 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMUtils: org.w3c.dom.Element getNextSiblingElement(org.w3c.dom.Node)>(r57);
+
+        if $r10 == null goto label9;
+
+        $r17 = new javax.xml.crypto.MarshalException;
+
+        varReplacer391 = "Unexpected element after DigestValue element";
+
+        specialinvoke $r17.<javax.xml.crypto.MarshalException: void <init>(java.lang.String)>(varReplacer391);
+
+        throw $r17;
+
+     label9:
+        varReplacer387 = "URI";
+
+        $r11 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMUtils: java.lang.String getAttributeValue(org.w3c.dom.Element,java.lang.String)>(r2, varReplacer387);
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.lang.String uri> = $r11;
+
+        varReplacer394 = "Id";
+
+        $r12 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMUtils: java.lang.String getIdAttributeValue(org.w3c.dom.Element,java.lang.String)>(r2, varReplacer394);
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.lang.String id> = $r12;
+
+        varReplacer383 = "Type";
+
+        $r13 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMUtils: java.lang.String getAttributeValue(org.w3c.dom.Element,java.lang.String)>(r2, varReplacer383);
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.lang.String type> = $r13;
+
+        varReplacer397 = null;
+
+        varReplacer398 = "URI";
+
+        $r14 = interfaceinvoke r2.<org.w3c.dom.Element: org.w3c.dom.Attr getAttributeNodeNS(java.lang.String,java.lang.String)>(varReplacer397, varReplacer398);
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: org.w3c.dom.Attr here> = $r14;
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: org.w3c.dom.Element refElem> = r2;
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.util.List transforms> = r4;
+
+        $r15 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.util.List transforms>;
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.util.List allTransforms> = $r15;
+
+        varReplacer389 = null;
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: javax.xml.crypto.Data appliedTransformData> = varReplacer389;
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.security.Provider provider> = r16;
+
+        return;
+    }
+
+    public javax.xml.crypto.dsig.DigestMethod getDigestMethod()
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMReference r0;
+        javax.xml.crypto.dsig.DigestMethod $r1;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMReference;
+
+        $r1 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: javax.xml.crypto.dsig.DigestMethod digestMethod>;
+
+        return $r1;
+    }
+
+    public java.lang.String getId()
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMReference r0;
+        java.lang.String $r1;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMReference;
+
+        $r1 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.lang.String id>;
+
+        return $r1;
+    }
+
+    public java.lang.String getURI()
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMReference r0;
+        java.lang.String $r1;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMReference;
+
+        $r1 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.lang.String uri>;
+
+        return $r1;
+    }
+
+    public java.lang.String getType()
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMReference r0;
+        java.lang.String $r1;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMReference;
+
+        $r1 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.lang.String type>;
+
+        return $r1;
+    }
+
+    public java.util.List getTransforms()
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMReference r0;
+        java.util.List $r1, $r2;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMReference;
+
+        $r1 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.util.List allTransforms>;
+
+        $r2 = staticinvoke <java.util.Collections: java.util.List unmodifiableList(java.util.List)>($r1);
+
+        return $r2;
+    }
+
+    public byte[] getDigestValue()
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMReference r0;
+        byte[] $r1, $r2, $r4;
+        java.lang.Object $r3;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMReference;
+
+        $r1 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: byte[] digestValue>;
+
+        if $r1 != null goto label1;
+
+        $r4 = null;
+
+        goto label2;
+
+     label1:
+        $r2 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: byte[] digestValue>;
+
+        $r3 = virtualinvoke $r2.<java.lang.Object: java.lang.Object clone()>();
+
+        $r4 = (byte[]) $r3;
+
+     label2:
+        return $r4;
+    }
+
+    public byte[] getCalculatedDigestValue()
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMReference r0;
+        byte[] $r1, $r2, $r4;
+        java.lang.Object $r3;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMReference;
+
+        $r1 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: byte[] calcDigestValue>;
+
+        if $r1 != null goto label1;
+
+        $r4 = null;
+
+        goto label2;
+
+     label1:
+        $r2 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: byte[] calcDigestValue>;
+
+        $r3 = virtualinvoke $r2.<java.lang.Object: java.lang.Object clone()>();
+
+        $r4 = (byte[]) $r3;
+
+     label2:
+        return $r4;
+    }
+
+    public void marshal(org.apache.jcp.xml.dsig.internal.dom.XmlWriter, java.lang.String, javax.xml.crypto.XMLCryptoContext) throws javax.xml.crypto.MarshalException
+    {
+        org.slf4j.Logger $r0, $r15;
+        org.apache.jcp.xml.dsig.internal.dom.XmlWriter r1;
+        java.lang.String r2, $r8, $r9, $r11, $r19, varReplacer405, varReplacer406, varReplacer407, varReplacer408, varReplacer409, varReplacer410, varReplacer411, varReplacer412, varReplacer413, varReplacer414, varReplacer415, varReplacer416, varReplacer417, varReplacer418, varReplacer419, varReplacer420, varReplacer421;
+        javax.xml.crypto.XMLStructure r3;
+        org.apache.jcp.xml.dsig.internal.dom.DOMReference r4;
+        javax.xml.crypto.dom.DOMStructure $r5;
+        org.w3c.dom.Node $r6;
+        org.w3c.dom.Element $r7;
+        org.w3c.dom.Attr $r10;
+        java.util.List $r13, $r20;
+        boolean $z0, $z1;
+        javax.xml.crypto.dsig.DigestMethod $r14;
+        byte[] $r16, $r18;
+        java.util.Base64$Encoder $r17;
+        java.util.Iterator r21;
+        java.lang.Object $r22;
+        javax.xml.crypto.dsig.Transform r23;
+        javax.xml.crypto.XMLCryptoContext r24;
+
+        nop;
+
+        r4 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMReference;
+
+        r1 := @parameter0: org.apache.jcp.xml.dsig.internal.dom.XmlWriter;
+
+        r2 := @parameter1: java.lang.String;
+
+        r24 := @parameter2: javax.xml.crypto.XMLCryptoContext;
+
+        $r0 = <org.apache.jcp.xml.dsig.internal.dom.DOMReference: org.slf4j.Logger LOG>;
+
+        varReplacer421 = "Marshalling Reference";
+
+        interfaceinvoke $r0.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer421);
+
+        varReplacer407 = "Reference";
+
+        varReplacer408 = "http://www.w3.org/2000/09/xmldsig#";
+
+        interfaceinvoke r1.<org.apache.jcp.xml.dsig.internal.dom.XmlWriter: void writeStartElement(java.lang.String,java.lang.String,java.lang.String)>(r2, varReplacer407, varReplacer408);
+
+        r3 = interfaceinvoke r1.<org.apache.jcp.xml.dsig.internal.dom.XmlWriter: javax.xml.crypto.XMLStructure getCurrentNodeAsStructure()>();
+
+        $r5 = (javax.xml.crypto.dom.DOMStructure) r3;
+
+        $r6 = virtualinvoke $r5.<javax.xml.crypto.dom.DOMStructure: org.w3c.dom.Node getNode()>();
+
+        $r7 = (org.w3c.dom.Element) $r6;
+
+        r4.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: org.w3c.dom.Element refElem> = $r7;
+
+        $r8 = r4.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.lang.String id>;
+
+        varReplacer414 = "";
+
+        varReplacer415 = "";
+
+        varReplacer416 = "Id";
+
+        interfaceinvoke r1.<org.apache.jcp.xml.dsig.internal.dom.XmlWriter: void writeIdAttribute(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>(varReplacer414, varReplacer414, varReplacer416, $r8);
+
+        $r9 = r4.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.lang.String uri>;
+
+        varReplacer417 = "";
+
+        varReplacer418 = "";
+
+        varReplacer419 = "URI";
+
+        $r10 = interfaceinvoke r1.<org.apache.jcp.xml.dsig.internal.dom.XmlWriter: org.w3c.dom.Attr writeAttribute(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>(varReplacer417, varReplacer417, varReplacer419, $r9);
+
+        r4.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: org.w3c.dom.Attr here> = $r10;
+
+        $r11 = r4.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.lang.String type>;
+
+        varReplacer409 = "";
+
+        varReplacer410 = "";
+
+        varReplacer411 = "Type";
+
+        interfaceinvoke r1.<org.apache.jcp.xml.dsig.internal.dom.XmlWriter: org.w3c.dom.Attr writeAttribute(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>(varReplacer409, varReplacer409, varReplacer411, $r11);
+
+        $r13 = r4.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.util.List allTransforms>;
+
+        $z0 = interfaceinvoke $r13.<java.util.List: boolean isEmpty()>();
+
+        if $z0 != 0 goto label3;
+
+        varReplacer412 = "Transforms";
+
+        varReplacer413 = "http://www.w3.org/2000/09/xmldsig#";
+
+        interfaceinvoke r1.<org.apache.jcp.xml.dsig.internal.dom.XmlWriter: void writeStartElement(java.lang.String,java.lang.String,java.lang.String)>(r2, varReplacer412, varReplacer413);
+
+        $r20 = r4.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.util.List allTransforms>;
+
+        r21 = interfaceinvoke $r20.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $z1 = interfaceinvoke r21.<java.util.Iterator: boolean hasNext()>();
+
+        if $z1 == 0 goto label2;
+
+        $r22 = interfaceinvoke r21.<java.util.Iterator: java.lang.Object next()>();
+
+        r23 = (javax.xml.crypto.dsig.Transform) $r22;
+
+        interfaceinvoke r1.<org.apache.jcp.xml.dsig.internal.dom.XmlWriter: void marshalStructure(javax.xml.crypto.XMLStructure,java.lang.String,javax.xml.crypto.XMLCryptoContext)>(r23, r2, r24);
+
+        goto label1;
+
+     label2:
+        interfaceinvoke r1.<org.apache.jcp.xml.dsig.internal.dom.XmlWriter: void writeEndElement()>();
+
+     label3:
+        $r14 = r4.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: javax.xml.crypto.dsig.DigestMethod digestMethod>;
+
+        staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMDigestMethod: void marshal(org.apache.jcp.xml.dsig.internal.dom.XmlWriter,javax.xml.crypto.dsig.DigestMethod,java.lang.String)>(r1, $r14, r2);
+
+        $r15 = <org.apache.jcp.xml.dsig.internal.dom.DOMReference: org.slf4j.Logger LOG>;
+
+        varReplacer420 = "Adding digestValueElem";
+
+        interfaceinvoke $r15.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer420);
+
+        varReplacer405 = "DigestValue";
+
+        varReplacer406 = "http://www.w3.org/2000/09/xmldsig#";
+
+        interfaceinvoke r1.<org.apache.jcp.xml.dsig.internal.dom.XmlWriter: void writeStartElement(java.lang.String,java.lang.String,java.lang.String)>(r2, varReplacer405, varReplacer406);
+
+        $r16 = r4.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: byte[] digestValue>;
+
+        if $r16 == null goto label4;
+
+        $r17 = staticinvoke <java.util.Base64: java.util.Base64$Encoder getMimeEncoder()>();
+
+        $r18 = r4.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: byte[] digestValue>;
+
+        $r19 = virtualinvoke $r17.<java.util.Base64$Encoder: java.lang.String encodeToString(byte[])>($r18);
+
+        interfaceinvoke r1.<org.apache.jcp.xml.dsig.internal.dom.XmlWriter: void writeCharacters(java.lang.String)>($r19);
+
+     label4:
+        interfaceinvoke r1.<org.apache.jcp.xml.dsig.internal.dom.XmlWriter: void writeEndElement()>();
+
+        interfaceinvoke r1.<org.apache.jcp.xml.dsig.internal.dom.XmlWriter: void writeEndElement()>();
+
+        return;
+    }
+
+    public void digest(javax.xml.crypto.dsig.XMLSignContext) throws javax.xml.crypto.dsig.XMLSignatureException
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMReference r0;
+        javax.xml.crypto.Data $r1, r16;
+        javax.xml.crypto.dsig.XMLSignContext r2;
+        byte[] $r3, $r5;
+        java.util.Base64$Encoder $r4;
+        java.lang.String r6, $r7, varReplacer423, varReplacer424, varReplacer425;
+        org.slf4j.Logger $r8, $r14;
+        org.w3c.dom.Element $r9, r10, $r11;
+        org.w3c.dom.Document $r12;
+        org.w3c.dom.Text $r13;
+        javax.xml.crypto.dsig.XMLSignatureException $r15;
+        int varReplacer422;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMReference;
+
+        r2 := @parameter0: javax.xml.crypto.dsig.XMLSignContext;
+
+        $r1 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: javax.xml.crypto.Data appliedTransformData>;
+
+        if $r1 != null goto label1;
+
+        r16 = specialinvoke r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: javax.xml.crypto.Data dereference(javax.xml.crypto.XMLCryptoContext)>(r2);
+
+        goto label2;
+
+     label1:
+        r16 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: javax.xml.crypto.Data appliedTransformData>;
+
+     label2:
+        $r3 = specialinvoke r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: byte[] transform(javax.xml.crypto.Data,javax.xml.crypto.XMLCryptoContext)>(r16, r2);
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: byte[] digestValue> = $r3;
+
+        $r4 = staticinvoke <java.util.Base64: java.util.Base64$Encoder getMimeEncoder()>();
+
+        $r5 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: byte[] digestValue>;
+
+        r6 = virtualinvoke $r4.<java.util.Base64$Encoder: java.lang.String encodeToString(byte[])>($r5);
+
+        $r8 = <org.apache.jcp.xml.dsig.internal.dom.DOMReference: org.slf4j.Logger LOG>;
+
+        $r7 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.lang.String uri>;
+
+        varReplacer423 = "Reference object uri = {}";
+
+        interfaceinvoke $r8.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object)>(varReplacer423, $r7);
+
+        $r9 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: org.w3c.dom.Element refElem>;
+
+        r10 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMUtils: org.w3c.dom.Element getLastChildElement(org.w3c.dom.Node)>($r9);
+
+        if r10 != null goto label3;
+
+        $r15 = new javax.xml.crypto.dsig.XMLSignatureException;
+
+        varReplacer425 = "DigestValue element expected";
+
+        specialinvoke $r15.<javax.xml.crypto.dsig.XMLSignatureException: void <init>(java.lang.String)>(varReplacer425);
+
+        throw $r15;
+
+     label3:
+        staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMUtils: void removeAllChildren(org.w3c.dom.Node)>(r10);
+
+        $r11 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: org.w3c.dom.Element refElem>;
+
+        $r12 = interfaceinvoke $r11.<org.w3c.dom.Element: org.w3c.dom.Document getOwnerDocument()>();
+
+        $r13 = interfaceinvoke $r12.<org.w3c.dom.Document: org.w3c.dom.Text createTextNode(java.lang.String)>(r6);
+
+        interfaceinvoke r10.<org.w3c.dom.Element: org.w3c.dom.Node appendChild(org.w3c.dom.Node)>($r13);
+
+        varReplacer422 = 1;
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: boolean digested> = varReplacer422;
+
+        $r14 = <org.apache.jcp.xml.dsig.internal.dom.DOMReference: org.slf4j.Logger LOG>;
+
+        varReplacer424 = "Reference digesting completed";
+
+        interfaceinvoke $r14.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer424);
+
+        return;
+    }
+
+    public boolean validate(javax.xml.crypto.dsig.XMLValidateContext) throws javax.xml.crypto.dsig.XMLSignatureException
+    {
+        javax.xml.crypto.dsig.XMLValidateContext r0;
+        org.apache.jcp.xml.dsig.internal.dom.DOMReference r1;
+        boolean $z0, $z1, $z2, $z3, $z4;
+        javax.xml.crypto.Data r2;
+        byte[] $r3, $r5, $r6, $r11, $r19;
+        org.slf4j.Logger $r4, $r8, $r16;
+        java.lang.StringBuilder $r7, $r9, $r13, $r15, $r17, $r21;
+        java.util.Base64$Encoder $r10, $r18;
+        java.lang.String $r12, $r14, $r20, $r22, varReplacer427, varReplacer428, varReplacer429;
+        java.lang.NullPointerException $r23;
+        int varReplacer426;
+
+        nop;
+
+        r1 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMReference;
+
+        r0 := @parameter0: javax.xml.crypto.dsig.XMLValidateContext;
+
+        if r0 != null goto label1;
+
+        $r23 = new java.lang.NullPointerException;
+
+        varReplacer429 = "validateContext cannot be null";
+
+        specialinvoke $r23.<java.lang.NullPointerException: void <init>(java.lang.String)>(varReplacer429);
+
+        throw $r23;
+
+     label1:
+        $z0 = r1.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: boolean validated>;
+
+        if $z0 == 0 goto label2;
+
+        $z4 = r1.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: boolean validationStatus>;
+
+        return $z4;
+
+     label2:
+        r2 = specialinvoke r1.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: javax.xml.crypto.Data dereference(javax.xml.crypto.XMLCryptoContext)>(r0);
+
+        $r3 = specialinvoke r1.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: byte[] transform(javax.xml.crypto.Data,javax.xml.crypto.XMLCryptoContext)>(r2, r0);
+
+        r1.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: byte[] calcDigestValue> = $r3;
+
+        $r4 = <org.apache.jcp.xml.dsig.internal.dom.DOMReference: org.slf4j.Logger LOG>;
+
+        $z1 = interfaceinvoke $r4.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z1 == 0 goto label3;
+
+        $r8 = <org.apache.jcp.xml.dsig.internal.dom.DOMReference: org.slf4j.Logger LOG>;
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer427 = "Expected digest: ";
+
+        $r9 = virtualinvoke $r7.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer427);
+
+        $r10 = staticinvoke <java.util.Base64: java.util.Base64$Encoder getMimeEncoder()>();
+
+        $r11 = r1.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: byte[] digestValue>;
+
+        $r12 = virtualinvoke $r10.<java.util.Base64$Encoder: java.lang.String encodeToString(byte[])>($r11);
+
+        $r13 = virtualinvoke $r9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r12);
+
+        $r14 = virtualinvoke $r13.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r8.<org.slf4j.Logger: void debug(java.lang.String)>($r14);
+
+        $r16 = <org.apache.jcp.xml.dsig.internal.dom.DOMReference: org.slf4j.Logger LOG>;
+
+        $r15 = new java.lang.StringBuilder;
+
+        specialinvoke $r15.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer428 = "Actual digest: ";
+
+        $r17 = virtualinvoke $r15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer428);
+
+        $r18 = staticinvoke <java.util.Base64: java.util.Base64$Encoder getMimeEncoder()>();
+
+        $r19 = r1.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: byte[] calcDigestValue>;
+
+        $r20 = virtualinvoke $r18.<java.util.Base64$Encoder: java.lang.String encodeToString(byte[])>($r19);
+
+        $r21 = virtualinvoke $r17.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r20);
+
+        $r22 = virtualinvoke $r21.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r16.<org.slf4j.Logger: void debug(java.lang.String)>($r22);
+
+     label3:
+        $r6 = r1.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: byte[] digestValue>;
+
+        $r5 = r1.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: byte[] calcDigestValue>;
+
+        $z2 = staticinvoke <java.util.Arrays: boolean equals(byte[],byte[])>($r6, $r5);
+
+        r1.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: boolean validationStatus> = $z2;
+
+        varReplacer426 = 1;
+
+        r1.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: boolean validated> = varReplacer426;
+
+        $z3 = r1.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: boolean validationStatus>;
+
+        return $z3;
+    }
+
+    public javax.xml.crypto.Data getDereferencedData()
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMReference r0;
+        javax.xml.crypto.Data $r1;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMReference;
+
+        $r1 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: javax.xml.crypto.Data derefData>;
+
+        return $r1;
+    }
+
+    public java.io.InputStream getDigestInputStream()
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMReference r0;
+        java.io.InputStream $r1;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMReference;
+
+        $r1 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.io.InputStream dis>;
+
+        return $r1;
+    }
+
+    private javax.xml.crypto.Data dereference(javax.xml.crypto.XMLCryptoContext) throws javax.xml.crypto.dsig.XMLSignatureException
+    {
+        javax.xml.crypto.XMLCryptoContext r0;
+        org.apache.jcp.xml.dsig.internal.dom.DOMReference r1;
+        org.slf4j.Logger $r2, $r5;
+        java.lang.Class $r3, $r6;
+        java.lang.String $r4, $r7, varReplacer430, varReplacer431;
+        java.lang.Throwable $r8, r9;
+        javax.xml.crypto.dsig.XMLSignatureException $r10;
+        javax.xml.crypto.URIDereferencer r11;
+        javax.xml.crypto.Data r12;
+
+        nop;
+
+        r1 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMReference;
+
+        r0 := @parameter0: javax.xml.crypto.XMLCryptoContext;
+
+        r11 = interfaceinvoke r0.<javax.xml.crypto.XMLCryptoContext: javax.xml.crypto.URIDereferencer getURIDereferencer()>();
+
+        if r11 != null goto label1;
+
+        r11 = <org.apache.jcp.xml.dsig.internal.dom.DOMURIDereferencer: javax.xml.crypto.URIDereferencer INSTANCE>;
+
+     label1:
+        r12 = interfaceinvoke r11.<javax.xml.crypto.URIDereferencer: javax.xml.crypto.Data dereference(javax.xml.crypto.URIReference,javax.xml.crypto.XMLCryptoContext)>(r1, r0);
+
+        $r2 = <org.apache.jcp.xml.dsig.internal.dom.DOMReference: org.slf4j.Logger LOG>;
+
+        $r3 = virtualinvoke r11.<java.lang.Object: java.lang.Class getClass()>();
+
+        $r4 = virtualinvoke $r3.<java.lang.Class: java.lang.String getName()>();
+
+        varReplacer431 = "URIDereferencer class name: {}";
+
+        interfaceinvoke $r2.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object)>(varReplacer431, $r4);
+
+        $r5 = <org.apache.jcp.xml.dsig.internal.dom.DOMReference: org.slf4j.Logger LOG>;
+
+        $r6 = virtualinvoke r12.<java.lang.Object: java.lang.Class getClass()>();
+
+        $r7 = virtualinvoke $r6.<java.lang.Class: java.lang.String getName()>();
+
+        varReplacer430 = "Data class name: {}";
+
+        interfaceinvoke $r5.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object)>(varReplacer430, $r7);
+
+     label2:
+        goto label4;
+
+     label3:
+        $r8 := @caughtexception;
+
+        r9 = $r8;
+
+        $r10 = new javax.xml.crypto.dsig.XMLSignatureException;
+
+        specialinvoke $r10.<javax.xml.crypto.dsig.XMLSignatureException: void <init>(java.lang.Throwable)>(r9);
+
+        throw $r10;
+
+     label4:
+        return r12;
+
+        catch javax.xml.crypto.URIReferenceException from label1 to label2 with label3;
+    }
+
+    private byte[] transform(javax.xml.crypto.Data, javax.xml.crypto.XMLCryptoContext) throws javax.xml.crypto.dsig.XMLSignatureException
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMReference r0;
+        java.security.MessageDigest $r1, $r2, $r7, $r35, $r39;
+        javax.xml.crypto.XMLCryptoContext r3;
+        java.lang.Object $r4, $r30, $r32;
+        java.lang.Boolean r5, r76;
+        org.apache.jcp.xml.dsig.internal.DigesterOutputStream $r6, $r34, r68;
+        javax.xml.crypto.Data r8, $r33, r69, r79;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, z8, $z9, $z10, z11, $z12, $z13;
+        java.io.InputStream $r9, $r28, $r82;
+        javax.xml.crypto.dsig.XMLSignatureException $r10, $r42, $r46, $r48, $r50, $r52, $r54, $r61, $r66;
+        java.security.Provider $r11, $r12, $r13, $r14;
+        java.lang.String r15, $r38, r75, varReplacer432, varReplacer433, varReplacer434, varReplacer435, varReplacer436, varReplacer439, varReplacer440, varReplacer441, varReplacer442, varReplacer443, varReplacer444;
+        org.w3c.dom.Element $r16, $r21, $r23, $r24, $r25, r87;
+        org.apache.jcp.xml.dsig.internal.dom.XmlWriterToTree $r17, r19;
+        java.util.List $r18, $r20, $r31, $r73, $r86;
+        org.w3c.dom.Document $r22;
+        org.apache.xml.security.signature.XMLSignatureInput $r26, r77, $r80;
+        javax.xml.crypto.OctetStreamData $r27, $r81;
+        org.apache.jcp.xml.dsig.internal.dom.ApacheData $r29;
+        int $i0, i1, i2, varReplacer437, varReplacer438;
+        javax.xml.crypto.dsig.DigestMethod $r36;
+        org.apache.jcp.xml.dsig.internal.dom.DOMDigestMethod $r37;
+        java.lang.Throwable $r40, r41, $r43, r44, $r47, $r49, $r51, $r53, $r55, r56, r57, $r58, $r59, $r60, $r62, $r63, $r64, $r65, r67, r72, r89, r90, r91, r92, r93, r94, r95;
+        org.apache.xml.security.c14n.CanonicalizationException $r45, r96;
+        org.apache.xml.security.utils.UnsyncBufferedOutputStream $r70, r71;
+        org.apache.jcp.xml.dsig.internal.dom.DOMTransform r74, $r84, r85;
+        javax.xml.crypto.dsig.TransformService r78, r83;
+        byte[] r88;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMReference;
+
+        r8 := @parameter0: javax.xml.crypto.Data;
+
+        r3 := @parameter1: javax.xml.crypto.XMLCryptoContext;
+
+        $r1 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.security.MessageDigest md>;
+
+        if $r1 != null goto label04;
+
+     label01:
+        $r36 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: javax.xml.crypto.dsig.DigestMethod digestMethod>;
+
+        $r37 = (org.apache.jcp.xml.dsig.internal.dom.DOMDigestMethod) $r36;
+
+        $r38 = virtualinvoke $r37.<org.apache.jcp.xml.dsig.internal.dom.DOMDigestMethod: java.lang.String getMessageDigestAlgorithm()>();
+
+        $r39 = staticinvoke <java.security.MessageDigest: java.security.MessageDigest getInstance(java.lang.String)>($r38);
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.security.MessageDigest md> = $r39;
+
+     label02:
+        goto label04;
+
+     label03:
+        $r65 := @caughtexception;
+
+        r67 = $r65;
+
+        $r66 = new javax.xml.crypto.dsig.XMLSignatureException;
+
+        specialinvoke $r66.<javax.xml.crypto.dsig.XMLSignatureException: void <init>(java.lang.Throwable)>(r67);
+
+        throw $r66;
+
+     label04:
+        $r2 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.security.MessageDigest md>;
+
+        virtualinvoke $r2.<java.security.MessageDigest: void reset()>();
+
+        varReplacer439 = "javax.xml.crypto.dsig.cacheReference";
+
+        $r4 = interfaceinvoke r3.<javax.xml.crypto.XMLCryptoContext: java.lang.Object getProperty(java.lang.String)>(varReplacer439);
+
+        r5 = (java.lang.Boolean) $r4;
+
+        if r5 == null goto label05;
+
+        $z7 = virtualinvoke r5.<java.lang.Boolean: boolean booleanValue()>();
+
+        if $z7 == 0 goto label05;
+
+        $r33 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMReference: javax.xml.crypto.Data copyDerefData(javax.xml.crypto.Data)>(r8);
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: javax.xml.crypto.Data derefData> = $r33;
+
+        $r34 = new org.apache.jcp.xml.dsig.internal.DigesterOutputStream;
+
+        $r35 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.security.MessageDigest md>;
+
+        varReplacer438 = 1;
+
+        specialinvoke $r34.<org.apache.jcp.xml.dsig.internal.DigesterOutputStream: void <init>(java.security.MessageDigest,boolean)>($r35, varReplacer438);
+
+        r68 = $r34;
+
+        goto label06;
+
+     label05:
+        $r6 = new org.apache.jcp.xml.dsig.internal.DigesterOutputStream;
+
+        $r7 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.security.MessageDigest md>;
+
+        specialinvoke $r6.<org.apache.jcp.xml.dsig.internal.DigesterOutputStream: void <init>(java.security.MessageDigest)>($r7);
+
+        r68 = $r6;
+
+     label06:
+        r69 = r8;
+
+     label07:
+        $r70 = new org.apache.xml.security.utils.UnsyncBufferedOutputStream;
+
+        specialinvoke $r70.<org.apache.xml.security.utils.UnsyncBufferedOutputStream: void <init>(java.io.OutputStream)>(r68);
+
+        r71 = $r70;
+
+        r72 = null;
+
+     label08:
+        i1 = 0;
+
+        $r73 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.util.List transforms>;
+
+        i2 = interfaceinvoke $r73.<java.util.List: int size()>();
+
+     label09:
+        if i1 >= i2 goto label12;
+
+        $r31 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.util.List transforms>;
+
+        $r32 = interfaceinvoke $r31.<java.util.List: java.lang.Object get(int)>(i1);
+
+        r74 = (org.apache.jcp.xml.dsig.internal.dom.DOMTransform) $r32;
+
+        $i0 = i2 - 1;
+
+        if i1 >= $i0 goto label10;
+
+        r69 = virtualinvoke r74.<org.apache.jcp.xml.dsig.internal.dom.DOMTransform: javax.xml.crypto.Data transform(javax.xml.crypto.Data,javax.xml.crypto.XMLCryptoContext)>(r69, r3);
+
+        goto label11;
+
+     label10:
+        r69 = virtualinvoke r74.<org.apache.jcp.xml.dsig.internal.dom.DOMTransform: javax.xml.crypto.Data transform(javax.xml.crypto.Data,javax.xml.crypto.XMLCryptoContext,java.io.OutputStream)>(r69, r3, r71);
+
+     label11:
+        i1 = i1 + 1;
+
+        goto label09;
+
+     label12:
+        if r69 == null goto label33;
+
+        z8 = <org.apache.jcp.xml.dsig.internal.dom.DOMReference: boolean useC14N11>;
+
+        r75 = "http://www.w3.org/TR/2001/REC-xml-c14n-20010315";
+
+        $z1 = r3 instanceof javax.xml.crypto.dsig.XMLSignContext;
+
+        if $z1 == 0 goto label17;
+
+        if z8 != 0 goto label16;
+
+        varReplacer432 = "org.apache.xml.security.useC14N11";
+
+        $r30 = interfaceinvoke r3.<javax.xml.crypto.XMLCryptoContext: java.lang.Object getProperty(java.lang.String)>(varReplacer432);
+
+        r76 = (java.lang.Boolean) $r30;
+
+        if r76 == null goto label13;
+
+        $z6 = virtualinvoke r76.<java.lang.Boolean: boolean booleanValue()>();
+
+        if $z6 == 0 goto label13;
+
+        $z9 = 1;
+
+        goto label14;
+
+     label13:
+        $z9 = 0;
+
+     label14:
+        z8 = $z9;
+
+        if z8 == 0 goto label15;
+
+        r75 = "http://www.w3.org/2006/12/xml-c14n11";
+
+     label15:
+        goto label17;
+
+     label16:
+        r75 = "http://www.w3.org/2006/12/xml-c14n11";
+
+     label17:
+        $z10 = r69 instanceof org.apache.jcp.xml.dsig.internal.dom.ApacheData;
+
+        if $z10 == 0 goto label18;
+
+        $r29 = (org.apache.jcp.xml.dsig.internal.dom.ApacheData) r69;
+
+        r77 = interfaceinvoke $r29.<org.apache.jcp.xml.dsig.internal.dom.ApacheData: org.apache.xml.security.signature.XMLSignatureInput getXMLSignatureInput()>();
+
+        goto label25;
+
+     label18:
+        $z2 = r69 instanceof javax.xml.crypto.OctetStreamData;
+
+        if $z2 == 0 goto label19;
+
+        $r26 = new org.apache.xml.security.signature.XMLSignatureInput;
+
+        $r27 = (javax.xml.crypto.OctetStreamData) r69;
+
+        $r28 = virtualinvoke $r27.<javax.xml.crypto.OctetStreamData: java.io.InputStream getOctetStream()>();
+
+        specialinvoke $r26.<org.apache.xml.security.signature.XMLSignatureInput: void <init>(java.io.InputStream)>($r28);
+
+        r77 = $r26;
+
+        goto label25;
+
+     label19:
+        $z3 = r69 instanceof javax.xml.crypto.NodeSetData;
+
+        if $z3 == 0 goto label24;
+
+        $r11 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.security.Provider provider>;
+
+        if $r11 != null goto label20;
+
+        varReplacer435 = "DOM";
+
+        r78 = staticinvoke <javax.xml.crypto.dsig.TransformService: javax.xml.crypto.dsig.TransformService getInstance(java.lang.String,java.lang.String)>(r75, varReplacer435);
+
+        goto label23;
+
+     label20:
+        $r12 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.security.Provider provider>;
+
+        varReplacer433 = "DOM";
+
+        r78 = staticinvoke <javax.xml.crypto.dsig.TransformService: javax.xml.crypto.dsig.TransformService getInstance(java.lang.String,java.lang.String,java.security.Provider)>(r75, varReplacer433, $r12);
+
+     label21:
+        goto label23;
+
+     label22:
+        $r64 := @caughtexception;
+
+        varReplacer442 = "DOM";
+
+        r78 = staticinvoke <javax.xml.crypto.dsig.TransformService: javax.xml.crypto.dsig.TransformService getInstance(java.lang.String,java.lang.String)>(r75, varReplacer442);
+
+     label23:
+        r79 = virtualinvoke r78.<javax.xml.crypto.dsig.TransformService: javax.xml.crypto.Data transform(javax.xml.crypto.Data,javax.xml.crypto.XMLCryptoContext)>(r69, r3);
+
+        $r80 = new org.apache.xml.security.signature.XMLSignatureInput;
+
+        $r81 = (javax.xml.crypto.OctetStreamData) r79;
+
+        $r82 = virtualinvoke $r81.<javax.xml.crypto.OctetStreamData: java.io.InputStream getOctetStream()>();
+
+        specialinvoke $r80.<org.apache.xml.security.signature.XMLSignatureInput: void <init>(java.io.InputStream)>($r82);
+
+        r77 = $r80;
+
+        goto label25;
+
+     label24:
+        $r10 = new javax.xml.crypto.dsig.XMLSignatureException;
+
+        varReplacer436 = "unrecognized Data type";
+
+        specialinvoke $r10.<javax.xml.crypto.dsig.XMLSignatureException: void <init>(java.lang.String)>(varReplacer436);
+
+        throw $r10;
+
+     label25:
+        z11 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.Utils: boolean secureValidation(javax.xml.crypto.XMLCryptoContext)>(r3);
+
+        virtualinvoke r77.<org.apache.xml.security.signature.XMLSignatureInput: void setSecureValidation(boolean)>(z11);
+
+        $z12 = r3 instanceof javax.xml.crypto.dsig.XMLSignContext;
+
+        if $z12 == 0 goto label32;
+
+        if z8 == 0 goto label32;
+
+        $z4 = virtualinvoke r77.<org.apache.xml.security.signature.XMLSignatureInput: boolean isOctetStream()>();
+
+        if $z4 != 0 goto label32;
+
+        $z5 = virtualinvoke r77.<org.apache.xml.security.signature.XMLSignatureInput: boolean isOutputStreamSet()>();
+
+        if $z5 != 0 goto label32;
+
+        $r13 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.security.Provider provider>;
+
+        if $r13 != null goto label26;
+
+        varReplacer440 = "DOM";
+
+        r83 = staticinvoke <javax.xml.crypto.dsig.TransformService: javax.xml.crypto.dsig.TransformService getInstance(java.lang.String,java.lang.String)>(r75, varReplacer440);
+
+        goto label29;
+
+     label26:
+        $r14 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.security.Provider provider>;
+
+        varReplacer441 = "DOM";
+
+        r83 = staticinvoke <javax.xml.crypto.dsig.TransformService: javax.xml.crypto.dsig.TransformService getInstance(java.lang.String,java.lang.String,java.security.Provider)>(r75, varReplacer441, $r14);
+
+     label27:
+        goto label29;
+
+     label28:
+        $r63 := @caughtexception;
+
+        varReplacer434 = "DOM";
+
+        r83 = staticinvoke <javax.xml.crypto.dsig.TransformService: javax.xml.crypto.dsig.TransformService getInstance(java.lang.String,java.lang.String)>(r75, varReplacer434);
+
+     label29:
+        $r84 = new org.apache.jcp.xml.dsig.internal.dom.DOMTransform;
+
+        specialinvoke $r84.<org.apache.jcp.xml.dsig.internal.dom.DOMTransform: void <init>(javax.xml.crypto.dsig.TransformService)>(r83);
+
+        r85 = $r84;
+
+        r15 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMUtils: java.lang.String getSignaturePrefix(javax.xml.crypto.XMLCryptoContext)>(r3);
+
+        $r86 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.util.List allTransforms>;
+
+        $z13 = interfaceinvoke $r86.<java.util.List: boolean isEmpty()>();
+
+        if $z13 == 0 goto label30;
+
+        $r21 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: org.w3c.dom.Element refElem>;
+
+        $r22 = interfaceinvoke $r21.<org.w3c.dom.Element: org.w3c.dom.Document getOwnerDocument()>();
+
+        varReplacer443 = "Transforms";
+
+        varReplacer444 = "http://www.w3.org/2000/09/xmldsig#";
+
+        r87 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMUtils: org.w3c.dom.Element createElement(org.w3c.dom.Document,java.lang.String,java.lang.String,java.lang.String)>($r22, varReplacer443, varReplacer444, r15);
+
+        $r24 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: org.w3c.dom.Element refElem>;
+
+        $r23 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: org.w3c.dom.Element refElem>;
+
+        $r25 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMUtils: org.w3c.dom.Element getFirstChildElement(org.w3c.dom.Node)>($r23);
+
+        interfaceinvoke $r24.<org.w3c.dom.Element: org.w3c.dom.Node insertBefore(org.w3c.dom.Node,org.w3c.dom.Node)>(r87, $r25);
+
+        goto label31;
+
+     label30:
+        $r16 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: org.w3c.dom.Element refElem>;
+
+        r87 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMUtils: org.w3c.dom.Element getFirstChildElement(org.w3c.dom.Node)>($r16);
+
+     label31:
+        $r17 = new org.apache.jcp.xml.dsig.internal.dom.XmlWriterToTree;
+
+        $r18 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.Marshaller: java.util.List getMarshallers()>();
+
+        specialinvoke $r17.<org.apache.jcp.xml.dsig.internal.dom.XmlWriterToTree: void <init>(java.util.List,org.w3c.dom.Node)>($r18, r87);
+
+        r19 = $r17;
+
+        virtualinvoke r85.<org.apache.jcp.xml.dsig.internal.dom.DOMTransform: void marshal(org.apache.jcp.xml.dsig.internal.dom.XmlWriter,java.lang.String,javax.xml.crypto.XMLCryptoContext)>(r19, r15, r3);
+
+        $r20 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.util.List allTransforms>;
+
+        interfaceinvoke $r20.<java.util.List: boolean add(java.lang.Object)>(r85);
+
+        varReplacer437 = 1;
+
+        virtualinvoke r77.<org.apache.xml.security.signature.XMLSignatureInput: void updateOutputStream(java.io.OutputStream,boolean)>(r71, varReplacer437);
+
+        goto label33;
+
+     label32:
+        virtualinvoke r77.<org.apache.xml.security.signature.XMLSignatureInput: void updateOutputStream(java.io.OutputStream)>(r71);
+
+     label33:
+        virtualinvoke r71.<java.io.OutputStream: void flush()>();
+
+        if r5 == null goto label34;
+
+        $z0 = virtualinvoke r5.<java.lang.Boolean: boolean booleanValue()>();
+
+        if $z0 == 0 goto label34;
+
+        $r9 = virtualinvoke r68.<org.apache.jcp.xml.dsig.internal.DigesterOutputStream: java.io.InputStream getInputStream()>();
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.io.InputStream dis> = $r9;
+
+     label34:
+        r88 = virtualinvoke r68.<org.apache.jcp.xml.dsig.internal.DigesterOutputStream: byte[] getDigestValue()>();
+
+     label35:
+        if null == null goto label39;
+
+     label36:
+        virtualinvoke r71.<java.io.OutputStream: void close()>();
+
+     label37:
+        goto label40;
+
+     label38:
+        $r62 := @caughtexception;
+
+        r89 = $r62;
+
+        virtualinvoke r72.<java.lang.Throwable: void addSuppressed(java.lang.Throwable)>(r89);
+
+        goto label40;
+
+     label39:
+        virtualinvoke r71.<java.io.OutputStream: void close()>();
+
+     label40:
+        if r68 == null goto label44;
+
+     label41:
+        virtualinvoke r68.<org.apache.jcp.xml.dsig.internal.DigesterOutputStream: void close()>();
+
+     label42:
+        goto label44;
+
+     label43:
+        $r60 := @caughtexception;
+
+        r90 = $r60;
+
+        $r61 = new javax.xml.crypto.dsig.XMLSignatureException;
+
+        specialinvoke $r61.<javax.xml.crypto.dsig.XMLSignatureException: void <init>(java.lang.Throwable)>(r90);
+
+        throw $r61;
+
+     label44:
+        return r88;
+
+     label45:
+        $r59 := @caughtexception;
+
+        r91 = $r59;
+
+        r72 = r91;
+
+        throw r91;
+
+     label46:
+        $r58 := @caughtexception;
+
+        r57 = $r58;
+
+     label47:
+        if r72 == null goto label51;
+
+     label48:
+        virtualinvoke r71.<java.io.OutputStream: void close()>();
+
+     label49:
+        goto label52;
+
+     label50:
+        $r55 := @caughtexception;
+
+        r56 = $r55;
+
+        virtualinvoke r72.<java.lang.Throwable: void addSuppressed(java.lang.Throwable)>(r56);
+
+        goto label52;
+
+     label51:
+        virtualinvoke r71.<java.io.OutputStream: void close()>();
+
+     label52:
+        throw r57;
+
+     label53:
+        $r53 := @caughtexception;
+
+        r92 = $r53;
+
+        $r54 = new javax.xml.crypto.dsig.XMLSignatureException;
+
+        specialinvoke $r54.<javax.xml.crypto.dsig.XMLSignatureException: void <init>(java.lang.Throwable)>(r92);
+
+        throw $r54;
+
+     label54:
+        $r51 := @caughtexception;
+
+        r93 = $r51;
+
+        $r52 = new javax.xml.crypto.dsig.XMLSignatureException;
+
+        specialinvoke $r52.<javax.xml.crypto.dsig.XMLSignatureException: void <init>(java.lang.Throwable)>(r93);
+
+        throw $r52;
+
+     label55:
+        $r49 := @caughtexception;
+
+        r94 = $r49;
+
+        $r50 = new javax.xml.crypto.dsig.XMLSignatureException;
+
+        specialinvoke $r50.<javax.xml.crypto.dsig.XMLSignatureException: void <init>(java.lang.Throwable)>(r94);
+
+        throw $r50;
+
+     label56:
+        $r47 := @caughtexception;
+
+        r95 = $r47;
+
+        $r48 = new javax.xml.crypto.dsig.XMLSignatureException;
+
+        specialinvoke $r48.<javax.xml.crypto.dsig.XMLSignatureException: void <init>(java.lang.Throwable)>(r95);
+
+        throw $r48;
+
+     label57:
+        $r45 := @caughtexception;
+
+        r96 = $r45;
+
+        $r46 = new javax.xml.crypto.dsig.XMLSignatureException;
+
+        specialinvoke $r46.<javax.xml.crypto.dsig.XMLSignatureException: void <init>(java.lang.Throwable)>(r96);
+
+        throw $r46;
+
+     label58:
+        $r43 := @caughtexception;
+
+        r44 = $r43;
+
+     label59:
+        if r68 == null goto label63;
+
+     label60:
+        virtualinvoke r68.<org.apache.jcp.xml.dsig.internal.DigesterOutputStream: void close()>();
+
+     label61:
+        goto label63;
+
+     label62:
+        $r40 := @caughtexception;
+
+        r41 = $r40;
+
+        $r42 = new javax.xml.crypto.dsig.XMLSignatureException;
+
+        specialinvoke $r42.<javax.xml.crypto.dsig.XMLSignatureException: void <init>(java.lang.Throwable)>(r41);
+
+        throw $r42;
+
+     label63:
+        throw r44;
+
+        catch java.security.NoSuchAlgorithmException from label01 to label02 with label03;
+        catch java.security.NoSuchAlgorithmException from label20 to label21 with label22;
+        catch java.security.NoSuchAlgorithmException from label26 to label27 with label28;
+        catch java.lang.Throwable from label36 to label37 with label38;
+        catch java.io.IOException from label41 to label42 with label43;
+        catch java.lang.Throwable from label08 to label35 with label45;
+        catch java.lang.Throwable from label48 to label49 with label50;
+        catch java.lang.Throwable from label45 to label47 with label46;
+        catch java.security.NoSuchAlgorithmException from label07 to label40 with label53;
+        catch java.security.NoSuchAlgorithmException from label45 to label53 with label53;
+        catch javax.xml.crypto.dsig.TransformException from label07 to label40 with label54;
+        catch javax.xml.crypto.dsig.TransformException from label45 to label53 with label54;
+        catch javax.xml.crypto.MarshalException from label07 to label40 with label55;
+        catch javax.xml.crypto.MarshalException from label45 to label53 with label55;
+        catch java.io.IOException from label07 to label40 with label56;
+        catch java.io.IOException from label45 to label53 with label56;
+        catch org.apache.xml.security.c14n.CanonicalizationException from label07 to label40 with label57;
+        catch org.apache.xml.security.c14n.CanonicalizationException from label45 to label53 with label57;
+        catch java.lang.Throwable from label07 to label40 with label58;
+        catch java.io.IOException from label60 to label61 with label62;
+        catch java.lang.Throwable from label45 to label59 with label58;
+    }
+
+    public org.w3c.dom.Node getHere()
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMReference r0;
+        org.w3c.dom.Attr $r1;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMReference;
+
+        $r1 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: org.w3c.dom.Attr here>;
+
+        return $r1;
+    }
+
+    public boolean equals(java.lang.Object)
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMReference r0;
+        java.lang.Object r1;
+        boolean $z0, z1, z2, z3, z4, $z5, $z6, $z7, $z8, $z9, $z10;
+        javax.xml.crypto.dsig.Reference r2;
+        java.lang.String $r3, $r4, $r5, $r6, $r7, $r8, $r9, $r12, $r13, $r14, $r15, $r16;
+        java.util.List $r10, $r11;
+        byte[] $r17, $r18;
+        javax.xml.crypto.dsig.DigestMethod $r19, $r20;
+        int varReplacer445, varReplacer446;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMReference;
+
+        r1 := @parameter0: java.lang.Object;
+
+        if r0 != r1 goto label01;
+
+        varReplacer445 = 1;
+
+        return varReplacer445;
+
+     label01:
+        $z0 = r1 instanceof javax.xml.crypto.dsig.Reference;
+
+        if $z0 != 0 goto label02;
+
+        varReplacer446 = 0;
+
+        return varReplacer446;
+
+     label02:
+        r2 = (javax.xml.crypto.dsig.Reference) r1;
+
+        $r3 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.lang.String id>;
+
+        if $r3 != null goto label04;
+
+        $r14 = interfaceinvoke r2.<javax.xml.crypto.dsig.Reference: java.lang.String getId()>();
+
+        if $r14 != null goto label03;
+
+        $z6 = 1;
+
+        goto label05;
+
+     label03:
+        $z6 = 0;
+
+        goto label05;
+
+     label04:
+        $r4 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.lang.String id>;
+
+        $r5 = interfaceinvoke r2.<javax.xml.crypto.dsig.Reference: java.lang.String getId()>();
+
+        $z6 = virtualinvoke $r4.<java.lang.String: boolean equals(java.lang.Object)>($r5);
+
+     label05:
+        z1 = $z6;
+
+        $r15 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.lang.String uri>;
+
+        if $r15 != null goto label07;
+
+        $r13 = interfaceinvoke r2.<javax.xml.crypto.dsig.Reference: java.lang.String getURI()>();
+
+        if $r13 != null goto label06;
+
+        $z7 = 1;
+
+        goto label08;
+
+     label06:
+        $z7 = 0;
+
+        goto label08;
+
+     label07:
+        $r6 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.lang.String uri>;
+
+        $r7 = interfaceinvoke r2.<javax.xml.crypto.dsig.Reference: java.lang.String getURI()>();
+
+        $z7 = virtualinvoke $r6.<java.lang.String: boolean equals(java.lang.Object)>($r7);
+
+     label08:
+        z2 = $z7;
+
+        $r16 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.lang.String type>;
+
+        if $r16 != null goto label10;
+
+        $r12 = interfaceinvoke r2.<javax.xml.crypto.dsig.Reference: java.lang.String getType()>();
+
+        if $r12 != null goto label09;
+
+        $z8 = 1;
+
+        goto label11;
+
+     label09:
+        $z8 = 0;
+
+        goto label11;
+
+     label10:
+        $r8 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.lang.String type>;
+
+        $r9 = interfaceinvoke r2.<javax.xml.crypto.dsig.Reference: java.lang.String getType()>();
+
+        $z8 = virtualinvoke $r8.<java.lang.String: boolean equals(java.lang.Object)>($r9);
+
+     label11:
+        z3 = $z8;
+
+        $r17 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: byte[] digestValue>;
+
+        $r18 = interfaceinvoke r2.<javax.xml.crypto.dsig.Reference: byte[] getDigestValue()>();
+
+        z4 = staticinvoke <java.util.Arrays: boolean equals(byte[],byte[])>($r17, $r18);
+
+        $r19 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: javax.xml.crypto.dsig.DigestMethod digestMethod>;
+
+        $r20 = interfaceinvoke r2.<javax.xml.crypto.dsig.Reference: javax.xml.crypto.dsig.DigestMethod getDigestMethod()>();
+
+        $z9 = virtualinvoke $r19.<java.lang.Object: boolean equals(java.lang.Object)>($r20);
+
+        if $z9 == 0 goto label12;
+
+        if z1 == 0 goto label12;
+
+        if z2 == 0 goto label12;
+
+        if z3 == 0 goto label12;
+
+        $r10 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.util.List allTransforms>;
+
+        $r11 = interfaceinvoke r2.<javax.xml.crypto.dsig.Reference: java.util.List getTransforms()>();
+
+        $z5 = interfaceinvoke $r10.<java.util.List: boolean equals(java.lang.Object)>($r11);
+
+        if $z5 == 0 goto label12;
+
+        if z4 == 0 goto label12;
+
+        $z10 = 1;
+
+        goto label13;
+
+     label12:
+        $z10 = 0;
+
+     label13:
+        return $z10;
+    }
+
+    public int hashCode()
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMReference r0;
+        java.lang.String $r1, $r2, $r3, $r8, $r9, $r10;
+        byte[] $r4, $r7;
+        javax.xml.crypto.dsig.DigestMethod $r5;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, i12, i13, i14;
+        java.util.List $r6;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMReference;
+
+        i12 = 17;
+
+        $r1 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.lang.String id>;
+
+        if $r1 == null goto label1;
+
+        $i10 = 31 * i12;
+
+        $r10 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.lang.String id>;
+
+        $i11 = virtualinvoke $r10.<java.lang.String: int hashCode()>();
+
+        i12 = $i10 + $i11;
+
+     label1:
+        $r2 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.lang.String uri>;
+
+        if $r2 == null goto label2;
+
+        $i8 = 31 * i12;
+
+        $r9 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.lang.String uri>;
+
+        $i9 = virtualinvoke $r9.<java.lang.String: int hashCode()>();
+
+        i12 = $i8 + $i9;
+
+     label2:
+        $r3 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.lang.String type>;
+
+        if $r3 == null goto label3;
+
+        $i6 = 31 * i12;
+
+        $r8 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.lang.String type>;
+
+        $i7 = virtualinvoke $r8.<java.lang.String: int hashCode()>();
+
+        i12 = $i6 + $i7;
+
+     label3:
+        $r4 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: byte[] digestValue>;
+
+        if $r4 == null goto label4;
+
+        $i4 = 31 * i12;
+
+        $r7 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: byte[] digestValue>;
+
+        $i5 = staticinvoke <java.util.Arrays: int hashCode(byte[])>($r7);
+
+        i12 = $i4 + $i5;
+
+     label4:
+        $i0 = 31 * i12;
+
+        $r5 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: javax.xml.crypto.dsig.DigestMethod digestMethod>;
+
+        $i1 = virtualinvoke $r5.<java.lang.Object: int hashCode()>();
+
+        i13 = $i0 + $i1;
+
+        $i2 = 31 * i13;
+
+        $r6 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: java.util.List allTransforms>;
+
+        $i3 = interfaceinvoke $r6.<java.util.List: int hashCode()>();
+
+        i14 = $i2 + $i3;
+
+        return i14;
+    }
+
+    boolean isDigested()
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMReference r0;
+        boolean $z0;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMReference;
+
+        $z0 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMReference: boolean digested>;
+
+        return $z0;
+    }
+
+    private static javax.xml.crypto.Data copyDerefData(javax.xml.crypto.Data)
+    {
+        javax.xml.crypto.Data r0;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5;
+        org.apache.jcp.xml.dsig.internal.dom.ApacheData r1;
+        org.apache.xml.security.signature.XMLSignatureInput r2;
+        javax.xml.crypto.OctetStreamData $r3;
+        java.io.InputStream $r4;
+        java.lang.String $r5, $r6, $r15, $r21, varReplacer449, varReplacer450;
+        org.apache.jcp.xml.dsig.internal.dom.DOMSubTreeData $r7;
+        org.w3c.dom.Node $r8;
+        org.apache.jcp.xml.dsig.internal.dom.DOMReference$1 $r9;
+        java.lang.Throwable $r10, r24;
+        java.lang.StringBuilder $r11, $r13, $r14, $r17, $r19, $r20;
+        org.slf4j.Logger $r12, $r18;
+        java.lang.Exception $r16, r23;
+        java.util.Set r22;
+        null_type varReplacer447, varReplacer448;
+
+        nop;
+
+        r0 := @parameter0: javax.xml.crypto.Data;
+
+        $z0 = r0 instanceof org.apache.jcp.xml.dsig.internal.dom.ApacheData;
+
+        if $z0 == 0 goto label9;
+
+        r1 = (org.apache.jcp.xml.dsig.internal.dom.ApacheData) r0;
+
+        r2 = interfaceinvoke r1.<org.apache.jcp.xml.dsig.internal.dom.ApacheData: org.apache.xml.security.signature.XMLSignatureInput getXMLSignatureInput()>();
+
+        $z1 = virtualinvoke r2.<org.apache.xml.security.signature.XMLSignatureInput: boolean isNodeSet()>();
+
+        if $z1 == 0 goto label4;
+
+     label1:
+        r22 = virtualinvoke r2.<org.apache.xml.security.signature.XMLSignatureInput: java.util.Set getNodeSet()>();
+
+        $r9 = new org.apache.jcp.xml.dsig.internal.dom.DOMReference$1;
+
+        specialinvoke $r9.<org.apache.jcp.xml.dsig.internal.dom.DOMReference$1: void <init>(java.util.Set)>(r22);
+
+     label2:
+        return $r9;
+
+     label3:
+        $r16 := @caughtexception;
+
+        r23 = $r16;
+
+        $r18 = <org.apache.jcp.xml.dsig.internal.dom.DOMReference: org.slf4j.Logger LOG>;
+
+        $r17 = new java.lang.StringBuilder;
+
+        specialinvoke $r17.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer449 = "cannot cache dereferenced data: ";
+
+        $r19 = virtualinvoke $r17.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer449);
+
+        $r20 = virtualinvoke $r19.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(r23);
+
+        $r21 = virtualinvoke $r20.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r18.<org.slf4j.Logger: void warn(java.lang.String)>($r21);
+
+        varReplacer448 = null;
+
+        return varReplacer448;
+
+     label4:
+        $z2 = virtualinvoke r2.<org.apache.xml.security.signature.XMLSignatureInput: boolean isElement()>();
+
+        if $z2 == 0 goto label5;
+
+        $r7 = new org.apache.jcp.xml.dsig.internal.dom.DOMSubTreeData;
+
+        $r8 = virtualinvoke r2.<org.apache.xml.security.signature.XMLSignatureInput: org.w3c.dom.Node getSubNode()>();
+
+        $z5 = virtualinvoke r2.<org.apache.xml.security.signature.XMLSignatureInput: boolean isExcludeComments()>();
+
+        specialinvoke $r7.<org.apache.jcp.xml.dsig.internal.dom.DOMSubTreeData: void <init>(org.w3c.dom.Node,boolean)>($r8, $z5);
+
+        return $r7;
+
+     label5:
+        $z3 = virtualinvoke r2.<org.apache.xml.security.signature.XMLSignatureInput: boolean isOctetStream()>();
+
+        if $z3 != 0 goto label6;
+
+        $z4 = virtualinvoke r2.<org.apache.xml.security.signature.XMLSignatureInput: boolean isByteArray()>();
+
+        if $z4 == 0 goto label9;
+
+     label6:
+        $r3 = new javax.xml.crypto.OctetStreamData;
+
+        $r4 = virtualinvoke r2.<org.apache.xml.security.signature.XMLSignatureInput: java.io.InputStream getOctetStream()>();
+
+        $r5 = virtualinvoke r2.<org.apache.xml.security.signature.XMLSignatureInput: java.lang.String getSourceURI()>();
+
+        $r6 = virtualinvoke r2.<org.apache.xml.security.signature.XMLSignatureInput: java.lang.String getMIMEType()>();
+
+        specialinvoke $r3.<javax.xml.crypto.OctetStreamData: void <init>(java.io.InputStream,java.lang.String,java.lang.String)>($r4, $r5, $r6);
+
+     label7:
+        return $r3;
+
+     label8:
+        $r10 := @caughtexception;
+
+        r24 = $r10;
+
+        $r12 = <org.apache.jcp.xml.dsig.internal.dom.DOMReference: org.slf4j.Logger LOG>;
+
+        $r11 = new java.lang.StringBuilder;
+
+        specialinvoke $r11.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer450 = "cannot cache dereferenced data: ";
+
+        $r13 = virtualinvoke $r11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer450);
+
+        $r14 = virtualinvoke $r13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(r24);
+
+        $r15 = virtualinvoke $r14.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r12.<org.slf4j.Logger: void warn(java.lang.String)>($r15);
+
+        varReplacer447 = null;
+
+        return varReplacer447;
+
+     label9:
+        return r0;
+
+        catch java.lang.Exception from label1 to label2 with label3;
+        catch java.io.IOException from label6 to label7 with label8;
+    }
+
+    public static java.lang.Boolean lambda$static$0()
+    {
+        boolean $z0;
+        java.lang.Boolean $r0;
+        java.lang.String varReplacer451;
+
+        nop;
+
+        varReplacer451 = "com.sun.org.apache.xml.internal.security.useC14N11";
+
+        $z0 = staticinvoke <java.lang.Boolean: boolean getBoolean(java.lang.String)>(varReplacer451);
+
+        $r0 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>($z0);
+
+        return $r0;
+    }
+
+    static void <clinit>()
+    {
+        java.security.PrivilegedAction $r0;
+        java.lang.Object $r1;
+        java.lang.Boolean $r2;
+        boolean $z0;
+        org.slf4j.Logger $r3;
+
+        nop;
+
+        $r0 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMReference$lambda_static_0__1: java.security.PrivilegedAction bootstrap$()>();
+
+        $r1 = staticinvoke <java.security.AccessController: java.lang.Object doPrivileged(java.security.PrivilegedAction)>($r0);
+
+        $r2 = (java.lang.Boolean) $r1;
+
+        $z0 = virtualinvoke $r2.<java.lang.Boolean: boolean booleanValue()>();
+
+        <org.apache.jcp.xml.dsig.internal.dom.DOMReference: boolean useC14N11> = $z0;
+
+        $r3 = staticinvoke <org.slf4j.LoggerFactory: org.slf4j.Logger getLogger(java.lang.Class)>(class "Lorg/apache/jcp/xml/dsig/internal/dom/DOMReference;");
+
+        <org.apache.jcp.xml.dsig.internal.dom.DOMReference: org.slf4j.Logger LOG> = $r3;
+
+        return;
+    }
+}

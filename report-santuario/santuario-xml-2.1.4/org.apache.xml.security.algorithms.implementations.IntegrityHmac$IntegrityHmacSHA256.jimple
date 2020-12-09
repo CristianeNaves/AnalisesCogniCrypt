@@ -1,0 +1,44 @@
+public class org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA256 extends org.apache.xml.security.algorithms.implementations.IntegrityHmac
+{
+
+    public void <init>() throws org.apache.xml.security.signature.XMLSignatureException
+    {
+        org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA256 r0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA256;
+
+        specialinvoke r0.<org.apache.xml.security.algorithms.implementations.IntegrityHmac: void <init>()>();
+
+        return;
+    }
+
+    public java.lang.String engineGetURI()
+    {
+        org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA256 r0;
+        java.lang.String varReplacer1921;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA256;
+
+        varReplacer1921 = "http://www.w3.org/2001/04/xmldsig-more#hmac-sha256";
+
+        return varReplacer1921;
+    }
+
+    int getDigestLength()
+    {
+        org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA256 r0;
+        int varReplacer1922;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacSHA256;
+
+        varReplacer1922 = 256;
+
+        return varReplacer1922;
+    }
+}

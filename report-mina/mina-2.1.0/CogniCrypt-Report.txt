@@ -1,0 +1,54 @@
+Ruleset: 
+	java.security.KeyPair
+	void
+	javax.crypto.CipherInputStream
+	java.security.spec.DSAGenParameterSpec
+	java.security.SecureRandom
+	javax.crypto.CipherOutputStream
+	java.security.KeyStore
+	javax.crypto.spec.GCMParameterSpec
+	java.security.MessageDigest
+	javax.net.ssl.KeyManagerFactory
+	java.security.DigestInputStream
+	javax.xml.crypto.dsig.spec.HMACParameterSpec
+	java.security.Signature
+	java.security.cert.PKIXParameters
+	javax.net.ssl.SSLEngine
+	javax.crypto.spec.PBEKeySpec
+	javax.net.ssl.SSLParameters
+	java.security.spec.RSAKeyGenParameterSpec
+	javax.net.ssl.TrustManagerFactory
+	javax.crypto.spec.DHGenParameterSpec
+	java.security.cert.PKIXBuilderParameters
+	java.security.AlgorithmParameters
+	javax.crypto.spec.PBEParameterSpec
+	java.security.cert.TrustAnchor
+	javax.net.ssl.KeyStoreBuilderParameters
+	javax.crypto.KeyGenerator
+	javax.crypto.spec.DHParameterSpec
+	javax.crypto.SecretKey
+	javax.crypto.Mac
+	javax.crypto.spec.SecretKeySpec
+	javax.net.ssl.SSLContext
+	javax.crypto.SecretKeyFactory
+	java.security.spec.DSAParameterSpec
+	java.security.KeyPairGenerator
+	java.security.DigestOutputStream
+	javax.crypto.spec.IvParameterSpec
+	javax.net.ssl.CertPathTrustManagerParameters
+	java.security.Key
+	javax.crypto.Cipher
+
+Analyzed Objects: 
+	Object:
+		Variable: $r3
+		Type: javax.crypto.spec.DHParameterSpec
+		Statement: specialinvoke $r3.<javax.crypto.spec.DHParameterSpec: void <init>(java.math.BigInteger,java.math.BigInteger)>($r5, $r4)
+		Method: <org.apache.sshd.common.kex.DHG: byte[] getE()>
+		SHA-256: 710c4407057370b57e25c51f288da824757d289852b8a0eb171e6b0689062bb9
+		Secure: true
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 39
+	Number of Objects Analyzed: 1
+No violation of any of the rules found.=====================================================================

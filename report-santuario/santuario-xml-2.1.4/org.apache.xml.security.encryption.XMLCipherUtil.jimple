@@ -1,0 +1,263 @@
+public final class org.apache.xml.security.encryption.XMLCipherUtil extends java.lang.Object
+{
+    private static final org.slf4j.Logger LOG;
+    private static final boolean gcmUseIvParameterSpec;
+
+    public void <init>()
+    {
+        org.apache.xml.security.encryption.XMLCipherUtil r0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipherUtil;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static java.security.spec.AlgorithmParameterSpec constructBlockCipherParameters(java.lang.String, byte[], java.lang.Class)
+    {
+        java.lang.String r0, $r1, $r4, $r5, varReplacer2842;
+        boolean $z0, $z1, $z2;
+        byte[] r2;
+        java.lang.Class r3;
+        org.slf4j.Logger $r6;
+        javax.crypto.spec.IvParameterSpec $r7;
+        java.security.spec.AlgorithmParameterSpec $r8;
+
+        nop;
+
+        r0 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: byte[];
+
+        r3 := @parameter2: java.lang.Class;
+
+        $r1 = "http://www.w3.org/2009/xmlenc11#aes128-gcm";
+
+        $z0 = virtualinvoke $r1.<java.lang.String: boolean equals(java.lang.Object)>(r0);
+
+        if $z0 != 0 goto label1;
+
+        $r4 = "http://www.w3.org/2009/xmlenc11#aes192-gcm";
+
+        $z1 = virtualinvoke $r4.<java.lang.String: boolean equals(java.lang.Object)>(r0);
+
+        if $z1 != 0 goto label1;
+
+        $r5 = "http://www.w3.org/2009/xmlenc11#aes256-gcm";
+
+        $z2 = virtualinvoke $r5.<java.lang.String: boolean equals(java.lang.Object)>(r0);
+
+        if $z2 == 0 goto label2;
+
+     label1:
+        $r8 = staticinvoke <org.apache.xml.security.encryption.XMLCipherUtil: java.security.spec.AlgorithmParameterSpec constructBlockCipherParametersForGCMAlgorithm(java.lang.String,byte[],java.lang.Class)>(r0, r2, r3);
+
+        return $r8;
+
+     label2:
+        $r6 = <org.apache.xml.security.encryption.XMLCipherUtil: org.slf4j.Logger LOG>;
+
+        varReplacer2842 = "Saw non-AES-GCM mode block cipher, returning IvParameterSpec: {}";
+
+        interfaceinvoke $r6.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object)>(varReplacer2842, r0);
+
+        $r7 = new javax.crypto.spec.IvParameterSpec;
+
+        specialinvoke $r7.<javax.crypto.spec.IvParameterSpec: void <init>(byte[])>(r2);
+
+        return $r7;
+    }
+
+    public static java.security.spec.AlgorithmParameterSpec constructBlockCipherParameters(boolean, byte[], java.lang.Class)
+    {
+        boolean z0;
+        org.slf4j.Logger $r0;
+        javax.crypto.spec.IvParameterSpec $r1;
+        byte[] r2;
+        java.lang.Class r3;
+        java.security.spec.AlgorithmParameterSpec $r4;
+        java.lang.String varReplacer2843, varReplacer2844;
+
+        nop;
+
+        z0 := @parameter0: boolean;
+
+        r2 := @parameter1: byte[];
+
+        r3 := @parameter2: java.lang.Class;
+
+        if z0 == 0 goto label1;
+
+        varReplacer2844 = "AES/GCM/NoPadding";
+
+        $r4 = staticinvoke <org.apache.xml.security.encryption.XMLCipherUtil: java.security.spec.AlgorithmParameterSpec constructBlockCipherParametersForGCMAlgorithm(java.lang.String,byte[],java.lang.Class)>(varReplacer2844, r2, r3);
+
+        return $r4;
+
+     label1:
+        $r0 = <org.apache.xml.security.encryption.XMLCipherUtil: org.slf4j.Logger LOG>;
+
+        varReplacer2843 = "Saw non-AES-GCM mode block cipher, returning IvParameterSpec";
+
+        interfaceinvoke $r0.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2843);
+
+        $r1 = new javax.crypto.spec.IvParameterSpec;
+
+        specialinvoke $r1.<javax.crypto.spec.IvParameterSpec: void <init>(byte[])>(r2);
+
+        return $r1;
+    }
+
+    private static java.security.spec.AlgorithmParameterSpec constructBlockCipherParametersForGCMAlgorithm(java.lang.String, byte[], java.lang.Class)
+    {
+        boolean $z0;
+        java.lang.String r0, varReplacer2846, varReplacer2847, varReplacer2848, varReplacer2849, varReplacer2850;
+        org.slf4j.Logger $r1, $r11, $r12, $r15;
+        java.lang.Class r2, $r4, r17;
+        java.lang.Class[] $r3;
+        java.lang.reflect.Constructor $r5;
+        java.lang.Object[] $r6;
+        java.lang.Integer $r7;
+        byte[] r8;
+        java.lang.Object $r9;
+        java.security.spec.AlgorithmParameterSpec r10;
+        javax.crypto.spec.IvParameterSpec $r13, $r16;
+        java.lang.Exception $r14, r18;
+        int varReplacer2845;
+
+        nop;
+
+        r0 := @parameter0: java.lang.String;
+
+        r8 := @parameter1: byte[];
+
+        r2 := @parameter2: java.lang.Class;
+
+        $z0 = <org.apache.xml.security.encryption.XMLCipherUtil: boolean gcmUseIvParameterSpec>;
+
+        if $z0 == 0 goto label1;
+
+        $r12 = <org.apache.xml.security.encryption.XMLCipherUtil: org.slf4j.Logger LOG>;
+
+        varReplacer2848 = "Saw AES-GCM block cipher, using IvParameterSpec due to system property override: {}";
+
+        interfaceinvoke $r12.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object)>(varReplacer2848, r0);
+
+        $r13 = new javax.crypto.spec.IvParameterSpec;
+
+        specialinvoke $r13.<javax.crypto.spec.IvParameterSpec: void <init>(byte[])>(r8);
+
+        return $r13;
+
+     label1:
+        $r1 = <org.apache.xml.security.encryption.XMLCipherUtil: org.slf4j.Logger LOG>;
+
+        varReplacer2847 = "Saw AES-GCM block cipher, attempting to create GCMParameterSpec: {}";
+
+        interfaceinvoke $r1.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object)>(varReplacer2847, r0);
+
+     label2:
+        varReplacer2846 = "javax.crypto.spec.GCMParameterSpec";
+
+        r17 = staticinvoke <org.apache.xml.security.utils.ClassLoaderUtils: java.lang.Class loadClass(java.lang.String,java.lang.Class)>(varReplacer2846, r2);
+
+        $r3 = newarray (java.lang.Class)[2];
+
+        $r4 = <java.lang.Integer: java.lang.Class TYPE>;
+
+        $r3[0] = $r4;
+
+        $r3[1] = class "[B";
+
+        $r5 = virtualinvoke r17.<java.lang.Class: java.lang.reflect.Constructor getConstructor(java.lang.Class[])>($r3);
+
+        $r6 = newarray (java.lang.Object)[2];
+
+        varReplacer2845 = 128;
+
+        $r7 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(varReplacer2845);
+
+        $r6[0] = $r7;
+
+        $r6[1] = r8;
+
+        $r9 = virtualinvoke $r5.<java.lang.reflect.Constructor: java.lang.Object newInstance(java.lang.Object[])>($r6);
+
+        r10 = (java.security.spec.AlgorithmParameterSpec) $r9;
+
+        $r11 = <org.apache.xml.security.encryption.XMLCipherUtil: org.slf4j.Logger LOG>;
+
+        varReplacer2850 = "Successfully created GCMParameterSpec";
+
+        interfaceinvoke $r11.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2850);
+
+     label3:
+        return r10;
+
+     label4:
+        $r14 := @caughtexception;
+
+        r18 = $r14;
+
+        $r15 = <org.apache.xml.security.encryption.XMLCipherUtil: org.slf4j.Logger LOG>;
+
+        varReplacer2849 = "Failed to create GCMParameterSpec, falling back to returning IvParameterSpec";
+
+        interfaceinvoke $r15.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Throwable)>(varReplacer2849, r18);
+
+        $r16 = new javax.crypto.spec.IvParameterSpec;
+
+        specialinvoke $r16.<javax.crypto.spec.IvParameterSpec: void <init>(byte[])>(r8);
+
+        return $r16;
+
+        catch java.lang.Exception from label2 to label3 with label4;
+    }
+
+    public static java.lang.Boolean lambda$static$0()
+    {
+        boolean $z0;
+        java.lang.Boolean $r0;
+        java.lang.String varReplacer2851;
+
+        nop;
+
+        varReplacer2851 = "org.apache.xml.security.cipher.gcm.useIvParameterSpec";
+
+        $z0 = staticinvoke <java.lang.Boolean: boolean getBoolean(java.lang.String)>(varReplacer2851);
+
+        $r0 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>($z0);
+
+        return $r0;
+    }
+
+    static void <clinit>()
+    {
+        org.slf4j.Logger $r0;
+        java.security.PrivilegedAction $r1;
+        java.lang.Object $r2;
+        java.lang.Boolean $r3;
+        boolean $z0;
+
+        nop;
+
+        $r0 = staticinvoke <org.slf4j.LoggerFactory: org.slf4j.Logger getLogger(java.lang.Class)>(class "Lorg/apache/xml/security/encryption/XMLCipherUtil;");
+
+        <org.apache.xml.security.encryption.XMLCipherUtil: org.slf4j.Logger LOG> = $r0;
+
+        $r1 = staticinvoke <org.apache.xml.security.encryption.XMLCipherUtil$lambda_static_0__4: java.security.PrivilegedAction bootstrap$()>();
+
+        $r2 = staticinvoke <java.security.AccessController: java.lang.Object doPrivileged(java.security.PrivilegedAction)>($r1);
+
+        $r3 = (java.lang.Boolean) $r2;
+
+        $z0 = virtualinvoke $r3.<java.lang.Boolean: boolean booleanValue()>();
+
+        <org.apache.xml.security.encryption.XMLCipherUtil: boolean gcmUseIvParameterSpec> = $z0;
+
+        return;
+    }
+}

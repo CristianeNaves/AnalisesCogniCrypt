@@ -1,0 +1,707 @@
+public abstract class org.apache.xml.security.c14n.implementations.Canonicalizer20010315 extends org.apache.xml.security.c14n.implementations.CanonicalizerBase
+{
+    private static final java.lang.String XMLNS_URI;
+    private static final java.lang.String XML_LANG_URI;
+    private boolean firstCall;
+    private final java.util.SortedSet result;
+    private org.apache.xml.security.c14n.implementations.Canonicalizer20010315$XmlAttrStack xmlattrStack;
+
+    public void <init>(boolean)
+    {
+        org.apache.xml.security.c14n.implementations.Canonicalizer20010315 r0;
+        boolean z0;
+        java.util.TreeSet $r1;
+        org.apache.xml.security.c14n.helper.AttrCompare $r2;
+        org.apache.xml.security.c14n.implementations.Canonicalizer20010315$XmlAttrStack $r3;
+        null_type varReplacer2355;
+        int varReplacer2356;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.c14n.implementations.Canonicalizer20010315;
+
+        z0 := @parameter0: boolean;
+
+        specialinvoke r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: void <init>(boolean)>(z0);
+
+        varReplacer2356 = 1;
+
+        r0.<org.apache.xml.security.c14n.implementations.Canonicalizer20010315: boolean firstCall> = varReplacer2356;
+
+        $r1 = new java.util.TreeSet;
+
+        $r2 = <org.apache.xml.security.c14n.implementations.Canonicalizer20010315: org.apache.xml.security.c14n.helper.AttrCompare COMPARE>;
+
+        specialinvoke $r1.<java.util.TreeSet: void <init>(java.util.Comparator)>($r2);
+
+        r0.<org.apache.xml.security.c14n.implementations.Canonicalizer20010315: java.util.SortedSet result> = $r1;
+
+        $r3 = new org.apache.xml.security.c14n.implementations.Canonicalizer20010315$XmlAttrStack;
+
+        varReplacer2355 = null;
+
+        specialinvoke $r3.<org.apache.xml.security.c14n.implementations.Canonicalizer20010315$XmlAttrStack: void <init>(org.apache.xml.security.c14n.implementations.Canonicalizer20010315$1)>(varReplacer2355);
+
+        r0.<org.apache.xml.security.c14n.implementations.Canonicalizer20010315: org.apache.xml.security.c14n.implementations.Canonicalizer20010315$XmlAttrStack xmlattrStack> = $r3;
+
+        return;
+    }
+
+    public byte[] engineCanonicalizeXPathNodeSet(java.util.Set, java.lang.String) throws org.apache.xml.security.c14n.CanonicalizationException
+    {
+        org.apache.xml.security.c14n.CanonicalizationException $r0;
+        org.apache.xml.security.c14n.implementations.Canonicalizer20010315 r1;
+        java.util.Set r2;
+        java.lang.String r3, varReplacer2357;
+
+        nop;
+
+        r1 := @this: org.apache.xml.security.c14n.implementations.Canonicalizer20010315;
+
+        r2 := @parameter0: java.util.Set;
+
+        r3 := @parameter1: java.lang.String;
+
+        $r0 = new org.apache.xml.security.c14n.CanonicalizationException;
+
+        varReplacer2357 = "c14n.Canonicalizer.UnsupportedOperation";
+
+        specialinvoke $r0.<org.apache.xml.security.c14n.CanonicalizationException: void <init>(java.lang.String)>(varReplacer2357);
+
+        throw $r0;
+    }
+
+    public byte[] engineCanonicalizeSubTree(org.w3c.dom.Node, java.lang.String) throws org.apache.xml.security.c14n.CanonicalizationException
+    {
+        org.apache.xml.security.c14n.CanonicalizationException $r0;
+        org.apache.xml.security.c14n.implementations.Canonicalizer20010315 r1;
+        org.w3c.dom.Node r2;
+        java.lang.String r3, varReplacer2358;
+
+        nop;
+
+        r1 := @this: org.apache.xml.security.c14n.implementations.Canonicalizer20010315;
+
+        r2 := @parameter0: org.w3c.dom.Node;
+
+        r3 := @parameter1: java.lang.String;
+
+        $r0 = new org.apache.xml.security.c14n.CanonicalizationException;
+
+        varReplacer2358 = "c14n.Canonicalizer.UnsupportedOperation";
+
+        specialinvoke $r0.<org.apache.xml.security.c14n.CanonicalizationException: void <init>(java.lang.String)>(varReplacer2358);
+
+        throw $r0;
+    }
+
+    public byte[] engineCanonicalizeSubTree(org.w3c.dom.Node, java.lang.String, boolean) throws org.apache.xml.security.c14n.CanonicalizationException
+    {
+        org.apache.xml.security.c14n.CanonicalizationException $r0;
+        org.apache.xml.security.c14n.implementations.Canonicalizer20010315 r1;
+        org.w3c.dom.Node r2;
+        java.lang.String r3, varReplacer2359;
+        boolean z0;
+
+        nop;
+
+        r1 := @this: org.apache.xml.security.c14n.implementations.Canonicalizer20010315;
+
+        r2 := @parameter0: org.w3c.dom.Node;
+
+        r3 := @parameter1: java.lang.String;
+
+        z0 := @parameter2: boolean;
+
+        $r0 = new org.apache.xml.security.c14n.CanonicalizationException;
+
+        varReplacer2359 = "c14n.Canonicalizer.UnsupportedOperation";
+
+        specialinvoke $r0.<org.apache.xml.security.c14n.CanonicalizationException: void <init>(java.lang.String)>(varReplacer2359);
+
+        throw $r0;
+    }
+
+    protected java.util.Iterator handleAttributesSubtree(org.w3c.dom.Element, org.apache.xml.security.c14n.implementations.NameSpaceSymbTable) throws org.apache.xml.security.c14n.CanonicalizationException
+    {
+        org.w3c.dom.Element r0;
+        boolean $z0, $z1, $z2, $z3, $z4, $z6, $z7, $z9;
+        org.apache.xml.security.c14n.implementations.Canonicalizer20010315 r1;
+        java.util.SortedSet r2;
+        java.util.Iterator $r3;
+        org.apache.xml.security.c14n.implementations.NameSpaceSymbTable r4;
+        org.apache.xml.security.c14n.implementations.Canonicalizer20010315$XmlAttrStack $r5;
+        org.w3c.dom.NamedNodeMap r6;
+        int i0, i1, varReplacer2361;
+        org.w3c.dom.Node $r7, r14;
+        org.w3c.dom.Attr r8, $r15;
+        java.lang.String r9, r10, r11, $r12, $r13, $r17, $r18, $r21, varReplacer2360;
+        java.lang.Object[] $r16, r19;
+        org.apache.xml.security.c14n.CanonicalizationException $r20;
+        null_type varReplacer2362;
+
+        nop;
+
+        r1 := @this: org.apache.xml.security.c14n.implementations.Canonicalizer20010315;
+
+        r0 := @parameter0: org.w3c.dom.Element;
+
+        r4 := @parameter1: org.apache.xml.security.c14n.implementations.NameSpaceSymbTable;
+
+        $z0 = interfaceinvoke r0.<org.w3c.dom.Element: boolean hasAttributes()>();
+
+        if $z0 != 0 goto label1;
+
+        $z9 = r1.<org.apache.xml.security.c14n.implementations.Canonicalizer20010315: boolean firstCall>;
+
+        if $z9 != 0 goto label1;
+
+        varReplacer2362 = null;
+
+        return varReplacer2362;
+
+     label1:
+        r2 = r1.<org.apache.xml.security.c14n.implementations.Canonicalizer20010315: java.util.SortedSet result>;
+
+        interfaceinvoke r2.<java.util.SortedSet: void clear()>();
+
+        $z1 = interfaceinvoke r0.<org.w3c.dom.Element: boolean hasAttributes()>();
+
+        if $z1 == 0 goto label6;
+
+        r6 = interfaceinvoke r0.<org.w3c.dom.Element: org.w3c.dom.NamedNodeMap getAttributes()>();
+
+        i0 = interfaceinvoke r6.<org.w3c.dom.NamedNodeMap: int getLength()>();
+
+        i1 = 0;
+
+     label2:
+        if i1 >= i0 goto label6;
+
+        $r7 = interfaceinvoke r6.<org.w3c.dom.NamedNodeMap: org.w3c.dom.Node item(int)>(i1);
+
+        r8 = (org.w3c.dom.Attr) $r7;
+
+        r9 = interfaceinvoke r8.<org.w3c.dom.Attr: java.lang.String getNamespaceURI()>();
+
+        r10 = interfaceinvoke r8.<org.w3c.dom.Attr: java.lang.String getLocalName()>();
+
+        r11 = interfaceinvoke r8.<org.w3c.dom.Attr: java.lang.String getValue()>();
+
+        $r12 = "http://www.w3.org/2000/xmlns/";
+
+        $z3 = virtualinvoke $r12.<java.lang.String: boolean equals(java.lang.Object)>(r9);
+
+        if $z3 != 0 goto label3;
+
+        interfaceinvoke r2.<java.util.SortedSet: boolean add(java.lang.Object)>(r8);
+
+        goto label5;
+
+     label3:
+        $r13 = "xml";
+
+        $z4 = virtualinvoke $r13.<java.lang.String: boolean equals(java.lang.Object)>(r10);
+
+        if $z4 == 0 goto label4;
+
+        $r21 = "http://www.w3.org/XML/1998/namespace";
+
+        $z7 = virtualinvoke $r21.<java.lang.String: boolean equals(java.lang.Object)>(r11);
+
+        if $z7 != 0 goto label5;
+
+     label4:
+        r14 = virtualinvoke r4.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: org.w3c.dom.Node addMappingAndRender(java.lang.String,java.lang.String,org.w3c.dom.Attr)>(r10, r11, r8);
+
+        if r14 == null goto label5;
+
+        $r15 = (org.w3c.dom.Attr) r14;
+
+        interfaceinvoke r2.<java.util.SortedSet: boolean add(java.lang.Object)>($r15);
+
+        $z6 = staticinvoke <org.apache.xml.security.c14n.helper.C14nHelper: boolean namespaceIsRelative(org.w3c.dom.Attr)>(r8);
+
+        if $z6 == 0 goto label5;
+
+        $r16 = newarray (java.lang.Object)[3];
+
+        $r17 = interfaceinvoke r0.<org.w3c.dom.Element: java.lang.String getTagName()>();
+
+        $r16[0] = $r17;
+
+        $r16[1] = r10;
+
+        $r18 = interfaceinvoke r8.<org.w3c.dom.Attr: java.lang.String getNodeValue()>();
+
+        $r16[2] = $r18;
+
+        r19 = $r16;
+
+        $r20 = new org.apache.xml.security.c14n.CanonicalizationException;
+
+        varReplacer2360 = "c14n.Canonicalizer.RelativeNamespace";
+
+        specialinvoke $r20.<org.apache.xml.security.c14n.CanonicalizationException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2360, r19);
+
+        throw $r20;
+
+     label5:
+        i1 = i1 + 1;
+
+        goto label2;
+
+     label6:
+        $z2 = r1.<org.apache.xml.security.c14n.implementations.Canonicalizer20010315: boolean firstCall>;
+
+        if $z2 == 0 goto label7;
+
+        virtualinvoke r4.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: void getUnrenderedNodes(java.util.Collection)>(r2);
+
+        $r5 = r1.<org.apache.xml.security.c14n.implementations.Canonicalizer20010315: org.apache.xml.security.c14n.implementations.Canonicalizer20010315$XmlAttrStack xmlattrStack>;
+
+        virtualinvoke $r5.<org.apache.xml.security.c14n.implementations.Canonicalizer20010315$XmlAttrStack: void getXmlnsAttr(java.util.Collection)>(r2);
+
+        varReplacer2361 = 0;
+
+        r1.<org.apache.xml.security.c14n.implementations.Canonicalizer20010315: boolean firstCall> = varReplacer2361;
+
+     label7:
+        $r3 = interfaceinvoke r2.<java.util.SortedSet: java.util.Iterator iterator()>();
+
+        return $r3;
+    }
+
+    protected java.util.Iterator handleAttributes(org.w3c.dom.Element, org.apache.xml.security.c14n.implementations.NameSpaceSymbTable) throws org.apache.xml.security.c14n.CanonicalizationException
+    {
+        org.apache.xml.security.c14n.implementations.Canonicalizer20010315 r0;
+        org.apache.xml.security.c14n.implementations.NameSpaceSymbTable r1;
+        org.apache.xml.security.c14n.implementations.Canonicalizer20010315$XmlAttrStack $r2, $r5, $r26;
+        int $i0, $i1, $i2, i3, i4;
+        org.w3c.dom.Element r3;
+        boolean z0, $z1, $z2, $z4, $z5, $z6, $z8, $z10, $z11, $z12, $z13, $z15;
+        java.util.SortedSet r4;
+        org.w3c.dom.Attr $r6, $r8, r10, $r18, r28;
+        org.w3c.dom.Document $r7;
+        org.w3c.dom.Node $r9, r17;
+        java.lang.String r11, r12, r13, $r14, $r15, $r16, $r20, $r21, $r24, $r25, varReplacer2363, varReplacer2364, varReplacer2365, varReplacer2366, varReplacer2367, varReplacer2368;
+        java.lang.Object[] $r19, r22;
+        org.apache.xml.security.c14n.CanonicalizationException $r23;
+        org.w3c.dom.NamedNodeMap r27;
+        java.lang.Object r29;
+        java.util.Iterator $r30;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.c14n.implementations.Canonicalizer20010315;
+
+        r3 := @parameter0: org.w3c.dom.Element;
+
+        r1 := @parameter1: org.apache.xml.security.c14n.implementations.NameSpaceSymbTable;
+
+        $r2 = r0.<org.apache.xml.security.c14n.implementations.Canonicalizer20010315: org.apache.xml.security.c14n.implementations.Canonicalizer20010315$XmlAttrStack xmlattrStack>;
+
+        $i0 = virtualinvoke r1.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: int getLevel()>();
+
+        virtualinvoke $r2.<org.apache.xml.security.c14n.implementations.Canonicalizer20010315$XmlAttrStack: void push(int)>($i0);
+
+        $i1 = virtualinvoke r1.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: int getLevel()>();
+
+        $i2 = virtualinvoke r0.<org.apache.xml.security.c14n.implementations.Canonicalizer20010315: int isVisibleDO(org.w3c.dom.Node,int)>(r3, $i1);
+
+        if $i2 != 1 goto label01;
+
+        $z15 = 1;
+
+        goto label02;
+
+     label01:
+        $z15 = 0;
+
+     label02:
+        z0 = $z15;
+
+        r4 = r0.<org.apache.xml.security.c14n.implementations.Canonicalizer20010315: java.util.SortedSet result>;
+
+        interfaceinvoke r4.<java.util.SortedSet: void clear()>();
+
+        $z1 = interfaceinvoke r3.<org.w3c.dom.Element: boolean hasAttributes()>();
+
+        if $z1 == 0 goto label12;
+
+        r27 = interfaceinvoke r3.<org.w3c.dom.Element: org.w3c.dom.NamedNodeMap getAttributes()>();
+
+        i3 = interfaceinvoke r27.<org.w3c.dom.NamedNodeMap: int getLength()>();
+
+        i4 = 0;
+
+     label03:
+        if i4 >= i3 goto label12;
+
+        $r9 = interfaceinvoke r27.<org.w3c.dom.NamedNodeMap: org.w3c.dom.Node item(int)>(i4);
+
+        r10 = (org.w3c.dom.Attr) $r9;
+
+        r11 = interfaceinvoke r10.<org.w3c.dom.Attr: java.lang.String getNamespaceURI()>();
+
+        r12 = interfaceinvoke r10.<org.w3c.dom.Attr: java.lang.String getLocalName()>();
+
+        r13 = interfaceinvoke r10.<org.w3c.dom.Attr: java.lang.String getValue()>();
+
+        $r14 = "http://www.w3.org/2000/xmlns/";
+
+        $z4 = virtualinvoke $r14.<java.lang.String: boolean equals(java.lang.Object)>(r11);
+
+        if $z4 != 0 goto label05;
+
+        $r25 = "http://www.w3.org/XML/1998/namespace";
+
+        $z13 = virtualinvoke $r25.<java.lang.String: boolean equals(java.lang.Object)>(r11);
+
+        if $z13 == 0 goto label04;
+
+        $r26 = r0.<org.apache.xml.security.c14n.implementations.Canonicalizer20010315: org.apache.xml.security.c14n.implementations.Canonicalizer20010315$XmlAttrStack xmlattrStack>;
+
+        virtualinvoke $r26.<org.apache.xml.security.c14n.implementations.Canonicalizer20010315$XmlAttrStack: void addXmlnsAttr(org.w3c.dom.Attr)>(r10);
+
+        goto label11;
+
+     label04:
+        if z0 == 0 goto label11;
+
+        interfaceinvoke r4.<java.util.SortedSet: boolean add(java.lang.Object)>(r10);
+
+        goto label11;
+
+     label05:
+        $r15 = "xml";
+
+        $z5 = virtualinvoke $r15.<java.lang.String: boolean equals(java.lang.Object)>(r12);
+
+        if $z5 == 0 goto label06;
+
+        $r24 = "http://www.w3.org/XML/1998/namespace";
+
+        $z12 = virtualinvoke $r24.<java.lang.String: boolean equals(java.lang.Object)>(r13);
+
+        if $z12 != 0 goto label11;
+
+     label06:
+        $z6 = virtualinvoke r0.<org.apache.xml.security.c14n.implementations.Canonicalizer20010315: boolean isVisible(org.w3c.dom.Node)>(r10);
+
+        if $z6 == 0 goto label09;
+
+        if z0 != 0 goto label07;
+
+        $z11 = virtualinvoke r1.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: boolean removeMappingIfRender(java.lang.String)>(r12);
+
+        if $z11 != 0 goto label11;
+
+     label07:
+        r17 = virtualinvoke r1.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: org.w3c.dom.Node addMappingAndRender(java.lang.String,java.lang.String,org.w3c.dom.Attr)>(r12, r13, r10);
+
+        if r17 == null goto label08;
+
+        $r18 = (org.w3c.dom.Attr) r17;
+
+        interfaceinvoke r4.<java.util.SortedSet: boolean add(java.lang.Object)>($r18);
+
+        $z10 = staticinvoke <org.apache.xml.security.c14n.helper.C14nHelper: boolean namespaceIsRelative(org.w3c.dom.Attr)>(r10);
+
+        if $z10 == 0 goto label08;
+
+        $r19 = newarray (java.lang.Object)[3];
+
+        $r20 = interfaceinvoke r3.<org.w3c.dom.Element: java.lang.String getTagName()>();
+
+        $r19[0] = $r20;
+
+        $r19[1] = r12;
+
+        $r21 = interfaceinvoke r10.<org.w3c.dom.Attr: java.lang.String getNodeValue()>();
+
+        $r19[2] = $r21;
+
+        r22 = $r19;
+
+        $r23 = new org.apache.xml.security.c14n.CanonicalizationException;
+
+        varReplacer2366 = "c14n.Canonicalizer.RelativeNamespace";
+
+        specialinvoke $r23.<org.apache.xml.security.c14n.CanonicalizationException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2366, r22);
+
+        throw $r23;
+
+     label08:
+        goto label11;
+
+     label09:
+        if z0 == 0 goto label10;
+
+        $r16 = "xmlns";
+
+        $z8 = virtualinvoke $r16.<java.lang.String: boolean equals(java.lang.Object)>(r12);
+
+        if $z8 != 0 goto label10;
+
+        virtualinvoke r1.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: void removeMapping(java.lang.String)>(r12);
+
+        goto label11;
+
+     label10:
+        virtualinvoke r1.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: boolean addMapping(java.lang.String,java.lang.String,org.w3c.dom.Attr)>(r12, r13, r10);
+
+     label11:
+        i4 = i4 + 1;
+
+        goto label03;
+
+     label12:
+        if z0 == 0 goto label16;
+
+        varReplacer2363 = "http://www.w3.org/2000/xmlns/";
+
+        varReplacer2364 = "xmlns";
+
+        r28 = interfaceinvoke r3.<org.w3c.dom.Element: org.w3c.dom.Attr getAttributeNodeNS(java.lang.String,java.lang.String)>(varReplacer2363, varReplacer2364);
+
+        r29 = null;
+
+        if r28 != null goto label13;
+
+        varReplacer2365 = "xmlns";
+
+        r29 = virtualinvoke r1.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: org.w3c.dom.Attr getMapping(java.lang.String)>(varReplacer2365);
+
+        goto label14;
+
+     label13:
+        $z2 = virtualinvoke r0.<org.apache.xml.security.c14n.implementations.Canonicalizer20010315: boolean isVisible(org.w3c.dom.Node)>(r28);
+
+        if $z2 != 0 goto label14;
+
+        $r7 = interfaceinvoke r28.<org.w3c.dom.Attr: org.w3c.dom.Document getOwnerDocument()>();
+
+        $r8 = virtualinvoke r0.<org.apache.xml.security.c14n.implementations.Canonicalizer20010315: org.w3c.dom.Attr getNullNode(org.w3c.dom.Document)>($r7);
+
+        varReplacer2367 = "xmlns";
+
+        varReplacer2368 = "";
+
+        r29 = virtualinvoke r1.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: org.w3c.dom.Node addMappingAndRender(java.lang.String,java.lang.String,org.w3c.dom.Attr)>(varReplacer2367, varReplacer2368, $r8);
+
+     label14:
+        if r29 == null goto label15;
+
+        $r6 = (org.w3c.dom.Attr) r29;
+
+        interfaceinvoke r4.<java.util.SortedSet: boolean add(java.lang.Object)>($r6);
+
+     label15:
+        $r5 = r0.<org.apache.xml.security.c14n.implementations.Canonicalizer20010315: org.apache.xml.security.c14n.implementations.Canonicalizer20010315$XmlAttrStack xmlattrStack>;
+
+        virtualinvoke $r5.<org.apache.xml.security.c14n.implementations.Canonicalizer20010315$XmlAttrStack: void getXmlnsAttr(java.util.Collection)>(r4);
+
+        virtualinvoke r1.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: void getUnrenderedNodes(java.util.Collection)>(r4);
+
+     label16:
+        $r30 = interfaceinvoke r4.<java.util.SortedSet: java.util.Iterator iterator()>();
+
+        return $r30;
+    }
+
+    protected void circumventBugIfNeeded(org.apache.xml.security.signature.XMLSignatureInput) throws org.apache.xml.security.c14n.CanonicalizationException, javax.xml.parsers.ParserConfigurationException, java.io.IOException, org.xml.sax.SAXException
+    {
+        org.apache.xml.security.signature.XMLSignatureInput r0;
+        boolean $z0;
+        org.w3c.dom.Node $r1, $r3;
+        java.util.Set $r2;
+        org.apache.xml.security.c14n.implementations.Canonicalizer20010315 r4;
+        org.w3c.dom.Document r5;
+
+        nop;
+
+        r4 := @this: org.apache.xml.security.c14n.implementations.Canonicalizer20010315;
+
+        r0 := @parameter0: org.apache.xml.security.signature.XMLSignatureInput;
+
+        $z0 = virtualinvoke r0.<org.apache.xml.security.signature.XMLSignatureInput: boolean isNeedsToBeExpanded()>();
+
+        if $z0 != 0 goto label1;
+
+        return;
+
+     label1:
+        $r1 = virtualinvoke r0.<org.apache.xml.security.signature.XMLSignatureInput: org.w3c.dom.Node getSubNode()>();
+
+        if $r1 == null goto label2;
+
+        $r3 = virtualinvoke r0.<org.apache.xml.security.signature.XMLSignatureInput: org.w3c.dom.Node getSubNode()>();
+
+        r5 = staticinvoke <org.apache.xml.security.utils.XMLUtils: org.w3c.dom.Document getOwnerDocument(org.w3c.dom.Node)>($r3);
+
+        goto label3;
+
+     label2:
+        $r2 = virtualinvoke r0.<org.apache.xml.security.signature.XMLSignatureInput: java.util.Set getNodeSet()>();
+
+        r5 = staticinvoke <org.apache.xml.security.utils.XMLUtils: org.w3c.dom.Document getOwnerDocument(java.util.Set)>($r2);
+
+     label3:
+        staticinvoke <org.apache.xml.security.utils.XMLUtils: void circumventBug2650(org.w3c.dom.Document)>(r5);
+
+        return;
+    }
+
+    protected void handleParent(org.w3c.dom.Element, org.apache.xml.security.c14n.implementations.NameSpaceSymbTable)
+    {
+        org.w3c.dom.Element r0;
+        boolean $z0, $z2, $z3, $z4, $z5, $z7;
+        org.apache.xml.security.c14n.implementations.Canonicalizer20010315 r1;
+        org.apache.xml.security.c14n.implementations.Canonicalizer20010315$XmlAttrStack $r2, $r15;
+        org.w3c.dom.NamedNodeMap r3;
+        int i0, i1, varReplacer2370;
+        java.lang.String $r4, $r11, $r12, $r13, $r14, $r16, $r17, $r18, r20, r21, r22, r23, r24, varReplacer2369, varReplacer2371, varReplacer2372;
+        org.w3c.dom.Document $r5;
+        org.apache.xml.security.c14n.implementations.NameSpaceSymbTable r6;
+        java.lang.StringBuilder $r7, $r8, $r9;
+        org.w3c.dom.Node $r10;
+        org.w3c.dom.Attr r19, r25;
+
+        nop;
+
+        r1 := @this: org.apache.xml.security.c14n.implementations.Canonicalizer20010315;
+
+        r0 := @parameter0: org.w3c.dom.Element;
+
+        r6 := @parameter1: org.apache.xml.security.c14n.implementations.NameSpaceSymbTable;
+
+        $z0 = interfaceinvoke r0.<org.w3c.dom.Element: boolean hasAttributes()>();
+
+        if $z0 != 0 goto label01;
+
+        $r18 = interfaceinvoke r0.<org.w3c.dom.Element: java.lang.String getNamespaceURI()>();
+
+        if $r18 != null goto label01;
+
+        return;
+
+     label01:
+        $r2 = r1.<org.apache.xml.security.c14n.implementations.Canonicalizer20010315: org.apache.xml.security.c14n.implementations.Canonicalizer20010315$XmlAttrStack xmlattrStack>;
+
+        varReplacer2370 = -1;
+
+        virtualinvoke $r2.<org.apache.xml.security.c14n.implementations.Canonicalizer20010315$XmlAttrStack: void push(int)>(varReplacer2370);
+
+        r3 = interfaceinvoke r0.<org.w3c.dom.Element: org.w3c.dom.NamedNodeMap getAttributes()>();
+
+        i0 = interfaceinvoke r3.<org.w3c.dom.NamedNodeMap: int getLength()>();
+
+        i1 = 0;
+
+     label02:
+        if i1 >= i0 goto label06;
+
+        $r10 = interfaceinvoke r3.<org.w3c.dom.NamedNodeMap: org.w3c.dom.Node item(int)>(i1);
+
+        r19 = (org.w3c.dom.Attr) $r10;
+
+        r20 = interfaceinvoke r19.<org.w3c.dom.Attr: java.lang.String getLocalName()>();
+
+        r21 = interfaceinvoke r19.<org.w3c.dom.Attr: java.lang.String getNodeValue()>();
+
+        $r11 = "http://www.w3.org/2000/xmlns/";
+
+        $r12 = interfaceinvoke r19.<org.w3c.dom.Attr: java.lang.String getNamespaceURI()>();
+
+        $z3 = virtualinvoke $r11.<java.lang.String: boolean equals(java.lang.Object)>($r12);
+
+        if $z3 == 0 goto label04;
+
+        $r16 = "xml";
+
+        $z5 = virtualinvoke $r16.<java.lang.String: boolean equals(java.lang.Object)>(r20);
+
+        if $z5 == 0 goto label03;
+
+        $r17 = "http://www.w3.org/XML/1998/namespace";
+
+        $z7 = virtualinvoke $r17.<java.lang.String: boolean equals(java.lang.Object)>(r21);
+
+        if $z7 != 0 goto label05;
+
+     label03:
+        virtualinvoke r6.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: boolean addMapping(java.lang.String,java.lang.String,org.w3c.dom.Attr)>(r20, r21, r19);
+
+        goto label05;
+
+     label04:
+        $r13 = "http://www.w3.org/XML/1998/namespace";
+
+        $r14 = interfaceinvoke r19.<org.w3c.dom.Attr: java.lang.String getNamespaceURI()>();
+
+        $z4 = virtualinvoke $r13.<java.lang.String: boolean equals(java.lang.Object)>($r14);
+
+        if $z4 == 0 goto label05;
+
+        $r15 = r1.<org.apache.xml.security.c14n.implementations.Canonicalizer20010315: org.apache.xml.security.c14n.implementations.Canonicalizer20010315$XmlAttrStack xmlattrStack>;
+
+        virtualinvoke $r15.<org.apache.xml.security.c14n.implementations.Canonicalizer20010315$XmlAttrStack: void addXmlnsAttr(org.w3c.dom.Attr)>(r19);
+
+     label05:
+        i1 = i1 + 1;
+
+        goto label02;
+
+     label06:
+        $r4 = interfaceinvoke r0.<org.w3c.dom.Element: java.lang.String getNamespaceURI()>();
+
+        if $r4 == null goto label10;
+
+        r22 = interfaceinvoke r0.<org.w3c.dom.Element: java.lang.String getPrefix()>();
+
+        r23 = interfaceinvoke r0.<org.w3c.dom.Element: java.lang.String getNamespaceURI()>();
+
+        if r22 == null goto label07;
+
+        varReplacer2369 = "";
+
+        $z2 = virtualinvoke r22.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2369);
+
+        if $z2 == 0 goto label08;
+
+     label07:
+        r22 = "xmlns";
+
+        r24 = "xmlns";
+
+        goto label09;
+
+     label08:
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer2371 = "xmlns:";
+
+        $r8 = virtualinvoke $r7.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2371);
+
+        $r9 = virtualinvoke $r8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r22);
+
+        r24 = virtualinvoke $r9.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label09:
+        $r5 = interfaceinvoke r0.<org.w3c.dom.Element: org.w3c.dom.Document getOwnerDocument()>();
+
+        varReplacer2372 = "http://www.w3.org/2000/xmlns/";
+
+        r25 = interfaceinvoke $r5.<org.w3c.dom.Document: org.w3c.dom.Attr createAttributeNS(java.lang.String,java.lang.String)>(varReplacer2372, r24);
+
+        interfaceinvoke r25.<org.w3c.dom.Attr: void setValue(java.lang.String)>(r23);
+
+        virtualinvoke r6.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: boolean addMapping(java.lang.String,java.lang.String,org.w3c.dom.Attr)>(r22, r23, r25);
+
+     label10:
+        return;
+    }
+}

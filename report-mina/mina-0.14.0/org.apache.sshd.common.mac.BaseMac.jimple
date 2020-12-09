@@ -1,0 +1,246 @@
+public class org.apache.sshd.common.mac.BaseMac extends java.lang.Object implements org.apache.sshd.common.Mac
+{
+    private final java.lang.String algorithm;
+    private final int defbsize;
+    private final int bsize;
+    private final byte[] tmp;
+    private javax.crypto.Mac mac;
+
+    public void <init>(java.lang.String, int, int)
+    {
+        org.apache.sshd.common.mac.BaseMac r0;
+        java.lang.String r1;
+        int i0, i1;
+        byte[] $r2;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.mac.BaseMac;
+
+        r1 := @parameter0: java.lang.String;
+
+        i0 := @parameter1: int;
+
+        i1 := @parameter2: int;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        r0.<org.apache.sshd.common.mac.BaseMac: java.lang.String algorithm> = r1;
+
+        r0.<org.apache.sshd.common.mac.BaseMac: int bsize> = i0;
+
+        r0.<org.apache.sshd.common.mac.BaseMac: int defbsize> = i1;
+
+        $r2 = newarray (byte)[i1];
+
+        r0.<org.apache.sshd.common.mac.BaseMac: byte[] tmp> = $r2;
+
+        return;
+    }
+
+    public int getBlockSize()
+    {
+        org.apache.sshd.common.mac.BaseMac r0;
+        int $i0;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.mac.BaseMac;
+
+        $i0 = r0.<org.apache.sshd.common.mac.BaseMac: int bsize>;
+
+        return $i0;
+    }
+
+    public void init(byte[]) throws java.lang.Exception
+    {
+        org.apache.sshd.common.mac.BaseMac r0;
+        int $i0, $i1, $i2, $i3, varReplacer790, varReplacer791;
+        javax.crypto.spec.SecretKeySpec $r1, r8;
+        java.lang.String $r2, $r3;
+        javax.crypto.Mac $r4, $r5;
+        byte[] r6, r7;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.mac.BaseMac;
+
+        r6 := @parameter0: byte[];
+
+        $i1 = lengthof r6;
+
+        $i0 = r0.<org.apache.sshd.common.mac.BaseMac: int defbsize>;
+
+        if $i1 <= $i0 goto label1;
+
+        $i2 = r0.<org.apache.sshd.common.mac.BaseMac: int defbsize>;
+
+        r7 = newarray (byte)[$i2];
+
+        $i3 = r0.<org.apache.sshd.common.mac.BaseMac: int defbsize>;
+
+        varReplacer790 = 0;
+
+        varReplacer791 = 0;
+
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>(r6, varReplacer790, r7, varReplacer790, $i3);
+
+        r6 = r7;
+
+     label1:
+        $r1 = new javax.crypto.spec.SecretKeySpec;
+
+        $r2 = r0.<org.apache.sshd.common.mac.BaseMac: java.lang.String algorithm>;
+
+        specialinvoke $r1.<javax.crypto.spec.SecretKeySpec: void <init>(byte[],java.lang.String)>(r6, $r2);
+
+        r8 = $r1;
+
+        $r3 = r0.<org.apache.sshd.common.mac.BaseMac: java.lang.String algorithm>;
+
+        $r4 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: javax.crypto.Mac getMac(java.lang.String)>($r3);
+
+        r0.<org.apache.sshd.common.mac.BaseMac: javax.crypto.Mac mac> = $r4;
+
+        $r5 = r0.<org.apache.sshd.common.mac.BaseMac: javax.crypto.Mac mac>;
+
+        virtualinvoke $r5.<javax.crypto.Mac: void init(java.security.Key)>(r8);
+
+        return;
+    }
+
+    public void updateUInt(long)
+    {
+        org.apache.sshd.common.mac.BaseMac r0;
+        long l0, $l1, $l4, $l7;
+        int $i2, $i5, $i8, $i10, varReplacer792, varReplacer793;
+        byte $b3, $b6, $b9, $b11;
+        byte[] $r1, $r2, $r3, $r4, $r5;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.mac.BaseMac;
+
+        l0 := @parameter0: long;
+
+        $r1 = r0.<org.apache.sshd.common.mac.BaseMac: byte[] tmp>;
+
+        $l1 = l0 >>> 24;
+
+        $i2 = (int) $l1;
+
+        $b3 = (byte) $i2;
+
+        $r1[0] = $b3;
+
+        $r2 = r0.<org.apache.sshd.common.mac.BaseMac: byte[] tmp>;
+
+        $l4 = l0 >>> 16;
+
+        $i5 = (int) $l4;
+
+        $b6 = (byte) $i5;
+
+        $r2[1] = $b6;
+
+        $r3 = r0.<org.apache.sshd.common.mac.BaseMac: byte[] tmp>;
+
+        $l7 = l0 >>> 8;
+
+        $i8 = (int) $l7;
+
+        $b9 = (byte) $i8;
+
+        $r3[2] = $b9;
+
+        $r4 = r0.<org.apache.sshd.common.mac.BaseMac: byte[] tmp>;
+
+        $i10 = (int) l0;
+
+        $b11 = (byte) $i10;
+
+        $r4[3] = $b11;
+
+        $r5 = r0.<org.apache.sshd.common.mac.BaseMac: byte[] tmp>;
+
+        varReplacer792 = 0;
+
+        varReplacer793 = 4;
+
+        virtualinvoke r0.<org.apache.sshd.common.mac.BaseMac: void update(byte[],int,int)>($r5, varReplacer792, varReplacer793);
+
+        return;
+    }
+
+    public void update(byte[], int, int)
+    {
+        org.apache.sshd.common.mac.BaseMac r0;
+        byte[] r1;
+        int i0, i1;
+        javax.crypto.Mac $r2;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.mac.BaseMac;
+
+        r1 := @parameter0: byte[];
+
+        i0 := @parameter1: int;
+
+        i1 := @parameter2: int;
+
+        $r2 = r0.<org.apache.sshd.common.mac.BaseMac: javax.crypto.Mac mac>;
+
+        virtualinvoke $r2.<javax.crypto.Mac: void update(byte[],int,int)>(r1, i0, i1);
+
+        return;
+    }
+
+    public void doFinal(byte[], int) throws java.lang.Exception
+    {
+        org.apache.sshd.common.mac.BaseMac r0;
+        int $i0, $i1, i2, $i3, varReplacer794, varReplacer795;
+        byte[] r1, $r3, $r5;
+        javax.crypto.Mac $r2, $r4;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.mac.BaseMac;
+
+        r1 := @parameter0: byte[];
+
+        i2 := @parameter1: int;
+
+        $i1 = r0.<org.apache.sshd.common.mac.BaseMac: int bsize>;
+
+        $i0 = r0.<org.apache.sshd.common.mac.BaseMac: int defbsize>;
+
+        if $i1 == $i0 goto label1;
+
+        $r4 = r0.<org.apache.sshd.common.mac.BaseMac: javax.crypto.Mac mac>;
+
+        $r3 = r0.<org.apache.sshd.common.mac.BaseMac: byte[] tmp>;
+
+        varReplacer794 = 0;
+
+        virtualinvoke $r4.<javax.crypto.Mac: void doFinal(byte[],int)>($r3, varReplacer794);
+
+        $r5 = r0.<org.apache.sshd.common.mac.BaseMac: byte[] tmp>;
+
+        $i3 = r0.<org.apache.sshd.common.mac.BaseMac: int bsize>;
+
+        varReplacer795 = 0;
+
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>($r5, varReplacer795, r1, i2, $i3);
+
+        goto label2;
+
+     label1:
+        $r2 = r0.<org.apache.sshd.common.mac.BaseMac: javax.crypto.Mac mac>;
+
+        virtualinvoke $r2.<javax.crypto.Mac: void doFinal(byte[],int)>(r1, i2);
+
+     label2:
+        return;
+    }
+}

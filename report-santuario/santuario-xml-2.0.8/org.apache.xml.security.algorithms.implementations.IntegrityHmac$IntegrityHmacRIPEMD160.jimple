@@ -1,0 +1,44 @@
+public class org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacRIPEMD160 extends org.apache.xml.security.algorithms.implementations.IntegrityHmac
+{
+
+    public void <init>() throws org.apache.xml.security.signature.XMLSignatureException
+    {
+        org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacRIPEMD160 r0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacRIPEMD160;
+
+        specialinvoke r0.<org.apache.xml.security.algorithms.implementations.IntegrityHmac: void <init>()>();
+
+        return;
+    }
+
+    public java.lang.String engineGetURI()
+    {
+        org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacRIPEMD160 r0;
+        java.lang.String varReplacer1960;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacRIPEMD160;
+
+        varReplacer1960 = "http://www.w3.org/2001/04/xmldsig-more#hmac-ripemd160";
+
+        return varReplacer1960;
+    }
+
+    int getDigestLength()
+    {
+        org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacRIPEMD160 r0;
+        int varReplacer1961;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.algorithms.implementations.IntegrityHmac$IntegrityHmacRIPEMD160;
+
+        varReplacer1961 = 160;
+
+        return varReplacer1961;
+    }
+}

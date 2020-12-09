@@ -1,0 +1,257 @@
+public class org.apache.xml.security.stax.impl.processor.input.XMLEncryptedKeyInputHandler extends org.apache.xml.security.stax.ext.AbstractInputSecurityHeaderHandler
+{
+    private static final transient org.slf4j.Logger logger;
+
+    public void <init>()
+    {
+        org.apache.xml.security.stax.impl.processor.input.XMLEncryptedKeyInputHandler r0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.XMLEncryptedKeyInputHandler;
+
+        specialinvoke r0.<org.apache.xml.security.stax.ext.AbstractInputSecurityHeaderHandler: void <init>()>();
+
+        return;
+    }
+
+    public void handle(org.apache.xml.security.stax.ext.InputProcessorChain, org.apache.xml.security.stax.ext.XMLSecurityProperties, java.util.Deque, java.lang.Integer) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.stax.impl.processor.input.XMLEncryptedKeyInputHandler r0;
+        java.util.Deque r1;
+        java.lang.Integer r2;
+        int $i0, $i1;
+        org.apache.xml.security.stax.ext.XMLSecurityProperties r3;
+        java.lang.Object $r4, $r6;
+        javax.xml.bind.JAXBElement $r5;
+        org.apache.xml.security.binding.xmlenc.EncryptedKeyType r7;
+        org.apache.xml.security.stax.ext.stax.XMLSecEvent r8;
+        org.apache.xml.security.stax.ext.InputProcessorChain r9;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.XMLEncryptedKeyInputHandler;
+
+        r9 := @parameter0: org.apache.xml.security.stax.ext.InputProcessorChain;
+
+        r3 := @parameter1: org.apache.xml.security.stax.ext.XMLSecurityProperties;
+
+        r1 := @parameter2: java.util.Deque;
+
+        r2 := @parameter3: java.lang.Integer;
+
+        $i0 = virtualinvoke r2.<java.lang.Integer: int intValue()>();
+
+        $r4 = virtualinvoke r0.<org.apache.xml.security.stax.impl.processor.input.XMLEncryptedKeyInputHandler: java.lang.Object parseStructure(java.util.Deque,int,org.apache.xml.security.stax.ext.XMLSecurityProperties)>(r1, $i0, r3);
+
+        $r5 = (javax.xml.bind.JAXBElement) $r4;
+
+        $r6 = virtualinvoke $r5.<javax.xml.bind.JAXBElement: java.lang.Object getValue()>();
+
+        r7 = (org.apache.xml.security.binding.xmlenc.EncryptedKeyType) $r6;
+
+        $i1 = virtualinvoke r2.<java.lang.Integer: int intValue()>();
+
+        r8 = virtualinvoke r0.<org.apache.xml.security.stax.impl.processor.input.XMLEncryptedKeyInputHandler: org.apache.xml.security.stax.ext.stax.XMLSecEvent getResponsibleStartXMLEvent(java.util.Deque,int)>(r1, $i1);
+
+        virtualinvoke r0.<org.apache.xml.security.stax.impl.processor.input.XMLEncryptedKeyInputHandler: void handle(org.apache.xml.security.stax.ext.InputProcessorChain,org.apache.xml.security.binding.xmlenc.EncryptedKeyType,org.apache.xml.security.stax.ext.stax.XMLSecEvent,org.apache.xml.security.stax.ext.XMLSecurityProperties)>(r9, r7, r8, r3);
+
+        return;
+    }
+
+    public void handle(org.apache.xml.security.stax.ext.InputProcessorChain, org.apache.xml.security.binding.xmlenc.EncryptedKeyType, org.apache.xml.security.stax.ext.stax.XMLSecEvent, org.apache.xml.security.stax.ext.XMLSecurityProperties) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.binding.xmlenc.EncryptedKeyType r0;
+        org.apache.xml.security.binding.xmlenc.EncryptionMethodType $r1;
+        java.lang.String $r2, $r10, $r15, $r17, varReplacer4626;
+        org.apache.xml.security.stax.ext.InputProcessorChain r3;
+        org.apache.xml.security.stax.ext.InboundSecurityContext r4;
+        org.apache.xml.security.stax.impl.processor.input.XMLEncryptedKeyInputHandler$1 $r5, r9;
+        org.apache.xml.security.stax.impl.processor.input.XMLEncryptedKeyInputHandler r6;
+        org.apache.xml.security.stax.ext.XMLSecurityProperties r7;
+        org.apache.xml.security.stax.ext.stax.XMLSecEvent r8;
+        org.apache.xml.security.stax.securityEvent.EncryptedKeyTokenSecurityEvent $r11, r12;
+        java.lang.Object $r13;
+        org.apache.xml.security.stax.securityToken.SecurityToken $r14;
+        org.apache.xml.security.binding.xmlenc.ReferenceList $r16;
+        org.apache.xml.security.exceptions.XMLSecurityException $r18;
+        null_type varReplacer4627;
+
+        nop;
+
+        r6 := @this: org.apache.xml.security.stax.impl.processor.input.XMLEncryptedKeyInputHandler;
+
+        r3 := @parameter0: org.apache.xml.security.stax.ext.InputProcessorChain;
+
+        r0 := @parameter1: org.apache.xml.security.binding.xmlenc.EncryptedKeyType;
+
+        r8 := @parameter2: org.apache.xml.security.stax.ext.stax.XMLSecEvent;
+
+        r7 := @parameter3: org.apache.xml.security.stax.ext.XMLSecurityProperties;
+
+        $r1 = virtualinvoke r0.<org.apache.xml.security.binding.xmlenc.EncryptedKeyType: org.apache.xml.security.binding.xmlenc.EncryptionMethodType getEncryptionMethod()>();
+
+        if $r1 != null goto label1;
+
+        $r18 = new org.apache.xml.security.exceptions.XMLSecurityException;
+
+        varReplacer4626 = "stax.encryption.noEncAlgo";
+
+        specialinvoke $r18.<org.apache.xml.security.exceptions.XMLSecurityException: void <init>(java.lang.String)>(varReplacer4626);
+
+        throw $r18;
+
+     label1:
+        $r2 = virtualinvoke r0.<org.apache.xml.security.binding.xmlenc.EncryptedKeyType: java.lang.String getId()>();
+
+        if $r2 != null goto label2;
+
+        varReplacer4627 = null;
+
+        $r17 = staticinvoke <org.apache.xml.security.stax.impl.util.IDGenerator: java.lang.String generateID(java.lang.String)>(varReplacer4627);
+
+        virtualinvoke r0.<org.apache.xml.security.binding.xmlenc.EncryptedKeyType: void setId(java.lang.String)>($r17);
+
+     label2:
+        r4 = interfaceinvoke r3.<org.apache.xml.security.stax.ext.InputProcessorChain: org.apache.xml.security.stax.ext.InboundSecurityContext getSecurityContext()>();
+
+        $r5 = new org.apache.xml.security.stax.impl.processor.input.XMLEncryptedKeyInputHandler$1;
+
+        specialinvoke $r5.<org.apache.xml.security.stax.impl.processor.input.XMLEncryptedKeyInputHandler$1: void <init>(org.apache.xml.security.stax.impl.processor.input.XMLEncryptedKeyInputHandler,org.apache.xml.security.stax.ext.InboundSecurityContext,org.apache.xml.security.binding.xmlenc.EncryptedKeyType,org.apache.xml.security.stax.ext.XMLSecurityProperties,org.apache.xml.security.stax.ext.stax.XMLSecEvent)>(r6, r4, r0, r7, r8);
+
+        r9 = $r5;
+
+        $r10 = virtualinvoke r0.<org.apache.xml.security.binding.xmlenc.EncryptedKeyType: java.lang.String getId()>();
+
+        interfaceinvoke r4.<org.apache.xml.security.stax.ext.InboundSecurityContext: void registerSecurityTokenProvider(java.lang.String,org.apache.xml.security.stax.securityToken.SecurityTokenProvider)>($r10, r9);
+
+        $r11 = new org.apache.xml.security.stax.securityEvent.EncryptedKeyTokenSecurityEvent;
+
+        specialinvoke $r11.<org.apache.xml.security.stax.securityEvent.EncryptedKeyTokenSecurityEvent: void <init>()>();
+
+        r12 = $r11;
+
+        $r13 = interfaceinvoke r9.<org.apache.xml.security.stax.securityToken.SecurityTokenProvider: java.lang.Object getSecurityToken()>();
+
+        $r14 = (org.apache.xml.security.stax.securityToken.SecurityToken) $r13;
+
+        virtualinvoke r12.<org.apache.xml.security.stax.securityEvent.EncryptedKeyTokenSecurityEvent: void setSecurityToken(org.apache.xml.security.stax.securityToken.SecurityToken)>($r14);
+
+        $r15 = virtualinvoke r0.<org.apache.xml.security.binding.xmlenc.EncryptedKeyType: java.lang.String getId()>();
+
+        virtualinvoke r12.<org.apache.xml.security.stax.securityEvent.EncryptedKeyTokenSecurityEvent: void setCorrelationID(java.lang.String)>($r15);
+
+        interfaceinvoke r4.<org.apache.xml.security.stax.ext.InboundSecurityContext: void registerSecurityEvent(org.apache.xml.security.stax.securityEvent.SecurityEvent)>(r12);
+
+        $r16 = virtualinvoke r0.<org.apache.xml.security.binding.xmlenc.EncryptedKeyType: org.apache.xml.security.binding.xmlenc.ReferenceList getReferenceList()>();
+
+        if $r16 == null goto label3;
+
+        virtualinvoke r6.<org.apache.xml.security.stax.impl.processor.input.XMLEncryptedKeyInputHandler: void handleReferenceList(org.apache.xml.security.stax.ext.InputProcessorChain,org.apache.xml.security.binding.xmlenc.EncryptedKeyType,org.apache.xml.security.stax.ext.XMLSecurityProperties)>(r3, r0, r7);
+
+     label3:
+        return;
+    }
+
+    private byte[] generateDigest(byte[]) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        java.security.MessageDigest $r0;
+        byte[] r1, $r2;
+        java.lang.Throwable $r3, r4;
+        org.apache.xml.security.stax.impl.processor.input.XMLEncryptedKeyInputHandler r6;
+        org.apache.xml.security.exceptions.XMLSecurityException $r7;
+        java.lang.Exception $r8;
+        java.lang.String varReplacer4628;
+
+        nop;
+
+        r6 := @this: org.apache.xml.security.stax.impl.processor.input.XMLEncryptedKeyInputHandler;
+
+        r1 := @parameter0: byte[];
+
+     label1:
+        varReplacer4628 = "SHA-1";
+
+        $r0 = staticinvoke <java.security.MessageDigest: java.security.MessageDigest getInstance(java.lang.String)>(varReplacer4628);
+
+        $r2 = virtualinvoke $r0.<java.security.MessageDigest: byte[] digest(byte[])>(r1);
+
+     label2:
+        return $r2;
+
+     label3:
+        $r3 := @caughtexception;
+
+        r4 = $r3;
+
+        $r7 = new org.apache.xml.security.exceptions.XMLSecurityException;
+
+        $r8 = (java.lang.Exception) r4;
+
+        specialinvoke $r7.<org.apache.xml.security.exceptions.XMLSecurityException: void <init>(java.lang.Exception)>($r8);
+
+        throw $r7;
+
+        catch java.security.NoSuchAlgorithmException from label1 to label2 with label3;
+    }
+
+    protected void handleReferenceList(org.apache.xml.security.stax.ext.InputProcessorChain, org.apache.xml.security.binding.xmlenc.EncryptedKeyType, org.apache.xml.security.stax.ext.XMLSecurityProperties) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.stax.impl.processor.input.XMLEncryptedKeyInputHandler r0;
+        org.apache.xml.security.stax.ext.InputProcessorChain r1;
+        org.apache.xml.security.binding.xmlenc.EncryptedKeyType r2;
+        org.apache.xml.security.stax.ext.XMLSecurityProperties r3;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.input.XMLEncryptedKeyInputHandler;
+
+        r1 := @parameter0: org.apache.xml.security.stax.ext.InputProcessorChain;
+
+        r2 := @parameter1: org.apache.xml.security.binding.xmlenc.EncryptedKeyType;
+
+        r3 := @parameter2: org.apache.xml.security.stax.ext.XMLSecurityProperties;
+
+        return;
+    }
+
+    static byte[] access$000(org.apache.xml.security.stax.impl.processor.input.XMLEncryptedKeyInputHandler, byte[]) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.stax.impl.processor.input.XMLEncryptedKeyInputHandler r0;
+        byte[] r1, $r2;
+
+        nop;
+
+        r0 := @parameter0: org.apache.xml.security.stax.impl.processor.input.XMLEncryptedKeyInputHandler;
+
+        r1 := @parameter1: byte[];
+
+        $r2 = specialinvoke r0.<org.apache.xml.security.stax.impl.processor.input.XMLEncryptedKeyInputHandler: byte[] generateDigest(byte[])>(r1);
+
+        return $r2;
+    }
+
+    static org.slf4j.Logger access$100()
+    {
+        org.slf4j.Logger $r0;
+
+        nop;
+
+        $r0 = <org.apache.xml.security.stax.impl.processor.input.XMLEncryptedKeyInputHandler: org.slf4j.Logger logger>;
+
+        return $r0;
+    }
+
+    static void <clinit>()
+    {
+        org.slf4j.Logger $r0;
+
+        nop;
+
+        $r0 = staticinvoke <org.slf4j.LoggerFactory: org.slf4j.Logger getLogger(java.lang.Class)>(class "Lorg/apache/xml/security/stax/impl/processor/input/XMLEncryptedKeyInputHandler;");
+
+        <org.apache.xml.security.stax.impl.processor.input.XMLEncryptedKeyInputHandler: org.slf4j.Logger logger> = $r0;
+
+        return;
+    }
+}

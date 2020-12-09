@@ -1,0 +1,650 @@
+public class org.apache.xml.security.stax.ext.OutboundXMLSec extends java.lang.Object
+{
+    private final org.apache.xml.security.stax.ext.XMLSecurityProperties securityProperties;
+
+    public void <init>(org.apache.xml.security.stax.ext.XMLSecurityProperties)
+    {
+        org.apache.xml.security.stax.ext.OutboundXMLSec r0;
+        org.apache.xml.security.stax.ext.XMLSecurityProperties r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.ext.OutboundXMLSec;
+
+        r1 := @parameter0: org.apache.xml.security.stax.ext.XMLSecurityProperties;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        r0.<org.apache.xml.security.stax.ext.OutboundXMLSec: org.apache.xml.security.stax.ext.XMLSecurityProperties securityProperties> = r1;
+
+        return;
+    }
+
+    public javax.xml.stream.XMLStreamWriter processOutMessage(java.io.OutputStream, java.lang.String) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.stax.ext.OutboundXMLSec r0;
+        java.io.OutputStream r1;
+        java.lang.String r2;
+        javax.xml.stream.XMLStreamWriter $r3;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.ext.OutboundXMLSec;
+
+        r1 := @parameter0: java.io.OutputStream;
+
+        r2 := @parameter1: java.lang.String;
+
+        $r3 = specialinvoke r0.<org.apache.xml.security.stax.ext.OutboundXMLSec: javax.xml.stream.XMLStreamWriter processOutMessage(java.lang.Object,java.lang.String)>(r1, r2);
+
+        return $r3;
+    }
+
+    public javax.xml.stream.XMLStreamWriter processOutMessage(javax.xml.stream.XMLStreamWriter, java.lang.String) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.stax.ext.OutboundXMLSec r0;
+        javax.xml.stream.XMLStreamWriter r1, $r3;
+        java.lang.String r2;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.ext.OutboundXMLSec;
+
+        r1 := @parameter0: javax.xml.stream.XMLStreamWriter;
+
+        r2 := @parameter1: java.lang.String;
+
+        $r3 = specialinvoke r0.<org.apache.xml.security.stax.ext.OutboundXMLSec: javax.xml.stream.XMLStreamWriter processOutMessage(java.lang.Object,java.lang.String)>(r1, r2);
+
+        return $r3;
+    }
+
+    private javax.xml.stream.XMLStreamWriter processOutMessage(java.lang.Object, java.lang.String) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.stax.impl.OutboundSecurityContextImpl $r0, r1;
+        org.apache.xml.security.stax.impl.DocumentContextImpl $r2, r3;
+        java.lang.String r4, $r15, $r28, $r29, $r31, $r38, $r39, $r41, varReplacer3744, varReplacer3746, varReplacer3747, varReplacer3748, varReplacer3749;
+        org.apache.xml.security.stax.impl.OutputProcessorChainImpl $r5, r6;
+        org.apache.xml.security.stax.ext.OutboundXMLSec r7;
+        org.apache.xml.security.stax.ext.XMLSecurityProperties $r8, $r26, $r36;
+        java.util.List $r9, r49, r52;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6;
+        java.lang.Object r10, $r21, $r27, $r37;
+        java.lang.IllegalArgumentException $r11;
+        java.lang.StringBuilder $r12, $r13, $r14;
+        org.apache.xml.security.stax.impl.processor.output.FinalOutputProcessor $r16, $r19, r54, r55;
+        javax.xml.stream.XMLStreamWriter $r17;
+        org.apache.xml.security.stax.impl.XMLSecurityStreamWriter $r18, r56;
+        java.io.OutputStream $r20;
+        org.apache.xml.security.stax.ext.XMLSecurityConstants$Action r22, $r23, $r24;
+        org.apache.xml.security.stax.impl.processor.output.XMLEncryptOutputProcessor $r25, r51;
+        int $i0, $i1, i2, i3;
+        org.apache.xml.security.stax.ext.OutboundSecurityContext $r30, $r33, $r40, $r43;
+        javax.xml.namespace.QName $r32, $r34, $r42, $r44;
+        org.apache.xml.security.stax.impl.processor.output.XMLSignatureOutputProcessor $r35, r48;
+        org.apache.xml.security.stax.ext.SecurePart r45, r46, r50, r53;
+        java.util.Iterator r47;
+        null_type varReplacer3745, varReplacer3750;
+
+        nop;
+
+        r7 := @this: org.apache.xml.security.stax.ext.OutboundXMLSec;
+
+        r10 := @parameter0: java.lang.Object;
+
+        r4 := @parameter1: java.lang.String;
+
+        $r0 = new org.apache.xml.security.stax.impl.OutboundSecurityContextImpl;
+
+        specialinvoke $r0.<org.apache.xml.security.stax.impl.OutboundSecurityContextImpl: void <init>()>();
+
+        r1 = $r0;
+
+        $r2 = new org.apache.xml.security.stax.impl.DocumentContextImpl;
+
+        specialinvoke $r2.<org.apache.xml.security.stax.impl.DocumentContextImpl: void <init>()>();
+
+        r3 = $r2;
+
+        virtualinvoke r3.<org.apache.xml.security.stax.impl.DocumentContextImpl: void setEncoding(java.lang.String)>(r4);
+
+        $r5 = new org.apache.xml.security.stax.impl.OutputProcessorChainImpl;
+
+        specialinvoke $r5.<org.apache.xml.security.stax.impl.OutputProcessorChainImpl: void <init>(org.apache.xml.security.stax.ext.OutboundSecurityContext,org.apache.xml.security.stax.impl.DocumentContextImpl)>(r1, r3);
+
+        r6 = $r5;
+
+        r45 = null;
+
+        r46 = null;
+
+        $r8 = r7.<org.apache.xml.security.stax.ext.OutboundXMLSec: org.apache.xml.security.stax.ext.XMLSecurityProperties securityProperties>;
+
+        $r9 = virtualinvoke $r8.<org.apache.xml.security.stax.ext.XMLSecurityProperties: java.util.List getActions()>();
+
+        r47 = interfaceinvoke $r9.<java.util.List: java.util.Iterator iterator()>();
+
+     label01:
+        $z0 = interfaceinvoke r47.<java.util.Iterator: boolean hasNext()>();
+
+        if $z0 == 0 goto label13;
+
+        $r21 = interfaceinvoke r47.<java.util.Iterator: java.lang.Object next()>();
+
+        r22 = (org.apache.xml.security.stax.ext.XMLSecurityConstants$Action) $r21;
+
+        $r23 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: org.apache.xml.security.stax.ext.XMLSecurityConstants$Action SIGNATURE>;
+
+        $z3 = virtualinvoke $r23.<org.apache.xml.security.stax.ext.XMLSecurityConstants$Action: boolean equals(java.lang.Object)>(r22);
+
+        if $z3 == 0 goto label07;
+
+        $r35 = new org.apache.xml.security.stax.impl.processor.output.XMLSignatureOutputProcessor;
+
+        specialinvoke $r35.<org.apache.xml.security.stax.impl.processor.output.XMLSignatureOutputProcessor: void <init>()>();
+
+        r48 = $r35;
+
+        specialinvoke r7.<org.apache.xml.security.stax.ext.OutboundXMLSec: void initializeOutputProcessor(org.apache.xml.security.stax.impl.OutputProcessorChainImpl,org.apache.xml.security.stax.ext.OutputProcessor,org.apache.xml.security.stax.ext.XMLSecurityConstants$Action)>(r6, r48, r22);
+
+        specialinvoke r7.<org.apache.xml.security.stax.ext.OutboundXMLSec: void configureSignatureKeys(org.apache.xml.security.stax.impl.OutboundSecurityContextImpl)>(r1);
+
+        $r36 = r7.<org.apache.xml.security.stax.ext.OutboundXMLSec: org.apache.xml.security.stax.ext.XMLSecurityProperties securityProperties>;
+
+        r49 = virtualinvoke $r36.<org.apache.xml.security.stax.ext.XMLSecurityProperties: java.util.List getSignatureSecureParts()>();
+
+        i2 = 0;
+
+     label02:
+        $i1 = interfaceinvoke r49.<java.util.List: int size()>();
+
+        if i2 >= $i1 goto label06;
+
+        $r37 = interfaceinvoke r49.<java.util.List: java.lang.Object get(int)>(i2);
+
+        r50 = (org.apache.xml.security.stax.ext.SecurePart) $r37;
+
+        $r38 = virtualinvoke r50.<org.apache.xml.security.stax.ext.SecurePart: java.lang.String getIdToSign()>();
+
+        if $r38 != null goto label03;
+
+        $r42 = virtualinvoke r50.<org.apache.xml.security.stax.ext.SecurePart: javax.xml.namespace.QName getName()>();
+
+        if $r42 == null goto label03;
+
+        $r43 = virtualinvoke r6.<org.apache.xml.security.stax.impl.OutputProcessorChainImpl: org.apache.xml.security.stax.ext.OutboundSecurityContext getSecurityContext()>();
+
+        $r44 = virtualinvoke r50.<org.apache.xml.security.stax.ext.SecurePart: javax.xml.namespace.QName getName()>();
+
+        varReplacer3747 = "signatureParts";
+
+        interfaceinvoke $r43.<org.apache.xml.security.stax.ext.OutboundSecurityContext: void putAsMap(java.lang.Object,java.lang.Object,java.lang.Object)>(varReplacer3747, $r44, r50);
+
+        goto label05;
+
+     label03:
+        $r39 = virtualinvoke r50.<org.apache.xml.security.stax.ext.SecurePart: java.lang.String getIdToSign()>();
+
+        if $r39 == null goto label04;
+
+        $r40 = virtualinvoke r6.<org.apache.xml.security.stax.impl.OutputProcessorChainImpl: org.apache.xml.security.stax.ext.OutboundSecurityContext getSecurityContext()>();
+
+        $r41 = virtualinvoke r50.<org.apache.xml.security.stax.ext.SecurePart: java.lang.String getIdToSign()>();
+
+        varReplacer3749 = "signatureParts";
+
+        interfaceinvoke $r40.<org.apache.xml.security.stax.ext.OutboundSecurityContext: void putAsMap(java.lang.Object,java.lang.Object,java.lang.Object)>(varReplacer3749, $r41, r50);
+
+        goto label05;
+
+     label04:
+        $z6 = virtualinvoke r50.<org.apache.xml.security.stax.ext.SecurePart: boolean isSecureEntireRequest()>();
+
+        if $z6 == 0 goto label05;
+
+        r45 = r50;
+
+     label05:
+        i2 = i2 + 1;
+
+        goto label02;
+
+     label06:
+        goto label12;
+
+     label07:
+        $r24 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: org.apache.xml.security.stax.ext.XMLSecurityConstants$Action ENCRYPT>;
+
+        $z4 = virtualinvoke $r24.<org.apache.xml.security.stax.ext.XMLSecurityConstants$Action: boolean equals(java.lang.Object)>(r22);
+
+        if $z4 == 0 goto label12;
+
+        $r25 = new org.apache.xml.security.stax.impl.processor.output.XMLEncryptOutputProcessor;
+
+        specialinvoke $r25.<org.apache.xml.security.stax.impl.processor.output.XMLEncryptOutputProcessor: void <init>()>();
+
+        r51 = $r25;
+
+        specialinvoke r7.<org.apache.xml.security.stax.ext.OutboundXMLSec: void initializeOutputProcessor(org.apache.xml.security.stax.impl.OutputProcessorChainImpl,org.apache.xml.security.stax.ext.OutputProcessor,org.apache.xml.security.stax.ext.XMLSecurityConstants$Action)>(r6, r51, r22);
+
+        specialinvoke r7.<org.apache.xml.security.stax.ext.OutboundXMLSec: void configureEncryptionKeys(org.apache.xml.security.stax.impl.OutboundSecurityContextImpl)>(r1);
+
+        $r26 = r7.<org.apache.xml.security.stax.ext.OutboundXMLSec: org.apache.xml.security.stax.ext.XMLSecurityProperties securityProperties>;
+
+        r52 = virtualinvoke $r26.<org.apache.xml.security.stax.ext.XMLSecurityProperties: java.util.List getEncryptionSecureParts()>();
+
+        i3 = 0;
+
+     label08:
+        $i0 = interfaceinvoke r52.<java.util.List: int size()>();
+
+        if i3 >= $i0 goto label12;
+
+        $r27 = interfaceinvoke r52.<java.util.List: java.lang.Object get(int)>(i3);
+
+        r53 = (org.apache.xml.security.stax.ext.SecurePart) $r27;
+
+        $r28 = virtualinvoke r53.<org.apache.xml.security.stax.ext.SecurePart: java.lang.String getIdToSign()>();
+
+        if $r28 != null goto label09;
+
+        $r32 = virtualinvoke r53.<org.apache.xml.security.stax.ext.SecurePart: javax.xml.namespace.QName getName()>();
+
+        if $r32 == null goto label09;
+
+        $r33 = virtualinvoke r6.<org.apache.xml.security.stax.impl.OutputProcessorChainImpl: org.apache.xml.security.stax.ext.OutboundSecurityContext getSecurityContext()>();
+
+        $r34 = virtualinvoke r53.<org.apache.xml.security.stax.ext.SecurePart: javax.xml.namespace.QName getName()>();
+
+        varReplacer3748 = "encryptionParts";
+
+        interfaceinvoke $r33.<org.apache.xml.security.stax.ext.OutboundSecurityContext: void putAsMap(java.lang.Object,java.lang.Object,java.lang.Object)>(varReplacer3748, $r34, r53);
+
+        goto label11;
+
+     label09:
+        $r29 = virtualinvoke r53.<org.apache.xml.security.stax.ext.SecurePart: java.lang.String getIdToSign()>();
+
+        if $r29 == null goto label10;
+
+        $r30 = virtualinvoke r6.<org.apache.xml.security.stax.impl.OutputProcessorChainImpl: org.apache.xml.security.stax.ext.OutboundSecurityContext getSecurityContext()>();
+
+        $r31 = virtualinvoke r53.<org.apache.xml.security.stax.ext.SecurePart: java.lang.String getIdToSign()>();
+
+        varReplacer3746 = "encryptionParts";
+
+        interfaceinvoke $r30.<org.apache.xml.security.stax.ext.OutboundSecurityContext: void putAsMap(java.lang.Object,java.lang.Object,java.lang.Object)>(varReplacer3746, $r31, r53);
+
+        goto label11;
+
+     label10:
+        $z5 = virtualinvoke r53.<org.apache.xml.security.stax.ext.SecurePart: boolean isSecureEntireRequest()>();
+
+        if $z5 == 0 goto label11;
+
+        r46 = r53;
+
+     label11:
+        i3 = i3 + 1;
+
+        goto label08;
+
+     label12:
+        goto label01;
+
+     label13:
+        $z1 = r10 instanceof java.io.OutputStream;
+
+        if $z1 == 0 goto label14;
+
+        $r19 = new org.apache.xml.security.stax.impl.processor.output.FinalOutputProcessor;
+
+        $r20 = (java.io.OutputStream) r10;
+
+        specialinvoke $r19.<org.apache.xml.security.stax.impl.processor.output.FinalOutputProcessor: void <init>(java.io.OutputStream,java.lang.String)>($r20, r4);
+
+        r54 = $r19;
+
+        varReplacer3750 = null;
+
+        specialinvoke r7.<org.apache.xml.security.stax.ext.OutboundXMLSec: void initializeOutputProcessor(org.apache.xml.security.stax.impl.OutputProcessorChainImpl,org.apache.xml.security.stax.ext.OutputProcessor,org.apache.xml.security.stax.ext.XMLSecurityConstants$Action)>(r6, r54, varReplacer3750);
+
+        goto label16;
+
+     label14:
+        $z2 = r10 instanceof javax.xml.stream.XMLStreamWriter;
+
+        if $z2 == 0 goto label15;
+
+        $r16 = new org.apache.xml.security.stax.impl.processor.output.FinalOutputProcessor;
+
+        $r17 = (javax.xml.stream.XMLStreamWriter) r10;
+
+        specialinvoke $r16.<org.apache.xml.security.stax.impl.processor.output.FinalOutputProcessor: void <init>(javax.xml.stream.XMLStreamWriter)>($r17);
+
+        r55 = $r16;
+
+        varReplacer3745 = null;
+
+        specialinvoke r7.<org.apache.xml.security.stax.ext.OutboundXMLSec: void initializeOutputProcessor(org.apache.xml.security.stax.impl.OutputProcessorChainImpl,org.apache.xml.security.stax.ext.OutputProcessor,org.apache.xml.security.stax.ext.XMLSecurityConstants$Action)>(r6, r55, varReplacer3745);
+
+        goto label16;
+
+     label15:
+        $r11 = new java.lang.IllegalArgumentException;
+
+        $r12 = new java.lang.StringBuilder;
+
+        specialinvoke $r12.<java.lang.StringBuilder: void <init>()>();
+
+        $r13 = virtualinvoke $r12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(r10);
+
+        varReplacer3744 = " is not supported as output";
+
+        $r14 = virtualinvoke $r13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer3744);
+
+        $r15 = virtualinvoke $r14.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $r11.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($r15);
+
+        throw $r11;
+
+     label16:
+        $r18 = new org.apache.xml.security.stax.impl.XMLSecurityStreamWriter;
+
+        specialinvoke $r18.<org.apache.xml.security.stax.impl.XMLSecurityStreamWriter: void <init>(org.apache.xml.security.stax.ext.OutputProcessorChain)>(r6);
+
+        r56 = $r18;
+
+        virtualinvoke r56.<org.apache.xml.security.stax.impl.XMLSecurityStreamWriter: void setSignEntireRequestPart(org.apache.xml.security.stax.ext.SecurePart)>(r45);
+
+        virtualinvoke r56.<org.apache.xml.security.stax.impl.XMLSecurityStreamWriter: void setEncryptEntireRequestPart(org.apache.xml.security.stax.ext.SecurePart)>(r46);
+
+        return r56;
+    }
+
+    private void initializeOutputProcessor(org.apache.xml.security.stax.impl.OutputProcessorChainImpl, org.apache.xml.security.stax.ext.OutputProcessor, org.apache.xml.security.stax.ext.XMLSecurityConstants$Action) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.stax.ext.OutputProcessor r0;
+        org.apache.xml.security.stax.ext.OutboundXMLSec r1;
+        org.apache.xml.security.stax.ext.XMLSecurityProperties $r2;
+        org.apache.xml.security.stax.ext.XMLSecurityConstants$Action r3;
+        org.apache.xml.security.stax.impl.OutputProcessorChainImpl r4;
+
+        nop;
+
+        r1 := @this: org.apache.xml.security.stax.ext.OutboundXMLSec;
+
+        r4 := @parameter0: org.apache.xml.security.stax.impl.OutputProcessorChainImpl;
+
+        r0 := @parameter1: org.apache.xml.security.stax.ext.OutputProcessor;
+
+        r3 := @parameter2: org.apache.xml.security.stax.ext.XMLSecurityConstants$Action;
+
+        $r2 = r1.<org.apache.xml.security.stax.ext.OutboundXMLSec: org.apache.xml.security.stax.ext.XMLSecurityProperties securityProperties>;
+
+        interfaceinvoke r0.<org.apache.xml.security.stax.ext.OutputProcessor: void setXMLSecurityProperties(org.apache.xml.security.stax.ext.XMLSecurityProperties)>($r2);
+
+        interfaceinvoke r0.<org.apache.xml.security.stax.ext.OutputProcessor: void setAction(org.apache.xml.security.stax.ext.XMLSecurityConstants$Action)>(r3);
+
+        interfaceinvoke r0.<org.apache.xml.security.stax.ext.OutputProcessor: void init(org.apache.xml.security.stax.ext.OutputProcessorChain)>(r4);
+
+        return;
+    }
+
+    private void configureSignatureKeys(org.apache.xml.security.stax.impl.OutboundSecurityContextImpl) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.stax.ext.OutboundXMLSec r0;
+        org.apache.xml.security.stax.ext.XMLSecurityProperties $r1, $r3, $r10, $r14, $r19;
+        java.security.Key r2, $r12, $r15, $r20;
+        java.security.cert.X509Certificate[] r4;
+        boolean $z0, $z1;
+        java.lang.String r5, varReplacer3751, varReplacer3752, varReplacer3753;
+        org.apache.xml.security.stax.impl.securityToken.GenericOutboundSecurityToken r6, $r11, $r17;
+        org.apache.xml.security.stax.ext.OutboundXMLSec$1 $r7, r8;
+        org.apache.xml.security.stax.impl.OutboundSecurityContextImpl r9;
+        java.security.PublicKey $r13;
+        org.apache.xml.security.exceptions.XMLSecurityException $r16;
+        int $i0;
+        org.apache.xml.security.stax.securityToken.SecurityTokenConstants$TokenType $r18;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.ext.OutboundXMLSec;
+
+        r9 := @parameter0: org.apache.xml.security.stax.impl.OutboundSecurityContextImpl;
+
+        $r1 = r0.<org.apache.xml.security.stax.ext.OutboundXMLSec: org.apache.xml.security.stax.ext.XMLSecurityProperties securityProperties>;
+
+        r2 = virtualinvoke $r1.<org.apache.xml.security.stax.ext.XMLSecurityProperties: java.security.Key getSignatureKey()>();
+
+        $r3 = r0.<org.apache.xml.security.stax.ext.OutboundXMLSec: org.apache.xml.security.stax.ext.XMLSecurityProperties securityProperties>;
+
+        r4 = virtualinvoke $r3.<org.apache.xml.security.stax.ext.XMLSecurityProperties: java.security.cert.X509Certificate[] getSignatureCerts()>();
+
+        $z0 = r2 instanceof java.security.PrivateKey;
+
+        if $z0 == 0 goto label2;
+
+        if r4 == null goto label1;
+
+        $i0 = lengthof r4;
+
+        if $i0 != 0 goto label2;
+
+     label1:
+        $r14 = r0.<org.apache.xml.security.stax.ext.OutboundXMLSec: org.apache.xml.security.stax.ext.XMLSecurityProperties securityProperties>;
+
+        $r15 = virtualinvoke $r14.<org.apache.xml.security.stax.ext.XMLSecurityProperties: java.security.Key getSignatureVerificationKey()>();
+
+        if $r15 != null goto label2;
+
+        $r16 = new org.apache.xml.security.exceptions.XMLSecurityException;
+
+        varReplacer3751 = "stax.signature.publicKeyOrCertificateMissing";
+
+        specialinvoke $r16.<org.apache.xml.security.exceptions.XMLSecurityException: void <init>(java.lang.String)>(varReplacer3751);
+
+        throw $r16;
+
+     label2:
+        varReplacer3753 = "SIG";
+
+        r5 = staticinvoke <org.apache.xml.security.stax.impl.util.IDGenerator: java.lang.String generateID(java.lang.String)>(varReplacer3753);
+
+        $r17 = new org.apache.xml.security.stax.impl.securityToken.GenericOutboundSecurityToken;
+
+        $r18 = <org.apache.xml.security.stax.securityToken.SecurityTokenConstants: org.apache.xml.security.stax.securityToken.SecurityTokenConstants$TokenType DefaultToken>;
+
+        specialinvoke $r17.<org.apache.xml.security.stax.impl.securityToken.GenericOutboundSecurityToken: void <init>(java.lang.String,org.apache.xml.security.stax.securityToken.SecurityTokenConstants$TokenType,java.security.Key,java.security.cert.X509Certificate[])>(r5, $r18, r2, r4);
+
+        r6 = $r17;
+
+        $r19 = r0.<org.apache.xml.security.stax.ext.OutboundXMLSec: org.apache.xml.security.stax.ext.XMLSecurityProperties securityProperties>;
+
+        $r20 = virtualinvoke $r19.<org.apache.xml.security.stax.ext.XMLSecurityProperties: java.security.Key getSignatureVerificationKey()>();
+
+        $z1 = $r20 instanceof java.security.PublicKey;
+
+        if $z1 == 0 goto label3;
+
+        $r11 = (org.apache.xml.security.stax.impl.securityToken.GenericOutboundSecurityToken) r6;
+
+        $r10 = r0.<org.apache.xml.security.stax.ext.OutboundXMLSec: org.apache.xml.security.stax.ext.XMLSecurityProperties securityProperties>;
+
+        $r12 = virtualinvoke $r10.<org.apache.xml.security.stax.ext.XMLSecurityProperties: java.security.Key getSignatureVerificationKey()>();
+
+        $r13 = (java.security.PublicKey) $r12;
+
+        virtualinvoke $r11.<org.apache.xml.security.stax.impl.securityToken.GenericOutboundSecurityToken: void setPublicKey(java.security.PublicKey)>($r13);
+
+     label3:
+        $r7 = new org.apache.xml.security.stax.ext.OutboundXMLSec$1;
+
+        specialinvoke $r7.<org.apache.xml.security.stax.ext.OutboundXMLSec$1: void <init>(org.apache.xml.security.stax.ext.OutboundXMLSec,org.apache.xml.security.stax.securityToken.OutboundSecurityToken,java.lang.String)>(r0, r6, r5);
+
+        r8 = $r7;
+
+        virtualinvoke r9.<org.apache.xml.security.stax.impl.OutboundSecurityContextImpl: void registerSecurityTokenProvider(java.lang.String,org.apache.xml.security.stax.securityToken.SecurityTokenProvider)>(r5, r8);
+
+        varReplacer3752 = "PROP_USE_THIS_TOKEN_ID_FOR_SIGNATURE";
+
+        virtualinvoke r9.<org.apache.xml.security.stax.impl.OutboundSecurityContextImpl: void put(java.lang.String,java.lang.Object)>(varReplacer3752, r5);
+
+        return;
+    }
+
+    private void configureEncryptionKeys(org.apache.xml.security.stax.impl.OutboundSecurityContextImpl) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.stax.ext.OutboundXMLSec r0;
+        org.apache.xml.security.stax.ext.XMLSecurityProperties $r1, $r3, $r9, $r11, $r13;
+        java.security.Key r2, $r36;
+        java.security.cert.X509Certificate r4;
+        java.lang.String $r6, $r12, $r14, r21, r24, varReplacer3755, varReplacer3756, varReplacer3758;
+        org.apache.xml.security.stax.securityToken.SecurityTokenConstants$TokenType $r7, $r26;
+        org.apache.xml.security.stax.impl.securityToken.GenericOutboundSecurityToken r8, r27, $r30, $r33;
+        org.apache.xml.security.stax.impl.OutboundSecurityContextImpl r10;
+        boolean $z0;
+        java.security.cert.X509Certificate[] $r16, r19;
+        java.lang.Throwable $r17, r23;
+        java.lang.Object r20;
+        javax.crypto.KeyGenerator r22;
+        int i0;
+        org.apache.xml.security.stax.ext.OutboundXMLSec$2 r29, $r34;
+        org.apache.xml.security.exceptions.XMLSecurityException $r31, $r32;
+        java.lang.Exception $r35;
+        null_type varReplacer3754, varReplacer3757;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.ext.OutboundXMLSec;
+
+        r10 := @parameter0: org.apache.xml.security.stax.impl.OutboundSecurityContextImpl;
+
+        $r1 = r0.<org.apache.xml.security.stax.ext.OutboundXMLSec: org.apache.xml.security.stax.ext.XMLSecurityProperties securityProperties>;
+
+        r2 = virtualinvoke $r1.<org.apache.xml.security.stax.ext.XMLSecurityProperties: java.security.Key getEncryptionTransportKey()>();
+
+        $r3 = r0.<org.apache.xml.security.stax.ext.OutboundXMLSec: org.apache.xml.security.stax.ext.XMLSecurityProperties securityProperties>;
+
+        r4 = virtualinvoke $r3.<org.apache.xml.security.stax.ext.XMLSecurityProperties: java.security.cert.X509Certificate getEncryptionUseThisCertificate()>();
+
+        r19 = null;
+
+        if r4 == null goto label1;
+
+        $r16 = newarray (java.security.cert.X509Certificate)[1];
+
+        $r16[0] = r4;
+
+        r19 = $r16;
+
+     label1:
+        $r30 = new org.apache.xml.security.stax.impl.securityToken.GenericOutboundSecurityToken;
+
+        varReplacer3757 = null;
+
+        $r6 = staticinvoke <org.apache.xml.security.stax.impl.util.IDGenerator: java.lang.String generateID(java.lang.String)>(varReplacer3757);
+
+        $r7 = <org.apache.xml.security.stax.securityToken.SecurityTokenConstants: org.apache.xml.security.stax.securityToken.SecurityTokenConstants$TokenType DefaultToken>;
+
+        specialinvoke $r30.<org.apache.xml.security.stax.impl.securityToken.GenericOutboundSecurityToken: void <init>(java.lang.String,org.apache.xml.security.stax.securityToken.SecurityTokenConstants$TokenType,java.security.Key,java.security.cert.X509Certificate[])>($r6, $r7, r2, r19);
+
+        r8 = $r30;
+
+        $r9 = r0.<org.apache.xml.security.stax.ext.OutboundXMLSec: org.apache.xml.security.stax.ext.XMLSecurityProperties securityProperties>;
+
+        r20 = virtualinvoke $r9.<org.apache.xml.security.stax.ext.XMLSecurityProperties: java.security.Key getEncryptionKey()>();
+
+        if r20 != null goto label8;
+
+        if r4 != null goto label2;
+
+        if r2 != null goto label2;
+
+        $r31 = new org.apache.xml.security.exceptions.XMLSecurityException;
+
+        varReplacer3756 = "stax.encryption.encryptionKeyMissing";
+
+        specialinvoke $r31.<org.apache.xml.security.exceptions.XMLSecurityException: void <init>(java.lang.String)>(varReplacer3756);
+
+        throw $r31;
+
+     label2:
+        $r11 = r0.<org.apache.xml.security.stax.ext.OutboundXMLSec: org.apache.xml.security.stax.ext.XMLSecurityProperties securityProperties>;
+
+        $r12 = virtualinvoke $r11.<org.apache.xml.security.stax.ext.XMLSecurityProperties: java.lang.String getEncryptionSymAlgorithm()>();
+
+        r21 = staticinvoke <org.apache.xml.security.stax.config.JCEAlgorithmMapper: java.lang.String getJCEKeyAlgorithmFromURI(java.lang.String)>($r12);
+
+     label3:
+        r22 = staticinvoke <javax.crypto.KeyGenerator: javax.crypto.KeyGenerator getInstance(java.lang.String)>(r21);
+
+     label4:
+        goto label6;
+
+     label5:
+        $r17 := @caughtexception;
+
+        r23 = $r17;
+
+        $r32 = new org.apache.xml.security.exceptions.XMLSecurityException;
+
+        $r35 = (java.lang.Exception) r23;
+
+        specialinvoke $r32.<org.apache.xml.security.exceptions.XMLSecurityException: void <init>(java.lang.Exception)>($r35);
+
+        throw $r32;
+
+     label6:
+        varReplacer3755 = "AES";
+
+        $z0 = virtualinvoke r21.<java.lang.String: boolean contains(java.lang.CharSequence)>(varReplacer3755);
+
+        if $z0 == 0 goto label7;
+
+        $r13 = r0.<org.apache.xml.security.stax.ext.OutboundXMLSec: org.apache.xml.security.stax.ext.XMLSecurityProperties securityProperties>;
+
+        $r14 = virtualinvoke $r13.<org.apache.xml.security.stax.ext.XMLSecurityProperties: java.lang.String getEncryptionSymAlgorithm()>();
+
+        i0 = staticinvoke <org.apache.xml.security.stax.config.JCEAlgorithmMapper: int getKeyLengthFromURI(java.lang.String)>($r14);
+
+        virtualinvoke r22.<javax.crypto.KeyGenerator: void init(int)>(i0);
+
+     label7:
+        r20 = virtualinvoke r22.<javax.crypto.KeyGenerator: javax.crypto.SecretKey generateKey()>();
+
+     label8:
+        varReplacer3754 = null;
+
+        r24 = staticinvoke <org.apache.xml.security.stax.impl.util.IDGenerator: java.lang.String generateID(java.lang.String)>(varReplacer3754);
+
+        $r33 = new org.apache.xml.security.stax.impl.securityToken.GenericOutboundSecurityToken;
+
+        $r26 = <org.apache.xml.security.stax.securityToken.SecurityTokenConstants: org.apache.xml.security.stax.securityToken.SecurityTokenConstants$TokenType DefaultToken>;
+
+        $r36 = (java.security.Key) r20;
+
+        specialinvoke $r33.<org.apache.xml.security.stax.impl.securityToken.GenericOutboundSecurityToken: void <init>(java.lang.String,org.apache.xml.security.stax.securityToken.SecurityTokenConstants$TokenType,java.security.Key)>(r24, $r26, $r36);
+
+        r27 = $r33;
+
+        virtualinvoke r27.<org.apache.xml.security.stax.impl.securityToken.GenericOutboundSecurityToken: void setKeyWrappingToken(org.apache.xml.security.stax.securityToken.OutboundSecurityToken)>(r8);
+
+        $r34 = new org.apache.xml.security.stax.ext.OutboundXMLSec$2;
+
+        specialinvoke $r34.<org.apache.xml.security.stax.ext.OutboundXMLSec$2: void <init>(org.apache.xml.security.stax.ext.OutboundXMLSec,org.apache.xml.security.stax.impl.securityToken.GenericOutboundSecurityToken,java.lang.String)>(r0, r27, r24);
+
+        r29 = $r34;
+
+        virtualinvoke r10.<org.apache.xml.security.stax.impl.OutboundSecurityContextImpl: void registerSecurityTokenProvider(java.lang.String,org.apache.xml.security.stax.securityToken.SecurityTokenProvider)>(r24, r29);
+
+        varReplacer3758 = "PROP_USE_THIS_TOKEN_ID_FOR_ENCRYPTION";
+
+        virtualinvoke r10.<org.apache.xml.security.stax.impl.OutboundSecurityContextImpl: void put(java.lang.String,java.lang.Object)>(varReplacer3758, r24);
+
+        return;
+
+        catch java.security.NoSuchAlgorithmException from label3 to label4 with label5;
+    }
+}

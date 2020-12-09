@@ -1,0 +1,635 @@
+public abstract class org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider extends org.apache.sshd.common.keyprovider.AbstractKeyPairProvider
+{
+    private java.lang.String path;
+    private java.lang.String algorithm;
+    private int keySize;
+    private java.security.spec.AlgorithmParameterSpec keySpec;
+    private java.security.KeyPair keyPair;
+    private boolean overwriteAllowed;
+
+    protected void <init>()
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        java.lang.String varReplacer2429;
+        int varReplacer2430;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        specialinvoke r0.<org.apache.sshd.common.keyprovider.AbstractKeyPairProvider: void <init>()>();
+
+        varReplacer2429 = "DSA";
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.lang.String algorithm> = varReplacer2429;
+
+        varReplacer2430 = 1;
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: boolean overwriteAllowed> = varReplacer2430;
+
+        return;
+    }
+
+    protected void <init>(java.lang.String)
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        java.lang.String r1, varReplacer2432;
+        int varReplacer2431;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        r1 := @parameter0: java.lang.String;
+
+        specialinvoke r0.<org.apache.sshd.common.keyprovider.AbstractKeyPairProvider: void <init>()>();
+
+        varReplacer2432 = "DSA";
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.lang.String algorithm> = varReplacer2432;
+
+        varReplacer2431 = 1;
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: boolean overwriteAllowed> = varReplacer2431;
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.lang.String path> = r1;
+
+        return;
+    }
+
+    protected void <init>(java.lang.String, java.lang.String)
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        java.lang.String r1, r2, varReplacer2434;
+        int varReplacer2433;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        r1 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: java.lang.String;
+
+        specialinvoke r0.<org.apache.sshd.common.keyprovider.AbstractKeyPairProvider: void <init>()>();
+
+        varReplacer2434 = "DSA";
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.lang.String algorithm> = varReplacer2434;
+
+        varReplacer2433 = 1;
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: boolean overwriteAllowed> = varReplacer2433;
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.lang.String path> = r1;
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.lang.String algorithm> = r2;
+
+        return;
+    }
+
+    protected void <init>(java.lang.String, java.lang.String, int)
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        java.lang.String r1, r2, varReplacer2436;
+        int i0, varReplacer2435;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        r1 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: java.lang.String;
+
+        i0 := @parameter2: int;
+
+        specialinvoke r0.<org.apache.sshd.common.keyprovider.AbstractKeyPairProvider: void <init>()>();
+
+        varReplacer2436 = "DSA";
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.lang.String algorithm> = varReplacer2436;
+
+        varReplacer2435 = 1;
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: boolean overwriteAllowed> = varReplacer2435;
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.lang.String path> = r1;
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.lang.String algorithm> = r2;
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: int keySize> = i0;
+
+        return;
+    }
+
+    public java.lang.String getPath()
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        java.lang.String $r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        $r1 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.lang.String path>;
+
+        return $r1;
+    }
+
+    public void setPath(java.lang.String)
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        java.lang.String r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        r1 := @parameter0: java.lang.String;
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.lang.String path> = r1;
+
+        return;
+    }
+
+    public java.lang.String getAlgorithm()
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        java.lang.String $r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        $r1 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.lang.String algorithm>;
+
+        return $r1;
+    }
+
+    public void setAlgorithm(java.lang.String)
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        java.lang.String r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        r1 := @parameter0: java.lang.String;
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.lang.String algorithm> = r1;
+
+        return;
+    }
+
+    public int getKeySize()
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        int $i0;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        $i0 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: int keySize>;
+
+        return $i0;
+    }
+
+    public void setKeySize(int)
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        int i0;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        i0 := @parameter0: int;
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: int keySize> = i0;
+
+        return;
+    }
+
+    public java.security.spec.AlgorithmParameterSpec getKeySpec()
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        java.security.spec.AlgorithmParameterSpec $r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        $r1 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.spec.AlgorithmParameterSpec keySpec>;
+
+        return $r1;
+    }
+
+    public void setKeySpec(java.security.spec.AlgorithmParameterSpec)
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        java.security.spec.AlgorithmParameterSpec r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        r1 := @parameter0: java.security.spec.AlgorithmParameterSpec;
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.spec.AlgorithmParameterSpec keySpec> = r1;
+
+        return;
+    }
+
+    public boolean isOverwriteAllowed()
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        boolean $z0;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        $z0 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: boolean overwriteAllowed>;
+
+        return $z0;
+    }
+
+    public void setOverwriteAllowed(boolean)
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        boolean z0;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        z0 := @parameter0: boolean;
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: boolean overwriteAllowed> = z0;
+
+        return;
+    }
+
+    protected abstract java.security.KeyPair doReadKeyPair(java.io.InputStream) throws java.lang.Exception;
+
+    protected abstract void doWriteKeyPair(java.security.KeyPair, java.io.OutputStream) throws java.lang.Exception;
+
+    public synchronized java.lang.Iterable loadKeys()
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        java.security.KeyPair $r1, $r2, $r7, $r8, $r12, $r16, $r17, $r18;
+        java.util.Set $r3;
+        java.lang.String $r4, $r6, $r9, $r11, $r14;
+        java.util.List $r5;
+        java.io.File $r10, $r13, r15;
+        boolean $z0, $z1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        $r1 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.KeyPair keyPair>;
+
+        if $r1 != null goto label3;
+
+        $r4 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.lang.String path>;
+
+        if $r4 == null goto label1;
+
+        $r13 = new java.io.File;
+
+        $r14 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.lang.String path>;
+
+        specialinvoke $r13.<java.io.File: void <init>(java.lang.String)>($r14);
+
+        r15 = $r13;
+
+        $z0 = virtualinvoke r15.<java.io.File: boolean exists()>();
+
+        if $z0 == 0 goto label1;
+
+        $z1 = virtualinvoke r15.<java.io.File: boolean isFile()>();
+
+        if $z1 == 0 goto label1;
+
+        $r16 = specialinvoke r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.KeyPair readKeyPair(java.io.File)>(r15);
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.KeyPair keyPair> = $r16;
+
+     label1:
+        $r17 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.KeyPair keyPair>;
+
+        if $r17 != null goto label2;
+
+        $r6 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.lang.String algorithm>;
+
+        $r7 = specialinvoke r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.KeyPair generateKeyPair(java.lang.String)>($r6);
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.KeyPair keyPair> = $r7;
+
+        $r8 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.KeyPair keyPair>;
+
+        if $r8 == null goto label2;
+
+        $r9 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.lang.String path>;
+
+        if $r9 == null goto label2;
+
+        $r12 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.KeyPair keyPair>;
+
+        $r10 = new java.io.File;
+
+        $r11 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.lang.String path>;
+
+        specialinvoke $r10.<java.io.File: void <init>(java.lang.String)>($r11);
+
+        specialinvoke r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: void writeKeyPair(java.security.KeyPair,java.io.File)>($r12, $r10);
+
+     label2:
+        $r18 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.KeyPair keyPair>;
+
+        if $r18 != null goto label3;
+
+        $r5 = staticinvoke <java.util.Collections: java.util.List emptyList()>();
+
+        return $r5;
+
+     label3:
+        $r2 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.KeyPair keyPair>;
+
+        $r3 = staticinvoke <java.util.Collections: java.util.Set singleton(java.lang.Object)>($r2);
+
+        return $r3;
+    }
+
+    private java.security.KeyPair readKeyPair(java.io.File)
+    {
+        java.io.FileInputStream $r0, r8;
+        java.io.File r1;
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r2;
+        java.lang.Throwable $r3, r4;
+        java.lang.Exception $r5, r10;
+        java.lang.String $r6, varReplacer2438;
+        org.slf4j.Logger $r7;
+        java.security.KeyPair r9;
+        null_type varReplacer2437;
+
+        nop;
+
+        r2 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        r1 := @parameter0: java.io.File;
+
+        r8 = null;
+
+     label1:
+        $r0 = new java.io.FileInputStream;
+
+        specialinvoke $r0.<java.io.FileInputStream: void <init>(java.io.File)>(r1);
+
+        r8 = $r0;
+
+        r9 = virtualinvoke r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.KeyPair doReadKeyPair(java.io.InputStream)>(r8);
+
+     label2:
+        specialinvoke r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: void close(java.io.Closeable)>(r8);
+
+        return r9;
+
+     label3:
+        $r5 := @caughtexception;
+
+        r10 = $r5;
+
+        $r7 = r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $r6 = r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.lang.String path>;
+
+        varReplacer2438 = "Unable to read key {}: {}";
+
+        interfaceinvoke $r7.<org.slf4j.Logger: void warn(java.lang.String,java.lang.Object,java.lang.Object)>(varReplacer2438, $r6, r10);
+
+     label4:
+        specialinvoke r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: void close(java.io.Closeable)>(r8);
+
+        goto label7;
+
+     label5:
+        $r3 := @caughtexception;
+
+        r4 = $r3;
+
+     label6:
+        specialinvoke r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: void close(java.io.Closeable)>(r8);
+
+        throw r4;
+
+     label7:
+        varReplacer2437 = null;
+
+        return varReplacer2437;
+
+        catch java.lang.Exception from label1 to label2 with label3;
+        catch java.lang.Throwable from label1 to label2 with label5;
+        catch java.lang.Throwable from label3 to label4 with label5;
+        catch java.lang.Throwable from label5 to label6 with label5;
+    }
+
+    private void writeKeyPair(java.security.KeyPair, java.io.File)
+    {
+        java.io.File r0;
+        boolean $z0, $z1;
+        java.io.FileOutputStream $r1, r12;
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r2;
+        java.security.KeyPair r3;
+        org.slf4j.Logger $r4, $r11;
+        java.lang.String $r5, $r10, varReplacer2439, varReplacer2440;
+        java.lang.Throwable $r6, r7;
+        java.lang.Exception $r8, r9;
+
+        nop;
+
+        r2 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        r3 := @parameter0: java.security.KeyPair;
+
+        r0 := @parameter1: java.io.File;
+
+        $z0 = virtualinvoke r0.<java.io.File: boolean exists()>();
+
+        if $z0 == 0 goto label01;
+
+        $z1 = r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: boolean overwriteAllowed>;
+
+        if $z1 == 0 goto label09;
+
+     label01:
+        r12 = null;
+
+     label02:
+        $r1 = new java.io.FileOutputStream;
+
+        specialinvoke $r1.<java.io.FileOutputStream: void <init>(java.io.File)>(r0);
+
+        r12 = $r1;
+
+        virtualinvoke r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: void doWriteKeyPair(java.security.KeyPair,java.io.OutputStream)>(r3, r12);
+
+     label03:
+        specialinvoke r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: void close(java.io.Closeable)>(r12);
+
+        goto label08;
+
+     label04:
+        $r8 := @caughtexception;
+
+        r9 = $r8;
+
+        $r11 = r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $r10 = r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.lang.String path>;
+
+        varReplacer2439 = "Unable to write key {}: {}";
+
+        interfaceinvoke $r11.<org.slf4j.Logger: void warn(java.lang.String,java.lang.Object,java.lang.Object)>(varReplacer2439, $r10, r9);
+
+     label05:
+        specialinvoke r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: void close(java.io.Closeable)>(r12);
+
+        goto label08;
+
+     label06:
+        $r6 := @caughtexception;
+
+        r7 = $r6;
+
+     label07:
+        specialinvoke r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: void close(java.io.Closeable)>(r12);
+
+        throw r7;
+
+     label08:
+        goto label10;
+
+     label09:
+        $r4 = r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $r5 = virtualinvoke r0.<java.io.File: java.lang.String getName()>();
+
+        varReplacer2440 = "Overwriting key ({}) is disabled: using throwaway {}";
+
+        interfaceinvoke $r4.<org.slf4j.Logger: void error(java.lang.String,java.lang.Object,java.lang.Object)>(varReplacer2440, $r5, r3);
+
+     label10:
+        return;
+
+        catch java.lang.Exception from label02 to label03 with label04;
+        catch java.lang.Throwable from label02 to label03 with label06;
+        catch java.lang.Throwable from label04 to label05 with label06;
+        catch java.lang.Throwable from label06 to label07 with label06;
+    }
+
+    private java.security.KeyPair generateKeyPair(java.lang.String)
+    {
+        java.lang.String r0, varReplacer2441, varReplacer2442;
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r1;
+        java.security.spec.AlgorithmParameterSpec $r2, $r4;
+        int $i0, $i1;
+        java.security.KeyPair r3;
+        java.lang.Exception $r5, r10;
+        org.slf4j.Logger $r6, $r8;
+        java.security.KeyPairGenerator r7;
+        null_type varReplacer2443;
+
+        nop;
+
+        r1 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        r0 := @parameter0: java.lang.String;
+
+     label1:
+        r7 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.security.KeyPairGenerator getKeyPairGenerator(java.lang.String)>(r0);
+
+        $r2 = r1.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.spec.AlgorithmParameterSpec keySpec>;
+
+        if $r2 == null goto label2;
+
+        $r4 = r1.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.spec.AlgorithmParameterSpec keySpec>;
+
+        virtualinvoke r7.<java.security.KeyPairGenerator: void initialize(java.security.spec.AlgorithmParameterSpec)>($r4);
+
+        goto label3;
+
+     label2:
+        $i0 = r1.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: int keySize>;
+
+        if $i0 == 0 goto label3;
+
+        $i1 = r1.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: int keySize>;
+
+        virtualinvoke r7.<java.security.KeyPairGenerator: void initialize(int)>($i1);
+
+     label3:
+        $r8 = r1.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        varReplacer2441 = "Generating host key...";
+
+        interfaceinvoke $r8.<org.slf4j.Logger: void info(java.lang.String)>(varReplacer2441);
+
+        r3 = virtualinvoke r7.<java.security.KeyPairGenerator: java.security.KeyPair generateKeyPair()>();
+
+     label4:
+        return r3;
+
+     label5:
+        $r5 := @caughtexception;
+
+        r10 = $r5;
+
+        $r6 = r1.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        varReplacer2442 = "Unable to generate keypair";
+
+        interfaceinvoke $r6.<org.slf4j.Logger: void warn(java.lang.String,java.lang.Throwable)>(varReplacer2442, r10);
+
+        varReplacer2443 = null;
+
+        return varReplacer2443;
+
+        catch java.lang.Exception from label1 to label4 with label5;
+    }
+
+    private void close(java.io.Closeable)
+    {
+        java.io.Closeable r0;
+        java.lang.Throwable $r1, r2;
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r3;
+
+        nop;
+
+        r3 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        r0 := @parameter0: java.io.Closeable;
+
+     label1:
+        if r0 == null goto label2;
+
+        interfaceinvoke r0.<java.io.Closeable: void close()>();
+
+     label2:
+        goto label4;
+
+     label3:
+        $r1 := @caughtexception;
+
+        r2 = $r1;
+
+     label4:
+        return;
+
+        catch java.io.IOException from label1 to label2 with label3;
+    }
+}

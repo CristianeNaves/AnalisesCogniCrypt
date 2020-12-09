@@ -1,0 +1,783 @@
+final class org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC extends org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue
+{
+    private static final java.lang.String VER;
+    private static final boolean AT_LEAST_18;
+    private byte[] ecPublicKey;
+    private java.security.KeyFactory eckf;
+    private java.security.spec.ECParameterSpec ecParams;
+    private java.lang.reflect.Method encodePoint;
+    private java.lang.reflect.Method decodePoint;
+
+    void <init>(java.security.interfaces.ECPublicKey) throws java.security.KeyException
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC r0;
+        java.security.interfaces.ECPublicKey r1;
+        java.security.spec.ECPoint r2;
+        java.security.spec.ECParameterSpec $r3, $r7;
+        java.lang.Object[] $r6, r21;
+        java.security.spec.EllipticCurve $r8;
+        java.lang.reflect.Method $r9;
+        java.lang.Object $r10;
+        byte[] $r11, $r12;
+        java.lang.Throwable $r13, $r15, $r17, r20, r22, r23;
+        java.lang.Exception $r19;
+        org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC$1 $r24;
+        java.security.KeyException $r25, $r26, $r27;
+        java.security.PrivilegedActionException $r28;
+        java.lang.String varReplacer257;
+        null_type varReplacer258;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC;
+
+        r1 := @parameter0: java.security.interfaces.ECPublicKey;
+
+        specialinvoke r0.<org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue: void <init>(java.security.PublicKey)>(r1);
+
+        r2 = interfaceinvoke r1.<java.security.interfaces.ECPublicKey: java.security.spec.ECPoint getW()>();
+
+        $r3 = interfaceinvoke r1.<java.security.interfaces.ECPublicKey: java.security.spec.ECParameterSpec getParams()>();
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC: java.security.spec.ECParameterSpec ecParams> = $r3;
+
+     label1:
+        $r24 = new org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC$1;
+
+        specialinvoke $r24.<org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC$1: void <init>(org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC)>(r0);
+
+        staticinvoke <java.security.AccessController: java.lang.Object doPrivileged(java.security.PrivilegedExceptionAction)>($r24);
+
+     label2:
+        goto label4;
+
+     label3:
+        $r17 := @caughtexception;
+
+        r20 = $r17;
+
+        $r25 = new java.security.KeyException;
+
+        $r28 = (java.security.PrivilegedActionException) r20;
+
+        $r19 = virtualinvoke $r28.<java.security.PrivilegedActionException: java.lang.Exception getException()>();
+
+        varReplacer257 = "ECKeyValue not supported";
+
+        specialinvoke $r25.<java.security.KeyException: void <init>(java.lang.String,java.lang.Throwable)>(varReplacer257, $r19);
+
+        throw $r25;
+
+     label4:
+        $r6 = newarray (java.lang.Object)[2];
+
+        $r6[0] = r2;
+
+        $r7 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC: java.security.spec.ECParameterSpec ecParams>;
+
+        $r8 = virtualinvoke $r7.<java.security.spec.ECParameterSpec: java.security.spec.EllipticCurve getCurve()>();
+
+        $r6[1] = $r8;
+
+        r21 = $r6;
+
+     label5:
+        $r9 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC: java.lang.reflect.Method encodePoint>;
+
+        varReplacer258 = null;
+
+        $r10 = virtualinvoke $r9.<java.lang.reflect.Method: java.lang.Object invoke(java.lang.Object,java.lang.Object[])>(varReplacer258, r21);
+
+        $r11 = (byte[]) $r10;
+
+        $r12 = (byte[]) $r11;
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC: byte[] ecPublicKey> = $r12;
+
+     label6:
+        goto label9;
+
+     label7:
+        $r15 := @caughtexception;
+
+        r22 = $r15;
+
+        $r26 = new java.security.KeyException;
+
+        specialinvoke $r26.<java.security.KeyException: void <init>(java.lang.Throwable)>(r22);
+
+        throw $r26;
+
+     label8:
+        $r13 := @caughtexception;
+
+        r23 = $r13;
+
+        $r27 = new java.security.KeyException;
+
+        specialinvoke $r27.<java.security.KeyException: void <init>(java.lang.Throwable)>(r23);
+
+        throw $r27;
+
+     label9:
+        return;
+
+        catch java.security.PrivilegedActionException from label1 to label2 with label3;
+        catch java.lang.IllegalAccessException from label5 to label6 with label7;
+        catch java.lang.reflect.InvocationTargetException from label5 to label6 with label8;
+    }
+
+    void <init>(org.w3c.dom.Element) throws javax.xml.crypto.MarshalException
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC r0;
+        org.w3c.dom.Element r1;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC;
+
+        r1 := @parameter0: org.w3c.dom.Element;
+
+        specialinvoke r0.<org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue: void <init>(org.w3c.dom.Element)>(r1);
+
+        return;
+    }
+
+    void getMethods() throws java.lang.ClassNotFoundException, java.lang.NoSuchMethodException
+    {
+        boolean $z0;
+        java.lang.String r0, $r8, varReplacer259, varReplacer260;
+        java.lang.Class r1;
+        java.lang.Class[] $r2, $r5, $r6, r9, r10, r11;
+        org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC r3;
+        java.lang.reflect.Method $r4, $r7;
+
+        nop;
+
+        r3 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC;
+
+        $z0 = <org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC: boolean AT_LEAST_18>;
+
+        if $z0 == 0 goto label1;
+
+        $r8 = "sun.security.util.ECUtil";
+
+        goto label2;
+
+     label1:
+        $r8 = "sun.security.ec.ECParameters";
+
+     label2:
+        r0 = $r8;
+
+        r1 = staticinvoke <org.apache.xml.security.utils.ClassLoaderUtils: java.lang.Class loadClass(java.lang.String,java.lang.Class)>(r0, class "Lorg/apache/jcp/xml/dsig/internal/dom/DOMKeyValue;");
+
+        $r2 = newarray (java.lang.Class)[2];
+
+        $r2[0] = class "Ljava/security/spec/ECPoint;";
+
+        $r2[1] = class "Ljava/security/spec/EllipticCurve;";
+
+        r9 = $r2;
+
+        varReplacer259 = "encodePoint";
+
+        $r4 = virtualinvoke r1.<java.lang.Class: java.lang.reflect.Method getMethod(java.lang.String,java.lang.Class[])>(varReplacer259, r9);
+
+        r3.<org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC: java.lang.reflect.Method encodePoint> = $r4;
+
+        $r5 = newarray (java.lang.Class)[1];
+
+        $r5[0] = class "Ljava/security/spec/ECParameterSpec;";
+
+        r10 = $r5;
+
+        $r6 = newarray (java.lang.Class)[2];
+
+        $r6[0] = class "[B";
+
+        $r6[1] = class "Ljava/security/spec/EllipticCurve;";
+
+        r11 = $r6;
+
+        varReplacer260 = "decodePoint";
+
+        $r7 = virtualinvoke r1.<java.lang.Class: java.lang.reflect.Method getMethod(java.lang.String,java.lang.Class[])>(varReplacer260, r11);
+
+        r3.<org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC: java.lang.reflect.Method decodePoint> = $r7;
+
+        return;
+    }
+
+    void marshalPublicKey(org.apache.jcp.xml.dsig.internal.dom.XmlWriter, java.security.interfaces.ECPublicKey, java.lang.String, javax.xml.crypto.XMLCryptoContext) throws javax.xml.crypto.MarshalException
+    {
+        javax.xml.crypto.XMLCryptoContext r0;
+        java.lang.String r1, $r8, r14, r15, r17, varReplacer261, varReplacer262, varReplacer263, varReplacer264, varReplacer265, varReplacer266, varReplacer267, varReplacer268, varReplacer269, varReplacer270, varReplacer271, varReplacer272;
+        org.apache.jcp.xml.dsig.internal.dom.XmlWriter r2;
+        org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC r3;
+        java.security.spec.ECParameterSpec $r4;
+        java.lang.StringBuilder $r5, $r6, $r7;
+        byte[] $r10;
+        java.lang.Throwable $r11, r16;
+        javax.xml.crypto.MarshalException $r12;
+        java.security.interfaces.ECPublicKey r13;
+
+        nop;
+
+        r3 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC;
+
+        r2 := @parameter0: org.apache.jcp.xml.dsig.internal.dom.XmlWriter;
+
+        r13 := @parameter1: java.security.interfaces.ECPublicKey;
+
+        r14 := @parameter2: java.lang.String;
+
+        r0 := @parameter3: javax.xml.crypto.XMLCryptoContext;
+
+        varReplacer268 = "http://www.w3.org/2009/xmldsig11#";
+
+        r1 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMUtils: java.lang.String getNSPrefix(javax.xml.crypto.XMLCryptoContext,java.lang.String)>(r0, varReplacer268);
+
+        varReplacer261 = "ECKeyValue";
+
+        varReplacer262 = "http://www.w3.org/2009/xmldsig11#";
+
+        interfaceinvoke r2.<org.apache.jcp.xml.dsig.internal.dom.XmlWriter: void writeStartElement(java.lang.String,java.lang.String,java.lang.String)>(r1, varReplacer261, varReplacer262);
+
+        varReplacer271 = "NamedCurve";
+
+        varReplacer272 = "http://www.w3.org/2009/xmldsig11#";
+
+        interfaceinvoke r2.<org.apache.jcp.xml.dsig.internal.dom.XmlWriter: void writeStartElement(java.lang.String,java.lang.String,java.lang.String)>(r1, varReplacer271, varReplacer272);
+
+        varReplacer270 = "http://www.w3.org/2009/xmldsig11#";
+
+        interfaceinvoke r2.<org.apache.jcp.xml.dsig.internal.dom.XmlWriter: void writeNamespace(java.lang.String,java.lang.String)>(r1, varReplacer270);
+
+     label1:
+        $r4 = r3.<org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC: java.security.spec.ECParameterSpec ecParams>;
+
+        r15 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC: java.lang.String getCurveName(java.security.spec.ECParameterSpec)>($r4);
+
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer269 = "urn:oid:";
+
+        $r6 = virtualinvoke $r5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer269);
+
+        $r7 = virtualinvoke $r6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r15);
+
+        $r8 = virtualinvoke $r7.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        varReplacer265 = "";
+
+        varReplacer266 = "";
+
+        varReplacer267 = "URI";
+
+        interfaceinvoke r2.<org.apache.jcp.xml.dsig.internal.dom.XmlWriter: org.w3c.dom.Attr writeAttribute(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>(varReplacer265, varReplacer265, varReplacer267, $r8);
+
+     label2:
+        goto label4;
+
+     label3:
+        $r11 := @caughtexception;
+
+        r16 = $r11;
+
+        $r12 = new javax.xml.crypto.MarshalException;
+
+        specialinvoke $r12.<javax.xml.crypto.MarshalException: void <init>(java.lang.Throwable)>(r16);
+
+        throw $r12;
+
+     label4:
+        interfaceinvoke r2.<org.apache.jcp.xml.dsig.internal.dom.XmlWriter: void writeEndElement()>();
+
+        varReplacer263 = "PublicKey";
+
+        varReplacer264 = "http://www.w3.org/2009/xmldsig11#";
+
+        interfaceinvoke r2.<org.apache.jcp.xml.dsig.internal.dom.XmlWriter: void writeStartElement(java.lang.String,java.lang.String,java.lang.String)>(r1, varReplacer263, varReplacer264);
+
+        $r10 = r3.<org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC: byte[] ecPublicKey>;
+
+        r17 = staticinvoke <org.apache.xml.security.utils.Base64: java.lang.String encode(byte[])>($r10);
+
+        interfaceinvoke r2.<org.apache.jcp.xml.dsig.internal.dom.XmlWriter: void writeCharacters(java.lang.String)>(r17);
+
+        interfaceinvoke r2.<org.apache.jcp.xml.dsig.internal.dom.XmlWriter: void writeEndElement()>();
+
+        interfaceinvoke r2.<org.apache.jcp.xml.dsig.internal.dom.XmlWriter: void writeEndElement()>();
+
+        return;
+
+        catch java.security.GeneralSecurityException from label1 to label2 with label3;
+    }
+
+    private static java.lang.String getCurveName(java.security.spec.ECParameterSpec) throws java.security.GeneralSecurityException
+    {
+        java.security.AlgorithmParameters r0;
+        java.security.spec.ECParameterSpec r1;
+        java.security.spec.AlgorithmParameterSpec $r2;
+        java.security.spec.ECGenParameterSpec r3;
+        java.lang.String $r4, varReplacer273;
+        null_type varReplacer274;
+
+        nop;
+
+        r1 := @parameter0: java.security.spec.ECParameterSpec;
+
+        varReplacer273 = "EC";
+
+        r0 = staticinvoke <java.security.AlgorithmParameters: java.security.AlgorithmParameters getInstance(java.lang.String)>(varReplacer273);
+
+        virtualinvoke r0.<java.security.AlgorithmParameters: void init(java.security.spec.AlgorithmParameterSpec)>(r1);
+
+        $r2 = virtualinvoke r0.<java.security.AlgorithmParameters: java.security.spec.AlgorithmParameterSpec getParameterSpec(java.lang.Class)>(class "Ljava/security/spec/ECGenParameterSpec;");
+
+        r3 = (java.security.spec.ECGenParameterSpec) $r2;
+
+        if r3 != null goto label1;
+
+        varReplacer274 = null;
+
+        return varReplacer274;
+
+     label1:
+        $r4 = virtualinvoke r3.<java.security.spec.ECGenParameterSpec: java.lang.String getName()>();
+
+        return $r4;
+    }
+
+    java.security.interfaces.ECPublicKey unmarshalKeyValue(org.w3c.dom.Element) throws javax.xml.crypto.MarshalException
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC r0;
+        java.security.KeyFactory $r1, $r17, $r24;
+        org.w3c.dom.Element r3, r46, r50;
+        java.lang.String $r4, $r5, $r7, $r8, $r10, $r20, $r21, $r41, $r43, r47, r48, varReplacer275, varReplacer276, varReplacer277, varReplacer278, varReplacer279, varReplacer280, varReplacer281, varReplacer282, varReplacer283, varReplacer284, varReplacer285, varReplacer286, varReplacer287, varReplacer289;
+        boolean $z0, $z1, $z2, $z3, $z4;
+        int $i0;
+        java.lang.Object[] $r11, r51;
+        byte[] $r12;
+        java.security.spec.EllipticCurve $r13;
+        java.lang.reflect.Method $r14;
+        java.lang.Object $r15;
+        java.security.PublicKey $r18;
+        java.security.interfaces.ECPublicKey $r19;
+        java.lang.Throwable $r25, $r27, $r31, r32, $r34, $r37, r44, r45, r54, r55;
+        org.apache.xml.security.exceptions.Base64DecodingException $r29, r53;
+        java.lang.Exception $r36;
+        java.lang.StringBuilder $r40, $r42, $r57;
+        java.security.spec.ECParameterSpec r49;
+        java.security.spec.ECPoint r52;
+        java.security.spec.ECPublicKeySpec r56, $r69;
+        java.lang.RuntimeException $r58;
+        org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC$2 $r59;
+        javax.xml.crypto.MarshalException $r60, $r61, $r63, $r64, $r65, $r66, $r67, $r68;
+        java.lang.UnsupportedOperationException $r62;
+        java.security.NoSuchAlgorithmException $r70;
+        java.security.PrivilegedActionException $r71;
+        null_type varReplacer288;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC;
+
+        r3 := @parameter0: org.w3c.dom.Element;
+
+        $r1 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC: java.security.KeyFactory eckf>;
+
+        if $r1 != null goto label04;
+
+     label01:
+        varReplacer275 = "EC";
+
+        $r24 = staticinvoke <java.security.KeyFactory: java.security.KeyFactory getInstance(java.lang.String)>(varReplacer275);
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC: java.security.KeyFactory eckf> = $r24;
+
+     label02:
+        goto label04;
+
+     label03:
+        $r37 := @caughtexception;
+
+        r44 = $r37;
+
+        $r58 = new java.lang.RuntimeException;
+
+        $r57 = new java.lang.StringBuilder;
+
+        specialinvoke $r57.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer276 = "unable to create EC KeyFactory: ";
+
+        $r40 = virtualinvoke $r57.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer276);
+
+        $r70 = (java.security.NoSuchAlgorithmException) r44;
+
+        $r41 = virtualinvoke $r70.<java.security.NoSuchAlgorithmException: java.lang.String getMessage()>();
+
+        $r42 = virtualinvoke $r40.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r41);
+
+        $r43 = virtualinvoke $r42.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $r58.<java.lang.RuntimeException: void <init>(java.lang.String)>($r43);
+
+        throw $r58;
+
+     label04:
+        $r59 = new org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC$2;
+
+        specialinvoke $r59.<org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC$2: void <init>(org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC)>(r0);
+
+        staticinvoke <java.security.AccessController: java.lang.Object doPrivileged(java.security.PrivilegedExceptionAction)>($r59);
+
+     label05:
+        goto label07;
+
+     label06:
+        $r34 := @caughtexception;
+
+        r45 = $r34;
+
+        $r60 = new javax.xml.crypto.MarshalException;
+
+        $r71 = (java.security.PrivilegedActionException) r45;
+
+        $r36 = virtualinvoke $r71.<java.security.PrivilegedActionException: java.lang.Exception getException()>();
+
+        varReplacer278 = "ECKeyValue not supported";
+
+        specialinvoke $r60.<javax.xml.crypto.MarshalException: void <init>(java.lang.String,java.lang.Throwable)>(varReplacer278, $r36);
+
+        throw $r60;
+
+     label07:
+        r46 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMUtils: org.w3c.dom.Element getFirstChildElement(org.w3c.dom.Node)>(r3);
+
+        if r46 != null goto label08;
+
+        $r61 = new javax.xml.crypto.MarshalException;
+
+        varReplacer279 = "KeyValue must contain at least one type";
+
+        specialinvoke $r61.<javax.xml.crypto.MarshalException: void <init>(java.lang.String)>(varReplacer279);
+
+        throw $r61;
+
+     label08:
+        $r4 = interfaceinvoke r46.<org.w3c.dom.Element: java.lang.String getLocalName()>();
+
+        varReplacer283 = "ECParameters";
+
+        $z0 = virtualinvoke $r4.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer283);
+
+        if $z0 == 0 goto label09;
+
+        $r20 = "http://www.w3.org/2009/xmldsig11#";
+
+        $r21 = interfaceinvoke r46.<org.w3c.dom.Element: java.lang.String getNamespaceURI()>();
+
+        $z4 = virtualinvoke $r20.<java.lang.String: boolean equals(java.lang.Object)>($r21);
+
+        if $z4 == 0 goto label09;
+
+        $r62 = new java.lang.UnsupportedOperationException;
+
+        varReplacer285 = "ECParameters not supported";
+
+        specialinvoke $r62.<java.lang.UnsupportedOperationException: void <init>(java.lang.String)>(varReplacer285);
+
+        throw $r62;
+
+     label09:
+        $r5 = interfaceinvoke r46.<org.w3c.dom.Element: java.lang.String getLocalName()>();
+
+        varReplacer289 = "NamedCurve";
+
+        $z1 = virtualinvoke $r5.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer289);
+
+        if $z1 == 0 goto label16;
+
+        $r7 = "http://www.w3.org/2009/xmldsig11#";
+
+        $r8 = interfaceinvoke r46.<org.w3c.dom.Element: java.lang.String getNamespaceURI()>();
+
+        $z2 = virtualinvoke $r7.<java.lang.String: boolean equals(java.lang.Object)>($r8);
+
+        if $z2 == 0 goto label16;
+
+        varReplacer287 = "URI";
+
+        r47 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMUtils: java.lang.String getAttributeValue(org.w3c.dom.Element,java.lang.String)>(r46, varReplacer287);
+
+        varReplacer286 = "urn:oid:";
+
+        $z3 = virtualinvoke r47.<java.lang.String: boolean startsWith(java.lang.String)>(varReplacer286);
+
+        if $z3 == 0 goto label14;
+
+        $r10 = "urn:oid:";
+
+        $i0 = virtualinvoke $r10.<java.lang.String: int length()>();
+
+        r48 = virtualinvoke r47.<java.lang.String: java.lang.String substring(int)>($i0);
+
+     label10:
+        r49 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC: java.security.spec.ECParameterSpec getECParameterSpec(java.lang.String)>(r48);
+
+     label11:
+        goto label13;
+
+     label12:
+        $r31 := @caughtexception;
+
+        r32 = $r31;
+
+        $r63 = new javax.xml.crypto.MarshalException;
+
+        specialinvoke $r63.<javax.xml.crypto.MarshalException: void <init>(java.lang.Throwable)>(r32);
+
+        throw $r63;
+
+     label13:
+        goto label15;
+
+     label14:
+        $r64 = new javax.xml.crypto.MarshalException;
+
+        varReplacer284 = "Invalid NamedCurve URI";
+
+        specialinvoke $r64.<javax.xml.crypto.MarshalException: void <init>(java.lang.String)>(varReplacer284);
+
+        throw $r64;
+
+     label15:
+        goto label17;
+
+     label16:
+        $r65 = new javax.xml.crypto.MarshalException;
+
+        varReplacer280 = "Invalid ECKeyValue";
+
+        specialinvoke $r65.<javax.xml.crypto.MarshalException: void <init>(java.lang.String)>(varReplacer280);
+
+        throw $r65;
+
+     label17:
+        varReplacer281 = "PublicKey";
+
+        varReplacer282 = "http://www.w3.org/2009/xmldsig11#";
+
+        r50 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMUtils: org.w3c.dom.Element getNextSiblingElement(org.w3c.dom.Node,java.lang.String,java.lang.String)>(r46, varReplacer281, varReplacer282);
+
+     label18:
+        $r11 = newarray (java.lang.Object)[2];
+
+        $r12 = staticinvoke <org.apache.xml.security.utils.Base64: byte[] decode(org.w3c.dom.Element)>(r50);
+
+        $r11[0] = $r12;
+
+        $r13 = virtualinvoke r49.<java.security.spec.ECParameterSpec: java.security.spec.EllipticCurve getCurve()>();
+
+        $r11[1] = $r13;
+
+        r51 = $r11;
+
+        $r14 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC: java.lang.reflect.Method decodePoint>;
+
+        varReplacer288 = null;
+
+        $r15 = virtualinvoke $r14.<java.lang.reflect.Method: java.lang.Object invoke(java.lang.Object,java.lang.Object[])>(varReplacer288, r51);
+
+        r52 = (java.security.spec.ECPoint) $r15;
+
+     label19:
+        goto label23;
+
+     label20:
+        $r29 := @caughtexception;
+
+        r53 = $r29;
+
+        $r66 = new javax.xml.crypto.MarshalException;
+
+        varReplacer277 = "Invalid EC PublicKey";
+
+        specialinvoke $r66.<javax.xml.crypto.MarshalException: void <init>(java.lang.String,java.lang.Throwable)>(varReplacer277, r53);
+
+        throw $r66;
+
+     label21:
+        $r27 := @caughtexception;
+
+        r54 = $r27;
+
+        $r67 = new javax.xml.crypto.MarshalException;
+
+        specialinvoke $r67.<javax.xml.crypto.MarshalException: void <init>(java.lang.Throwable)>(r54);
+
+        throw $r67;
+
+     label22:
+        $r25 := @caughtexception;
+
+        r55 = $r25;
+
+        $r68 = new javax.xml.crypto.MarshalException;
+
+        specialinvoke $r68.<javax.xml.crypto.MarshalException: void <init>(java.lang.Throwable)>(r55);
+
+        throw $r68;
+
+     label23:
+        $r69 = new java.security.spec.ECPublicKeySpec;
+
+        specialinvoke $r69.<java.security.spec.ECPublicKeySpec: void <init>(java.security.spec.ECPoint,java.security.spec.ECParameterSpec)>(r52, r49);
+
+        r56 = $r69;
+
+        $r17 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC: java.security.KeyFactory eckf>;
+
+        $r18 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue: java.security.PublicKey access$000(java.security.KeyFactory,java.security.spec.KeySpec)>($r17, r56);
+
+        $r19 = (java.security.interfaces.ECPublicKey) $r18;
+
+        return $r19;
+
+        catch java.security.NoSuchAlgorithmException from label01 to label02 with label03;
+        catch java.security.PrivilegedActionException from label04 to label05 with label06;
+        catch java.security.GeneralSecurityException from label10 to label11 with label12;
+        catch org.apache.xml.security.exceptions.Base64DecodingException from label18 to label19 with label20;
+        catch java.lang.IllegalAccessException from label18 to label19 with label21;
+        catch java.lang.reflect.InvocationTargetException from label18 to label19 with label22;
+    }
+
+    private static java.security.spec.ECParameterSpec getECParameterSpec(java.lang.String) throws java.security.GeneralSecurityException
+    {
+        java.security.AlgorithmParameters r0;
+        java.security.spec.ECGenParameterSpec $r1;
+        java.lang.String r2, varReplacer290;
+        java.security.spec.AlgorithmParameterSpec $r3;
+        java.security.spec.ECParameterSpec $r4;
+
+        nop;
+
+        r2 := @parameter0: java.lang.String;
+
+        varReplacer290 = "EC";
+
+        r0 = staticinvoke <java.security.AlgorithmParameters: java.security.AlgorithmParameters getInstance(java.lang.String)>(varReplacer290);
+
+        $r1 = new java.security.spec.ECGenParameterSpec;
+
+        specialinvoke $r1.<java.security.spec.ECGenParameterSpec: void <init>(java.lang.String)>(r2);
+
+        virtualinvoke r0.<java.security.AlgorithmParameters: void init(java.security.spec.AlgorithmParameterSpec)>($r1);
+
+        $r3 = virtualinvoke r0.<java.security.AlgorithmParameters: java.security.spec.AlgorithmParameterSpec getParameterSpec(java.lang.Class)>(class "Ljava/security/spec/ECParameterSpec;");
+
+        $r4 = (java.security.spec.ECParameterSpec) $r3;
+
+        return $r4;
+    }
+
+    volatile java.security.PublicKey unmarshalKeyValue(org.w3c.dom.Element) throws javax.xml.crypto.MarshalException
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC r0;
+        org.w3c.dom.Element r1;
+        java.security.interfaces.ECPublicKey $r2;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC;
+
+        r1 := @parameter0: org.w3c.dom.Element;
+
+        $r2 = virtualinvoke r0.<org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC: java.security.interfaces.ECPublicKey unmarshalKeyValue(org.w3c.dom.Element)>(r1);
+
+        return $r2;
+    }
+
+    volatile void marshalPublicKey(org.apache.jcp.xml.dsig.internal.dom.XmlWriter, java.security.PublicKey, java.lang.String, javax.xml.crypto.XMLCryptoContext) throws javax.xml.crypto.MarshalException
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC r0;
+        org.apache.jcp.xml.dsig.internal.dom.XmlWriter r1;
+        java.security.PublicKey r2;
+        java.lang.String r3;
+        javax.xml.crypto.XMLCryptoContext r4;
+        java.security.interfaces.ECPublicKey $r5;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC;
+
+        r1 := @parameter0: org.apache.jcp.xml.dsig.internal.dom.XmlWriter;
+
+        r2 := @parameter1: java.security.PublicKey;
+
+        r3 := @parameter2: java.lang.String;
+
+        r4 := @parameter3: javax.xml.crypto.XMLCryptoContext;
+
+        $r5 = (java.security.interfaces.ECPublicKey) r2;
+
+        virtualinvoke r0.<org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC: void marshalPublicKey(org.apache.jcp.xml.dsig.internal.dom.XmlWriter,java.security.interfaces.ECPublicKey,java.lang.String,javax.xml.crypto.XMLCryptoContext)>(r1, $r5, r3, r4);
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        java.lang.String $r0, $r1, $r2, $r3, varReplacer291, varReplacer292, varReplacer293, varReplacer294;
+        boolean $z0, $z1, $z2, $z3;
+
+        nop;
+
+        varReplacer291 = "java.version";
+
+        $r0 = staticinvoke <java.lang.System: java.lang.String getProperty(java.lang.String)>(varReplacer291);
+
+        <org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC: java.lang.String VER> = $r0;
+
+        $r1 = <org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC: java.lang.String VER>;
+
+        varReplacer292 = "1.5";
+
+        $z0 = virtualinvoke $r1.<java.lang.String: boolean startsWith(java.lang.String)>(varReplacer292);
+
+        if $z0 != 0 goto label1;
+
+        $r2 = <org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC: java.lang.String VER>;
+
+        varReplacer293 = "1.6";
+
+        $z1 = virtualinvoke $r2.<java.lang.String: boolean startsWith(java.lang.String)>(varReplacer293);
+
+        if $z1 != 0 goto label1;
+
+        $r3 = <org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC: java.lang.String VER>;
+
+        varReplacer294 = "1.7";
+
+        $z2 = virtualinvoke $r3.<java.lang.String: boolean startsWith(java.lang.String)>(varReplacer294);
+
+        if $z2 != 0 goto label1;
+
+        $z3 = 1;
+
+        goto label2;
+
+     label1:
+        $z3 = 0;
+
+     label2:
+        <org.apache.jcp.xml.dsig.internal.dom.DOMKeyValue$EC: boolean AT_LEAST_18> = $z3;
+
+        return;
+    }
+}

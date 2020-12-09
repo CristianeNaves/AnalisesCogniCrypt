@@ -1,0 +1,30 @@
+public class org.apache.xml.security.algorithms.implementations.SignatureECDSA$SignatureECDSASHA384 extends org.apache.xml.security.algorithms.implementations.SignatureECDSA
+{
+
+    public void <init>() throws org.apache.xml.security.signature.XMLSignatureException
+    {
+        org.apache.xml.security.algorithms.implementations.SignatureECDSA$SignatureECDSASHA384 r0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.algorithms.implementations.SignatureECDSA$SignatureECDSASHA384;
+
+        specialinvoke r0.<org.apache.xml.security.algorithms.implementations.SignatureECDSA: void <init>()>();
+
+        return;
+    }
+
+    public java.lang.String engineGetURI()
+    {
+        org.apache.xml.security.algorithms.implementations.SignatureECDSA$SignatureECDSASHA384 r0;
+        java.lang.String varReplacer1969;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.algorithms.implementations.SignatureECDSA$SignatureECDSASHA384;
+
+        varReplacer1969 = "http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha384";
+
+        return varReplacer1969;
+    }
+}

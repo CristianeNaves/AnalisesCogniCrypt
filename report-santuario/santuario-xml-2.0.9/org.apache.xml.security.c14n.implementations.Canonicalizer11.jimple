@@ -1,0 +1,1528 @@
+public abstract class org.apache.xml.security.c14n.implementations.Canonicalizer11 extends org.apache.xml.security.c14n.implementations.CanonicalizerBase
+{
+    private static final java.lang.String XMLNS_URI;
+    private static final java.lang.String XML_LANG_URI;
+    private static org.slf4j.Logger log;
+    private final java.util.SortedSet result;
+    private boolean firstCall;
+    private org.apache.xml.security.c14n.implementations.Canonicalizer11$XmlAttrStack xmlattrStack;
+
+    public void <init>(boolean)
+    {
+        org.apache.xml.security.c14n.implementations.Canonicalizer11 r0;
+        boolean z0;
+        java.util.TreeSet $r1;
+        org.apache.xml.security.c14n.helper.AttrCompare $r2;
+        org.apache.xml.security.c14n.implementations.Canonicalizer11$XmlAttrStack $r3;
+        int varReplacer2253;
+        null_type varReplacer2254;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.c14n.implementations.Canonicalizer11;
+
+        z0 := @parameter0: boolean;
+
+        specialinvoke r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: void <init>(boolean)>(z0);
+
+        $r1 = new java.util.TreeSet;
+
+        $r2 = <org.apache.xml.security.c14n.implementations.Canonicalizer11: org.apache.xml.security.c14n.helper.AttrCompare COMPARE>;
+
+        specialinvoke $r1.<java.util.TreeSet: void <init>(java.util.Comparator)>($r2);
+
+        r0.<org.apache.xml.security.c14n.implementations.Canonicalizer11: java.util.SortedSet result> = $r1;
+
+        varReplacer2253 = 1;
+
+        r0.<org.apache.xml.security.c14n.implementations.Canonicalizer11: boolean firstCall> = varReplacer2253;
+
+        $r3 = new org.apache.xml.security.c14n.implementations.Canonicalizer11$XmlAttrStack;
+
+        varReplacer2254 = null;
+
+        specialinvoke $r3.<org.apache.xml.security.c14n.implementations.Canonicalizer11$XmlAttrStack: void <init>(org.apache.xml.security.c14n.implementations.Canonicalizer11$1)>(varReplacer2254);
+
+        r0.<org.apache.xml.security.c14n.implementations.Canonicalizer11: org.apache.xml.security.c14n.implementations.Canonicalizer11$XmlAttrStack xmlattrStack> = $r3;
+
+        return;
+    }
+
+    public byte[] engineCanonicalizeXPathNodeSet(java.util.Set, java.lang.String) throws org.apache.xml.security.c14n.CanonicalizationException
+    {
+        org.apache.xml.security.c14n.CanonicalizationException $r0;
+        org.apache.xml.security.c14n.implementations.Canonicalizer11 r1;
+        java.util.Set r2;
+        java.lang.String r3, varReplacer2255;
+
+        nop;
+
+        r1 := @this: org.apache.xml.security.c14n.implementations.Canonicalizer11;
+
+        r2 := @parameter0: java.util.Set;
+
+        r3 := @parameter1: java.lang.String;
+
+        $r0 = new org.apache.xml.security.c14n.CanonicalizationException;
+
+        varReplacer2255 = "c14n.Canonicalizer.UnsupportedOperation";
+
+        specialinvoke $r0.<org.apache.xml.security.c14n.CanonicalizationException: void <init>(java.lang.String)>(varReplacer2255);
+
+        throw $r0;
+    }
+
+    public byte[] engineCanonicalizeSubTree(org.w3c.dom.Node, java.lang.String) throws org.apache.xml.security.c14n.CanonicalizationException
+    {
+        org.apache.xml.security.c14n.CanonicalizationException $r0;
+        org.apache.xml.security.c14n.implementations.Canonicalizer11 r1;
+        org.w3c.dom.Node r2;
+        java.lang.String r3, varReplacer2256;
+
+        nop;
+
+        r1 := @this: org.apache.xml.security.c14n.implementations.Canonicalizer11;
+
+        r2 := @parameter0: org.w3c.dom.Node;
+
+        r3 := @parameter1: java.lang.String;
+
+        $r0 = new org.apache.xml.security.c14n.CanonicalizationException;
+
+        varReplacer2256 = "c14n.Canonicalizer.UnsupportedOperation";
+
+        specialinvoke $r0.<org.apache.xml.security.c14n.CanonicalizationException: void <init>(java.lang.String)>(varReplacer2256);
+
+        throw $r0;
+    }
+
+    public byte[] engineCanonicalizeSubTree(org.w3c.dom.Node, java.lang.String, boolean) throws org.apache.xml.security.c14n.CanonicalizationException
+    {
+        org.apache.xml.security.c14n.CanonicalizationException $r0;
+        org.apache.xml.security.c14n.implementations.Canonicalizer11 r1;
+        org.w3c.dom.Node r2;
+        java.lang.String r3, varReplacer2257;
+        boolean z0;
+
+        nop;
+
+        r1 := @this: org.apache.xml.security.c14n.implementations.Canonicalizer11;
+
+        r2 := @parameter0: org.w3c.dom.Node;
+
+        r3 := @parameter1: java.lang.String;
+
+        z0 := @parameter2: boolean;
+
+        $r0 = new org.apache.xml.security.c14n.CanonicalizationException;
+
+        varReplacer2257 = "c14n.Canonicalizer.UnsupportedOperation";
+
+        specialinvoke $r0.<org.apache.xml.security.c14n.CanonicalizationException: void <init>(java.lang.String)>(varReplacer2257);
+
+        throw $r0;
+    }
+
+    protected java.util.Iterator handleAttributesSubtree(org.w3c.dom.Element, org.apache.xml.security.c14n.implementations.NameSpaceSymbTable) throws org.apache.xml.security.c14n.CanonicalizationException
+    {
+        org.w3c.dom.Element r0;
+        boolean $z0, $z1, $z2, $z3, $z4, $z6, $z7, $z9;
+        org.apache.xml.security.c14n.implementations.Canonicalizer11 r1;
+        java.util.SortedSet r2;
+        java.util.Iterator $r3;
+        org.apache.xml.security.c14n.implementations.NameSpaceSymbTable r4;
+        org.apache.xml.security.c14n.implementations.Canonicalizer11$XmlAttrStack $r5;
+        org.w3c.dom.NamedNodeMap r6;
+        int i0, i1, varReplacer2258;
+        org.w3c.dom.Node $r7, r14;
+        org.w3c.dom.Attr r8, $r15;
+        java.lang.String r9, r10, r11, $r12, $r13, $r17, $r18, $r21, varReplacer2259;
+        java.lang.Object[] $r16, r19;
+        org.apache.xml.security.c14n.CanonicalizationException $r20;
+        null_type varReplacer2260;
+
+        nop;
+
+        r1 := @this: org.apache.xml.security.c14n.implementations.Canonicalizer11;
+
+        r0 := @parameter0: org.w3c.dom.Element;
+
+        r4 := @parameter1: org.apache.xml.security.c14n.implementations.NameSpaceSymbTable;
+
+        $z0 = interfaceinvoke r0.<org.w3c.dom.Element: boolean hasAttributes()>();
+
+        if $z0 != 0 goto label1;
+
+        $z9 = r1.<org.apache.xml.security.c14n.implementations.Canonicalizer11: boolean firstCall>;
+
+        if $z9 != 0 goto label1;
+
+        varReplacer2260 = null;
+
+        return varReplacer2260;
+
+     label1:
+        r2 = r1.<org.apache.xml.security.c14n.implementations.Canonicalizer11: java.util.SortedSet result>;
+
+        interfaceinvoke r2.<java.util.SortedSet: void clear()>();
+
+        $z1 = interfaceinvoke r0.<org.w3c.dom.Element: boolean hasAttributes()>();
+
+        if $z1 == 0 goto label6;
+
+        r6 = interfaceinvoke r0.<org.w3c.dom.Element: org.w3c.dom.NamedNodeMap getAttributes()>();
+
+        i0 = interfaceinvoke r6.<org.w3c.dom.NamedNodeMap: int getLength()>();
+
+        i1 = 0;
+
+     label2:
+        if i1 >= i0 goto label6;
+
+        $r7 = interfaceinvoke r6.<org.w3c.dom.NamedNodeMap: org.w3c.dom.Node item(int)>(i1);
+
+        r8 = (org.w3c.dom.Attr) $r7;
+
+        r9 = interfaceinvoke r8.<org.w3c.dom.Attr: java.lang.String getNamespaceURI()>();
+
+        r10 = interfaceinvoke r8.<org.w3c.dom.Attr: java.lang.String getLocalName()>();
+
+        r11 = interfaceinvoke r8.<org.w3c.dom.Attr: java.lang.String getValue()>();
+
+        $r12 = "http://www.w3.org/2000/xmlns/";
+
+        $z3 = virtualinvoke $r12.<java.lang.String: boolean equals(java.lang.Object)>(r9);
+
+        if $z3 != 0 goto label3;
+
+        interfaceinvoke r2.<java.util.SortedSet: boolean add(java.lang.Object)>(r8);
+
+        goto label5;
+
+     label3:
+        $r13 = "xml";
+
+        $z4 = virtualinvoke $r13.<java.lang.String: boolean equals(java.lang.Object)>(r10);
+
+        if $z4 == 0 goto label4;
+
+        $r21 = "http://www.w3.org/XML/1998/namespace";
+
+        $z7 = virtualinvoke $r21.<java.lang.String: boolean equals(java.lang.Object)>(r11);
+
+        if $z7 != 0 goto label5;
+
+     label4:
+        r14 = virtualinvoke r4.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: org.w3c.dom.Node addMappingAndRender(java.lang.String,java.lang.String,org.w3c.dom.Attr)>(r10, r11, r8);
+
+        if r14 == null goto label5;
+
+        $r15 = (org.w3c.dom.Attr) r14;
+
+        interfaceinvoke r2.<java.util.SortedSet: boolean add(java.lang.Object)>($r15);
+
+        $z6 = staticinvoke <org.apache.xml.security.c14n.helper.C14nHelper: boolean namespaceIsRelative(org.w3c.dom.Attr)>(r8);
+
+        if $z6 == 0 goto label5;
+
+        $r16 = newarray (java.lang.Object)[3];
+
+        $r17 = interfaceinvoke r0.<org.w3c.dom.Element: java.lang.String getTagName()>();
+
+        $r16[0] = $r17;
+
+        $r16[1] = r10;
+
+        $r18 = interfaceinvoke r8.<org.w3c.dom.Attr: java.lang.String getNodeValue()>();
+
+        $r16[2] = $r18;
+
+        r19 = $r16;
+
+        $r20 = new org.apache.xml.security.c14n.CanonicalizationException;
+
+        varReplacer2259 = "c14n.Canonicalizer.RelativeNamespace";
+
+        specialinvoke $r20.<org.apache.xml.security.c14n.CanonicalizationException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2259, r19);
+
+        throw $r20;
+
+     label5:
+        i1 = i1 + 1;
+
+        goto label2;
+
+     label6:
+        $z2 = r1.<org.apache.xml.security.c14n.implementations.Canonicalizer11: boolean firstCall>;
+
+        if $z2 == 0 goto label7;
+
+        virtualinvoke r4.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: void getUnrenderedNodes(java.util.Collection)>(r2);
+
+        $r5 = r1.<org.apache.xml.security.c14n.implementations.Canonicalizer11: org.apache.xml.security.c14n.implementations.Canonicalizer11$XmlAttrStack xmlattrStack>;
+
+        virtualinvoke $r5.<org.apache.xml.security.c14n.implementations.Canonicalizer11$XmlAttrStack: void getXmlnsAttr(java.util.Collection)>(r2);
+
+        varReplacer2258 = 0;
+
+        r1.<org.apache.xml.security.c14n.implementations.Canonicalizer11: boolean firstCall> = varReplacer2258;
+
+     label7:
+        $r3 = interfaceinvoke r2.<java.util.SortedSet: java.util.Iterator iterator()>();
+
+        return $r3;
+    }
+
+    protected java.util.Iterator handleAttributes(org.w3c.dom.Element, org.apache.xml.security.c14n.implementations.NameSpaceSymbTable) throws org.apache.xml.security.c14n.CanonicalizationException
+    {
+        org.apache.xml.security.c14n.implementations.Canonicalizer11 r0;
+        org.apache.xml.security.c14n.implementations.NameSpaceSymbTable r1;
+        org.apache.xml.security.c14n.implementations.Canonicalizer11$XmlAttrStack $r2, $r5, $r26;
+        int $i0, $i1, $i2, i3, i4;
+        org.w3c.dom.Element r3;
+        boolean z0, $z1, $z2, $z4, $z5, $z6, $z8, $z10, $z11, $z12, $z13, $z15, $z17;
+        java.util.SortedSet r4;
+        org.w3c.dom.Attr $r6, $r8, r10, $r18, r28;
+        org.w3c.dom.Document $r7;
+        org.w3c.dom.Node $r9, r17;
+        java.lang.String r11, r12, r13, $r14, $r15, $r16, $r20, $r21, $r24, $r25, varReplacer2261, varReplacer2262, varReplacer2263, varReplacer2264, varReplacer2265, varReplacer2266, varReplacer2267;
+        java.lang.Object[] $r19, r22;
+        org.apache.xml.security.c14n.CanonicalizationException $r23;
+        org.w3c.dom.NamedNodeMap r27;
+        java.lang.Object r29;
+        java.util.Iterator $r30;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.c14n.implementations.Canonicalizer11;
+
+        r3 := @parameter0: org.w3c.dom.Element;
+
+        r1 := @parameter1: org.apache.xml.security.c14n.implementations.NameSpaceSymbTable;
+
+        $r2 = r0.<org.apache.xml.security.c14n.implementations.Canonicalizer11: org.apache.xml.security.c14n.implementations.Canonicalizer11$XmlAttrStack xmlattrStack>;
+
+        $i0 = virtualinvoke r1.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: int getLevel()>();
+
+        virtualinvoke $r2.<org.apache.xml.security.c14n.implementations.Canonicalizer11$XmlAttrStack: void push(int)>($i0);
+
+        $i1 = virtualinvoke r1.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: int getLevel()>();
+
+        $i2 = virtualinvoke r0.<org.apache.xml.security.c14n.implementations.Canonicalizer11: int isVisibleDO(org.w3c.dom.Node,int)>(r3, $i1);
+
+        if $i2 != 1 goto label01;
+
+        $z17 = 1;
+
+        goto label02;
+
+     label01:
+        $z17 = 0;
+
+     label02:
+        z0 = $z17;
+
+        r4 = r0.<org.apache.xml.security.c14n.implementations.Canonicalizer11: java.util.SortedSet result>;
+
+        interfaceinvoke r4.<java.util.SortedSet: void clear()>();
+
+        $z1 = interfaceinvoke r3.<org.w3c.dom.Element: boolean hasAttributes()>();
+
+        if $z1 == 0 goto label13;
+
+        r27 = interfaceinvoke r3.<org.w3c.dom.Element: org.w3c.dom.NamedNodeMap getAttributes()>();
+
+        i3 = interfaceinvoke r27.<org.w3c.dom.NamedNodeMap: int getLength()>();
+
+        i4 = 0;
+
+     label03:
+        if i4 >= i3 goto label13;
+
+        $r9 = interfaceinvoke r27.<org.w3c.dom.NamedNodeMap: org.w3c.dom.Node item(int)>(i4);
+
+        r10 = (org.w3c.dom.Attr) $r9;
+
+        r11 = interfaceinvoke r10.<org.w3c.dom.Attr: java.lang.String getNamespaceURI()>();
+
+        r12 = interfaceinvoke r10.<org.w3c.dom.Attr: java.lang.String getLocalName()>();
+
+        r13 = interfaceinvoke r10.<org.w3c.dom.Attr: java.lang.String getValue()>();
+
+        $r14 = "http://www.w3.org/2000/xmlns/";
+
+        $z4 = virtualinvoke $r14.<java.lang.String: boolean equals(java.lang.Object)>(r11);
+
+        if $z4 != 0 goto label06;
+
+        $r25 = "http://www.w3.org/XML/1998/namespace";
+
+        $z13 = virtualinvoke $r25.<java.lang.String: boolean equals(java.lang.Object)>(r11);
+
+        if $z13 == 0 goto label05;
+
+        varReplacer2265 = "id";
+
+        $z15 = virtualinvoke r12.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2265);
+
+        if $z15 == 0 goto label04;
+
+        if z0 == 0 goto label12;
+
+        interfaceinvoke r4.<java.util.SortedSet: boolean add(java.lang.Object)>(r10);
+
+        goto label12;
+
+     label04:
+        $r26 = r0.<org.apache.xml.security.c14n.implementations.Canonicalizer11: org.apache.xml.security.c14n.implementations.Canonicalizer11$XmlAttrStack xmlattrStack>;
+
+        virtualinvoke $r26.<org.apache.xml.security.c14n.implementations.Canonicalizer11$XmlAttrStack: void addXmlnsAttr(org.w3c.dom.Attr)>(r10);
+
+        goto label12;
+
+     label05:
+        if z0 == 0 goto label12;
+
+        interfaceinvoke r4.<java.util.SortedSet: boolean add(java.lang.Object)>(r10);
+
+        goto label12;
+
+     label06:
+        $r15 = "xml";
+
+        $z5 = virtualinvoke $r15.<java.lang.String: boolean equals(java.lang.Object)>(r12);
+
+        if $z5 == 0 goto label07;
+
+        $r24 = "http://www.w3.org/XML/1998/namespace";
+
+        $z12 = virtualinvoke $r24.<java.lang.String: boolean equals(java.lang.Object)>(r13);
+
+        if $z12 != 0 goto label12;
+
+     label07:
+        $z6 = virtualinvoke r0.<org.apache.xml.security.c14n.implementations.Canonicalizer11: boolean isVisible(org.w3c.dom.Node)>(r10);
+
+        if $z6 == 0 goto label10;
+
+        if z0 != 0 goto label08;
+
+        $z11 = virtualinvoke r1.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: boolean removeMappingIfRender(java.lang.String)>(r12);
+
+        if $z11 != 0 goto label12;
+
+     label08:
+        r17 = virtualinvoke r1.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: org.w3c.dom.Node addMappingAndRender(java.lang.String,java.lang.String,org.w3c.dom.Attr)>(r12, r13, r10);
+
+        if r17 == null goto label09;
+
+        $r18 = (org.w3c.dom.Attr) r17;
+
+        interfaceinvoke r4.<java.util.SortedSet: boolean add(java.lang.Object)>($r18);
+
+        $z10 = staticinvoke <org.apache.xml.security.c14n.helper.C14nHelper: boolean namespaceIsRelative(org.w3c.dom.Attr)>(r10);
+
+        if $z10 == 0 goto label09;
+
+        $r19 = newarray (java.lang.Object)[3];
+
+        $r20 = interfaceinvoke r3.<org.w3c.dom.Element: java.lang.String getTagName()>();
+
+        $r19[0] = $r20;
+
+        $r19[1] = r12;
+
+        $r21 = interfaceinvoke r10.<org.w3c.dom.Attr: java.lang.String getNodeValue()>();
+
+        $r19[2] = $r21;
+
+        r22 = $r19;
+
+        $r23 = new org.apache.xml.security.c14n.CanonicalizationException;
+
+        varReplacer2267 = "c14n.Canonicalizer.RelativeNamespace";
+
+        specialinvoke $r23.<org.apache.xml.security.c14n.CanonicalizationException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2267, r22);
+
+        throw $r23;
+
+     label09:
+        goto label12;
+
+     label10:
+        if z0 == 0 goto label11;
+
+        $r16 = "xmlns";
+
+        $z8 = virtualinvoke $r16.<java.lang.String: boolean equals(java.lang.Object)>(r12);
+
+        if $z8 != 0 goto label11;
+
+        virtualinvoke r1.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: void removeMapping(java.lang.String)>(r12);
+
+        goto label12;
+
+     label11:
+        virtualinvoke r1.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: boolean addMapping(java.lang.String,java.lang.String,org.w3c.dom.Attr)>(r12, r13, r10);
+
+     label12:
+        i4 = i4 + 1;
+
+        goto label03;
+
+     label13:
+        if z0 == 0 goto label17;
+
+        varReplacer2263 = "http://www.w3.org/2000/xmlns/";
+
+        varReplacer2264 = "xmlns";
+
+        r28 = interfaceinvoke r3.<org.w3c.dom.Element: org.w3c.dom.Attr getAttributeNodeNS(java.lang.String,java.lang.String)>(varReplacer2263, varReplacer2264);
+
+        r29 = null;
+
+        if r28 != null goto label14;
+
+        varReplacer2266 = "xmlns";
+
+        r29 = virtualinvoke r1.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: org.w3c.dom.Attr getMapping(java.lang.String)>(varReplacer2266);
+
+        goto label15;
+
+     label14:
+        $z2 = virtualinvoke r0.<org.apache.xml.security.c14n.implementations.Canonicalizer11: boolean isVisible(org.w3c.dom.Node)>(r28);
+
+        if $z2 != 0 goto label15;
+
+        $r7 = interfaceinvoke r28.<org.w3c.dom.Attr: org.w3c.dom.Document getOwnerDocument()>();
+
+        $r8 = virtualinvoke r0.<org.apache.xml.security.c14n.implementations.Canonicalizer11: org.w3c.dom.Attr getNullNode(org.w3c.dom.Document)>($r7);
+
+        varReplacer2261 = "xmlns";
+
+        varReplacer2262 = "";
+
+        r29 = virtualinvoke r1.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: org.w3c.dom.Node addMappingAndRender(java.lang.String,java.lang.String,org.w3c.dom.Attr)>(varReplacer2261, varReplacer2262, $r8);
+
+     label15:
+        if r29 == null goto label16;
+
+        $r6 = (org.w3c.dom.Attr) r29;
+
+        interfaceinvoke r4.<java.util.SortedSet: boolean add(java.lang.Object)>($r6);
+
+     label16:
+        $r5 = r0.<org.apache.xml.security.c14n.implementations.Canonicalizer11: org.apache.xml.security.c14n.implementations.Canonicalizer11$XmlAttrStack xmlattrStack>;
+
+        virtualinvoke $r5.<org.apache.xml.security.c14n.implementations.Canonicalizer11$XmlAttrStack: void getXmlnsAttr(java.util.Collection)>(r4);
+
+        virtualinvoke r1.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: void getUnrenderedNodes(java.util.Collection)>(r4);
+
+     label17:
+        $r30 = interfaceinvoke r4.<java.util.SortedSet: java.util.Iterator iterator()>();
+
+        return $r30;
+    }
+
+    protected void circumventBugIfNeeded(org.apache.xml.security.signature.XMLSignatureInput) throws org.apache.xml.security.c14n.CanonicalizationException, javax.xml.parsers.ParserConfigurationException, java.io.IOException, org.xml.sax.SAXException
+    {
+        org.apache.xml.security.signature.XMLSignatureInput r0;
+        boolean $z0;
+        org.w3c.dom.Node $r1, $r3;
+        java.util.Set $r2;
+        org.apache.xml.security.c14n.implementations.Canonicalizer11 r4;
+        org.w3c.dom.Document r5;
+
+        nop;
+
+        r4 := @this: org.apache.xml.security.c14n.implementations.Canonicalizer11;
+
+        r0 := @parameter0: org.apache.xml.security.signature.XMLSignatureInput;
+
+        $z0 = virtualinvoke r0.<org.apache.xml.security.signature.XMLSignatureInput: boolean isNeedsToBeExpanded()>();
+
+        if $z0 != 0 goto label1;
+
+        return;
+
+     label1:
+        $r1 = virtualinvoke r0.<org.apache.xml.security.signature.XMLSignatureInput: org.w3c.dom.Node getSubNode()>();
+
+        if $r1 == null goto label2;
+
+        $r3 = virtualinvoke r0.<org.apache.xml.security.signature.XMLSignatureInput: org.w3c.dom.Node getSubNode()>();
+
+        r5 = staticinvoke <org.apache.xml.security.utils.XMLUtils: org.w3c.dom.Document getOwnerDocument(org.w3c.dom.Node)>($r3);
+
+        goto label3;
+
+     label2:
+        $r2 = virtualinvoke r0.<org.apache.xml.security.signature.XMLSignatureInput: java.util.Set getNodeSet()>();
+
+        r5 = staticinvoke <org.apache.xml.security.utils.XMLUtils: org.w3c.dom.Document getOwnerDocument(java.util.Set)>($r2);
+
+     label3:
+        staticinvoke <org.apache.xml.security.utils.XMLUtils: void circumventBug2650(org.w3c.dom.Document)>(r5);
+
+        return;
+    }
+
+    protected void handleParent(org.w3c.dom.Element, org.apache.xml.security.c14n.implementations.NameSpaceSymbTable)
+    {
+        org.w3c.dom.Element r0;
+        boolean $z0, $z2, $z3, $z4, $z5, $z6, $z8;
+        org.apache.xml.security.c14n.implementations.Canonicalizer11 r1;
+        org.apache.xml.security.c14n.implementations.Canonicalizer11$XmlAttrStack $r2, $r16;
+        org.w3c.dom.NamedNodeMap r3;
+        int i0, i1, varReplacer2271;
+        java.lang.String $r4, $r11, $r12, $r13, $r14, $r15, $r17, $r18, $r19, r21, r22, r23, r24, r25, varReplacer2268, varReplacer2269, varReplacer2270;
+        org.w3c.dom.Document $r5;
+        org.apache.xml.security.c14n.implementations.NameSpaceSymbTable r6;
+        java.lang.StringBuilder $r7, $r8, $r9;
+        org.w3c.dom.Node $r10;
+        org.w3c.dom.Attr r20, r26;
+
+        nop;
+
+        r1 := @this: org.apache.xml.security.c14n.implementations.Canonicalizer11;
+
+        r0 := @parameter0: org.w3c.dom.Element;
+
+        r6 := @parameter1: org.apache.xml.security.c14n.implementations.NameSpaceSymbTable;
+
+        $z0 = interfaceinvoke r0.<org.w3c.dom.Element: boolean hasAttributes()>();
+
+        if $z0 != 0 goto label01;
+
+        $r19 = interfaceinvoke r0.<org.w3c.dom.Element: java.lang.String getNamespaceURI()>();
+
+        if $r19 != null goto label01;
+
+        return;
+
+     label01:
+        $r2 = r1.<org.apache.xml.security.c14n.implementations.Canonicalizer11: org.apache.xml.security.c14n.implementations.Canonicalizer11$XmlAttrStack xmlattrStack>;
+
+        varReplacer2271 = -1;
+
+        virtualinvoke $r2.<org.apache.xml.security.c14n.implementations.Canonicalizer11$XmlAttrStack: void push(int)>(varReplacer2271);
+
+        r3 = interfaceinvoke r0.<org.w3c.dom.Element: org.w3c.dom.NamedNodeMap getAttributes()>();
+
+        i0 = interfaceinvoke r3.<org.w3c.dom.NamedNodeMap: int getLength()>();
+
+        i1 = 0;
+
+     label02:
+        if i1 >= i0 goto label06;
+
+        $r10 = interfaceinvoke r3.<org.w3c.dom.NamedNodeMap: org.w3c.dom.Node item(int)>(i1);
+
+        r20 = (org.w3c.dom.Attr) $r10;
+
+        r21 = interfaceinvoke r20.<org.w3c.dom.Attr: java.lang.String getLocalName()>();
+
+        r22 = interfaceinvoke r20.<org.w3c.dom.Attr: java.lang.String getNodeValue()>();
+
+        $r11 = "http://www.w3.org/2000/xmlns/";
+
+        $r12 = interfaceinvoke r20.<org.w3c.dom.Attr: java.lang.String getNamespaceURI()>();
+
+        $z3 = virtualinvoke $r11.<java.lang.String: boolean equals(java.lang.Object)>($r12);
+
+        if $z3 == 0 goto label04;
+
+        $r17 = "xml";
+
+        $z6 = virtualinvoke $r17.<java.lang.String: boolean equals(java.lang.Object)>(r21);
+
+        if $z6 == 0 goto label03;
+
+        $r18 = "http://www.w3.org/XML/1998/namespace";
+
+        $z8 = virtualinvoke $r18.<java.lang.String: boolean equals(java.lang.Object)>(r22);
+
+        if $z8 != 0 goto label05;
+
+     label03:
+        virtualinvoke r6.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: boolean addMapping(java.lang.String,java.lang.String,org.w3c.dom.Attr)>(r21, r22, r20);
+
+        goto label05;
+
+     label04:
+        $r13 = "id";
+
+        $z4 = virtualinvoke $r13.<java.lang.String: boolean equals(java.lang.Object)>(r21);
+
+        if $z4 != 0 goto label05;
+
+        $r14 = "http://www.w3.org/XML/1998/namespace";
+
+        $r15 = interfaceinvoke r20.<org.w3c.dom.Attr: java.lang.String getNamespaceURI()>();
+
+        $z5 = virtualinvoke $r14.<java.lang.String: boolean equals(java.lang.Object)>($r15);
+
+        if $z5 == 0 goto label05;
+
+        $r16 = r1.<org.apache.xml.security.c14n.implementations.Canonicalizer11: org.apache.xml.security.c14n.implementations.Canonicalizer11$XmlAttrStack xmlattrStack>;
+
+        virtualinvoke $r16.<org.apache.xml.security.c14n.implementations.Canonicalizer11$XmlAttrStack: void addXmlnsAttr(org.w3c.dom.Attr)>(r20);
+
+     label05:
+        i1 = i1 + 1;
+
+        goto label02;
+
+     label06:
+        $r4 = interfaceinvoke r0.<org.w3c.dom.Element: java.lang.String getNamespaceURI()>();
+
+        if $r4 == null goto label10;
+
+        r23 = interfaceinvoke r0.<org.w3c.dom.Element: java.lang.String getPrefix()>();
+
+        r24 = interfaceinvoke r0.<org.w3c.dom.Element: java.lang.String getNamespaceURI()>();
+
+        if r23 == null goto label07;
+
+        varReplacer2268 = "";
+
+        $z2 = virtualinvoke r23.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2268);
+
+        if $z2 == 0 goto label08;
+
+     label07:
+        r23 = "xmlns";
+
+        r25 = "xmlns";
+
+        goto label09;
+
+     label08:
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer2270 = "xmlns:";
+
+        $r8 = virtualinvoke $r7.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2270);
+
+        $r9 = virtualinvoke $r8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r23);
+
+        r25 = virtualinvoke $r9.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label09:
+        $r5 = interfaceinvoke r0.<org.w3c.dom.Element: org.w3c.dom.Document getOwnerDocument()>();
+
+        varReplacer2269 = "http://www.w3.org/2000/xmlns/";
+
+        r26 = interfaceinvoke $r5.<org.w3c.dom.Document: org.w3c.dom.Attr createAttributeNS(java.lang.String,java.lang.String)>(varReplacer2269, r25);
+
+        interfaceinvoke r26.<org.w3c.dom.Attr: void setValue(java.lang.String)>(r24);
+
+        virtualinvoke r6.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: boolean addMapping(java.lang.String,java.lang.String,org.w3c.dom.Attr)>(r23, r24, r26);
+
+     label10:
+        return;
+    }
+
+    private static java.lang.String joinURI(java.lang.String, java.lang.String) throws java.net.URISyntaxException
+    {
+        java.lang.String r0, r1, r2, r3, $r5, r15, r16, r17, r18, r19, r23, r24, r25, r26, r27, r28, $r30, varReplacer2272, varReplacer2275, varReplacer2276, varReplacer2277;
+        int $i0, i1, $i2, $i3, varReplacer2273, varReplacer2278;
+        boolean $z0, $z1, $z2;
+        java.lang.StringBuilder $r4, $r6, $r7, $r8, $r9, $r10, $r12, $r13, $r14;
+        java.net.URI $r11, r20, $r21, r22, $r29;
+        null_type varReplacer2274;
+
+        nop;
+
+        r15 := @parameter0: java.lang.String;
+
+        r0 := @parameter1: java.lang.String;
+
+        r16 = null;
+
+        r17 = null;
+
+        r18 = "";
+
+        r19 = null;
+
+        if r15 == null goto label02;
+
+        varReplacer2276 = "..";
+
+        $z2 = virtualinvoke r15.<java.lang.String: boolean endsWith(java.lang.String)>(varReplacer2276);
+
+        if $z2 == 0 goto label01;
+
+        $r12 = new java.lang.StringBuilder;
+
+        specialinvoke $r12.<java.lang.StringBuilder: void <init>()>();
+
+        $r13 = virtualinvoke $r12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r15);
+
+        varReplacer2272 = "/";
+
+        $r14 = virtualinvoke $r13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2272);
+
+        r15 = virtualinvoke $r14.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label01:
+        $r11 = new java.net.URI;
+
+        specialinvoke $r11.<java.net.URI: void <init>(java.lang.String)>(r15);
+
+        r20 = $r11;
+
+        r16 = virtualinvoke r20.<java.net.URI: java.lang.String getScheme()>();
+
+        r17 = virtualinvoke r20.<java.net.URI: java.lang.String getAuthority()>();
+
+        r18 = virtualinvoke r20.<java.net.URI: java.lang.String getPath()>();
+
+        r19 = virtualinvoke r20.<java.net.URI: java.lang.String getQuery()>();
+
+     label02:
+        $r21 = new java.net.URI;
+
+        specialinvoke $r21.<java.net.URI: void <init>(java.lang.String)>(r0);
+
+        r22 = $r21;
+
+        r23 = virtualinvoke r22.<java.net.URI: java.lang.String getScheme()>();
+
+        r1 = virtualinvoke r22.<java.net.URI: java.lang.String getAuthority()>();
+
+        r2 = virtualinvoke r22.<java.net.URI: java.lang.String getPath()>();
+
+        r3 = virtualinvoke r22.<java.net.URI: java.lang.String getQuery()>();
+
+        if r23 == null goto label03;
+
+        $z1 = virtualinvoke r23.<java.lang.String: boolean equals(java.lang.Object)>(r16);
+
+        if $z1 == 0 goto label03;
+
+        r23 = null;
+
+     label03:
+        if r23 == null goto label04;
+
+        r24 = r23;
+
+        r25 = r1;
+
+        r26 = staticinvoke <org.apache.xml.security.c14n.implementations.Canonicalizer11: java.lang.String removeDotSegments(java.lang.String)>(r2);
+
+        r27 = r3;
+
+        goto label15;
+
+     label04:
+        if r1 == null goto label05;
+
+        r25 = r1;
+
+        r26 = staticinvoke <org.apache.xml.security.c14n.implementations.Canonicalizer11: java.lang.String removeDotSegments(java.lang.String)>(r2);
+
+        r27 = r3;
+
+        goto label14;
+
+     label05:
+        $i0 = virtualinvoke r2.<java.lang.String: int length()>();
+
+        if $i0 != 0 goto label07;
+
+        r26 = r18;
+
+        if r3 == null goto label06;
+
+        r27 = r3;
+
+        goto label13;
+
+     label06:
+        r27 = r19;
+
+        goto label13;
+
+     label07:
+        varReplacer2277 = "/";
+
+        $z0 = virtualinvoke r2.<java.lang.String: boolean startsWith(java.lang.String)>(varReplacer2277);
+
+        if $z0 == 0 goto label08;
+
+        r26 = staticinvoke <org.apache.xml.security.c14n.implementations.Canonicalizer11: java.lang.String removeDotSegments(java.lang.String)>(r2);
+
+        goto label12;
+
+     label08:
+        if r17 == null goto label09;
+
+        $i3 = virtualinvoke r18.<java.lang.String: int length()>();
+
+        if $i3 != 0 goto label09;
+
+        $r8 = new java.lang.StringBuilder;
+
+        specialinvoke $r8.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer2275 = "/";
+
+        $r9 = virtualinvoke $r8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2275);
+
+        $r10 = virtualinvoke $r9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r2);
+
+        r28 = virtualinvoke $r10.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        goto label11;
+
+     label09:
+        varReplacer2278 = 47;
+
+        i1 = virtualinvoke r18.<java.lang.String: int lastIndexOf(int)>(varReplacer2278);
+
+        if i1 != -1 goto label10;
+
+        r28 = r2;
+
+        goto label11;
+
+     label10:
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<java.lang.StringBuilder: void <init>()>();
+
+        $i2 = i1 + 1;
+
+        varReplacer2273 = 0;
+
+        $r5 = virtualinvoke r18.<java.lang.String: java.lang.String substring(int,int)>(varReplacer2273, $i2);
+
+        $r6 = virtualinvoke $r4.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r5);
+
+        $r7 = virtualinvoke $r6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r2);
+
+        r28 = virtualinvoke $r7.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label11:
+        r26 = staticinvoke <org.apache.xml.security.c14n.implementations.Canonicalizer11: java.lang.String removeDotSegments(java.lang.String)>(r28);
+
+     label12:
+        r27 = r3;
+
+     label13:
+        r25 = r17;
+
+     label14:
+        r24 = r16;
+
+     label15:
+        $r29 = new java.net.URI;
+
+        varReplacer2274 = null;
+
+        specialinvoke $r29.<java.net.URI: void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)>(r24, r25, r26, r27, varReplacer2274);
+
+        $r30 = virtualinvoke $r29.<java.net.URI: java.lang.String toString()>();
+
+        return $r30;
+    }
+
+    private static java.lang.String removeDotSegments(java.lang.String)
+    {
+        org.slf4j.Logger $r0, $r33;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8, $z9, $z10, $z11, $z12, $z13, $z14, $z15;
+        java.lang.String r1, $r3, $r4, $r5, $r7, $r9, $r10, $r11, $r13, $r14, $r15, $r20, $r21, $r26, $r27, $r28, $r29, $r31, r34, $r36, $r37, r38, varReplacer2279, varReplacer2280, varReplacer2282, varReplacer2283, varReplacer2286, varReplacer2287, varReplacer2288, varReplacer2291, varReplacer2292, varReplacer2294, varReplacer2295, varReplacer2296, varReplacer2297, varReplacer2298, varReplacer2299, varReplacer2303, varReplacer2304, varReplacer2305, varReplacer2306, varReplacer2307, varReplacer2308, varReplacer2310, varReplacer2311, varReplacer2312, varReplacer2313, varReplacer2314, varReplacer2315, varReplacer2316, varReplacer2317, varReplacer2318, varReplacer2319, varReplacer2320, varReplacer2321, varReplacer2323, varReplacer2324, varReplacer2325, varReplacer2326, varReplacer2327, varReplacer2328, varReplacer2329, varReplacer2331, varReplacer2333, varReplacer2334, varReplacer2335, varReplacer2336, varReplacer2337;
+        java.lang.StringBuilder $r2, $r16, $r22, r35;
+        char $c0, $c3, $c6;
+        int $i1, $i2, $i4, $i5, $i7, $i8, i9, i10, i12, i13, varReplacer2281, varReplacer2284, varReplacer2285, varReplacer2289, varReplacer2290, varReplacer2293, varReplacer2300, varReplacer2301, varReplacer2302, varReplacer2309, varReplacer2322, varReplacer2330, varReplacer2332;
+        byte b11;
+
+        nop;
+
+        r1 := @parameter0: java.lang.String;
+
+        $r0 = <org.apache.xml.security.c14n.implementations.Canonicalizer11: org.slf4j.Logger log>;
+
+        $z0 = interfaceinvoke $r0.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z0 == 0 goto label01;
+
+        $r33 = <org.apache.xml.security.c14n.implementations.Canonicalizer11: org.slf4j.Logger log>;
+
+        varReplacer2291 = "STEP   OUTPUT BUFFER\t\tINPUT BUFFER";
+
+        interfaceinvoke $r33.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2291);
+
+     label01:
+        r34 = r1;
+
+     label02:
+        varReplacer2326 = "//";
+
+        $i7 = virtualinvoke r34.<java.lang.String: int indexOf(java.lang.String)>(varReplacer2326);
+
+        if $i7 <= -1 goto label03;
+
+        varReplacer2328 = "//";
+
+        varReplacer2329 = "/";
+
+        r34 = virtualinvoke r34.<java.lang.String: java.lang.String replaceAll(java.lang.String,java.lang.String)>(varReplacer2328, varReplacer2329);
+
+        goto label02;
+
+     label03:
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<java.lang.StringBuilder: void <init>()>();
+
+        r35 = $r2;
+
+        varReplacer2330 = 0;
+
+        $c0 = virtualinvoke r34.<java.lang.String: char charAt(int)>(varReplacer2330);
+
+        if $c0 != 47 goto label04;
+
+        varReplacer2294 = "/";
+
+        virtualinvoke r35.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2294);
+
+        varReplacer2301 = 1;
+
+        r34 = virtualinvoke r34.<java.lang.String: java.lang.String substring(int)>(varReplacer2301);
+
+     label04:
+        $r3 = virtualinvoke r35.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        varReplacer2334 = "1 ";
+
+        staticinvoke <org.apache.xml.security.c14n.implementations.Canonicalizer11: void printStep(java.lang.String,java.lang.String,java.lang.String)>(varReplacer2334, $r3, r34);
+
+     label05:
+        $i8 = virtualinvoke r34.<java.lang.String: int length()>();
+
+        if $i8 == 0 goto label30;
+
+        varReplacer2279 = "./";
+
+        $z2 = virtualinvoke r34.<java.lang.String: boolean startsWith(java.lang.String)>(varReplacer2279);
+
+        if $z2 == 0 goto label06;
+
+        varReplacer2300 = 2;
+
+        r34 = virtualinvoke r34.<java.lang.String: java.lang.String substring(int)>(varReplacer2300);
+
+        $r31 = virtualinvoke r35.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        varReplacer2308 = "2A";
+
+        staticinvoke <org.apache.xml.security.c14n.implementations.Canonicalizer11: void printStep(java.lang.String,java.lang.String,java.lang.String)>(varReplacer2308, $r31, r34);
+
+        goto label05;
+
+     label06:
+        varReplacer2283 = "../";
+
+        $z3 = virtualinvoke r34.<java.lang.String: boolean startsWith(java.lang.String)>(varReplacer2283);
+
+        if $z3 == 0 goto label08;
+
+        varReplacer2281 = 3;
+
+        r34 = virtualinvoke r34.<java.lang.String: java.lang.String substring(int)>(varReplacer2281);
+
+        $r28 = virtualinvoke r35.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        varReplacer2292 = "/";
+
+        $z15 = virtualinvoke $r28.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2292);
+
+        if $z15 != 0 goto label07;
+
+        varReplacer2311 = "../";
+
+        virtualinvoke r35.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2311);
+
+     label07:
+        $r29 = virtualinvoke r35.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        varReplacer2318 = "2A";
+
+        staticinvoke <org.apache.xml.security.c14n.implementations.Canonicalizer11: void printStep(java.lang.String,java.lang.String,java.lang.String)>(varReplacer2318, $r29, r34);
+
+        goto label05;
+
+     label08:
+        varReplacer2335 = "/./";
+
+        $z4 = virtualinvoke r34.<java.lang.String: boolean startsWith(java.lang.String)>(varReplacer2335);
+
+        if $z4 == 0 goto label09;
+
+        varReplacer2332 = 2;
+
+        r34 = virtualinvoke r34.<java.lang.String: java.lang.String substring(int)>(varReplacer2332);
+
+        $r27 = virtualinvoke r35.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        varReplacer2303 = "2B";
+
+        staticinvoke <org.apache.xml.security.c14n.implementations.Canonicalizer11: void printStep(java.lang.String,java.lang.String,java.lang.String)>(varReplacer2303, $r27, r34);
+
+        goto label05;
+
+     label09:
+        varReplacer2298 = "/.";
+
+        $z5 = virtualinvoke r34.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2298);
+
+        if $z5 == 0 goto label10;
+
+        varReplacer2286 = "/.";
+
+        varReplacer2287 = "/";
+
+        r34 = virtualinvoke r34.<java.lang.String: java.lang.String replaceFirst(java.lang.String,java.lang.String)>(varReplacer2286, varReplacer2287);
+
+        $r26 = virtualinvoke r35.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        varReplacer2331 = "2B";
+
+        staticinvoke <org.apache.xml.security.c14n.implementations.Canonicalizer11: void printStep(java.lang.String,java.lang.String,java.lang.String)>(varReplacer2331, $r26, r34);
+
+        goto label05;
+
+     label10:
+        varReplacer2327 = "/../";
+
+        $z6 = virtualinvoke r34.<java.lang.String: boolean startsWith(java.lang.String)>(varReplacer2327);
+
+        if $z6 == 0 goto label16;
+
+        varReplacer2293 = 3;
+
+        r34 = virtualinvoke r34.<java.lang.String: java.lang.String substring(int)>(varReplacer2293);
+
+        $i4 = virtualinvoke r35.<java.lang.StringBuilder: int length()>();
+
+        if $i4 != 0 goto label11;
+
+        varReplacer2282 = "/";
+
+        virtualinvoke r35.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2282);
+
+        goto label15;
+
+     label11:
+        $r20 = virtualinvoke r35.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        varReplacer2324 = "../";
+
+        $z13 = virtualinvoke $r20.<java.lang.String: boolean endsWith(java.lang.String)>(varReplacer2324);
+
+        if $z13 == 0 goto label12;
+
+        varReplacer2305 = "..";
+
+        virtualinvoke r35.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2305);
+
+        goto label15;
+
+     label12:
+        $r21 = virtualinvoke r35.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        varReplacer2316 = "..";
+
+        $z14 = virtualinvoke $r21.<java.lang.String: boolean endsWith(java.lang.String)>(varReplacer2316);
+
+        if $z14 == 0 goto label13;
+
+        varReplacer2317 = "/..";
+
+        virtualinvoke r35.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2317);
+
+        goto label15;
+
+     label13:
+        varReplacer2304 = "/";
+
+        i9 = virtualinvoke r35.<java.lang.StringBuilder: int lastIndexOf(java.lang.String)>(varReplacer2304);
+
+        if i9 != -1 goto label14;
+
+        $r22 = new java.lang.StringBuilder;
+
+        specialinvoke $r22.<java.lang.StringBuilder: void <init>()>();
+
+        r35 = $r22;
+
+        varReplacer2309 = 0;
+
+        $c6 = virtualinvoke r34.<java.lang.String: char charAt(int)>(varReplacer2309);
+
+        if $c6 != 47 goto label15;
+
+        varReplacer2302 = 1;
+
+        r34 = virtualinvoke r34.<java.lang.String: java.lang.String substring(int)>(varReplacer2302);
+
+        goto label15;
+
+     label14:
+        $i5 = virtualinvoke r35.<java.lang.StringBuilder: int length()>();
+
+        r35 = virtualinvoke r35.<java.lang.StringBuilder: java.lang.StringBuilder delete(int,int)>(i9, $i5);
+
+     label15:
+        $r36 = virtualinvoke r35.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        varReplacer2299 = "2C";
+
+        staticinvoke <org.apache.xml.security.c14n.implementations.Canonicalizer11: void printStep(java.lang.String,java.lang.String,java.lang.String)>(varReplacer2299, $r36, r34);
+
+        goto label05;
+
+     label16:
+        varReplacer2297 = "/..";
+
+        $z7 = virtualinvoke r34.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2297);
+
+        if $z7 == 0 goto label22;
+
+        varReplacer2312 = "/..";
+
+        varReplacer2313 = "/";
+
+        r34 = virtualinvoke r34.<java.lang.String: java.lang.String replaceFirst(java.lang.String,java.lang.String)>(varReplacer2312, varReplacer2313);
+
+        $i1 = virtualinvoke r35.<java.lang.StringBuilder: int length()>();
+
+        if $i1 != 0 goto label17;
+
+        varReplacer2306 = "/";
+
+        virtualinvoke r35.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2306);
+
+        goto label21;
+
+     label17:
+        $r14 = virtualinvoke r35.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        varReplacer2280 = "../";
+
+        $z11 = virtualinvoke $r14.<java.lang.String: boolean endsWith(java.lang.String)>(varReplacer2280);
+
+        if $z11 == 0 goto label18;
+
+        varReplacer2314 = "..";
+
+        virtualinvoke r35.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2314);
+
+        goto label21;
+
+     label18:
+        $r15 = virtualinvoke r35.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        varReplacer2296 = "..";
+
+        $z12 = virtualinvoke $r15.<java.lang.String: boolean endsWith(java.lang.String)>(varReplacer2296);
+
+        if $z12 == 0 goto label19;
+
+        varReplacer2315 = "/..";
+
+        virtualinvoke r35.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2315);
+
+        goto label21;
+
+     label19:
+        varReplacer2307 = "/";
+
+        i10 = virtualinvoke r35.<java.lang.StringBuilder: int lastIndexOf(java.lang.String)>(varReplacer2307);
+
+        if i10 != -1 goto label20;
+
+        $r16 = new java.lang.StringBuilder;
+
+        specialinvoke $r16.<java.lang.StringBuilder: void <init>()>();
+
+        r35 = $r16;
+
+        varReplacer2322 = 0;
+
+        $c3 = virtualinvoke r34.<java.lang.String: char charAt(int)>(varReplacer2322);
+
+        if $c3 != 47 goto label21;
+
+        varReplacer2290 = 1;
+
+        r34 = virtualinvoke r34.<java.lang.String: java.lang.String substring(int)>(varReplacer2290);
+
+        goto label21;
+
+     label20:
+        $i2 = virtualinvoke r35.<java.lang.StringBuilder: int length()>();
+
+        r35 = virtualinvoke r35.<java.lang.StringBuilder: java.lang.StringBuilder delete(int,int)>(i10, $i2);
+
+     label21:
+        $r37 = virtualinvoke r35.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        varReplacer2319 = "2C";
+
+        staticinvoke <org.apache.xml.security.c14n.implementations.Canonicalizer11: void printStep(java.lang.String,java.lang.String,java.lang.String)>(varReplacer2319, $r37, r34);
+
+        goto label05;
+
+     label22:
+        varReplacer2336 = ".";
+
+        $z8 = virtualinvoke r34.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2336);
+
+        if $z8 == 0 goto label23;
+
+        r34 = "";
+
+        $r13 = virtualinvoke r35.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        varReplacer2323 = "2D";
+
+        staticinvoke <org.apache.xml.security.c14n.implementations.Canonicalizer11: void printStep(java.lang.String,java.lang.String,java.lang.String)>(varReplacer2323, $r13, r34);
+
+        goto label05;
+
+     label23:
+        varReplacer2337 = "..";
+
+        $z9 = virtualinvoke r34.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2337);
+
+        if $z9 == 0 goto label25;
+
+        $r10 = virtualinvoke r35.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        varReplacer2295 = "/";
+
+        $z10 = virtualinvoke $r10.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2295);
+
+        if $z10 != 0 goto label24;
+
+        varReplacer2333 = "..";
+
+        virtualinvoke r35.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2333);
+
+     label24:
+        r34 = "";
+
+        $r11 = virtualinvoke r35.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        varReplacer2310 = "2D";
+
+        staticinvoke <org.apache.xml.security.c14n.implementations.Canonicalizer11: void printStep(java.lang.String,java.lang.String,java.lang.String)>(varReplacer2310, $r11, r34);
+
+        goto label05;
+
+     label25:
+        b11 = -1;
+
+        varReplacer2289 = 47;
+
+        i12 = virtualinvoke r34.<java.lang.String: int indexOf(int)>(varReplacer2289);
+
+        if i12 != 0 goto label26;
+
+        varReplacer2284 = 47;
+
+        varReplacer2285 = 1;
+
+        i13 = virtualinvoke r34.<java.lang.String: int indexOf(int,int)>(varReplacer2284, varReplacer2285);
+
+        goto label27;
+
+     label26:
+        i13 = i12;
+
+        i12 = 0;
+
+     label27:
+        if i13 != -1 goto label28;
+
+        r38 = virtualinvoke r34.<java.lang.String: java.lang.String substring(int)>(i12);
+
+        r34 = "";
+
+        goto label29;
+
+     label28:
+        r38 = virtualinvoke r34.<java.lang.String: java.lang.String substring(int,int)>(i12, i13);
+
+        r34 = virtualinvoke r34.<java.lang.String: java.lang.String substring(int)>(i13);
+
+     label29:
+        virtualinvoke r35.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r38);
+
+        $r9 = virtualinvoke r35.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        varReplacer2325 = "2E";
+
+        staticinvoke <org.apache.xml.security.c14n.implementations.Canonicalizer11: void printStep(java.lang.String,java.lang.String,java.lang.String)>(varReplacer2325, $r9, r34);
+
+        goto label05;
+
+     label30:
+        $r4 = virtualinvoke r35.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        varReplacer2320 = "..";
+
+        $z1 = virtualinvoke $r4.<java.lang.String: boolean endsWith(java.lang.String)>(varReplacer2320);
+
+        if $z1 == 0 goto label31;
+
+        varReplacer2288 = "/";
+
+        virtualinvoke r35.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2288);
+
+        $r7 = virtualinvoke r35.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        varReplacer2321 = "3 ";
+
+        staticinvoke <org.apache.xml.security.c14n.implementations.Canonicalizer11: void printStep(java.lang.String,java.lang.String,java.lang.String)>(varReplacer2321, $r7, r34);
+
+     label31:
+        $r5 = virtualinvoke r35.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        return $r5;
+    }
+
+    private static void printStep(java.lang.String, java.lang.String, java.lang.String)
+    {
+        org.slf4j.Logger $r0, $r2, $r11, $r17;
+        boolean $z0;
+        java.lang.StringBuilder $r1, $r3, $r5, $r6, $r8, $r10, $r12, $r14, $r16, $r18, $r19;
+        java.lang.String r4, r7, $r9, r13, $r15, $r20, varReplacer2338, varReplacer2339, varReplacer2340, varReplacer2341;
+        int $i0;
+
+        nop;
+
+        r4 := @parameter0: java.lang.String;
+
+        r7 := @parameter1: java.lang.String;
+
+        r13 := @parameter2: java.lang.String;
+
+        $r0 = <org.apache.xml.security.c14n.implementations.Canonicalizer11: org.slf4j.Logger log>;
+
+        $z0 = interfaceinvoke $r0.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z0 == 0 goto label2;
+
+        $r2 = <org.apache.xml.security.c14n.implementations.Canonicalizer11: org.slf4j.Logger log>;
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer2340 = " ";
+
+        $r3 = virtualinvoke $r1.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2340);
+
+        $r5 = virtualinvoke $r3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r4);
+
+        varReplacer2339 = ":   ";
+
+        $r6 = virtualinvoke $r5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2339);
+
+        $r8 = virtualinvoke $r6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r7);
+
+        $r9 = virtualinvoke $r8.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r2.<org.slf4j.Logger: void debug(java.lang.String)>($r9);
+
+        $i0 = virtualinvoke r7.<java.lang.String: int length()>();
+
+        if $i0 != 0 goto label1;
+
+        $r17 = <org.apache.xml.security.c14n.implementations.Canonicalizer11: org.slf4j.Logger log>;
+
+        $r16 = new java.lang.StringBuilder;
+
+        specialinvoke $r16.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer2338 = "\t\t\t\t";
+
+        $r18 = virtualinvoke $r16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2338);
+
+        $r19 = virtualinvoke $r18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r13);
+
+        $r20 = virtualinvoke $r19.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r17.<org.slf4j.Logger: void debug(java.lang.String)>($r20);
+
+        goto label2;
+
+     label1:
+        $r11 = <org.apache.xml.security.c14n.implementations.Canonicalizer11: org.slf4j.Logger log>;
+
+        $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer2341 = "\t\t\t";
+
+        $r12 = virtualinvoke $r10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2341);
+
+        $r14 = virtualinvoke $r12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r13);
+
+        $r15 = virtualinvoke $r14.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r11.<org.slf4j.Logger: void debug(java.lang.String)>($r15);
+
+     label2:
+        return;
+    }
+
+    static java.lang.String access$000(java.lang.String, java.lang.String) throws java.net.URISyntaxException
+    {
+        java.lang.String r0, r1, $r2;
+
+        nop;
+
+        r0 := @parameter0: java.lang.String;
+
+        r1 := @parameter1: java.lang.String;
+
+        $r2 = staticinvoke <org.apache.xml.security.c14n.implementations.Canonicalizer11: java.lang.String joinURI(java.lang.String,java.lang.String)>(r0, r1);
+
+        return $r2;
+    }
+
+    static org.slf4j.Logger access$100()
+    {
+        org.slf4j.Logger $r0;
+
+        nop;
+
+        $r0 = <org.apache.xml.security.c14n.implementations.Canonicalizer11: org.slf4j.Logger log>;
+
+        return $r0;
+    }
+
+    static void <clinit>()
+    {
+        org.slf4j.Logger $r0;
+
+        nop;
+
+        $r0 = staticinvoke <org.slf4j.LoggerFactory: org.slf4j.Logger getLogger(java.lang.Class)>(class "Lorg/apache/xml/security/c14n/implementations/Canonicalizer11;");
+
+        <org.apache.xml.security.c14n.implementations.Canonicalizer11: org.slf4j.Logger log> = $r0;
+
+        return;
+    }
+}

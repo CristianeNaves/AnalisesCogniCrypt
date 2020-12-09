@@ -1,0 +1,1312 @@
+public abstract class org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider extends org.apache.sshd.common.keyprovider.AbstractKeyPairProvider
+{
+    public static final java.lang.String DEFAULT_ALGORITHM;
+    public static final boolean DEFAULT_ALLOWED_TO_OVERWRITE;
+    private final java.util.concurrent.atomic.AtomicReference keyPairHolder;
+    private java.nio.file.Path path;
+    private java.lang.String algorithm;
+    private int keySize;
+    private java.security.spec.AlgorithmParameterSpec keySpec;
+    private boolean overwriteAllowed;
+
+    protected void <init>()
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        java.util.concurrent.atomic.AtomicReference $r1;
+        java.lang.String varReplacer6718;
+        int varReplacer6719;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        specialinvoke r0.<org.apache.sshd.common.keyprovider.AbstractKeyPairProvider: void <init>()>();
+
+        $r1 = new java.util.concurrent.atomic.AtomicReference;
+
+        specialinvoke $r1.<java.util.concurrent.atomic.AtomicReference: void <init>()>();
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.util.concurrent.atomic.AtomicReference keyPairHolder> = $r1;
+
+        varReplacer6718 = "DSA";
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.lang.String algorithm> = varReplacer6718;
+
+        varReplacer6719 = 1;
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: boolean overwriteAllowed> = varReplacer6719;
+
+        return;
+    }
+
+    public java.nio.file.Path getPath()
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        java.nio.file.Path $r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        $r1 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.nio.file.Path path>;
+
+        return $r1;
+    }
+
+    public void setFile(java.io.File)
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        java.io.File r1;
+        java.nio.file.Path $r3;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        r1 := @parameter0: java.io.File;
+
+        if r1 != null goto label1;
+
+        $r3 = null;
+
+        goto label2;
+
+     label1:
+        $r3 = virtualinvoke r1.<java.io.File: java.nio.file.Path toPath()>();
+
+     label2:
+        virtualinvoke r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: void setPath(java.nio.file.Path)>($r3);
+
+        return;
+    }
+
+    public void setPath(java.nio.file.Path)
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        java.nio.file.Path r1, $r3;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        r1 := @parameter0: java.nio.file.Path;
+
+        if r1 != null goto label1;
+
+        $r3 = null;
+
+        goto label2;
+
+     label1:
+        $r3 = interfaceinvoke r1.<java.nio.file.Path: java.nio.file.Path toAbsolutePath()>();
+
+     label2:
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.nio.file.Path path> = $r3;
+
+        return;
+    }
+
+    public java.lang.String getAlgorithm()
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        java.lang.String $r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        $r1 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.lang.String algorithm>;
+
+        return $r1;
+    }
+
+    public void setAlgorithm(java.lang.String)
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        java.lang.String r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        r1 := @parameter0: java.lang.String;
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.lang.String algorithm> = r1;
+
+        return;
+    }
+
+    public int getKeySize()
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        int $i0;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        $i0 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: int keySize>;
+
+        return $i0;
+    }
+
+    public void setKeySize(int)
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        int i0;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        i0 := @parameter0: int;
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: int keySize> = i0;
+
+        return;
+    }
+
+    public java.security.spec.AlgorithmParameterSpec getKeySpec()
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        java.security.spec.AlgorithmParameterSpec $r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        $r1 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.spec.AlgorithmParameterSpec keySpec>;
+
+        return $r1;
+    }
+
+    public void setKeySpec(java.security.spec.AlgorithmParameterSpec)
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        java.security.spec.AlgorithmParameterSpec r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        r1 := @parameter0: java.security.spec.AlgorithmParameterSpec;
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.spec.AlgorithmParameterSpec keySpec> = r1;
+
+        return;
+    }
+
+    public boolean isOverwriteAllowed()
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        boolean $z0;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        $z0 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: boolean overwriteAllowed>;
+
+        return $z0;
+    }
+
+    public void setOverwriteAllowed(boolean)
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        boolean z0;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        z0 := @parameter0: boolean;
+
+        r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: boolean overwriteAllowed> = z0;
+
+        return;
+    }
+
+    public void clearLoadedKeys()
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        java.util.concurrent.atomic.AtomicReference $r1, $r2, r13;
+        java.lang.Object $r3;
+        java.security.KeyPair r4;
+        org.slf4j.Logger $r5, $r7;
+        boolean $z0, $z1, $z2;
+        java.lang.Object[] $r6;
+        java.nio.file.Path $r8;
+        java.lang.String $r9, $r10, varReplacer6720;
+        java.lang.Throwable $r11, r12;
+        java.security.PublicKey r14;
+        null_type varReplacer6721;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        $r1 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.util.concurrent.atomic.AtomicReference keyPairHolder>;
+
+        r13 = $r1;
+
+        entermonitor $r1;
+
+     label1:
+        $r2 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.util.concurrent.atomic.AtomicReference keyPairHolder>;
+
+        varReplacer6721 = null;
+
+        $r3 = virtualinvoke $r2.<java.util.concurrent.atomic.AtomicReference: java.lang.Object getAndSet(java.lang.Object)>(varReplacer6721);
+
+        r4 = (java.security.KeyPair) $r3;
+
+        exitmonitor r13;
+
+     label2:
+        goto label5;
+
+     label3:
+        $r11 := @caughtexception;
+
+        r12 = $r11;
+
+        exitmonitor r13;
+
+     label4:
+        throw r12;
+
+     label5:
+        if r4 == null goto label6;
+
+        $z2 = 1;
+
+        goto label7;
+
+     label6:
+        $z2 = 0;
+
+     label7:
+        $r5 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $z0 = interfaceinvoke $r5.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        $z1 = $z2 & $z0;
+
+        if $z1 == 0 goto label8;
+
+        r14 = virtualinvoke r4.<java.security.KeyPair: java.security.PublicKey getPublic()>();
+
+        $r7 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $r6 = newarray (java.lang.Object)[3];
+
+        $r8 = virtualinvoke r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.nio.file.Path getPath()>();
+
+        $r6[0] = $r8;
+
+        $r9 = staticinvoke <org.apache.sshd.common.config.keys.KeyUtils: java.lang.String getKeyType(java.security.Key)>(r14);
+
+        $r6[1] = $r9;
+
+        $r10 = staticinvoke <org.apache.sshd.common.config.keys.KeyUtils: java.lang.String getFingerPrint(java.security.PublicKey)>(r14);
+
+        $r6[2] = $r10;
+
+        varReplacer6720 = "clearLoadedKeys({}) removed key={}-{}";
+
+        interfaceinvoke $r7.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object[])>(varReplacer6720, $r6);
+
+     label8:
+        return;
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+        catch java.lang.Throwable from label3 to label4 with label3;
+    }
+
+    public synchronized java.util.List loadKeys()
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        java.nio.file.Path r1;
+        java.util.concurrent.atomic.AtomicReference $r2, r3, $r4, $r8;
+        java.lang.Object $r5;
+        java.util.List $r6, $r7;
+        java.lang.Throwable $r9, r10, $r11, r12;
+        java.lang.Object[] $r13;
+        org.slf4j.Logger $r14, $r18, $r20;
+        java.lang.Class $r15;
+        java.lang.String $r16, $r17, $r24, varReplacer6722, varReplacer6723, varReplacer6724;
+        boolean $z0;
+        java.lang.StringBuilder $r19, $r21, $r22, $r23;
+        java.security.KeyPair r25;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        r1 = virtualinvoke r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.nio.file.Path getPath()>();
+
+        $r2 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.util.concurrent.atomic.AtomicReference keyPairHolder>;
+
+        r3 = $r2;
+
+        entermonitor $r2;
+
+     label01:
+        $r4 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.util.concurrent.atomic.AtomicReference keyPairHolder>;
+
+        $r5 = virtualinvoke $r4.<java.util.concurrent.atomic.AtomicReference: java.lang.Object get()>();
+
+        r25 = (java.security.KeyPair) $r5;
+
+        if r25 != null goto label05;
+
+     label02:
+        r25 = virtualinvoke r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.KeyPair resolveKeyPair(java.nio.file.Path)>(r1);
+
+        if r25 == null goto label03;
+
+        $r8 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.util.concurrent.atomic.AtomicReference keyPairHolder>;
+
+        virtualinvoke $r8.<java.util.concurrent.atomic.AtomicReference: void set(java.lang.Object)>(r25);
+
+     label03:
+        goto label05;
+
+     label04:
+        $r11 := @caughtexception;
+
+        r12 = $r11;
+
+        $r14 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $r13 = newarray (java.lang.Object)[3];
+
+        $r13[0] = r1;
+
+        $r15 = virtualinvoke r12.<java.lang.Object: java.lang.Class getClass()>();
+
+        $r16 = virtualinvoke $r15.<java.lang.Class: java.lang.String getSimpleName()>();
+
+        $r13[1] = $r16;
+
+        $r17 = virtualinvoke r12.<java.lang.Throwable: java.lang.String getMessage()>();
+
+        $r13[2] = $r17;
+
+        varReplacer6723 = "loadKeys({}) Failed ({}) to resolve: {}";
+
+        interfaceinvoke $r14.<org.slf4j.Logger: void warn(java.lang.String,java.lang.Object[])>(varReplacer6723, $r13);
+
+        $r18 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $z0 = interfaceinvoke $r18.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z0 == 0 goto label05;
+
+        $r20 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $r19 = new java.lang.StringBuilder;
+
+        specialinvoke $r19.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer6722 = "loadKeys(";
+
+        $r21 = virtualinvoke $r19.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer6722);
+
+        $r22 = virtualinvoke $r21.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(r1);
+
+        varReplacer6724 = ") resolution failure details";
+
+        $r23 = virtualinvoke $r22.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer6724);
+
+        $r24 = virtualinvoke $r23.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r20.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Throwable)>($r24, r12);
+
+     label05:
+        exitmonitor r3;
+
+     label06:
+        goto label09;
+
+     label07:
+        $r9 := @caughtexception;
+
+        r10 = $r9;
+
+        exitmonitor r3;
+
+     label08:
+        throw r10;
+
+     label09:
+        if r25 != null goto label10;
+
+        $r7 = staticinvoke <java.util.Collections: java.util.List emptyList()>();
+
+        return $r7;
+
+     label10:
+        $r6 = staticinvoke <java.util.Collections: java.util.List singletonList(java.lang.Object)>(r25);
+
+        return $r6;
+
+        catch java.lang.Throwable from label02 to label03 with label04;
+        catch java.lang.Throwable from label01 to label06 with label07;
+        catch java.lang.Throwable from label07 to label08 with label07;
+    }
+
+    protected java.security.KeyPair resolveKeyPair(java.nio.file.Path) throws java.io.IOException, java.security.GeneralSecurityException
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        java.lang.String r1, $r7, $r8, $r13, $r14, $r23, $r28, $r29, $r38, $r43, $r44, $r51, varReplacer6725, varReplacer6726, varReplacer6727, varReplacer6728, varReplacer6729, varReplacer6731, varReplacer6732, varReplacer6733, varReplacer6734, varReplacer6735, varReplacer6736, varReplacer6737;
+        java.nio.file.Path r2;
+        org.slf4j.Logger $r3, $r6, $r11, $r15, $r17, $r26, $r30, $r32, $r41, $r45, $r47;
+        boolean $z0, $z1, $z2, $z3;
+        java.nio.file.OpenOption[] $r4;
+        java.lang.Object[] $r5, $r10, $r25, $r40;
+        java.lang.Throwable $r9, $r24, $r39, r53, r56, r57;
+        java.lang.Class $r12, $r27, $r42;
+        java.lang.StringBuilder $r16, $r18, $r19, $r20, $r21, $r22, $r31, $r33, $r34, $r35, $r36, $r37, $r46, $r48, $r49, $r50;
+        java.security.KeyPair r52, r54;
+        java.security.PublicKey r55;
+        null_type varReplacer6730, varReplacer6738;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        r2 := @parameter0: java.nio.file.Path;
+
+        r1 = virtualinvoke r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.lang.String getAlgorithm()>();
+
+        if r2 == null goto label05;
+
+     label01:
+        r52 = virtualinvoke r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.KeyPair loadFromFile(java.lang.String,java.nio.file.Path)>(r1, r2);
+
+        if r52 == null goto label03;
+
+     label02:
+        return r52;
+
+     label03:
+        goto label05;
+
+     label04:
+        $r39 := @caughtexception;
+
+        r53 = $r39;
+
+        $r41 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $r40 = newarray (java.lang.Object)[3];
+
+        $r40[0] = r2;
+
+        $r42 = virtualinvoke r53.<java.lang.Object: java.lang.Class getClass()>();
+
+        $r43 = virtualinvoke $r42.<java.lang.Class: java.lang.String getSimpleName()>();
+
+        $r40[1] = $r43;
+
+        $r44 = virtualinvoke r53.<java.lang.Throwable: java.lang.String getMessage()>();
+
+        $r40[2] = $r44;
+
+        varReplacer6726 = "resolveKeyPair({}) Failed ({}) to load: {}";
+
+        interfaceinvoke $r41.<org.slf4j.Logger: void warn(java.lang.String,java.lang.Object[])>(varReplacer6726, $r40);
+
+        $r45 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $z3 = interfaceinvoke $r45.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z3 == 0 goto label05;
+
+        $r47 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $r46 = new java.lang.StringBuilder;
+
+        specialinvoke $r46.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer6733 = "resolveKeyPair(";
+
+        $r48 = virtualinvoke $r46.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer6733);
+
+        $r49 = virtualinvoke $r48.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(r2);
+
+        varReplacer6729 = ") load failure details";
+
+        $r50 = virtualinvoke $r49.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer6729);
+
+        $r51 = virtualinvoke $r50.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r47.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Throwable)>($r51, r53);
+
+     label05:
+        r54 = virtualinvoke r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.KeyPair generateKeyPair(java.lang.String)>(r1);
+
+        if r54 != null goto label07;
+
+     label06:
+        varReplacer6738 = null;
+
+        return varReplacer6738;
+
+     label07:
+        $r3 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $z0 = interfaceinvoke $r3.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z0 == 0 goto label08;
+
+        r55 = virtualinvoke r54.<java.security.KeyPair: java.security.PublicKey getPublic()>();
+
+        $r6 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $r5 = newarray (java.lang.Object)[4];
+
+        $r5[0] = r2;
+
+        $r5[1] = r1;
+
+        $r7 = staticinvoke <org.apache.sshd.common.config.keys.KeyUtils: java.lang.String getKeyType(java.security.Key)>(r55);
+
+        $r5[2] = $r7;
+
+        $r8 = staticinvoke <org.apache.sshd.common.config.keys.KeyUtils: java.lang.String getFingerPrint(java.security.PublicKey)>(r55);
+
+        $r5[3] = $r8;
+
+        varReplacer6736 = "resolveKeyPair({}) generated {} key={}-{}";
+
+        interfaceinvoke $r6.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object[])>(varReplacer6736, $r5);
+
+     label08:
+        goto label11;
+
+     label09:
+        $r24 := @caughtexception;
+
+        r56 = $r24;
+
+        $r26 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $r25 = newarray (java.lang.Object)[5];
+
+        $r25[0] = r2;
+
+        $r25[1] = r1;
+
+        $r27 = virtualinvoke r56.<java.lang.Object: java.lang.Class getClass()>();
+
+        $r28 = virtualinvoke $r27.<java.lang.Class: java.lang.String getSimpleName()>();
+
+        $r25[2] = $r28;
+
+        $r25[3] = r1;
+
+        $r29 = virtualinvoke r56.<java.lang.Throwable: java.lang.String getMessage()>();
+
+        $r25[4] = $r29;
+
+        varReplacer6732 = "resolveKeyPair({})[{}] Failed ({}) to generate {} key-pair: {}";
+
+        interfaceinvoke $r26.<org.slf4j.Logger: void warn(java.lang.String,java.lang.Object[])>(varReplacer6732, $r25);
+
+        $r30 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $z2 = interfaceinvoke $r30.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z2 == 0 goto label10;
+
+        $r32 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $r31 = new java.lang.StringBuilder;
+
+        specialinvoke $r31.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer6725 = "resolveKeyPair(";
+
+        $r33 = virtualinvoke $r31.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer6725);
+
+        $r34 = virtualinvoke $r33.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(r2);
+
+        varReplacer6737 = ")[";
+
+        $r35 = virtualinvoke $r34.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer6737);
+
+        $r36 = virtualinvoke $r35.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r1);
+
+        varReplacer6728 = "] key-pair generation failure details";
+
+        $r37 = virtualinvoke $r36.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer6728);
+
+        $r38 = virtualinvoke $r37.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r32.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Throwable)>($r38, r56);
+
+     label10:
+        varReplacer6730 = null;
+
+        return varReplacer6730;
+
+     label11:
+        if r2 == null goto label15;
+
+     label12:
+        $r4 = newarray (java.nio.file.OpenOption)[0];
+
+        virtualinvoke r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: void writeKeyPair(java.security.KeyPair,java.nio.file.Path,java.nio.file.OpenOption[])>(r54, r2, $r4);
+
+     label13:
+        goto label15;
+
+     label14:
+        $r9 := @caughtexception;
+
+        r57 = $r9;
+
+        $r11 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $r10 = newarray (java.lang.Object)[5];
+
+        $r10[0] = r1;
+
+        $r10[1] = r2;
+
+        $r12 = virtualinvoke r57.<java.lang.Object: java.lang.Class getClass()>();
+
+        $r13 = virtualinvoke $r12.<java.lang.Class: java.lang.String getSimpleName()>();
+
+        $r10[2] = $r13;
+
+        $r10[3] = r1;
+
+        $r14 = virtualinvoke r57.<java.lang.Throwable: java.lang.String getMessage()>();
+
+        $r10[4] = $r14;
+
+        varReplacer6735 = "resolveKeyPair({})[{}] Failed ({}) to write {} key: {}";
+
+        interfaceinvoke $r11.<org.slf4j.Logger: void warn(java.lang.String,java.lang.Object[])>(varReplacer6735, $r10);
+
+        $r15 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $z1 = interfaceinvoke $r15.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z1 == 0 goto label15;
+
+        $r17 = r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $r16 = new java.lang.StringBuilder;
+
+        specialinvoke $r16.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer6734 = "resolveKeyPair(";
+
+        $r18 = virtualinvoke $r16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer6734);
+
+        $r19 = virtualinvoke $r18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(r2);
+
+        varReplacer6731 = ")[";
+
+        $r20 = virtualinvoke $r19.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer6731);
+
+        $r21 = virtualinvoke $r20.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r1);
+
+        varReplacer6727 = "] write failure details";
+
+        $r22 = virtualinvoke $r21.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer6727);
+
+        $r23 = virtualinvoke $r22.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r17.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Throwable)>($r23, r57);
+
+     label15:
+        return r54;
+
+        catch java.lang.Throwable from label01 to label02 with label04;
+        catch java.lang.Throwable from label05 to label06 with label09;
+        catch java.lang.Throwable from label07 to label08 with label09;
+        catch java.lang.Throwable from label12 to label13 with label14;
+    }
+
+    protected java.security.KeyPair loadFromFile(java.lang.String, java.nio.file.Path) throws java.io.IOException, java.security.GeneralSecurityException
+    {
+        java.nio.file.LinkOption[] r0;
+        java.nio.file.Path r1;
+        boolean $z0, $z1, $z2, $z3, $z4, $z6;
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r2;
+        java.nio.file.OpenOption[] $r3;
+        java.security.KeyPair r4;
+        java.security.PublicKey r5;
+        java.lang.String $r6, r7, $r14, $r15, r16, varReplacer6739, varReplacer6744;
+        org.slf4j.Logger $r8, $r10, $r11, $r13;
+        java.lang.Object[] $r9, $r12;
+        null_type varReplacer6740, varReplacer6742, varReplacer6743;
+        int varReplacer6741;
+
+        nop;
+
+        r2 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        r7 := @parameter0: java.lang.String;
+
+        r1 := @parameter1: java.nio.file.Path;
+
+        varReplacer6741 = 0;
+
+        r0 = staticinvoke <org.apache.sshd.common.util.io.IoUtils: java.nio.file.LinkOption[] getLinkOptions(boolean)>(varReplacer6741);
+
+        $z0 = staticinvoke <java.nio.file.Files: boolean exists(java.nio.file.Path,java.nio.file.LinkOption[])>(r1, r0);
+
+        if $z0 == 0 goto label1;
+
+        $z1 = staticinvoke <java.nio.file.Files: boolean isRegularFile(java.nio.file.Path,java.nio.file.LinkOption[])>(r1, r0);
+
+        if $z1 != 0 goto label2;
+
+     label1:
+        varReplacer6742 = null;
+
+        return varReplacer6742;
+
+     label2:
+        $r3 = <org.apache.sshd.common.util.io.IoUtils: java.nio.file.OpenOption[] EMPTY_OPEN_OPTIONS>;
+
+        r4 = virtualinvoke r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.KeyPair readKeyPair(java.nio.file.Path,java.nio.file.OpenOption[])>(r1, $r3);
+
+        if r4 != null goto label3;
+
+        varReplacer6743 = null;
+
+        return varReplacer6743;
+
+     label3:
+        r5 = virtualinvoke r4.<java.security.KeyPair: java.security.PublicKey getPublic()>();
+
+        r16 = interfaceinvoke r5.<java.security.PublicKey: java.lang.String getAlgorithm()>();
+
+        $r6 = "ECDSA";
+
+        $z2 = virtualinvoke $r6.<java.lang.String: boolean equalsIgnoreCase(java.lang.String)>(r16);
+
+        if $z2 == 0 goto label4;
+
+        r16 = "EC";
+
+     label4:
+        $z3 = staticinvoke <java.util.Objects: boolean equals(java.lang.Object,java.lang.Object)>(r7, r16);
+
+        if $z3 == 0 goto label6;
+
+        $r11 = r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $z6 = interfaceinvoke $r11.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z6 == 0 goto label5;
+
+        $r13 = r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $r12 = newarray (java.lang.Object)[3];
+
+        $r12[0] = r1;
+
+        $r14 = staticinvoke <org.apache.sshd.common.config.keys.KeyUtils: java.lang.String getKeyType(java.security.Key)>(r5);
+
+        $r12[1] = $r14;
+
+        $r15 = staticinvoke <org.apache.sshd.common.config.keys.KeyUtils: java.lang.String getFingerPrint(java.security.PublicKey)>(r5);
+
+        $r12[2] = $r15;
+
+        varReplacer6739 = "resolveKeyPair({}) loaded key={}-{}";
+
+        interfaceinvoke $r13.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object[])>(varReplacer6739, $r12);
+
+     label5:
+        return r4;
+
+     label6:
+        $r8 = r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $z4 = interfaceinvoke $r8.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z4 == 0 goto label7;
+
+        $r10 = r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $r9 = newarray (java.lang.Object)[3];
+
+        $r9[0] = r1;
+
+        $r9[1] = r7;
+
+        $r9[2] = r16;
+
+        varReplacer6744 = "resolveKeyPair({}) mismatched loaded key algorithm: expected={}, loaded={}";
+
+        interfaceinvoke $r10.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object[])>(varReplacer6744, $r9);
+
+     label7:
+        staticinvoke <java.nio.file.Files: boolean deleteIfExists(java.nio.file.Path)>(r1);
+
+        varReplacer6740 = null;
+
+        return varReplacer6740;
+    }
+
+    protected transient java.security.KeyPair readKeyPair(java.nio.file.Path, java.nio.file.OpenOption[]) throws java.io.IOException, java.security.GeneralSecurityException
+    {
+        java.nio.file.Path r0;
+        java.nio.file.OpenOption[] r1;
+        java.io.InputStream r2;
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r3;
+        java.lang.String $r4;
+        java.lang.Throwable $r5, r6, r7, $r8, $r9, $r10, r11, r12, r14;
+        java.security.KeyPair r13;
+
+        nop;
+
+        r3 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        r0 := @parameter0: java.nio.file.Path;
+
+        r1 := @parameter1: java.nio.file.OpenOption[];
+
+        r2 = staticinvoke <java.nio.file.Files: java.io.InputStream newInputStream(java.nio.file.Path,java.nio.file.OpenOption[])>(r0, r1);
+
+        r12 = null;
+
+     label01:
+        $r4 = interfaceinvoke r0.<java.nio.file.Path: java.lang.String toString()>();
+
+        r13 = virtualinvoke r3.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.KeyPair doReadKeyPair(java.lang.String,java.io.InputStream)>($r4, r2);
+
+     label02:
+        if r2 == null goto label07;
+
+        if r12 == null goto label06;
+
+     label03:
+        virtualinvoke r2.<java.io.InputStream: void close()>();
+
+     label04:
+        goto label07;
+
+     label05:
+        $r10 := @caughtexception;
+
+        r11 = $r10;
+
+        virtualinvoke r12.<java.lang.Throwable: void addSuppressed(java.lang.Throwable)>(r11);
+
+        goto label07;
+
+     label06:
+        virtualinvoke r2.<java.io.InputStream: void close()>();
+
+     label07:
+        return r13;
+
+     label08:
+        $r9 := @caughtexception;
+
+        r14 = $r9;
+
+        r12 = r14;
+
+        throw r14;
+
+     label09:
+        $r8 := @caughtexception;
+
+        r7 = $r8;
+
+     label10:
+        if r2 == null goto label15;
+
+        if r12 == null goto label14;
+
+     label11:
+        virtualinvoke r2.<java.io.InputStream: void close()>();
+
+     label12:
+        goto label15;
+
+     label13:
+        $r5 := @caughtexception;
+
+        r6 = $r5;
+
+        virtualinvoke r12.<java.lang.Throwable: void addSuppressed(java.lang.Throwable)>(r6);
+
+        goto label15;
+
+     label14:
+        virtualinvoke r2.<java.io.InputStream: void close()>();
+
+     label15:
+        throw r7;
+
+        catch java.lang.Throwable from label03 to label04 with label05;
+        catch java.lang.Throwable from label01 to label02 with label08;
+        catch java.lang.Throwable from label11 to label12 with label13;
+        catch java.lang.Throwable from label08 to label10 with label09;
+    }
+
+    protected abstract java.security.KeyPair doReadKeyPair(java.lang.String, java.io.InputStream) throws java.io.IOException, java.security.GeneralSecurityException;
+
+    protected transient void writeKeyPair(java.security.KeyPair, java.nio.file.Path, java.nio.file.OpenOption[]) throws java.io.IOException, java.security.GeneralSecurityException
+    {
+        java.nio.file.Path r0;
+        java.nio.file.LinkOption[] $r1;
+        boolean $z0, $z1, $z2;
+        java.nio.file.OpenOption[] r2;
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r3;
+        java.lang.String $r4, $r9, $r10, $r15, $r16, $r23, varReplacer6745, varReplacer6746, varReplacer6747, varReplacer6748;
+        java.security.KeyPair r5;
+        java.lang.Object[] $r6, $r12;
+        org.slf4j.Logger $r7, $r13, $r17, $r19;
+        java.lang.Throwable $r11, $r24, r25, r26, $r27, $r28, $r29, r31, r32, r33, r34;
+        java.lang.Class $r14;
+        java.lang.StringBuilder $r18, $r20, $r21, $r22;
+        java.io.OutputStream r30;
+        java.security.PublicKey $r35;
+
+        nop;
+
+        r3 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        r5 := @parameter0: java.security.KeyPair;
+
+        r0 := @parameter1: java.nio.file.Path;
+
+        r2 := @parameter2: java.nio.file.OpenOption[];
+
+        $r1 = newarray (java.nio.file.LinkOption)[0];
+
+        $z0 = staticinvoke <java.nio.file.Files: boolean exists(java.nio.file.Path,java.nio.file.LinkOption[])>(r0, $r1);
+
+        if $z0 == 0 goto label01;
+
+        $z1 = virtualinvoke r3.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: boolean isOverwriteAllowed()>();
+
+        if $z1 == 0 goto label19;
+
+     label01:
+        r30 = staticinvoke <java.nio.file.Files: java.io.OutputStream newOutputStream(java.nio.file.Path,java.nio.file.OpenOption[])>(r0, r2);
+
+        r31 = null;
+
+     label02:
+        $r4 = interfaceinvoke r0.<java.nio.file.Path: java.lang.String toString()>();
+
+        virtualinvoke r3.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: void doWriteKeyPair(java.lang.String,java.security.KeyPair,java.io.OutputStream)>($r4, r5, r30);
+
+     label03:
+        if r30 == null goto label16;
+
+        if r31 == null goto label07;
+
+     label04:
+        virtualinvoke r30.<java.io.OutputStream: void close()>();
+
+     label05:
+        goto label16;
+
+     label06:
+        $r29 := @caughtexception;
+
+        r32 = $r29;
+
+        virtualinvoke r31.<java.lang.Throwable: void addSuppressed(java.lang.Throwable)>(r32);
+
+        goto label16;
+
+     label07:
+        virtualinvoke r30.<java.io.OutputStream: void close()>();
+
+        goto label16;
+
+     label08:
+        $r28 := @caughtexception;
+
+        r33 = $r28;
+
+        r31 = r33;
+
+        throw r33;
+
+     label09:
+        $r27 := @caughtexception;
+
+        r26 = $r27;
+
+     label10:
+        if r30 == null goto label15;
+
+        if r31 == null goto label14;
+
+     label11:
+        virtualinvoke r30.<java.io.OutputStream: void close()>();
+
+     label12:
+        goto label15;
+
+     label13:
+        $r24 := @caughtexception;
+
+        r25 = $r24;
+
+        virtualinvoke r31.<java.lang.Throwable: void addSuppressed(java.lang.Throwable)>(r25);
+
+        goto label15;
+
+     label14:
+        virtualinvoke r30.<java.io.OutputStream: void close()>();
+
+     label15:
+        throw r26;
+
+     label16:
+        goto label22;
+
+     label17:
+        $r11 := @caughtexception;
+
+        r34 = $r11;
+
+        $r13 = r3.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $r12 = newarray (java.lang.Object)[3];
+
+        $r12[0] = r0;
+
+        $r14 = virtualinvoke r34.<java.lang.Object: java.lang.Class getClass()>();
+
+        $r15 = virtualinvoke $r14.<java.lang.Class: java.lang.String getSimpleName()>();
+
+        $r12[1] = $r15;
+
+        $r16 = virtualinvoke r34.<java.lang.Throwable: java.lang.String getMessage()>();
+
+        $r12[2] = $r16;
+
+        varReplacer6745 = "writeKeyPair({}) failed ({}) to write key {}: {}";
+
+        interfaceinvoke $r13.<org.slf4j.Logger: void warn(java.lang.String,java.lang.Object[])>(varReplacer6745, $r12);
+
+        $r17 = r3.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $z2 = interfaceinvoke $r17.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z2 == 0 goto label18;
+
+        $r19 = r3.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $r18 = new java.lang.StringBuilder;
+
+        specialinvoke $r18.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer6747 = "writeKeyPair(";
+
+        $r20 = virtualinvoke $r18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer6747);
+
+        $r21 = virtualinvoke $r20.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(r0);
+
+        varReplacer6748 = ") write failure details";
+
+        $r22 = virtualinvoke $r21.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer6748);
+
+        $r23 = virtualinvoke $r22.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r19.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Throwable)>($r23, r34);
+
+     label18:
+        goto label22;
+
+     label19:
+        $r7 = r3.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $r6 = newarray (java.lang.Object)[3];
+
+        $r6[0] = r0;
+
+        $r9 = staticinvoke <org.apache.sshd.common.config.keys.KeyUtils: java.lang.String getKeyType(java.security.KeyPair)>(r5);
+
+        $r6[1] = $r9;
+
+        if r5 != null goto label20;
+
+        $r35 = null;
+
+        goto label21;
+
+     label20:
+        $r35 = virtualinvoke r5.<java.security.KeyPair: java.security.PublicKey getPublic()>();
+
+     label21:
+        $r10 = staticinvoke <org.apache.sshd.common.config.keys.KeyUtils: java.lang.String getFingerPrint(java.security.PublicKey)>($r35);
+
+        $r6[2] = $r10;
+
+        varReplacer6746 = "Overwriting key ({}) is disabled: using throwaway {}: {}";
+
+        interfaceinvoke $r7.<org.slf4j.Logger: void error(java.lang.String,java.lang.Object[])>(varReplacer6746, $r6);
+
+     label22:
+        return;
+
+        catch java.lang.Throwable from label04 to label05 with label06;
+        catch java.lang.Throwable from label02 to label03 with label08;
+        catch java.lang.Throwable from label11 to label12 with label13;
+        catch java.lang.Throwable from label08 to label10 with label09;
+        catch java.lang.Throwable from label01 to label16 with label17;
+    }
+
+    protected abstract void doWriteKeyPair(java.lang.String, java.security.KeyPair, java.io.OutputStream) throws java.io.IOException, java.security.GeneralSecurityException;
+
+    protected java.security.KeyPair generateKeyPair(java.lang.String) throws java.security.GeneralSecurityException
+    {
+        java.lang.String r0, $r4, $r16, $r25, $r27, varReplacer6749, varReplacer6750, varReplacer6751, varReplacer6752;
+        java.security.KeyPairGenerator r1;
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r2;
+        java.security.spec.AlgorithmParameterSpec $r3, $r17, $r23;
+        int $i0, i1, $i2, $i3, $i4;
+        boolean $z0;
+        java.util.List $r5, $r6;
+        java.lang.Object $r7;
+        org.apache.sshd.common.cipher.ECCurves r8;
+        java.security.spec.ECParameterSpec $r9;
+        java.lang.StringBuilder $r10, $r12, $r13, $r14, $r15, $r18, $r20, $r21, $r22, $r26;
+        org.slf4j.Logger $r11, $r19;
+        java.lang.Class $r24;
+        java.security.KeyPair $r28;
+
+        nop;
+
+        r2 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        r0 := @parameter0: java.lang.String;
+
+        r1 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.security.KeyPairGenerator getKeyPairGenerator(java.lang.String)>(r0);
+
+        $r3 = r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.spec.AlgorithmParameterSpec keySpec>;
+
+        if $r3 == null goto label1;
+
+        $r17 = r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.spec.AlgorithmParameterSpec keySpec>;
+
+        virtualinvoke r1.<java.security.KeyPairGenerator: void initialize(java.security.spec.AlgorithmParameterSpec)>($r17);
+
+        $r19 = r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $r18 = new java.lang.StringBuilder;
+
+        specialinvoke $r18.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer6750 = "generateKeyPair(";
+
+        $r20 = virtualinvoke $r18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer6750);
+
+        $r21 = virtualinvoke $r20.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r0);
+
+        varReplacer6749 = ") generating host key - spec=";
+
+        $r22 = virtualinvoke $r21.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer6749);
+
+        $r23 = r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.spec.AlgorithmParameterSpec keySpec>;
+
+        $r24 = virtualinvoke $r23.<java.lang.Object: java.lang.Class getClass()>();
+
+        $r25 = virtualinvoke $r24.<java.lang.Class: java.lang.String getSimpleName()>();
+
+        $r26 = virtualinvoke $r22.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r25);
+
+        $r27 = virtualinvoke $r26.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r19.<org.slf4j.Logger: void info(java.lang.String)>($r27);
+
+        goto label3;
+
+     label1:
+        $i0 = r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: int keySize>;
+
+        if $i0 == 0 goto label2;
+
+        $i3 = r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: int keySize>;
+
+        virtualinvoke r1.<java.security.KeyPairGenerator: void initialize(int)>($i3);
+
+        $r11 = r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: org.slf4j.Logger log>;
+
+        $r10 = new java.lang.StringBuilder;
+
+        specialinvoke $r10.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer6751 = "generateKeyPair(";
+
+        $r12 = virtualinvoke $r10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer6751);
+
+        $r13 = virtualinvoke $r12.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r0);
+
+        varReplacer6752 = ") generating host key - size=";
+
+        $r14 = virtualinvoke $r13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer6752);
+
+        $i4 = r2.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: int keySize>;
+
+        $r15 = virtualinvoke $r14.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($i4);
+
+        $r16 = virtualinvoke $r15.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r11.<org.slf4j.Logger: void info(java.lang.String)>($r16);
+
+        goto label3;
+
+     label2:
+        $r4 = "EC";
+
+        $z0 = virtualinvoke $r4.<java.lang.String: boolean equals(java.lang.Object)>(r0);
+
+        if $z0 == 0 goto label3;
+
+        $r5 = <org.apache.sshd.common.cipher.ECCurves: java.util.List SORTED_KEY_SIZE>;
+
+        i1 = interfaceinvoke $r5.<java.util.List: int size()>();
+
+        $r6 = <org.apache.sshd.common.cipher.ECCurves: java.util.List SORTED_KEY_SIZE>;
+
+        $i2 = i1 - 1;
+
+        $r7 = interfaceinvoke $r6.<java.util.List: java.lang.Object get(int)>($i2);
+
+        r8 = (org.apache.sshd.common.cipher.ECCurves) $r7;
+
+        $r9 = virtualinvoke r8.<org.apache.sshd.common.cipher.ECCurves: java.security.spec.ECParameterSpec getParameters()>();
+
+        virtualinvoke r1.<java.security.KeyPairGenerator: void initialize(java.security.spec.AlgorithmParameterSpec)>($r9);
+
+     label3:
+        $r28 = virtualinvoke r1.<java.security.KeyPairGenerator: java.security.KeyPair generateKeyPair()>();
+
+        return $r28;
+    }
+
+    public volatile java.lang.Iterable loadKeys()
+    {
+        org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider r0;
+        java.util.List $r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider;
+
+        $r1 = virtualinvoke r0.<org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.util.List loadKeys()>();
+
+        return $r1;
+    }
+}

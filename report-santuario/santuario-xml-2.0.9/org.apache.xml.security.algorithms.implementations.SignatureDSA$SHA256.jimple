@@ -1,0 +1,30 @@
+public class org.apache.xml.security.algorithms.implementations.SignatureDSA$SHA256 extends org.apache.xml.security.algorithms.implementations.SignatureDSA
+{
+
+    public void <init>() throws org.apache.xml.security.signature.XMLSignatureException
+    {
+        org.apache.xml.security.algorithms.implementations.SignatureDSA$SHA256 r0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.algorithms.implementations.SignatureDSA$SHA256;
+
+        specialinvoke r0.<org.apache.xml.security.algorithms.implementations.SignatureDSA: void <init>()>();
+
+        return;
+    }
+
+    public java.lang.String engineGetURI()
+    {
+        org.apache.xml.security.algorithms.implementations.SignatureDSA$SHA256 r0;
+        java.lang.String varReplacer2016;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.algorithms.implementations.SignatureDSA$SHA256;
+
+        varReplacer2016 = "http://www.w3.org/2009/xmldsig11#dsa-sha256";
+
+        return varReplacer2016;
+    }
+}

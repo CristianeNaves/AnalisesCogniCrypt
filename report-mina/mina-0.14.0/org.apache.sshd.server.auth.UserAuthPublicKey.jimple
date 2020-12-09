@@ -1,0 +1,253 @@
+public class org.apache.sshd.server.auth.UserAuthPublicKey extends org.apache.sshd.server.auth.AbstractUserAuth
+{
+
+    public void <init>()
+    {
+        org.apache.sshd.server.auth.UserAuthPublicKey r0;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.auth.UserAuthPublicKey;
+
+        specialinvoke r0.<org.apache.sshd.server.auth.AbstractUserAuth: void <init>()>();
+
+        return;
+    }
+
+    public java.lang.Boolean doAuth(org.apache.sshd.common.util.Buffer, boolean) throws java.lang.Exception
+    {
+        boolean z0, z1, $z2, $z3;
+        org.apache.sshd.common.util.Buffer r0, $r15, r37, r38;
+        java.lang.String r1, $r14, $r19, $r20, $r34, varReplacer2644, varReplacer2646, varReplacer2651, varReplacer2654;
+        int i0, i1, i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, varReplacer2645, varReplacer2648, varReplacer2649, varReplacer2650, varReplacer2653;
+        java.security.PublicKey r2;
+        org.apache.sshd.server.auth.UserAuthPublicKey r3;
+        org.apache.sshd.server.session.ServerSession $r4, $r10, $r13, $r16, $r24, $r26;
+        org.apache.sshd.server.ServerFactoryManager $r5, $r11;
+        java.util.List $r6;
+        java.lang.Object $r7;
+        org.apache.sshd.common.Signature r8;
+        byte[] r9, $r18, $r21, $r25, $r36;
+        org.apache.sshd.server.PublickeyAuthenticator r12;
+        org.apache.sshd.common.KeyExchange $r17;
+        java.lang.Boolean $r22, $r28;
+        java.lang.Exception $r23, $r29, $r30;
+        java.lang.StringBuilder $r31, $r32, $r33;
+        java.lang.IllegalStateException $r35;
+        null_type varReplacer2647, varReplacer2652;
+
+        nop;
+
+        r3 := @this: org.apache.sshd.server.auth.UserAuthPublicKey;
+
+        r0 := @parameter0: org.apache.sshd.common.util.Buffer;
+
+        z0 := @parameter1: boolean;
+
+        if z0 != 0 goto label1;
+
+        $r35 = new java.lang.IllegalStateException;
+
+        specialinvoke $r35.<java.lang.IllegalStateException: void <init>()>();
+
+        throw $r35;
+
+     label1:
+        z1 = virtualinvoke r0.<org.apache.sshd.common.util.Buffer: boolean getBoolean()>();
+
+        r1 = virtualinvoke r0.<org.apache.sshd.common.util.Buffer: java.lang.String getString()>();
+
+        i0 = virtualinvoke r0.<org.apache.sshd.common.util.Buffer: int wpos()>();
+
+        i1 = virtualinvoke r0.<org.apache.sshd.common.util.Buffer: int rpos()>();
+
+        i2 = virtualinvoke r0.<org.apache.sshd.common.util.Buffer: int getInt()>();
+
+        $i3 = virtualinvoke r0.<org.apache.sshd.common.util.Buffer: int rpos()>();
+
+        $i4 = $i3 + i2;
+
+        virtualinvoke r0.<org.apache.sshd.common.util.Buffer: void wpos(int)>($i4);
+
+        r2 = virtualinvoke r0.<org.apache.sshd.common.util.Buffer: java.security.PublicKey getRawPublicKey()>();
+
+        $r4 = r3.<org.apache.sshd.server.auth.UserAuthPublicKey: org.apache.sshd.server.session.ServerSession session>;
+
+        $r5 = virtualinvoke $r4.<org.apache.sshd.server.session.ServerSession: org.apache.sshd.server.ServerFactoryManager getFactoryManager()>();
+
+        $r6 = interfaceinvoke $r5.<org.apache.sshd.server.ServerFactoryManager: java.util.List getSignatureFactories()>();
+
+        $r7 = staticinvoke <org.apache.sshd.common.NamedFactory$Utils: java.lang.Object create(java.util.List,java.lang.String)>($r6, r1);
+
+        r8 = (org.apache.sshd.common.Signature) $r7;
+
+        if r8 != null goto label2;
+
+        $r30 = new java.lang.Exception;
+
+        $r31 = new java.lang.StringBuilder;
+
+        specialinvoke $r31.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer2654 = "No Signature available for: ";
+
+        $r32 = virtualinvoke $r31.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2654);
+
+        $r33 = virtualinvoke $r32.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r1);
+
+        $r34 = virtualinvoke $r33.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $r30.<java.lang.Exception: void <init>(java.lang.String)>($r34);
+
+        throw $r30;
+
+     label2:
+        varReplacer2647 = null;
+
+        interfaceinvoke r8.<org.apache.sshd.common.Signature: void init(java.security.PublicKey,java.security.PrivateKey)>(r2, varReplacer2647);
+
+        virtualinvoke r0.<org.apache.sshd.common.util.Buffer: void wpos(int)>(i0);
+
+        if z1 == 0 goto label3;
+
+        $r36 = virtualinvoke r0.<org.apache.sshd.common.util.Buffer: byte[] getBytes()>();
+
+        goto label4;
+
+     label3:
+        $r36 = null;
+
+     label4:
+        r9 = $r36;
+
+        $r10 = r3.<org.apache.sshd.server.auth.UserAuthPublicKey: org.apache.sshd.server.session.ServerSession session>;
+
+        $r11 = virtualinvoke $r10.<org.apache.sshd.server.session.ServerSession: org.apache.sshd.server.ServerFactoryManager getFactoryManager()>();
+
+        r12 = interfaceinvoke $r11.<org.apache.sshd.server.ServerFactoryManager: org.apache.sshd.server.PublickeyAuthenticator getPublickeyAuthenticator()>();
+
+        if r12 != null goto label5;
+
+        $r29 = new java.lang.Exception;
+
+        varReplacer2644 = "No PublickeyAuthenticator configured";
+
+        specialinvoke $r29.<java.lang.Exception: void <init>(java.lang.String)>(varReplacer2644);
+
+        throw $r29;
+
+     label5:
+        $r14 = r3.<org.apache.sshd.server.auth.UserAuthPublicKey: java.lang.String username>;
+
+        $r13 = r3.<org.apache.sshd.server.auth.UserAuthPublicKey: org.apache.sshd.server.session.ServerSession session>;
+
+        $z2 = interfaceinvoke r12.<org.apache.sshd.server.PublickeyAuthenticator: boolean authenticate(java.lang.String,java.security.PublicKey,org.apache.sshd.server.session.ServerSession)>($r14, r2, $r13);
+
+        if $z2 != 0 goto label6;
+
+        varReplacer2650 = 0;
+
+        $r28 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(varReplacer2650);
+
+        return $r28;
+
+     label6:
+        if z1 != 0 goto label7;
+
+        $r24 = r3.<org.apache.sshd.server.auth.UserAuthPublicKey: org.apache.sshd.server.session.ServerSession session>;
+
+        varReplacer2653 = 60;
+
+        r37 = virtualinvoke $r24.<org.apache.sshd.server.session.ServerSession: org.apache.sshd.common.util.Buffer createBuffer(byte)>(varReplacer2653);
+
+        virtualinvoke r37.<org.apache.sshd.common.util.Buffer: void putString(java.lang.String)>(r1);
+
+        $r25 = virtualinvoke r0.<org.apache.sshd.common.util.Buffer: byte[] array()>();
+
+        $i9 = 4 + i2;
+
+        virtualinvoke r37.<org.apache.sshd.common.util.Buffer: void putRawBytes(byte[],int,int)>($r25, i1, $i9);
+
+        $r26 = r3.<org.apache.sshd.server.auth.UserAuthPublicKey: org.apache.sshd.server.session.ServerSession session>;
+
+        virtualinvoke $r26.<org.apache.sshd.server.session.ServerSession: org.apache.sshd.common.io.IoWriteFuture writePacket(org.apache.sshd.common.util.Buffer)>(r37);
+
+        varReplacer2652 = null;
+
+        return varReplacer2652;
+
+     label7:
+        $r15 = new org.apache.sshd.common.util.Buffer;
+
+        specialinvoke $r15.<org.apache.sshd.common.util.Buffer: void <init>()>();
+
+        r38 = $r15;
+
+        $r16 = r3.<org.apache.sshd.server.auth.UserAuthPublicKey: org.apache.sshd.server.session.ServerSession session>;
+
+        $r17 = virtualinvoke $r16.<org.apache.sshd.server.session.ServerSession: org.apache.sshd.common.KeyExchange getKex()>();
+
+        $r18 = interfaceinvoke $r17.<org.apache.sshd.common.KeyExchange: byte[] getH()>();
+
+        virtualinvoke r38.<org.apache.sshd.common.util.Buffer: void putString(byte[])>($r18);
+
+        varReplacer2645 = 50;
+
+        virtualinvoke r38.<org.apache.sshd.common.util.Buffer: void putByte(byte)>(varReplacer2645);
+
+        $r19 = r3.<org.apache.sshd.server.auth.UserAuthPublicKey: java.lang.String username>;
+
+        virtualinvoke r38.<org.apache.sshd.common.util.Buffer: void putString(java.lang.String)>($r19);
+
+        $r20 = r3.<org.apache.sshd.server.auth.UserAuthPublicKey: java.lang.String service>;
+
+        virtualinvoke r38.<org.apache.sshd.common.util.Buffer: void putString(java.lang.String)>($r20);
+
+        varReplacer2646 = "publickey";
+
+        virtualinvoke r38.<org.apache.sshd.common.util.Buffer: void putString(java.lang.String)>(varReplacer2646);
+
+        varReplacer2649 = 1;
+
+        virtualinvoke r38.<org.apache.sshd.common.util.Buffer: void putByte(byte)>(varReplacer2649);
+
+        virtualinvoke r38.<org.apache.sshd.common.util.Buffer: void putString(java.lang.String)>(r1);
+
+        virtualinvoke r0.<org.apache.sshd.common.util.Buffer: void rpos(int)>(i1);
+
+        $i5 = i1 + 4;
+
+        $i6 = $i5 + i2;
+
+        virtualinvoke r0.<org.apache.sshd.common.util.Buffer: void wpos(int)>($i6);
+
+        virtualinvoke r38.<org.apache.sshd.common.util.Buffer: void putBuffer(org.apache.sshd.common.util.Readable)>(r0);
+
+        $r21 = virtualinvoke r38.<org.apache.sshd.common.util.Buffer: byte[] array()>();
+
+        $i7 = virtualinvoke r38.<org.apache.sshd.common.util.Buffer: int rpos()>();
+
+        $i8 = virtualinvoke r38.<org.apache.sshd.common.util.Buffer: int available()>();
+
+        interfaceinvoke r8.<org.apache.sshd.common.Signature: void update(byte[],int,int)>($r21, $i7, $i8);
+
+        $z3 = interfaceinvoke r8.<org.apache.sshd.common.Signature: boolean verify(byte[])>(r9);
+
+        if $z3 != 0 goto label8;
+
+        $r23 = new java.lang.Exception;
+
+        varReplacer2651 = "Key verification failed";
+
+        specialinvoke $r23.<java.lang.Exception: void <init>(java.lang.String)>(varReplacer2651);
+
+        throw $r23;
+
+     label8:
+        varReplacer2648 = 1;
+
+        $r22 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(varReplacer2648);
+
+        return $r22;
+    }
+}

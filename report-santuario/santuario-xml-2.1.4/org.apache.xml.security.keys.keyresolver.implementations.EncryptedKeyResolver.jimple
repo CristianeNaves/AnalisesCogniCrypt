@@ -1,0 +1,264 @@
+public class org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver extends org.apache.xml.security.keys.keyresolver.KeyResolverSpi
+{
+    private static final org.slf4j.Logger LOG;
+    private java.security.Key kek;
+    private java.lang.String algorithm;
+    private java.util.List internalKeyResolvers;
+
+    public void <init>(java.lang.String)
+    {
+        org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver r0;
+        java.lang.String r1;
+        null_type varReplacer3207;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver;
+
+        r1 := @parameter0: java.lang.String;
+
+        specialinvoke r0.<org.apache.xml.security.keys.keyresolver.KeyResolverSpi: void <init>()>();
+
+        varReplacer3207 = null;
+
+        r0.<org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver: java.security.Key kek> = varReplacer3207;
+
+        r0.<org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver: java.lang.String algorithm> = r1;
+
+        return;
+    }
+
+    public void <init>(java.lang.String, java.security.Key)
+    {
+        org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver r0;
+        java.lang.String r1;
+        java.security.Key r2;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver;
+
+        r1 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: java.security.Key;
+
+        specialinvoke r0.<org.apache.xml.security.keys.keyresolver.KeyResolverSpi: void <init>()>();
+
+        r0.<org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver: java.lang.String algorithm> = r1;
+
+        r0.<org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver: java.security.Key kek> = r2;
+
+        return;
+    }
+
+    public void registerInternalKeyResolver(org.apache.xml.security.keys.keyresolver.KeyResolverSpi)
+    {
+        org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver r0;
+        java.util.List $r1, $r3;
+        org.apache.xml.security.keys.keyresolver.KeyResolverSpi r2;
+        java.util.ArrayList $r4;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver;
+
+        r2 := @parameter0: org.apache.xml.security.keys.keyresolver.KeyResolverSpi;
+
+        $r1 = r0.<org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver: java.util.List internalKeyResolvers>;
+
+        if $r1 != null goto label1;
+
+        $r4 = new java.util.ArrayList;
+
+        specialinvoke $r4.<java.util.ArrayList: void <init>()>();
+
+        r0.<org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver: java.util.List internalKeyResolvers> = $r4;
+
+     label1:
+        $r3 = r0.<org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver: java.util.List internalKeyResolvers>;
+
+        interfaceinvoke $r3.<java.util.List: boolean add(java.lang.Object)>(r2);
+
+        return;
+    }
+
+    public java.security.PublicKey engineLookupAndResolvePublicKey(org.w3c.dom.Element, java.lang.String, org.apache.xml.security.keys.storage.StorageResolver)
+    {
+        org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver r0;
+        org.w3c.dom.Element r1;
+        java.lang.String r2;
+        org.apache.xml.security.keys.storage.StorageResolver r3;
+        null_type varReplacer3208;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver;
+
+        r1 := @parameter0: org.w3c.dom.Element;
+
+        r2 := @parameter1: java.lang.String;
+
+        r3 := @parameter2: org.apache.xml.security.keys.storage.StorageResolver;
+
+        varReplacer3208 = null;
+
+        return varReplacer3208;
+    }
+
+    public java.security.cert.X509Certificate engineLookupResolveX509Certificate(org.w3c.dom.Element, java.lang.String, org.apache.xml.security.keys.storage.StorageResolver)
+    {
+        org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver r0;
+        org.w3c.dom.Element r1;
+        java.lang.String r2;
+        org.apache.xml.security.keys.storage.StorageResolver r3;
+        null_type varReplacer3209;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver;
+
+        r1 := @parameter0: org.w3c.dom.Element;
+
+        r2 := @parameter1: java.lang.String;
+
+        r3 := @parameter2: org.apache.xml.security.keys.storage.StorageResolver;
+
+        varReplacer3209 = null;
+
+        return varReplacer3209;
+    }
+
+    public javax.crypto.SecretKey engineLookupAndResolveSecretKey(org.w3c.dom.Element, java.lang.String, org.apache.xml.security.keys.storage.StorageResolver)
+    {
+        org.w3c.dom.Element r0;
+        org.slf4j.Logger $r1, $r3, $r14;
+        java.lang.String $r2, $r7, $r15, r16, varReplacer3211, varReplacer3212, varReplacer3213;
+        boolean z0;
+        org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver r4;
+        java.security.Key $r5, $r8;
+        java.util.List $r6, $r9, $r10;
+        java.lang.Object $r11;
+        org.apache.xml.security.keys.keyresolver.KeyResolverSpi $r12;
+        org.apache.xml.security.encryption.XMLEncryptionException $r13, r21;
+        org.apache.xml.security.keys.storage.StorageResolver r17;
+        javax.crypto.SecretKey r18;
+        org.apache.xml.security.encryption.XMLCipher r19;
+        int i0, i1, varReplacer3214;
+        org.apache.xml.security.encryption.EncryptedKey r20;
+        null_type varReplacer3210;
+
+        nop;
+
+        r4 := @this: org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver;
+
+        r0 := @parameter0: org.w3c.dom.Element;
+
+        r16 := @parameter1: java.lang.String;
+
+        r17 := @parameter2: org.apache.xml.security.keys.storage.StorageResolver;
+
+        if r0 != null goto label1;
+
+        varReplacer3210 = null;
+
+        return varReplacer3210;
+
+     label1:
+        $r1 = <org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver: org.slf4j.Logger LOG>;
+
+        $r2 = interfaceinvoke r0.<org.w3c.dom.Element: java.lang.String getTagName()>();
+
+        varReplacer3211 = "EncryptedKeyResolver - Can I resolve {}";
+
+        interfaceinvoke $r1.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object)>(varReplacer3211, $r2);
+
+        r18 = null;
+
+        varReplacer3212 = "EncryptedKey";
+
+        z0 = staticinvoke <org.apache.xml.security.utils.XMLUtils: boolean elementIsInEncryptionSpace(org.w3c.dom.Element,java.lang.String)>(r0, varReplacer3212);
+
+        if z0 == 0 goto label7;
+
+        $r3 = <org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver: org.slf4j.Logger LOG>;
+
+        varReplacer3213 = "Passed an Encrypted Key";
+
+        interfaceinvoke $r3.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer3213);
+
+     label2:
+        r19 = staticinvoke <org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher getInstance()>();
+
+        $r5 = r4.<org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver: java.security.Key kek>;
+
+        varReplacer3214 = 4;
+
+        virtualinvoke r19.<org.apache.xml.security.encryption.XMLCipher: void init(int,java.security.Key)>(varReplacer3214, $r5);
+
+        $r6 = r4.<org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver: java.util.List internalKeyResolvers>;
+
+        if $r6 == null goto label4;
+
+        $r9 = r4.<org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver: java.util.List internalKeyResolvers>;
+
+        i0 = interfaceinvoke $r9.<java.util.List: int size()>();
+
+        i1 = 0;
+
+     label3:
+        if i1 >= i0 goto label4;
+
+        $r10 = r4.<org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver: java.util.List internalKeyResolvers>;
+
+        $r11 = interfaceinvoke $r10.<java.util.List: java.lang.Object get(int)>(i1);
+
+        $r12 = (org.apache.xml.security.keys.keyresolver.KeyResolverSpi) $r11;
+
+        virtualinvoke r19.<org.apache.xml.security.encryption.XMLCipher: void registerInternalKeyResolver(org.apache.xml.security.keys.keyresolver.KeyResolverSpi)>($r12);
+
+        i1 = i1 + 1;
+
+        goto label3;
+
+     label4:
+        r20 = virtualinvoke r19.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedKey loadEncryptedKey(org.w3c.dom.Element)>(r0);
+
+        $r7 = r4.<org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver: java.lang.String algorithm>;
+
+        $r8 = virtualinvoke r19.<org.apache.xml.security.encryption.XMLCipher: java.security.Key decryptKey(org.apache.xml.security.encryption.EncryptedKey,java.lang.String)>(r20, $r7);
+
+        r18 = (javax.crypto.SecretKey) $r8;
+
+     label5:
+        goto label7;
+
+     label6:
+        $r13 := @caughtexception;
+
+        r21 = $r13;
+
+        $r14 = <org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver: org.slf4j.Logger LOG>;
+
+        $r15 = virtualinvoke r21.<org.apache.xml.security.encryption.XMLEncryptionException: java.lang.String getMessage()>();
+
+        interfaceinvoke $r14.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Throwable)>($r15, r21);
+
+     label7:
+        return r18;
+
+        catch org.apache.xml.security.encryption.XMLEncryptionException from label2 to label5 with label6;
+    }
+
+    static void <clinit>()
+    {
+        org.slf4j.Logger $r0;
+
+        nop;
+
+        $r0 = staticinvoke <org.slf4j.LoggerFactory: org.slf4j.Logger getLogger(java.lang.Class)>(class "Lorg/apache/xml/security/keys/keyresolver/implementations/RSAKeyValueResolver;");
+
+        <org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver: org.slf4j.Logger LOG> = $r0;
+
+        return;
+    }
+}

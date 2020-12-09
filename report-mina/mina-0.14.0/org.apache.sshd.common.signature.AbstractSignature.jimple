@@ -1,0 +1,199 @@
+public abstract class org.apache.sshd.common.signature.AbstractSignature extends java.lang.Object implements org.apache.sshd.common.Signature
+{
+    protected java.security.Signature signature;
+    protected java.lang.String algorithm;
+
+    protected void <init>(java.lang.String)
+    {
+        org.apache.sshd.common.signature.AbstractSignature r0;
+        java.lang.String r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.signature.AbstractSignature;
+
+        r1 := @parameter0: java.lang.String;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        r0.<org.apache.sshd.common.signature.AbstractSignature: java.lang.String algorithm> = r1;
+
+        return;
+    }
+
+    public void init(java.security.PublicKey, java.security.PrivateKey) throws java.lang.Exception
+    {
+        org.apache.sshd.common.signature.AbstractSignature r0;
+        java.lang.String $r1;
+        java.security.Signature $r2, $r5, $r6;
+        java.security.PublicKey r3;
+        java.security.PrivateKey r4;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.signature.AbstractSignature;
+
+        r3 := @parameter0: java.security.PublicKey;
+
+        r4 := @parameter1: java.security.PrivateKey;
+
+        $r1 = r0.<org.apache.sshd.common.signature.AbstractSignature: java.lang.String algorithm>;
+
+        $r2 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.security.Signature getSignature(java.lang.String)>($r1);
+
+        r0.<org.apache.sshd.common.signature.AbstractSignature: java.security.Signature signature> = $r2;
+
+        if r3 == null goto label1;
+
+        $r6 = r0.<org.apache.sshd.common.signature.AbstractSignature: java.security.Signature signature>;
+
+        virtualinvoke $r6.<java.security.Signature: void initVerify(java.security.PublicKey)>(r3);
+
+     label1:
+        if r4 == null goto label2;
+
+        $r5 = r0.<org.apache.sshd.common.signature.AbstractSignature: java.security.Signature signature>;
+
+        virtualinvoke $r5.<java.security.Signature: void initSign(java.security.PrivateKey)>(r4);
+
+     label2:
+        return;
+    }
+
+    public void update(byte[], int, int) throws java.lang.Exception
+    {
+        org.apache.sshd.common.signature.AbstractSignature r0;
+        byte[] r1;
+        int i0, i1;
+        java.security.Signature $r2;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.signature.AbstractSignature;
+
+        r1 := @parameter0: byte[];
+
+        i0 := @parameter1: int;
+
+        i1 := @parameter2: int;
+
+        $r2 = r0.<org.apache.sshd.common.signature.AbstractSignature: java.security.Signature signature>;
+
+        virtualinvoke $r2.<java.security.Signature: void update(byte[],int,int)>(r1, i0, i1);
+
+        return;
+    }
+
+    protected byte[] extractSig(byte[])
+    {
+        byte $b0, $b1, $b2, $b3, $b5, $b9, $b13, $b16, $b18, $b22, $b26, b29;
+        int $i4, $i6, $i7, $i8, $i10, $i11, $i12, $i14, $i15, $i17, $i19, $i20, $i21, $i23, $i24, $i25, $i27, $i28, i30, i31, i32, i33, i34, i35, i36, i37, i38, i39, i40, varReplacer748;
+        byte[] r0, r2;
+        org.apache.sshd.common.signature.AbstractSignature r1;
+
+        nop;
+
+        r1 := @this: org.apache.sshd.common.signature.AbstractSignature;
+
+        r2 := @parameter0: byte[];
+
+        $b0 = r2[0];
+
+        if $b0 != 0 goto label1;
+
+        $b1 = r2[1];
+
+        if $b1 != 0 goto label1;
+
+        $b2 = r2[2];
+
+        if $b2 != 0 goto label1;
+
+        b29 = 0;
+
+        i30 = b29 + 1;
+
+        $b3 = r2[b29];
+
+        $i4 = $b3 << 24;
+
+        $i8 = $i4 & -16777216;
+
+        i31 = i30 + 1;
+
+        $b5 = r2[i30];
+
+        $i6 = $b5 << 16;
+
+        $i7 = $i6 & 16711680;
+
+        $i12 = $i8 | $i7;
+
+        i32 = i31 + 1;
+
+        $b9 = r2[i31];
+
+        $i10 = $b9 << 8;
+
+        $i11 = $i10 & 65280;
+
+        $i15 = $i12 | $i11;
+
+        i33 = i32 + 1;
+
+        $b13 = r2[i32];
+
+        $i14 = $b13 & 255;
+
+        i34 = $i15 | $i14;
+
+        i35 = i33 + i34;
+
+        i36 = i35 + 1;
+
+        $b16 = r2[i35];
+
+        $i17 = $b16 << 24;
+
+        $i21 = $i17 & -16777216;
+
+        i37 = i36 + 1;
+
+        $b18 = r2[i36];
+
+        $i19 = $b18 << 16;
+
+        $i20 = $i19 & 16711680;
+
+        $i25 = $i21 | $i20;
+
+        i38 = i37 + 1;
+
+        $b22 = r2[i37];
+
+        $i23 = $b22 << 8;
+
+        $i24 = $i23 & 65280;
+
+        $i28 = $i25 | $i24;
+
+        i39 = i38 + 1;
+
+        $b26 = r2[i38];
+
+        $i27 = $b26 & 255;
+
+        i40 = $i28 | $i27;
+
+        r0 = newarray (byte)[i40];
+
+        varReplacer748 = 0;
+
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>(r2, i39, r0, varReplacer748, i40);
+
+        r2 = r0;
+
+     label1:
+        return r2;
+    }
+}

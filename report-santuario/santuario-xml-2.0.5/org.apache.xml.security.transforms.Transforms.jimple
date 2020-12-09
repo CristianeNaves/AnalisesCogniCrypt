@@ -1,0 +1,721 @@
+public class org.apache.xml.security.transforms.Transforms extends org.apache.xml.security.utils.SignatureElementProxy
+{
+    public static final java.lang.String TRANSFORM_C14N_OMIT_COMMENTS;
+    public static final java.lang.String TRANSFORM_C14N_WITH_COMMENTS;
+    public static final java.lang.String TRANSFORM_C14N11_OMIT_COMMENTS;
+    public static final java.lang.String TRANSFORM_C14N11_WITH_COMMENTS;
+    public static final java.lang.String TRANSFORM_C14N_EXCL_OMIT_COMMENTS;
+    public static final java.lang.String TRANSFORM_C14N_EXCL_WITH_COMMENTS;
+    public static final java.lang.String TRANSFORM_XSLT;
+    public static final java.lang.String TRANSFORM_BASE64_DECODE;
+    public static final java.lang.String TRANSFORM_XPATH;
+    public static final java.lang.String TRANSFORM_ENVELOPED_SIGNATURE;
+    public static final java.lang.String TRANSFORM_XPOINTER;
+    public static final java.lang.String TRANSFORM_XPATH2FILTER;
+    private static org.slf4j.Logger log;
+    private org.w3c.dom.Element[] transforms;
+    private boolean secureValidation;
+
+    protected void <init>()
+    {
+        org.apache.xml.security.transforms.Transforms r0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.transforms.Transforms;
+
+        specialinvoke r0.<org.apache.xml.security.utils.SignatureElementProxy: void <init>()>();
+
+        return;
+    }
+
+    public void <init>(org.w3c.dom.Document)
+    {
+        org.apache.xml.security.transforms.Transforms r0;
+        org.w3c.dom.Document r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.transforms.Transforms;
+
+        r1 := @parameter0: org.w3c.dom.Document;
+
+        specialinvoke r0.<org.apache.xml.security.utils.SignatureElementProxy: void <init>(org.w3c.dom.Document)>(r1);
+
+        virtualinvoke r0.<org.apache.xml.security.transforms.Transforms: void addReturnToSelf()>();
+
+        return;
+    }
+
+    public void <init>(org.w3c.dom.Element, java.lang.String) throws org.w3c.dom.DOMException, org.apache.xml.security.signature.XMLSignatureException, org.apache.xml.security.transforms.InvalidTransformException, org.apache.xml.security.transforms.TransformationException, org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.transforms.Transforms r0;
+        org.w3c.dom.Element r1;
+        java.lang.String r2, varReplacer5223;
+        int i0;
+        java.lang.Object[] $r3, r4;
+        org.apache.xml.security.transforms.TransformationException $r5;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.transforms.Transforms;
+
+        r1 := @parameter0: org.w3c.dom.Element;
+
+        r2 := @parameter1: java.lang.String;
+
+        specialinvoke r0.<org.apache.xml.security.utils.SignatureElementProxy: void <init>(org.w3c.dom.Element,java.lang.String)>(r1, r2);
+
+        i0 = virtualinvoke r0.<org.apache.xml.security.transforms.Transforms: int getLength()>();
+
+        if i0 != 0 goto label1;
+
+        $r3 = newarray (java.lang.Object)[2];
+
+        $r3[0] = "Transform";
+
+        $r3[1] = "Transforms";
+
+        r4 = $r3;
+
+        $r5 = new org.apache.xml.security.transforms.TransformationException;
+
+        varReplacer5223 = "xml.WrongContent";
+
+        specialinvoke $r5.<org.apache.xml.security.transforms.TransformationException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer5223, r4);
+
+        throw $r5;
+
+     label1:
+        return;
+    }
+
+    public void setSecureValidation(boolean)
+    {
+        org.apache.xml.security.transforms.Transforms r0;
+        boolean z0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.transforms.Transforms;
+
+        z0 := @parameter0: boolean;
+
+        r0.<org.apache.xml.security.transforms.Transforms: boolean secureValidation> = z0;
+
+        return;
+    }
+
+    public void addTransform(java.lang.String) throws org.apache.xml.security.transforms.TransformationException
+    {
+        org.slf4j.Logger $r0, $r6;
+        boolean $z0;
+        org.apache.xml.security.transforms.Transform $r1, r13;
+        org.apache.xml.security.transforms.Transforms r2;
+        org.w3c.dom.Document $r3;
+        java.lang.String r4, $r10, varReplacer5224, varReplacer5225;
+        java.lang.StringBuilder $r5, $r7, $r8, $r9;
+        org.apache.xml.security.transforms.InvalidTransformException $r11, r14;
+        org.apache.xml.security.transforms.TransformationException $r12;
+
+        nop;
+
+        r2 := @this: org.apache.xml.security.transforms.Transforms;
+
+        r4 := @parameter0: java.lang.String;
+
+     label1:
+        $r0 = <org.apache.xml.security.transforms.Transforms: org.slf4j.Logger log>;
+
+        $z0 = interfaceinvoke $r0.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z0 == 0 goto label2;
+
+        $r6 = <org.apache.xml.security.transforms.Transforms: org.slf4j.Logger log>;
+
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer5225 = "Transforms.addTransform(";
+
+        $r7 = virtualinvoke $r5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer5225);
+
+        $r8 = virtualinvoke $r7.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r4);
+
+        varReplacer5224 = ")";
+
+        $r9 = virtualinvoke $r8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer5224);
+
+        $r10 = virtualinvoke $r9.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r6.<org.slf4j.Logger: void debug(java.lang.String)>($r10);
+
+     label2:
+        $r1 = new org.apache.xml.security.transforms.Transform;
+
+        $r3 = virtualinvoke r2.<org.apache.xml.security.transforms.Transforms: org.w3c.dom.Document getDocument()>();
+
+        specialinvoke $r1.<org.apache.xml.security.transforms.Transform: void <init>(org.w3c.dom.Document,java.lang.String)>($r3, r4);
+
+        r13 = $r1;
+
+        specialinvoke r2.<org.apache.xml.security.transforms.Transforms: void addTransform(org.apache.xml.security.transforms.Transform)>(r13);
+
+     label3:
+        goto label5;
+
+     label4:
+        $r11 := @caughtexception;
+
+        r14 = $r11;
+
+        $r12 = new org.apache.xml.security.transforms.TransformationException;
+
+        specialinvoke $r12.<org.apache.xml.security.transforms.TransformationException: void <init>(java.lang.Exception)>(r14);
+
+        throw $r12;
+
+     label5:
+        return;
+
+        catch org.apache.xml.security.transforms.InvalidTransformException from label1 to label3 with label4;
+    }
+
+    public void addTransform(java.lang.String, org.w3c.dom.Element) throws org.apache.xml.security.transforms.TransformationException
+    {
+        org.slf4j.Logger $r0, $r7;
+        boolean $z0;
+        org.apache.xml.security.transforms.Transform $r1, r14;
+        org.apache.xml.security.transforms.Transforms r2;
+        org.w3c.dom.Document $r3;
+        java.lang.String r4, $r11, varReplacer5226, varReplacer5227;
+        org.w3c.dom.Element r5;
+        java.lang.StringBuilder $r6, $r8, $r9, $r10;
+        org.apache.xml.security.transforms.InvalidTransformException $r12, r15;
+        org.apache.xml.security.transforms.TransformationException $r13;
+
+        nop;
+
+        r2 := @this: org.apache.xml.security.transforms.Transforms;
+
+        r4 := @parameter0: java.lang.String;
+
+        r5 := @parameter1: org.w3c.dom.Element;
+
+     label1:
+        $r0 = <org.apache.xml.security.transforms.Transforms: org.slf4j.Logger log>;
+
+        $z0 = interfaceinvoke $r0.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z0 == 0 goto label2;
+
+        $r7 = <org.apache.xml.security.transforms.Transforms: org.slf4j.Logger log>;
+
+        $r6 = new java.lang.StringBuilder;
+
+        specialinvoke $r6.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer5226 = "Transforms.addTransform(";
+
+        $r8 = virtualinvoke $r6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer5226);
+
+        $r9 = virtualinvoke $r8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r4);
+
+        varReplacer5227 = ")";
+
+        $r10 = virtualinvoke $r9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer5227);
+
+        $r11 = virtualinvoke $r10.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r7.<org.slf4j.Logger: void debug(java.lang.String)>($r11);
+
+     label2:
+        $r1 = new org.apache.xml.security.transforms.Transform;
+
+        $r3 = virtualinvoke r2.<org.apache.xml.security.transforms.Transforms: org.w3c.dom.Document getDocument()>();
+
+        specialinvoke $r1.<org.apache.xml.security.transforms.Transform: void <init>(org.w3c.dom.Document,java.lang.String,org.w3c.dom.Element)>($r3, r4, r5);
+
+        r14 = $r1;
+
+        specialinvoke r2.<org.apache.xml.security.transforms.Transforms: void addTransform(org.apache.xml.security.transforms.Transform)>(r14);
+
+     label3:
+        goto label5;
+
+     label4:
+        $r12 := @caughtexception;
+
+        r15 = $r12;
+
+        $r13 = new org.apache.xml.security.transforms.TransformationException;
+
+        specialinvoke $r13.<org.apache.xml.security.transforms.TransformationException: void <init>(java.lang.Exception)>(r15);
+
+        throw $r13;
+
+     label5:
+        return;
+
+        catch org.apache.xml.security.transforms.InvalidTransformException from label1 to label3 with label4;
+    }
+
+    public void addTransform(java.lang.String, org.w3c.dom.NodeList) throws org.apache.xml.security.transforms.TransformationException
+    {
+        org.apache.xml.security.transforms.Transform $r0, r7;
+        org.apache.xml.security.transforms.Transforms r1;
+        org.w3c.dom.Document $r2;
+        java.lang.String r3;
+        org.w3c.dom.NodeList r4;
+        org.apache.xml.security.transforms.InvalidTransformException $r5, r8;
+        org.apache.xml.security.transforms.TransformationException $r6;
+
+        nop;
+
+        r1 := @this: org.apache.xml.security.transforms.Transforms;
+
+        r3 := @parameter0: java.lang.String;
+
+        r4 := @parameter1: org.w3c.dom.NodeList;
+
+     label1:
+        $r0 = new org.apache.xml.security.transforms.Transform;
+
+        $r2 = virtualinvoke r1.<org.apache.xml.security.transforms.Transforms: org.w3c.dom.Document getDocument()>();
+
+        specialinvoke $r0.<org.apache.xml.security.transforms.Transform: void <init>(org.w3c.dom.Document,java.lang.String,org.w3c.dom.NodeList)>($r2, r3, r4);
+
+        r7 = $r0;
+
+        specialinvoke r1.<org.apache.xml.security.transforms.Transforms: void addTransform(org.apache.xml.security.transforms.Transform)>(r7);
+
+     label2:
+        goto label4;
+
+     label3:
+        $r5 := @caughtexception;
+
+        r8 = $r5;
+
+        $r6 = new org.apache.xml.security.transforms.TransformationException;
+
+        specialinvoke $r6.<org.apache.xml.security.transforms.TransformationException: void <init>(java.lang.Exception)>(r8);
+
+        throw $r6;
+
+     label4:
+        return;
+
+        catch org.apache.xml.security.transforms.InvalidTransformException from label1 to label2 with label3;
+    }
+
+    private void addTransform(org.apache.xml.security.transforms.Transform)
+    {
+        org.slf4j.Logger $r0, $r5;
+        boolean $z0;
+        org.apache.xml.security.transforms.Transform r1;
+        org.w3c.dom.Element r2;
+        org.apache.xml.security.transforms.Transforms r3;
+        java.lang.StringBuilder $r4, $r6, $r8, $r9;
+        java.lang.String $r7, $r10, varReplacer5228, varReplacer5229;
+
+        nop;
+
+        r3 := @this: org.apache.xml.security.transforms.Transforms;
+
+        r1 := @parameter0: org.apache.xml.security.transforms.Transform;
+
+        $r0 = <org.apache.xml.security.transforms.Transforms: org.slf4j.Logger log>;
+
+        $z0 = interfaceinvoke $r0.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z0 == 0 goto label1;
+
+        $r5 = <org.apache.xml.security.transforms.Transforms: org.slf4j.Logger log>;
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer5229 = "Transforms.addTransform(";
+
+        $r6 = virtualinvoke $r4.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer5229);
+
+        $r7 = virtualinvoke r1.<org.apache.xml.security.transforms.Transform: java.lang.String getURI()>();
+
+        $r8 = virtualinvoke $r6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r7);
+
+        varReplacer5228 = ")";
+
+        $r9 = virtualinvoke $r8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer5228);
+
+        $r10 = virtualinvoke $r9.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r5.<org.slf4j.Logger: void debug(java.lang.String)>($r10);
+
+     label1:
+        r2 = virtualinvoke r1.<org.apache.xml.security.transforms.Transform: org.w3c.dom.Element getElement()>();
+
+        virtualinvoke r3.<org.apache.xml.security.transforms.Transforms: void appendSelf(org.w3c.dom.Node)>(r2);
+
+        virtualinvoke r3.<org.apache.xml.security.transforms.Transforms: void addReturnToSelf()>();
+
+        return;
+    }
+
+    public org.apache.xml.security.signature.XMLSignatureInput performTransforms(org.apache.xml.security.signature.XMLSignatureInput) throws org.apache.xml.security.transforms.TransformationException
+    {
+        org.apache.xml.security.transforms.Transforms r0;
+        org.apache.xml.security.signature.XMLSignatureInput r1, $r2;
+        null_type varReplacer5230;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.transforms.Transforms;
+
+        r1 := @parameter0: org.apache.xml.security.signature.XMLSignatureInput;
+
+        varReplacer5230 = null;
+
+        $r2 = virtualinvoke r0.<org.apache.xml.security.transforms.Transforms: org.apache.xml.security.signature.XMLSignatureInput performTransforms(org.apache.xml.security.signature.XMLSignatureInput,java.io.OutputStream)>(r1, varReplacer5230);
+
+        return $r2;
+    }
+
+    public org.apache.xml.security.signature.XMLSignatureInput performTransforms(org.apache.xml.security.signature.XMLSignatureInput, java.io.OutputStream) throws org.apache.xml.security.transforms.TransformationException
+    {
+        org.apache.xml.security.transforms.Transforms r0;
+        int $i0, i1, i2;
+        org.slf4j.Logger $r1, $r4, $r11, $r14;
+        boolean $z0, $z1;
+        java.io.OutputStream r2;
+        java.lang.StringBuilder $r5, $r6, $r7, $r8, $r9, $r15, $r16, $r17, $r18, $r19, $r35, $r36;
+        java.lang.String $r10, r12, $r20, r30, varReplacer5231, varReplacer5232, varReplacer5233, varReplacer5234, varReplacer5235, varReplacer5236;
+        org.apache.xml.security.c14n.InvalidCanonicalizerException $r21, r34;
+        org.apache.xml.security.c14n.CanonicalizationException $r23, r33;
+        java.lang.Throwable $r25, r32;
+        org.apache.xml.security.signature.XMLSignatureInput r27;
+        org.apache.xml.security.transforms.Transform r28, r29;
+        org.apache.xml.security.transforms.TransformationException $r37, $r38, $r39;
+        java.lang.Exception $r40;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.transforms.Transforms;
+
+        r27 := @parameter0: org.apache.xml.security.signature.XMLSignatureInput;
+
+        r2 := @parameter1: java.io.OutputStream;
+
+     label1:
+        $i0 = virtualinvoke r0.<org.apache.xml.security.transforms.Transforms: int getLength()>();
+
+        i1 = $i0 - 1;
+
+        i2 = 0;
+
+     label2:
+        if i2 >= i1 goto label4;
+
+        r28 = virtualinvoke r0.<org.apache.xml.security.transforms.Transforms: org.apache.xml.security.transforms.Transform item(int)>(i2);
+
+        $r11 = <org.apache.xml.security.transforms.Transforms: org.slf4j.Logger log>;
+
+        $z1 = interfaceinvoke $r11.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z1 == 0 goto label3;
+
+        r12 = virtualinvoke r28.<org.apache.xml.security.transforms.Transform: java.lang.String getURI()>();
+
+        $r14 = <org.apache.xml.security.transforms.Transforms: org.slf4j.Logger log>;
+
+        $r35 = new java.lang.StringBuilder;
+
+        specialinvoke $r35.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer5232 = "Perform the (";
+
+        $r15 = virtualinvoke $r35.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer5232);
+
+        $r16 = virtualinvoke $r15.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(i2);
+
+        varReplacer5236 = ")th ";
+
+        $r17 = virtualinvoke $r16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer5236);
+
+        $r18 = virtualinvoke $r17.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r12);
+
+        varReplacer5233 = " transform";
+
+        $r19 = virtualinvoke $r18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer5233);
+
+        $r20 = virtualinvoke $r19.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r14.<org.slf4j.Logger: void debug(java.lang.String)>($r20);
+
+     label3:
+        specialinvoke r0.<org.apache.xml.security.transforms.Transforms: void checkSecureValidation(org.apache.xml.security.transforms.Transform)>(r28);
+
+        r27 = virtualinvoke r28.<org.apache.xml.security.transforms.Transform: org.apache.xml.security.signature.XMLSignatureInput performTransform(org.apache.xml.security.signature.XMLSignatureInput)>(r27);
+
+        i2 = i2 + 1;
+
+        goto label2;
+
+     label4:
+        if i1 < 0 goto label6;
+
+        r29 = virtualinvoke r0.<org.apache.xml.security.transforms.Transforms: org.apache.xml.security.transforms.Transform item(int)>(i1);
+
+        $r1 = <org.apache.xml.security.transforms.Transforms: org.slf4j.Logger log>;
+
+        $z0 = interfaceinvoke $r1.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z0 == 0 goto label5;
+
+        r30 = virtualinvoke r29.<org.apache.xml.security.transforms.Transform: java.lang.String getURI()>();
+
+        $r4 = <org.apache.xml.security.transforms.Transforms: org.slf4j.Logger log>;
+
+        $r36 = new java.lang.StringBuilder;
+
+        specialinvoke $r36.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer5231 = "Perform the (";
+
+        $r5 = virtualinvoke $r36.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer5231);
+
+        $r6 = virtualinvoke $r5.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>(i1);
+
+        varReplacer5235 = ")th ";
+
+        $r7 = virtualinvoke $r6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer5235);
+
+        $r8 = virtualinvoke $r7.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r30);
+
+        varReplacer5234 = " transform";
+
+        $r9 = virtualinvoke $r8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer5234);
+
+        $r10 = virtualinvoke $r9.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r4.<org.slf4j.Logger: void debug(java.lang.String)>($r10);
+
+     label5:
+        specialinvoke r0.<org.apache.xml.security.transforms.Transforms: void checkSecureValidation(org.apache.xml.security.transforms.Transform)>(r29);
+
+        r27 = virtualinvoke r29.<org.apache.xml.security.transforms.Transform: org.apache.xml.security.signature.XMLSignatureInput performTransform(org.apache.xml.security.signature.XMLSignatureInput,java.io.OutputStream)>(r27, r2);
+
+     label6:
+        return r27;
+
+     label7:
+        $r25 := @caughtexception;
+
+        r32 = $r25;
+
+        $r37 = new org.apache.xml.security.transforms.TransformationException;
+
+        $r40 = (java.lang.Exception) r32;
+
+        specialinvoke $r37.<org.apache.xml.security.transforms.TransformationException: void <init>(java.lang.Exception)>($r40);
+
+        throw $r37;
+
+     label8:
+        $r23 := @caughtexception;
+
+        r33 = $r23;
+
+        $r38 = new org.apache.xml.security.transforms.TransformationException;
+
+        specialinvoke $r38.<org.apache.xml.security.transforms.TransformationException: void <init>(java.lang.Exception)>(r33);
+
+        throw $r38;
+
+     label9:
+        $r21 := @caughtexception;
+
+        r34 = $r21;
+
+        $r39 = new org.apache.xml.security.transforms.TransformationException;
+
+        specialinvoke $r39.<org.apache.xml.security.transforms.TransformationException: void <init>(java.lang.Exception)>(r34);
+
+        throw $r39;
+
+        catch java.io.IOException from label1 to label6 with label7;
+        catch org.apache.xml.security.c14n.CanonicalizationException from label1 to label6 with label8;
+        catch org.apache.xml.security.c14n.InvalidCanonicalizerException from label1 to label6 with label9;
+    }
+
+    private void checkSecureValidation(org.apache.xml.security.transforms.Transform) throws org.apache.xml.security.transforms.TransformationException
+    {
+        org.apache.xml.security.transforms.Transform r0;
+        java.lang.String r1, $r3, varReplacer5237;
+        org.apache.xml.security.transforms.Transforms r2;
+        boolean $z0, $z1, $z2;
+        java.lang.Object[] $r4, r5;
+        org.apache.xml.security.transforms.TransformationException $r6;
+
+        nop;
+
+        r2 := @this: org.apache.xml.security.transforms.Transforms;
+
+        r0 := @parameter0: org.apache.xml.security.transforms.Transform;
+
+        r1 = virtualinvoke r0.<org.apache.xml.security.transforms.Transform: java.lang.String getURI()>();
+
+        $z0 = r2.<org.apache.xml.security.transforms.Transforms: boolean secureValidation>;
+
+        if $z0 == 0 goto label1;
+
+        $r3 = "http://www.w3.org/TR/1999/REC-xslt-19991116";
+
+        $z2 = virtualinvoke $r3.<java.lang.String: boolean equals(java.lang.Object)>(r1);
+
+        if $z2 == 0 goto label1;
+
+        $r4 = newarray (java.lang.Object)[1];
+
+        $r4[0] = r1;
+
+        r5 = $r4;
+
+        $r6 = new org.apache.xml.security.transforms.TransformationException;
+
+        varReplacer5237 = "signature.Transform.ForbiddenTransform";
+
+        specialinvoke $r6.<org.apache.xml.security.transforms.TransformationException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer5237, r5);
+
+        throw $r6;
+
+     label1:
+        $z1 = r2.<org.apache.xml.security.transforms.Transforms: boolean secureValidation>;
+
+        virtualinvoke r0.<org.apache.xml.security.transforms.Transform: void setSecureValidation(boolean)>($z1);
+
+        return;
+    }
+
+    public int getLength()
+    {
+        org.apache.xml.security.transforms.Transforms r0;
+        org.w3c.dom.Element[] $r1;
+        int $i0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.transforms.Transforms;
+
+        specialinvoke r0.<org.apache.xml.security.transforms.Transforms: void initTransforms()>();
+
+        $r1 = r0.<org.apache.xml.security.transforms.Transforms: org.w3c.dom.Element[] transforms>;
+
+        $i0 = lengthof $r1;
+
+        return $i0;
+    }
+
+    public org.apache.xml.security.transforms.Transform item(int) throws org.apache.xml.security.transforms.TransformationException
+    {
+        org.apache.xml.security.transforms.Transforms r0;
+        org.apache.xml.security.transforms.Transform $r1;
+        int i0;
+        org.w3c.dom.Element[] $r2;
+        java.lang.String $r3;
+        org.w3c.dom.Element $r4;
+        org.apache.xml.security.exceptions.XMLSecurityException $r5, r6;
+        org.apache.xml.security.transforms.TransformationException $r7;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.transforms.Transforms;
+
+        i0 := @parameter0: int;
+
+     label1:
+        specialinvoke r0.<org.apache.xml.security.transforms.Transforms: void initTransforms()>();
+
+        $r1 = new org.apache.xml.security.transforms.Transform;
+
+        $r2 = r0.<org.apache.xml.security.transforms.Transforms: org.w3c.dom.Element[] transforms>;
+
+        $r4 = $r2[i0];
+
+        $r3 = r0.<org.apache.xml.security.transforms.Transforms: java.lang.String baseURI>;
+
+        specialinvoke $r1.<org.apache.xml.security.transforms.Transform: void <init>(org.w3c.dom.Element,java.lang.String)>($r4, $r3);
+
+     label2:
+        return $r1;
+
+     label3:
+        $r5 := @caughtexception;
+
+        r6 = $r5;
+
+        $r7 = new org.apache.xml.security.transforms.TransformationException;
+
+        specialinvoke $r7.<org.apache.xml.security.transforms.TransformationException: void <init>(java.lang.Exception)>(r6);
+
+        throw $r7;
+
+        catch org.apache.xml.security.exceptions.XMLSecurityException from label1 to label2 with label3;
+    }
+
+    private void initTransforms()
+    {
+        org.apache.xml.security.transforms.Transforms r0;
+        org.w3c.dom.Element[] $r1, $r3;
+        org.w3c.dom.Node $r2;
+        java.lang.String varReplacer5238;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.transforms.Transforms;
+
+        $r1 = r0.<org.apache.xml.security.transforms.Transforms: org.w3c.dom.Element[] transforms>;
+
+        if $r1 != null goto label1;
+
+        $r2 = virtualinvoke r0.<org.apache.xml.security.transforms.Transforms: org.w3c.dom.Node getFirstChild()>();
+
+        varReplacer5238 = "Transform";
+
+        $r3 = staticinvoke <org.apache.xml.security.utils.XMLUtils: org.w3c.dom.Element[] selectDsNodes(org.w3c.dom.Node,java.lang.String)>($r2, varReplacer5238);
+
+        r0.<org.apache.xml.security.transforms.Transforms: org.w3c.dom.Element[] transforms> = $r3;
+
+     label1:
+        return;
+    }
+
+    public java.lang.String getBaseLocalName()
+    {
+        org.apache.xml.security.transforms.Transforms r0;
+        java.lang.String varReplacer5239;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.transforms.Transforms;
+
+        varReplacer5239 = "Transforms";
+
+        return varReplacer5239;
+    }
+
+    static void <clinit>()
+    {
+        org.slf4j.Logger $r0;
+
+        nop;
+
+        $r0 = staticinvoke <org.slf4j.LoggerFactory: org.slf4j.Logger getLogger(java.lang.Class)>(class "Lorg/apache/xml/security/transforms/Transforms;");
+
+        <org.apache.xml.security.transforms.Transforms: org.slf4j.Logger log> = $r0;
+
+        return;
+    }
+}

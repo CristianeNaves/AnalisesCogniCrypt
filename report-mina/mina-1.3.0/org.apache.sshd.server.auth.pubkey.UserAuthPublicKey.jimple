@@ -1,0 +1,650 @@
+public class org.apache.sshd.server.auth.pubkey.UserAuthPublicKey extends org.apache.sshd.server.auth.AbstractUserAuth implements org.apache.sshd.common.signature.SignatureFactoriesManager
+{
+    public static final java.lang.String NAME;
+    private java.util.List factories;
+
+    public void <init>()
+    {
+        org.apache.sshd.server.auth.pubkey.UserAuthPublicKey r0;
+        null_type varReplacer7083;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.auth.pubkey.UserAuthPublicKey;
+
+        varReplacer7083 = null;
+
+        specialinvoke r0.<org.apache.sshd.server.auth.pubkey.UserAuthPublicKey: void <init>(java.util.List)>(varReplacer7083);
+
+        return;
+    }
+
+    public void <init>(java.util.List)
+    {
+        org.apache.sshd.server.auth.pubkey.UserAuthPublicKey r0;
+        java.util.List r1;
+        java.lang.String varReplacer7084;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.auth.pubkey.UserAuthPublicKey;
+
+        r1 := @parameter0: java.util.List;
+
+        varReplacer7084 = "publickey";
+
+        specialinvoke r0.<org.apache.sshd.server.auth.AbstractUserAuth: void <init>(java.lang.String)>(varReplacer7084);
+
+        r0.<org.apache.sshd.server.auth.pubkey.UserAuthPublicKey: java.util.List factories> = r1;
+
+        return;
+    }
+
+    public java.util.List getSignatureFactories()
+    {
+        org.apache.sshd.server.auth.pubkey.UserAuthPublicKey r0;
+        java.util.List $r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.auth.pubkey.UserAuthPublicKey;
+
+        $r1 = r0.<org.apache.sshd.server.auth.pubkey.UserAuthPublicKey: java.util.List factories>;
+
+        return $r1;
+    }
+
+    public void setSignatureFactories(java.util.List)
+    {
+        org.apache.sshd.server.auth.pubkey.UserAuthPublicKey r0;
+        java.util.List r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.auth.pubkey.UserAuthPublicKey;
+
+        r1 := @parameter0: java.util.List;
+
+        r0.<org.apache.sshd.server.auth.pubkey.UserAuthPublicKey: java.util.List factories> = r1;
+
+        return;
+    }
+
+    public java.lang.Boolean doAuth(org.apache.sshd.common.util.buffer.Buffer, boolean) throws java.lang.Exception
+    {
+        boolean z0, z1, $z2, z3, $z4, $z5, $z6, $z7, $z8;
+        org.apache.sshd.common.util.buffer.Buffer r0;
+        java.lang.String r1, r4, $r16, $r17, $r22, $r28, $r34, $r37, $r38, $r44, $r45, $r46, $r56, varReplacer7085, varReplacer7086, varReplacer7087, varReplacer7088, varReplacer7089, varReplacer7090, varReplacer7091, varReplacer7092, varReplacer7094, varReplacer7095, varReplacer7096, varReplacer7097;
+        int i0, i1, i2, $i3, $i4, $i5, $i6, $i7;
+        org.apache.sshd.server.auth.pubkey.UserAuthPublicKey r2;
+        org.apache.sshd.server.session.ServerSession r3;
+        java.security.PublicKey r5;
+        java.util.List $r6;
+        java.lang.Object[] $r7, $r20, $r26, $r32, $r35, $r41;
+        java.util.Collection r8;
+        org.slf4j.Logger $r9, $r15, $r18, $r21, $r27, $r30, $r33, $r36, $r42, $r47, $r50;
+        java.lang.Object $r10, $r11;
+        org.apache.sshd.common.signature.Signature r12;
+        byte[] r13, $r24, $r57;
+        org.apache.sshd.server.auth.pubkey.PublickeyAuthenticator r14;
+        java.lang.Boolean $r19, $r25, $r29, $r31;
+        java.security.SignatureException $r23;
+        java.lang.Error $r39, r40;
+        java.lang.Class $r43;
+        org.apache.sshd.common.RuntimeSshException $r48;
+        java.lang.StringBuilder $r49, $r51, $r52, $r53, $r54, $r55;
+        null_type varReplacer7093;
+
+        nop;
+
+        r2 := @this: org.apache.sshd.server.auth.pubkey.UserAuthPublicKey;
+
+        r0 := @parameter0: org.apache.sshd.common.util.buffer.Buffer;
+
+        z0 := @parameter1: boolean;
+
+        varReplacer7097 = "Instance not initialized";
+
+        staticinvoke <org.apache.sshd.common.util.ValidateUtils: void checkTrue(boolean,java.lang.String)>(z0, varReplacer7097);
+
+        z1 = virtualinvoke r0.<org.apache.sshd.common.util.buffer.Buffer: boolean getBoolean()>();
+
+        r1 = virtualinvoke r0.<org.apache.sshd.common.util.buffer.Buffer: java.lang.String getString()>();
+
+        i0 = virtualinvoke r0.<org.apache.sshd.common.util.buffer.Buffer: int wpos()>();
+
+        i1 = virtualinvoke r0.<org.apache.sshd.common.util.buffer.Buffer: int rpos()>();
+
+        i2 = virtualinvoke r0.<org.apache.sshd.common.util.buffer.Buffer: int getInt()>();
+
+        $i3 = virtualinvoke r0.<org.apache.sshd.common.util.buffer.Buffer: int rpos()>();
+
+        $i4 = $i3 + i2;
+
+        virtualinvoke r0.<org.apache.sshd.common.util.buffer.Buffer: void wpos(int)>($i4);
+
+        r3 = virtualinvoke r2.<org.apache.sshd.server.auth.pubkey.UserAuthPublicKey: org.apache.sshd.server.session.ServerSession getServerSession()>();
+
+        r4 = virtualinvoke r2.<org.apache.sshd.server.auth.pubkey.UserAuthPublicKey: java.lang.String getUsername()>();
+
+        r5 = virtualinvoke r0.<org.apache.sshd.common.util.buffer.Buffer: java.security.PublicKey getRawPublicKey()>();
+
+        $r6 = staticinvoke <org.apache.sshd.common.signature.SignatureFactoriesManager: java.util.List resolveSignatureFactories(org.apache.sshd.common.signature.SignatureFactoriesManager,org.apache.sshd.common.signature.SignatureFactoriesManager)>(r2, r3);
+
+        $r7 = newarray (java.lang.Object)[1];
+
+        $r7[0] = r3;
+
+        varReplacer7087 = "No signature factories for session=%s";
+
+        r8 = staticinvoke <org.apache.sshd.common.util.ValidateUtils: java.util.Collection checkNotNullAndNotEmpty(java.util.Collection,java.lang.String,java.lang.Object[])>($r6, varReplacer7087, $r7);
+
+        $r9 = r2.<org.apache.sshd.server.auth.pubkey.UserAuthPublicKey: org.slf4j.Logger log>;
+
+        $z2 = interfaceinvoke $r9.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z2 == 0 goto label01;
+
+        $r36 = r2.<org.apache.sshd.server.auth.pubkey.UserAuthPublicKey: org.slf4j.Logger log>;
+
+        $r35 = newarray (java.lang.Object)[5];
+
+        $r35[0] = r4;
+
+        $r35[1] = r3;
+
+        $r35[2] = r1;
+
+        $r37 = staticinvoke <org.apache.sshd.common.NamedResource: java.lang.String getNames(java.util.Collection)>(r8);
+
+        $r35[3] = $r37;
+
+        $r38 = staticinvoke <org.apache.sshd.common.config.keys.KeyUtils: java.lang.String getFingerPrint(java.security.PublicKey)>(r5);
+
+        $r35[4] = $r38;
+
+        varReplacer7091 = "doAuth({}@{}) verify key type={}, factories={}, fingerprint={}";
+
+        interfaceinvoke $r36.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object[])>(varReplacer7091, $r35);
+
+     label01:
+        $r10 = staticinvoke <org.apache.sshd.common.NamedFactory: java.lang.Object create(java.util.Collection,java.lang.String)>(r8, r1);
+
+        varReplacer7095 = "No verifier located for algorithm=%s";
+
+        $r11 = staticinvoke <org.apache.sshd.common.util.ValidateUtils: java.lang.Object checkNotNull(java.lang.Object,java.lang.String,java.lang.Object)>($r10, varReplacer7095, r1);
+
+        r12 = (org.apache.sshd.common.signature.Signature) $r11;
+
+        interfaceinvoke r12.<org.apache.sshd.common.signature.Signature: void initVerifier(java.security.PublicKey)>(r5);
+
+        virtualinvoke r0.<org.apache.sshd.common.util.buffer.Buffer: void wpos(int)>(i0);
+
+        if z1 == 0 goto label02;
+
+        $r57 = virtualinvoke r0.<org.apache.sshd.common.util.buffer.Buffer: byte[] getBytes()>();
+
+        goto label03;
+
+     label02:
+        $r57 = null;
+
+     label03:
+        r13 = $r57;
+
+        r14 = interfaceinvoke r3.<org.apache.sshd.server.session.ServerSession: org.apache.sshd.server.auth.pubkey.PublickeyAuthenticator getPublickeyAuthenticator()>();
+
+        if r14 != null goto label05;
+
+        $r30 = r2.<org.apache.sshd.server.auth.pubkey.UserAuthPublicKey: org.slf4j.Logger log>;
+
+        $z7 = interfaceinvoke $r30.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z7 == 0 goto label04;
+
+        $r33 = r2.<org.apache.sshd.server.auth.pubkey.UserAuthPublicKey: org.slf4j.Logger log>;
+
+        $r32 = newarray (java.lang.Object)[4];
+
+        $r32[0] = r4;
+
+        $r32[1] = r3;
+
+        $r32[2] = r1;
+
+        $r34 = staticinvoke <org.apache.sshd.common.config.keys.KeyUtils: java.lang.String getFingerPrint(java.security.PublicKey)>(r5);
+
+        $r32[3] = $r34;
+
+        varReplacer7090 = "doAuth({}@{}) key type={}, fingerprint={} - no authenticator";
+
+        interfaceinvoke $r33.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object[])>(varReplacer7090, $r32);
+
+     label04:
+        $r31 = <java.lang.Boolean: java.lang.Boolean FALSE>;
+
+        return $r31;
+
+     label05:
+        z3 = interfaceinvoke r14.<org.apache.sshd.server.auth.pubkey.PublickeyAuthenticator: boolean authenticate(java.lang.String,java.security.PublicKey,org.apache.sshd.server.session.ServerSession)>(r4, r5, r3);
+
+     label06:
+        goto label09;
+
+     label07:
+        $r39 := @caughtexception;
+
+        r40 = $r39;
+
+        $r42 = r2.<org.apache.sshd.server.auth.pubkey.UserAuthPublicKey: org.slf4j.Logger log>;
+
+        $r41 = newarray (java.lang.Object)[6];
+
+        $r41[0] = r4;
+
+        $r41[1] = r3;
+
+        $r43 = virtualinvoke r40.<java.lang.Object: java.lang.Class getClass()>();
+
+        $r44 = virtualinvoke $r43.<java.lang.Class: java.lang.String getSimpleName()>();
+
+        $r41[2] = $r44;
+
+        $r41[3] = r1;
+
+        $r45 = staticinvoke <org.apache.sshd.common.config.keys.KeyUtils: java.lang.String getFingerPrint(java.security.PublicKey)>(r5);
+
+        $r41[4] = $r45;
+
+        $r46 = virtualinvoke r40.<java.lang.Error: java.lang.String getMessage()>();
+
+        $r41[5] = $r46;
+
+        varReplacer7085 = "doAuth({}@{}) failed ({}) to consult delegate for {} key={}: {}";
+
+        interfaceinvoke $r42.<org.slf4j.Logger: void warn(java.lang.String,java.lang.Object[])>(varReplacer7085, $r41);
+
+        $r47 = r2.<org.apache.sshd.server.auth.pubkey.UserAuthPublicKey: org.slf4j.Logger log>;
+
+        $z8 = interfaceinvoke $r47.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z8 == 0 goto label08;
+
+        $r50 = r2.<org.apache.sshd.server.auth.pubkey.UserAuthPublicKey: org.slf4j.Logger log>;
+
+        $r49 = new java.lang.StringBuilder;
+
+        specialinvoke $r49.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer7086 = "doAuth(";
+
+        $r51 = virtualinvoke $r49.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer7086);
+
+        $r52 = virtualinvoke $r51.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r4);
+
+        varReplacer7096 = "@";
+
+        $r53 = virtualinvoke $r52.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer7096);
+
+        $r54 = virtualinvoke $r53.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(r3);
+
+        varReplacer7092 = ") delegate failure details";
+
+        $r55 = virtualinvoke $r54.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer7092);
+
+        $r56 = virtualinvoke $r55.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r50.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Throwable)>($r56, r40);
+
+     label08:
+        $r48 = new org.apache.sshd.common.RuntimeSshException;
+
+        specialinvoke $r48.<org.apache.sshd.common.RuntimeSshException: void <init>(java.lang.Throwable)>(r40);
+
+        throw $r48;
+
+     label09:
+        $r15 = r2.<org.apache.sshd.server.auth.pubkey.UserAuthPublicKey: org.slf4j.Logger log>;
+
+        $z4 = interfaceinvoke $r15.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z4 == 0 goto label10;
+
+        $r27 = r2.<org.apache.sshd.server.auth.pubkey.UserAuthPublicKey: org.slf4j.Logger log>;
+
+        $r26 = newarray (java.lang.Object)[5];
+
+        $r26[0] = r4;
+
+        $r26[1] = r3;
+
+        $r26[2] = r1;
+
+        $r28 = staticinvoke <org.apache.sshd.common.config.keys.KeyUtils: java.lang.String getFingerPrint(java.security.PublicKey)>(r5);
+
+        $r26[3] = $r28;
+
+        $r29 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(z3);
+
+        $r26[4] = $r29;
+
+        varReplacer7089 = "doAuth({}@{}) key type={}, fingerprint={} - authentication result: {}";
+
+        interfaceinvoke $r27.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object[])>(varReplacer7089, $r26);
+
+     label10:
+        if z3 != 0 goto label11;
+
+        $r25 = <java.lang.Boolean: java.lang.Boolean FALSE>;
+
+        return $r25;
+
+     label11:
+        if z1 != 0 goto label12;
+
+        $r24 = virtualinvoke r0.<org.apache.sshd.common.util.buffer.Buffer: byte[] array()>();
+
+        $i7 = 4 + i2;
+
+        virtualinvoke r2.<org.apache.sshd.server.auth.pubkey.UserAuthPublicKey: void sendPublicKeyResponse(org.apache.sshd.server.session.ServerSession,java.lang.String,java.lang.String,java.security.PublicKey,byte[],int,int,org.apache.sshd.common.util.buffer.Buffer)>(r3, r4, r1, r5, $r24, i1, $i7, r0);
+
+        varReplacer7093 = null;
+
+        return varReplacer7093;
+
+     label12:
+        virtualinvoke r0.<org.apache.sshd.common.util.buffer.Buffer: void rpos(int)>(i1);
+
+        $i5 = i1 + 4;
+
+        $i6 = $i5 + i2;
+
+        virtualinvoke r0.<org.apache.sshd.common.util.buffer.Buffer: void wpos(int)>($i6);
+
+        $r16 = virtualinvoke r2.<org.apache.sshd.server.auth.pubkey.UserAuthPublicKey: java.lang.String getService()>();
+
+        $r17 = virtualinvoke r2.<org.apache.sshd.server.auth.pubkey.UserAuthPublicKey: java.lang.String getName()>();
+
+        $z5 = virtualinvoke r2.<org.apache.sshd.server.auth.pubkey.UserAuthPublicKey: boolean verifySignature(org.apache.sshd.server.session.ServerSession,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.security.PublicKey,org.apache.sshd.common.util.buffer.Buffer,org.apache.sshd.common.signature.Signature,byte[])>(r3, $r16, $r17, r4, r1, r5, r0, r12, r13);
+
+        if $z5 != 0 goto label13;
+
+        $r23 = new java.security.SignatureException;
+
+        varReplacer7094 = "Key verification failed";
+
+        specialinvoke $r23.<java.security.SignatureException: void <init>(java.lang.String)>(varReplacer7094);
+
+        throw $r23;
+
+     label13:
+        $r18 = r2.<org.apache.sshd.server.auth.pubkey.UserAuthPublicKey: org.slf4j.Logger log>;
+
+        $z6 = interfaceinvoke $r18.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z6 == 0 goto label14;
+
+        $r21 = r2.<org.apache.sshd.server.auth.pubkey.UserAuthPublicKey: org.slf4j.Logger log>;
+
+        $r20 = newarray (java.lang.Object)[4];
+
+        $r20[0] = r4;
+
+        $r20[1] = r3;
+
+        $r20[2] = r1;
+
+        $r22 = staticinvoke <org.apache.sshd.common.config.keys.KeyUtils: java.lang.String getFingerPrint(java.security.PublicKey)>(r5);
+
+        $r20[3] = $r22;
+
+        varReplacer7088 = "doAuth({}@{}) key type={}, fingerprint={} - verified";
+
+        interfaceinvoke $r21.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object[])>(varReplacer7088, $r20);
+
+     label14:
+        $r19 = <java.lang.Boolean: java.lang.Boolean TRUE>;
+
+        return $r19;
+
+        catch java.lang.Error from label05 to label06 with label07;
+    }
+
+    protected boolean verifySignature(org.apache.sshd.server.session.ServerSession, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.security.PublicKey, org.apache.sshd.common.util.buffer.Buffer, org.apache.sshd.common.signature.Signature, byte[]) throws java.lang.Exception
+    {
+        org.apache.sshd.server.session.ServerSession r0;
+        byte[] r1, $r12, r13;
+        org.apache.sshd.common.util.buffer.ByteArrayBuffer $r2, r7;
+        java.lang.String r3, r4, r5, r6, $r17, $r18, $r21, $r22, varReplacer7098, varReplacer7099;
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, varReplacer7100, varReplacer7101, varReplacer7102;
+        org.apache.sshd.common.util.buffer.Buffer r8;
+        org.apache.sshd.server.auth.pubkey.UserAuthPublicKey r9;
+        org.slf4j.Logger $r10, $r16, $r20;
+        boolean $z0, $z1;
+        org.apache.sshd.common.signature.Signature r11;
+        java.lang.Object[] $r14, $r19;
+        java.security.PublicKey r15;
+
+        nop;
+
+        r9 := @this: org.apache.sshd.server.auth.pubkey.UserAuthPublicKey;
+
+        r0 := @parameter0: org.apache.sshd.server.session.ServerSession;
+
+        r4 := @parameter1: java.lang.String;
+
+        r5 := @parameter2: java.lang.String;
+
+        r3 := @parameter3: java.lang.String;
+
+        r6 := @parameter4: java.lang.String;
+
+        r15 := @parameter5: java.security.PublicKey;
+
+        r8 := @parameter6: org.apache.sshd.common.util.buffer.Buffer;
+
+        r11 := @parameter7: org.apache.sshd.common.signature.Signature;
+
+        r13 := @parameter8: byte[];
+
+        r1 = interfaceinvoke r0.<org.apache.sshd.server.session.ServerSession: byte[] getSessionId()>();
+
+        $r2 = new org.apache.sshd.common.util.buffer.ByteArrayBuffer;
+
+        $i0 = lengthof r1;
+
+        $i1 = virtualinvoke r3.<java.lang.String: int length()>();
+
+        $i2 = $i0 + $i1;
+
+        $i3 = virtualinvoke r4.<java.lang.String: int length()>();
+
+        $i4 = $i2 + $i3;
+
+        $i5 = virtualinvoke r5.<java.lang.String: int length()>();
+
+        $i6 = $i4 + $i5;
+
+        $i7 = virtualinvoke r6.<java.lang.String: int length()>();
+
+        $i8 = $i6 + $i7;
+
+        $i9 = $i8 + 256;
+
+        $i10 = $i9 + 64;
+
+        varReplacer7101 = 0;
+
+        specialinvoke $r2.<org.apache.sshd.common.util.buffer.ByteArrayBuffer: void <init>(int,boolean)>($i10, varReplacer7101);
+
+        r7 = $r2;
+
+        virtualinvoke r7.<org.apache.sshd.common.util.buffer.Buffer: void putBytes(byte[])>(r1);
+
+        varReplacer7100 = 50;
+
+        virtualinvoke r7.<org.apache.sshd.common.util.buffer.Buffer: void putByte(byte)>(varReplacer7100);
+
+        virtualinvoke r7.<org.apache.sshd.common.util.buffer.Buffer: void putString(java.lang.String)>(r3);
+
+        virtualinvoke r7.<org.apache.sshd.common.util.buffer.Buffer: void putString(java.lang.String)>(r4);
+
+        virtualinvoke r7.<org.apache.sshd.common.util.buffer.Buffer: void putString(java.lang.String)>(r5);
+
+        varReplacer7102 = 1;
+
+        virtualinvoke r7.<org.apache.sshd.common.util.buffer.Buffer: void putBoolean(boolean)>(varReplacer7102);
+
+        virtualinvoke r7.<org.apache.sshd.common.util.buffer.Buffer: void putString(java.lang.String)>(r6);
+
+        virtualinvoke r7.<org.apache.sshd.common.util.buffer.Buffer: void putBuffer(org.apache.sshd.common.util.Readable)>(r8);
+
+        $r10 = r9.<org.apache.sshd.server.auth.pubkey.UserAuthPublicKey: org.slf4j.Logger log>;
+
+        $z0 = interfaceinvoke $r10.<org.slf4j.Logger: boolean isTraceEnabled()>();
+
+        if $z0 == 0 goto label1;
+
+        $r16 = r9.<org.apache.sshd.server.auth.pubkey.UserAuthPublicKey: org.slf4j.Logger log>;
+
+        $r14 = newarray (java.lang.Object)[7];
+
+        $r14[0] = r3;
+
+        $r14[1] = r0;
+
+        $r14[2] = r4;
+
+        $r14[3] = r5;
+
+        $r14[4] = r6;
+
+        $r17 = staticinvoke <org.apache.sshd.common.config.keys.KeyUtils: java.lang.String getFingerPrint(java.security.PublicKey)>(r15);
+
+        $r14[5] = $r17;
+
+        $r18 = virtualinvoke r7.<org.apache.sshd.common.util.buffer.Buffer: java.lang.String toHex()>();
+
+        $r14[6] = $r18;
+
+        varReplacer7098 = "verifySignature({}@{})[{}][{}] key type={}, fingerprint={} - verification data={}";
+
+        interfaceinvoke $r16.<org.slf4j.Logger: void trace(java.lang.String,java.lang.Object[])>(varReplacer7098, $r14);
+
+        $r20 = r9.<org.apache.sshd.server.auth.pubkey.UserAuthPublicKey: org.slf4j.Logger log>;
+
+        $r19 = newarray (java.lang.Object)[7];
+
+        $r19[0] = r3;
+
+        $r19[1] = r0;
+
+        $r19[2] = r4;
+
+        $r19[3] = r5;
+
+        $r19[4] = r6;
+
+        $r21 = staticinvoke <org.apache.sshd.common.config.keys.KeyUtils: java.lang.String getFingerPrint(java.security.PublicKey)>(r15);
+
+        $r19[5] = $r21;
+
+        $r22 = staticinvoke <org.apache.sshd.common.util.buffer.BufferUtils: java.lang.String toHex(byte[])>(r13);
+
+        $r19[6] = $r22;
+
+        varReplacer7099 = "verifySignature({}@{})[{}][{}] key type={}, fingerprint={} - expected signature={}";
+
+        interfaceinvoke $r20.<org.slf4j.Logger: void trace(java.lang.String,java.lang.Object[])>(varReplacer7099, $r19);
+
+     label1:
+        $r12 = virtualinvoke r7.<org.apache.sshd.common.util.buffer.Buffer: byte[] array()>();
+
+        $i11 = virtualinvoke r7.<org.apache.sshd.common.util.buffer.Buffer: int rpos()>();
+
+        $i12 = virtualinvoke r7.<org.apache.sshd.common.util.buffer.Buffer: int available()>();
+
+        interfaceinvoke r11.<org.apache.sshd.common.signature.Signature: void update(byte[],int,int)>($r12, $i11, $i12);
+
+        $z1 = interfaceinvoke r11.<org.apache.sshd.common.signature.Signature: boolean verify(byte[])>(r13);
+
+        return $z1;
+    }
+
+    protected void sendPublicKeyResponse(org.apache.sshd.server.session.ServerSession, java.lang.String, java.lang.String, java.security.PublicKey, byte[], int, int, org.apache.sshd.common.util.buffer.Buffer) throws java.lang.Exception
+    {
+        org.apache.sshd.server.auth.pubkey.UserAuthPublicKey r0;
+        org.slf4j.Logger $r1, $r10;
+        boolean $z0;
+        org.apache.sshd.server.session.ServerSession r2;
+        java.lang.String r3, r8, $r11, varReplacer7103;
+        int $i0, i1, $i2, $i3, i4, varReplacer7104;
+        org.apache.sshd.common.util.buffer.Buffer r4, r12;
+        byte[] r5;
+        java.lang.Object[] $r7;
+        java.security.PublicKey r9;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.server.auth.pubkey.UserAuthPublicKey;
+
+        r2 := @parameter0: org.apache.sshd.server.session.ServerSession;
+
+        r8 := @parameter1: java.lang.String;
+
+        r3 := @parameter2: java.lang.String;
+
+        r9 := @parameter3: java.security.PublicKey;
+
+        r5 := @parameter4: byte[];
+
+        i4 := @parameter5: int;
+
+        i1 := @parameter6: int;
+
+        r12 := @parameter7: org.apache.sshd.common.util.buffer.Buffer;
+
+        $r1 = r0.<org.apache.sshd.server.auth.pubkey.UserAuthPublicKey: org.slf4j.Logger log>;
+
+        $z0 = interfaceinvoke $r1.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z0 == 0 goto label1;
+
+        $r10 = r0.<org.apache.sshd.server.auth.pubkey.UserAuthPublicKey: org.slf4j.Logger log>;
+
+        $r7 = newarray (java.lang.Object)[4];
+
+        $r7[0] = r8;
+
+        $r7[1] = r2;
+
+        $r7[2] = r3;
+
+        $r11 = staticinvoke <org.apache.sshd.common.config.keys.KeyUtils: java.lang.String getFingerPrint(java.security.PublicKey)>(r9);
+
+        $r7[3] = $r11;
+
+        varReplacer7103 = "doAuth({}@{}) send SSH_MSG_USERAUTH_PK_OK for key type={}, fingerprint={}";
+
+        interfaceinvoke $r10.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object[])>(varReplacer7103, $r7);
+
+     label1:
+        $i0 = staticinvoke <org.apache.sshd.common.util.GenericUtils: int length(java.lang.CharSequence)>(r3);
+
+        $i2 = $i0 + i1;
+
+        $i3 = $i2 + 32;
+
+        varReplacer7104 = 60;
+
+        r4 = interfaceinvoke r2.<org.apache.sshd.server.session.ServerSession: org.apache.sshd.common.util.buffer.Buffer createBuffer(byte,int)>(varReplacer7104, $i3);
+
+        virtualinvoke r4.<org.apache.sshd.common.util.buffer.Buffer: void putString(java.lang.String)>(r3);
+
+        virtualinvoke r4.<org.apache.sshd.common.util.buffer.Buffer: void putRawBytes(byte[],int,int)>(r5, i4, i1);
+
+        interfaceinvoke r2.<org.apache.sshd.server.session.ServerSession: org.apache.sshd.common.io.IoWriteFuture writePacket(org.apache.sshd.common.util.buffer.Buffer)>(r4);
+
+        return;
+    }
+}

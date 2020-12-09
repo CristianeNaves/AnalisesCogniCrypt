@@ -1,0 +1,1114 @@
+public abstract class org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod extends org.apache.jcp.xml.dsig.internal.dom.AbstractDOMSignatureMethod
+{
+    private static org.slf4j.Logger log;
+    private javax.xml.crypto.dsig.spec.SignatureMethodParameterSpec params;
+    private java.security.Signature signature;
+    static final java.lang.String RSA_SHA224;
+    static final java.lang.String RSA_SHA256;
+    static final java.lang.String RSA_SHA384;
+    static final java.lang.String RSA_SHA512;
+    static final java.lang.String RSA_RIPEMD160;
+    static final java.lang.String ECDSA_SHA1;
+    static final java.lang.String ECDSA_SHA224;
+    static final java.lang.String ECDSA_SHA256;
+    static final java.lang.String ECDSA_SHA384;
+    static final java.lang.String ECDSA_SHA512;
+    static final java.lang.String DSA_SHA256;
+    static final java.lang.String ECDSA_RIPEMD160;
+    static final java.lang.String RSA_SHA1_MGF1;
+    static final java.lang.String RSA_SHA224_MGF1;
+    static final java.lang.String RSA_SHA256_MGF1;
+    static final java.lang.String RSA_SHA384_MGF1;
+    static final java.lang.String RSA_SHA512_MGF1;
+    static final java.lang.String RSA_RIPEMD160_MGF1;
+
+    void <init>(java.security.spec.AlgorithmParameterSpec) throws java.security.InvalidAlgorithmParameterException
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod r0;
+        java.security.spec.AlgorithmParameterSpec r1;
+        javax.xml.crypto.dsig.spec.SignatureMethodParameterSpec $r2, $r3;
+        boolean $z0;
+        java.security.InvalidAlgorithmParameterException $r4;
+        java.lang.String varReplacer540;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod;
+
+        r1 := @parameter0: java.security.spec.AlgorithmParameterSpec;
+
+        specialinvoke r0.<org.apache.jcp.xml.dsig.internal.dom.AbstractDOMSignatureMethod: void <init>()>();
+
+        if r1 == null goto label1;
+
+        $z0 = r1 instanceof javax.xml.crypto.dsig.spec.SignatureMethodParameterSpec;
+
+        if $z0 != 0 goto label1;
+
+        $r4 = new java.security.InvalidAlgorithmParameterException;
+
+        varReplacer540 = "params must be of type SignatureMethodParameterSpec";
+
+        specialinvoke $r4.<java.security.InvalidAlgorithmParameterException: void <init>(java.lang.String)>(varReplacer540);
+
+        throw $r4;
+
+     label1:
+        $r2 = (javax.xml.crypto.dsig.spec.SignatureMethodParameterSpec) r1;
+
+        virtualinvoke r0.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: void checkParams(javax.xml.crypto.dsig.spec.SignatureMethodParameterSpec)>($r2);
+
+        $r3 = (javax.xml.crypto.dsig.spec.SignatureMethodParameterSpec) r1;
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: javax.xml.crypto.dsig.spec.SignatureMethodParameterSpec params> = $r3;
+
+        return;
+    }
+
+    void <init>(org.w3c.dom.Element) throws javax.xml.crypto.MarshalException
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod r0;
+        org.w3c.dom.Element r1, r2;
+        javax.xml.crypto.dsig.spec.SignatureMethodParameterSpec $r3, $r4;
+        java.lang.Throwable $r5, r6;
+        javax.xml.crypto.MarshalException $r7;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod;
+
+        r1 := @parameter0: org.w3c.dom.Element;
+
+        specialinvoke r0.<org.apache.jcp.xml.dsig.internal.dom.AbstractDOMSignatureMethod: void <init>()>();
+
+        r2 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMUtils: org.w3c.dom.Element getFirstChildElement(org.w3c.dom.Node)>(r1);
+
+        if r2 == null goto label1;
+
+        $r4 = virtualinvoke r0.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: javax.xml.crypto.dsig.spec.SignatureMethodParameterSpec unmarshalParams(org.w3c.dom.Element)>(r2);
+
+        r0.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: javax.xml.crypto.dsig.spec.SignatureMethodParameterSpec params> = $r4;
+
+     label1:
+        $r3 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: javax.xml.crypto.dsig.spec.SignatureMethodParameterSpec params>;
+
+        virtualinvoke r0.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: void checkParams(javax.xml.crypto.dsig.spec.SignatureMethodParameterSpec)>($r3);
+
+     label2:
+        goto label4;
+
+     label3:
+        $r5 := @caughtexception;
+
+        r6 = $r5;
+
+        $r7 = new javax.xml.crypto.MarshalException;
+
+        specialinvoke $r7.<javax.xml.crypto.MarshalException: void <init>(java.lang.Throwable)>(r6);
+
+        throw $r7;
+
+     label4:
+        return;
+
+        catch java.security.InvalidAlgorithmParameterException from label1 to label2 with label3;
+    }
+
+    static javax.xml.crypto.dsig.SignatureMethod unmarshal(org.w3c.dom.Element) throws javax.xml.crypto.MarshalException
+    {
+        org.w3c.dom.Element r0;
+        java.lang.String r1, $r6, varReplacer541, varReplacer542, varReplacer543, varReplacer544, varReplacer545, varReplacer546, varReplacer547, varReplacer548, varReplacer549, varReplacer550, varReplacer551, varReplacer552, varReplacer553, varReplacer554, varReplacer555, varReplacer556, varReplacer557, varReplacer558, varReplacer559, varReplacer560, varReplacer561, varReplacer562, varReplacer563, varReplacer564, varReplacer565, varReplacer566, varReplacer567, varReplacer568;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8, $z9, $z10, $z11, $z12, $z13, $z14, $z15, $z16, $z17, $z18, $z19, $z20, $z21, $z22, $z23, $z24, $z25;
+        javax.xml.crypto.MarshalException $r2;
+        java.lang.StringBuilder $r3, $r4, $r5;
+        org.apache.jcp.xml.dsig.internal.dom.DOMHMACSignatureMethod$RIPEMD160 $r7;
+        org.apache.jcp.xml.dsig.internal.dom.DOMHMACSignatureMethod$SHA512 $r8;
+        org.apache.jcp.xml.dsig.internal.dom.DOMHMACSignatureMethod$SHA384 $r9;
+        org.apache.jcp.xml.dsig.internal.dom.DOMHMACSignatureMethod$SHA256 $r10;
+        org.apache.jcp.xml.dsig.internal.dom.DOMHMACSignatureMethod$SHA224 $r11;
+        org.apache.jcp.xml.dsig.internal.dom.DOMHMACSignatureMethod$SHA1 $r12;
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$RIPEMD160withECDSA $r13;
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA512withECDSA $r14;
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA384withECDSA $r15;
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA256withECDSA $r16;
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA224withECDSA $r17;
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA1withECDSA $r18;
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA256withDSA $r19;
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA1withDSA $r20;
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$RIPEMD160withRSAandMGF1 $r21;
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA512withRSAandMGF1 $r22;
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA384withRSAandMGF1 $r23;
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA256withRSAandMGF1 $r24;
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA224withRSAandMGF1 $r25;
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA1withRSAandMGF1 $r26;
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$RIPEMD160withRSA $r27;
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA512withRSA $r28;
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA384withRSA $r29;
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA256withRSA $r30;
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA224withRSA $r31;
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA1withRSA $r32;
+
+        nop;
+
+        r0 := @parameter0: org.w3c.dom.Element;
+
+        varReplacer555 = "Algorithm";
+
+        r1 = staticinvoke <org.apache.jcp.xml.dsig.internal.dom.DOMUtils: java.lang.String getAttributeValue(org.w3c.dom.Element,java.lang.String)>(r0, varReplacer555);
+
+        varReplacer566 = "http://www.w3.org/2000/09/xmldsig#rsa-sha1";
+
+        $z0 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer566);
+
+        if $z0 == 0 goto label01;
+
+        $r32 = new org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA1withRSA;
+
+        specialinvoke $r32.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA1withRSA: void <init>(org.w3c.dom.Element)>(r0);
+
+        return $r32;
+
+     label01:
+        varReplacer541 = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha224";
+
+        $z1 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer541);
+
+        if $z1 == 0 goto label02;
+
+        $r31 = new org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA224withRSA;
+
+        specialinvoke $r31.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA224withRSA: void <init>(org.w3c.dom.Element)>(r0);
+
+        return $r31;
+
+     label02:
+        varReplacer544 = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256";
+
+        $z2 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer544);
+
+        if $z2 == 0 goto label03;
+
+        $r30 = new org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA256withRSA;
+
+        specialinvoke $r30.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA256withRSA: void <init>(org.w3c.dom.Element)>(r0);
+
+        return $r30;
+
+     label03:
+        varReplacer559 = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384";
+
+        $z3 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer559);
+
+        if $z3 == 0 goto label04;
+
+        $r29 = new org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA384withRSA;
+
+        specialinvoke $r29.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA384withRSA: void <init>(org.w3c.dom.Element)>(r0);
+
+        return $r29;
+
+     label04:
+        varReplacer564 = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512";
+
+        $z4 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer564);
+
+        if $z4 == 0 goto label05;
+
+        $r28 = new org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA512withRSA;
+
+        specialinvoke $r28.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA512withRSA: void <init>(org.w3c.dom.Element)>(r0);
+
+        return $r28;
+
+     label05:
+        varReplacer561 = "http://www.w3.org/2001/04/xmldsig-more#rsa-ripemd160";
+
+        $z5 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer561);
+
+        if $z5 == 0 goto label06;
+
+        $r27 = new org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$RIPEMD160withRSA;
+
+        specialinvoke $r27.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$RIPEMD160withRSA: void <init>(org.w3c.dom.Element)>(r0);
+
+        return $r27;
+
+     label06:
+        varReplacer565 = "http://www.w3.org/2007/05/xmldsig-more#sha1-rsa-MGF1";
+
+        $z6 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer565);
+
+        if $z6 == 0 goto label07;
+
+        $r26 = new org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA1withRSAandMGF1;
+
+        specialinvoke $r26.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA1withRSAandMGF1: void <init>(org.w3c.dom.Element)>(r0);
+
+        return $r26;
+
+     label07:
+        varReplacer545 = "http://www.w3.org/2007/05/xmldsig-more#sha224-rsa-MGF1";
+
+        $z7 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer545);
+
+        if $z7 == 0 goto label08;
+
+        $r25 = new org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA224withRSAandMGF1;
+
+        specialinvoke $r25.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA224withRSAandMGF1: void <init>(org.w3c.dom.Element)>(r0);
+
+        return $r25;
+
+     label08:
+        varReplacer560 = "http://www.w3.org/2007/05/xmldsig-more#sha256-rsa-MGF1";
+
+        $z8 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer560);
+
+        if $z8 == 0 goto label09;
+
+        $r24 = new org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA256withRSAandMGF1;
+
+        specialinvoke $r24.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA256withRSAandMGF1: void <init>(org.w3c.dom.Element)>(r0);
+
+        return $r24;
+
+     label09:
+        varReplacer568 = "http://www.w3.org/2007/05/xmldsig-more#sha384-rsa-MGF1";
+
+        $z9 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer568);
+
+        if $z9 == 0 goto label10;
+
+        $r23 = new org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA384withRSAandMGF1;
+
+        specialinvoke $r23.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA384withRSAandMGF1: void <init>(org.w3c.dom.Element)>(r0);
+
+        return $r23;
+
+     label10:
+        varReplacer548 = "http://www.w3.org/2007/05/xmldsig-more#sha512-rsa-MGF1";
+
+        $z10 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer548);
+
+        if $z10 == 0 goto label11;
+
+        $r22 = new org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA512withRSAandMGF1;
+
+        specialinvoke $r22.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA512withRSAandMGF1: void <init>(org.w3c.dom.Element)>(r0);
+
+        return $r22;
+
+     label11:
+        varReplacer558 = "http://www.w3.org/2007/05/xmldsig-more#ripemd160-rsa-MGF1";
+
+        $z11 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer558);
+
+        if $z11 == 0 goto label12;
+
+        $r21 = new org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$RIPEMD160withRSAandMGF1;
+
+        specialinvoke $r21.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$RIPEMD160withRSAandMGF1: void <init>(org.w3c.dom.Element)>(r0);
+
+        return $r21;
+
+     label12:
+        varReplacer552 = "http://www.w3.org/2000/09/xmldsig#dsa-sha1";
+
+        $z12 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer552);
+
+        if $z12 == 0 goto label13;
+
+        $r20 = new org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA1withDSA;
+
+        specialinvoke $r20.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA1withDSA: void <init>(org.w3c.dom.Element)>(r0);
+
+        return $r20;
+
+     label13:
+        varReplacer551 = "http://www.w3.org/2009/xmldsig11#dsa-sha256";
+
+        $z13 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer551);
+
+        if $z13 == 0 goto label14;
+
+        $r19 = new org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA256withDSA;
+
+        specialinvoke $r19.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA256withDSA: void <init>(org.w3c.dom.Element)>(r0);
+
+        return $r19;
+
+     label14:
+        varReplacer549 = "http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1";
+
+        $z14 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer549);
+
+        if $z14 == 0 goto label15;
+
+        $r18 = new org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA1withECDSA;
+
+        specialinvoke $r18.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA1withECDSA: void <init>(org.w3c.dom.Element)>(r0);
+
+        return $r18;
+
+     label15:
+        varReplacer556 = "http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha224";
+
+        $z15 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer556);
+
+        if $z15 == 0 goto label16;
+
+        $r17 = new org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA224withECDSA;
+
+        specialinvoke $r17.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA224withECDSA: void <init>(org.w3c.dom.Element)>(r0);
+
+        return $r17;
+
+     label16:
+        varReplacer547 = "http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256";
+
+        $z16 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer547);
+
+        if $z16 == 0 goto label17;
+
+        $r16 = new org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA256withECDSA;
+
+        specialinvoke $r16.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA256withECDSA: void <init>(org.w3c.dom.Element)>(r0);
+
+        return $r16;
+
+     label17:
+        varReplacer553 = "http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha384";
+
+        $z17 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer553);
+
+        if $z17 == 0 goto label18;
+
+        $r15 = new org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA384withECDSA;
+
+        specialinvoke $r15.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA384withECDSA: void <init>(org.w3c.dom.Element)>(r0);
+
+        return $r15;
+
+     label18:
+        varReplacer557 = "http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512";
+
+        $z18 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer557);
+
+        if $z18 == 0 goto label19;
+
+        $r14 = new org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA512withECDSA;
+
+        specialinvoke $r14.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$SHA512withECDSA: void <init>(org.w3c.dom.Element)>(r0);
+
+        return $r14;
+
+     label19:
+        varReplacer543 = "http://www.w3.org/2007/05/xmldsig-more#ecdsa-ripemd160";
+
+        $z19 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer543);
+
+        if $z19 == 0 goto label20;
+
+        $r13 = new org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$RIPEMD160withECDSA;
+
+        specialinvoke $r13.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod$RIPEMD160withECDSA: void <init>(org.w3c.dom.Element)>(r0);
+
+        return $r13;
+
+     label20:
+        varReplacer542 = "http://www.w3.org/2000/09/xmldsig#hmac-sha1";
+
+        $z20 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer542);
+
+        if $z20 == 0 goto label21;
+
+        $r12 = new org.apache.jcp.xml.dsig.internal.dom.DOMHMACSignatureMethod$SHA1;
+
+        specialinvoke $r12.<org.apache.jcp.xml.dsig.internal.dom.DOMHMACSignatureMethod$SHA1: void <init>(org.w3c.dom.Element)>(r0);
+
+        return $r12;
+
+     label21:
+        varReplacer546 = "http://www.w3.org/2001/04/xmldsig-more#hmac-sha224";
+
+        $z21 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer546);
+
+        if $z21 == 0 goto label22;
+
+        $r11 = new org.apache.jcp.xml.dsig.internal.dom.DOMHMACSignatureMethod$SHA224;
+
+        specialinvoke $r11.<org.apache.jcp.xml.dsig.internal.dom.DOMHMACSignatureMethod$SHA224: void <init>(org.w3c.dom.Element)>(r0);
+
+        return $r11;
+
+     label22:
+        varReplacer554 = "http://www.w3.org/2001/04/xmldsig-more#hmac-sha256";
+
+        $z22 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer554);
+
+        if $z22 == 0 goto label23;
+
+        $r10 = new org.apache.jcp.xml.dsig.internal.dom.DOMHMACSignatureMethod$SHA256;
+
+        specialinvoke $r10.<org.apache.jcp.xml.dsig.internal.dom.DOMHMACSignatureMethod$SHA256: void <init>(org.w3c.dom.Element)>(r0);
+
+        return $r10;
+
+     label23:
+        varReplacer550 = "http://www.w3.org/2001/04/xmldsig-more#hmac-sha384";
+
+        $z23 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer550);
+
+        if $z23 == 0 goto label24;
+
+        $r9 = new org.apache.jcp.xml.dsig.internal.dom.DOMHMACSignatureMethod$SHA384;
+
+        specialinvoke $r9.<org.apache.jcp.xml.dsig.internal.dom.DOMHMACSignatureMethod$SHA384: void <init>(org.w3c.dom.Element)>(r0);
+
+        return $r9;
+
+     label24:
+        varReplacer567 = "http://www.w3.org/2001/04/xmldsig-more#hmac-sha512";
+
+        $z24 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer567);
+
+        if $z24 == 0 goto label25;
+
+        $r8 = new org.apache.jcp.xml.dsig.internal.dom.DOMHMACSignatureMethod$SHA512;
+
+        specialinvoke $r8.<org.apache.jcp.xml.dsig.internal.dom.DOMHMACSignatureMethod$SHA512: void <init>(org.w3c.dom.Element)>(r0);
+
+        return $r8;
+
+     label25:
+        varReplacer563 = "http://www.w3.org/2001/04/xmldsig-more#hmac-ripemd160";
+
+        $z25 = virtualinvoke r1.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer563);
+
+        if $z25 == 0 goto label26;
+
+        $r7 = new org.apache.jcp.xml.dsig.internal.dom.DOMHMACSignatureMethod$RIPEMD160;
+
+        specialinvoke $r7.<org.apache.jcp.xml.dsig.internal.dom.DOMHMACSignatureMethod$RIPEMD160: void <init>(org.w3c.dom.Element)>(r0);
+
+        return $r7;
+
+     label26:
+        $r2 = new javax.xml.crypto.MarshalException;
+
+        $r3 = new java.lang.StringBuilder;
+
+        specialinvoke $r3.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer562 = "unsupported SignatureMethod algorithm: ";
+
+        $r4 = virtualinvoke $r3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer562);
+
+        $r5 = virtualinvoke $r4.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r1);
+
+        $r6 = virtualinvoke $r5.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $r2.<javax.xml.crypto.MarshalException: void <init>(java.lang.String)>($r6);
+
+        throw $r2;
+    }
+
+    public final java.security.spec.AlgorithmParameterSpec getParameterSpec()
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod r0;
+        javax.xml.crypto.dsig.spec.SignatureMethodParameterSpec $r1;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod;
+
+        $r1 = r0.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: javax.xml.crypto.dsig.spec.SignatureMethodParameterSpec params>;
+
+        return $r1;
+    }
+
+    boolean verify(java.security.Key, org.apache.jcp.xml.dsig.internal.dom.DOMSignedInfo, byte[], javax.xml.crypto.dsig.XMLValidateContext) throws java.security.InvalidKeyException, java.security.SignatureException, javax.xml.crypto.dsig.XMLSignatureException
+    {
+        java.security.Key r0;
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignedInfo r1;
+        byte[] r2, $r15, $r20;
+        boolean $z0, $z1, $z2, $z3, $z4;
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod r3;
+        java.security.Signature $r4, $r6, $r10, $r13, $r14, $r19, $r24, $r55;
+        java.security.PublicKey $r5;
+        org.slf4j.Logger $r7, $r22, $r29, $r34, $r40;
+        javax.xml.crypto.dsig.XMLValidateContext r8;
+        org.apache.jcp.xml.dsig.internal.SignerOutputStream $r9;
+        org.apache.jcp.xml.dsig.internal.dom.AbstractDOMSignatureMethod$Type $r11, $r12, r57;
+        java.security.interfaces.DSAKey $r16;
+        java.security.interfaces.DSAParams $r17;
+        java.math.BigInteger $r18;
+        int i0, $i1, $i2;
+        java.lang.StringBuilder $r21, $r23, $r26, $r28, $r30, $r31, $r33, $r35, $r37, $r39, $r41, $r42;
+        java.security.Provider $r25, r54;
+        java.lang.String $r27, $r32, $r36, $r38, $r43, $r45, $r46, varReplacer569, varReplacer570, varReplacer571, varReplacer572, varReplacer573, varReplacer574;
+        java.lang.Object $r44;
+        java.security.InvalidKeyException $r48;
+        java.lang.Throwable $r49, $r51, r56, r58;
+        javax.xml.crypto.dsig.XMLSignatureException $r50, $r52;
+        java.lang.NullPointerException $r53;
+
+        nop;
+
+        r3 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod;
+
+        r0 := @parameter0: java.security.Key;
+
+        r1 := @parameter1: org.apache.jcp.xml.dsig.internal.dom.DOMSignedInfo;
+
+        r2 := @parameter2: byte[];
+
+        r8 := @parameter3: javax.xml.crypto.dsig.XMLValidateContext;
+
+        if r0 == null goto label01;
+
+        if r1 == null goto label01;
+
+        if r2 != null goto label02;
+
+     label01:
+        $r53 = new java.lang.NullPointerException;
+
+        specialinvoke $r53.<java.lang.NullPointerException: void <init>()>();
+
+        throw $r53;
+
+     label02:
+        $z0 = r0 instanceof java.security.PublicKey;
+
+        if $z0 != 0 goto label03;
+
+        $r48 = new java.security.InvalidKeyException;
+
+        varReplacer572 = "key must be PublicKey";
+
+        specialinvoke $r48.<java.security.InvalidKeyException: void <init>(java.lang.String)>(varReplacer572);
+
+        throw $r48;
+
+     label03:
+        $r4 = r3.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: java.security.Signature signature>;
+
+        if $r4 != null goto label09;
+
+     label04:
+        varReplacer571 = "org.jcp.xml.dsig.internal.dom.SignatureProvider";
+
+        $r44 = interfaceinvoke r8.<javax.xml.crypto.dsig.XMLValidateContext: java.lang.Object getProperty(java.lang.String)>(varReplacer571);
+
+        r54 = (java.security.Provider) $r44;
+
+        if r54 != null goto label05;
+
+        $r46 = virtualinvoke r3.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: java.lang.String getJCAAlgorithm()>();
+
+        $r55 = staticinvoke <java.security.Signature: java.security.Signature getInstance(java.lang.String)>($r46);
+
+        goto label06;
+
+     label05:
+        $r45 = virtualinvoke r3.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: java.lang.String getJCAAlgorithm()>();
+
+        $r55 = staticinvoke <java.security.Signature: java.security.Signature getInstance(java.lang.String,java.security.Provider)>($r45, r54);
+
+     label06:
+        r3.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: java.security.Signature signature> = $r55;
+
+     label07:
+        goto label09;
+
+     label08:
+        $r51 := @caughtexception;
+
+        r56 = $r51;
+
+        $r52 = new javax.xml.crypto.dsig.XMLSignatureException;
+
+        specialinvoke $r52.<javax.xml.crypto.dsig.XMLSignatureException: void <init>(java.lang.Throwable)>(r56);
+
+        throw $r52;
+
+     label09:
+        $r6 = r3.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: java.security.Signature signature>;
+
+        $r5 = (java.security.PublicKey) r0;
+
+        virtualinvoke $r6.<java.security.Signature: void initVerify(java.security.PublicKey)>($r5);
+
+        $r7 = <org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: org.slf4j.Logger log>;
+
+        $z1 = interfaceinvoke $r7.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z1 == 0 goto label10;
+
+        $r22 = <org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: org.slf4j.Logger log>;
+
+        $r21 = new java.lang.StringBuilder;
+
+        specialinvoke $r21.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer573 = "Signature provider:";
+
+        $r23 = virtualinvoke $r21.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer573);
+
+        $r24 = r3.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: java.security.Signature signature>;
+
+        $r25 = virtualinvoke $r24.<java.security.Signature: java.security.Provider getProvider()>();
+
+        $r26 = virtualinvoke $r23.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>($r25);
+
+        $r27 = virtualinvoke $r26.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r22.<org.slf4j.Logger: void debug(java.lang.String)>($r27);
+
+        $r29 = <org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: org.slf4j.Logger log>;
+
+        $r28 = new java.lang.StringBuilder;
+
+        specialinvoke $r28.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer574 = "Verifying with key: ";
+
+        $r30 = virtualinvoke $r28.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer574);
+
+        $r31 = virtualinvoke $r30.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(r0);
+
+        $r32 = virtualinvoke $r31.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r29.<org.slf4j.Logger: void debug(java.lang.String)>($r32);
+
+        $r34 = <org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: org.slf4j.Logger log>;
+
+        $r33 = new java.lang.StringBuilder;
+
+        specialinvoke $r33.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer569 = "JCA Algorithm: ";
+
+        $r35 = virtualinvoke $r33.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer569);
+
+        $r36 = virtualinvoke r3.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: java.lang.String getJCAAlgorithm()>();
+
+        $r37 = virtualinvoke $r35.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r36);
+
+        $r38 = virtualinvoke $r37.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r34.<org.slf4j.Logger: void debug(java.lang.String)>($r38);
+
+        $r40 = <org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: org.slf4j.Logger log>;
+
+        $r39 = new java.lang.StringBuilder;
+
+        specialinvoke $r39.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer570 = "Signature Bytes length: ";
+
+        $r41 = virtualinvoke $r39.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer570);
+
+        $i2 = lengthof r2;
+
+        $r42 = virtualinvoke $r41.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($i2);
+
+        $r43 = virtualinvoke $r42.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r40.<org.slf4j.Logger: void debug(java.lang.String)>($r43);
+
+     label10:
+        $r9 = new org.apache.jcp.xml.dsig.internal.SignerOutputStream;
+
+        $r10 = r3.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: java.security.Signature signature>;
+
+        specialinvoke $r9.<org.apache.jcp.xml.dsig.internal.SignerOutputStream: void <init>(java.security.Signature)>($r10);
+
+        virtualinvoke r1.<org.apache.jcp.xml.dsig.internal.dom.DOMSignedInfo: void canonicalize(javax.xml.crypto.XMLCryptoContext,java.io.ByteArrayOutputStream)>(r8, $r9);
+
+     label11:
+        r57 = virtualinvoke r3.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: org.apache.jcp.xml.dsig.internal.dom.AbstractDOMSignatureMethod$Type getAlgorithmType()>();
+
+        $r11 = <org.apache.jcp.xml.dsig.internal.dom.AbstractDOMSignatureMethod$Type: org.apache.jcp.xml.dsig.internal.dom.AbstractDOMSignatureMethod$Type DSA>;
+
+        if r57 != $r11 goto label13;
+
+        $r16 = (java.security.interfaces.DSAKey) r0;
+
+        $r17 = interfaceinvoke $r16.<java.security.interfaces.DSAKey: java.security.interfaces.DSAParams getParams()>();
+
+        $r18 = interfaceinvoke $r17.<java.security.interfaces.DSAParams: java.math.BigInteger getQ()>();
+
+        i0 = virtualinvoke $r18.<java.math.BigInteger: int bitLength()>();
+
+        $r19 = r3.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: java.security.Signature signature>;
+
+        $i1 = i0 / 8;
+
+        $r20 = staticinvoke <org.apache.xml.security.utils.JavaUtils: byte[] convertDsaXMLDSIGtoASN1(byte[],int)>(r2, $i1);
+
+        $z4 = virtualinvoke $r19.<java.security.Signature: boolean verify(byte[])>($r20);
+
+     label12:
+        return $z4;
+
+     label13:
+        $r12 = <org.apache.jcp.xml.dsig.internal.dom.AbstractDOMSignatureMethod$Type: org.apache.jcp.xml.dsig.internal.dom.AbstractDOMSignatureMethod$Type ECDSA>;
+
+        if r57 != $r12 goto label15;
+
+        $r14 = r3.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: java.security.Signature signature>;
+
+        $r15 = staticinvoke <org.apache.xml.security.algorithms.implementations.SignatureECDSA: byte[] convertXMLDSIGtoASN1(byte[])>(r2);
+
+        $z3 = virtualinvoke $r14.<java.security.Signature: boolean verify(byte[])>($r15);
+
+     label14:
+        return $z3;
+
+     label15:
+        $r13 = r3.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: java.security.Signature signature>;
+
+        $z2 = virtualinvoke $r13.<java.security.Signature: boolean verify(byte[])>(r2);
+
+     label16:
+        return $z2;
+
+     label17:
+        $r49 := @caughtexception;
+
+        r58 = $r49;
+
+        $r50 = new javax.xml.crypto.dsig.XMLSignatureException;
+
+        specialinvoke $r50.<javax.xml.crypto.dsig.XMLSignatureException: void <init>(java.lang.Throwable)>(r58);
+
+        throw $r50;
+
+        catch java.security.NoSuchAlgorithmException from label04 to label07 with label08;
+        catch java.io.IOException from label11 to label12 with label17;
+        catch java.io.IOException from label13 to label14 with label17;
+        catch java.io.IOException from label15 to label16 with label17;
+    }
+
+    byte[] sign(java.security.Key, org.apache.jcp.xml.dsig.internal.dom.DOMSignedInfo, javax.xml.crypto.dsig.XMLSignContext) throws java.security.InvalidKeyException, javax.xml.crypto.dsig.XMLSignatureException
+    {
+        java.security.Key r0;
+        java.lang.NullPointerException $r1;
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignedInfo r2;
+        boolean $z0, $z1;
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod r3;
+        java.security.Signature $r4, $r6, $r10, $r13, $r15, $r21, $r27, $r54;
+        java.security.PrivateKey $r5;
+        org.slf4j.Logger $r7, $r25, $r32, $r37;
+        javax.xml.crypto.dsig.XMLSignContext r8;
+        org.apache.jcp.xml.dsig.internal.SignerOutputStream $r9;
+        org.apache.jcp.xml.dsig.internal.dom.AbstractDOMSignatureMethod$Type $r11, $r12, r56;
+        byte[] $r14, $r16, $r17, $r22, $r23;
+        java.security.interfaces.DSAKey $r18;
+        java.security.interfaces.DSAParams $r19;
+        java.math.BigInteger $r20;
+        int i0, $i1;
+        java.lang.StringBuilder $r24, $r26, $r29, $r31, $r33, $r34, $r36, $r38, $r40;
+        java.security.Provider $r28, r53;
+        java.lang.String $r30, $r35, $r39, $r41, $r43, $r44, varReplacer575, varReplacer576, varReplacer577, varReplacer578, varReplacer579;
+        java.lang.Object $r42;
+        java.security.InvalidKeyException $r46;
+        java.lang.Throwable $r47, $r49, $r51, r55, r57, r58;
+        javax.xml.crypto.dsig.XMLSignatureException $r48, $r50, $r52;
+
+        nop;
+
+        r3 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod;
+
+        r0 := @parameter0: java.security.Key;
+
+        r2 := @parameter1: org.apache.jcp.xml.dsig.internal.dom.DOMSignedInfo;
+
+        r8 := @parameter2: javax.xml.crypto.dsig.XMLSignContext;
+
+        if r0 == null goto label01;
+
+        if r2 != null goto label02;
+
+     label01:
+        $r1 = new java.lang.NullPointerException;
+
+        specialinvoke $r1.<java.lang.NullPointerException: void <init>()>();
+
+        throw $r1;
+
+     label02:
+        $z0 = r0 instanceof java.security.PrivateKey;
+
+        if $z0 != 0 goto label03;
+
+        $r46 = new java.security.InvalidKeyException;
+
+        varReplacer579 = "key must be PrivateKey";
+
+        specialinvoke $r46.<java.security.InvalidKeyException: void <init>(java.lang.String)>(varReplacer579);
+
+        throw $r46;
+
+     label03:
+        $r4 = r3.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: java.security.Signature signature>;
+
+        if $r4 != null goto label09;
+
+     label04:
+        varReplacer575 = "org.jcp.xml.dsig.internal.dom.SignatureProvider";
+
+        $r42 = interfaceinvoke r8.<javax.xml.crypto.dsig.XMLSignContext: java.lang.Object getProperty(java.lang.String)>(varReplacer575);
+
+        r53 = (java.security.Provider) $r42;
+
+        if r53 != null goto label05;
+
+        $r44 = virtualinvoke r3.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: java.lang.String getJCAAlgorithm()>();
+
+        $r54 = staticinvoke <java.security.Signature: java.security.Signature getInstance(java.lang.String)>($r44);
+
+        goto label06;
+
+     label05:
+        $r43 = virtualinvoke r3.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: java.lang.String getJCAAlgorithm()>();
+
+        $r54 = staticinvoke <java.security.Signature: java.security.Signature getInstance(java.lang.String,java.security.Provider)>($r43, r53);
+
+     label06:
+        r3.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: java.security.Signature signature> = $r54;
+
+     label07:
+        goto label09;
+
+     label08:
+        $r51 := @caughtexception;
+
+        r55 = $r51;
+
+        $r52 = new javax.xml.crypto.dsig.XMLSignatureException;
+
+        specialinvoke $r52.<javax.xml.crypto.dsig.XMLSignatureException: void <init>(java.lang.Throwable)>(r55);
+
+        throw $r52;
+
+     label09:
+        $r6 = r3.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: java.security.Signature signature>;
+
+        $r5 = (java.security.PrivateKey) r0;
+
+        virtualinvoke $r6.<java.security.Signature: void initSign(java.security.PrivateKey)>($r5);
+
+        $r7 = <org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: org.slf4j.Logger log>;
+
+        $z1 = interfaceinvoke $r7.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z1 == 0 goto label10;
+
+        $r25 = <org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: org.slf4j.Logger log>;
+
+        $r24 = new java.lang.StringBuilder;
+
+        specialinvoke $r24.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer576 = "Signature provider:";
+
+        $r26 = virtualinvoke $r24.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer576);
+
+        $r27 = r3.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: java.security.Signature signature>;
+
+        $r28 = virtualinvoke $r27.<java.security.Signature: java.security.Provider getProvider()>();
+
+        $r29 = virtualinvoke $r26.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>($r28);
+
+        $r30 = virtualinvoke $r29.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r25.<org.slf4j.Logger: void debug(java.lang.String)>($r30);
+
+        $r32 = <org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: org.slf4j.Logger log>;
+
+        $r31 = new java.lang.StringBuilder;
+
+        specialinvoke $r31.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer577 = "Signing with key: ";
+
+        $r33 = virtualinvoke $r31.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer577);
+
+        $r34 = virtualinvoke $r33.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(r0);
+
+        $r35 = virtualinvoke $r34.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r32.<org.slf4j.Logger: void debug(java.lang.String)>($r35);
+
+        $r37 = <org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: org.slf4j.Logger log>;
+
+        $r36 = new java.lang.StringBuilder;
+
+        specialinvoke $r36.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer578 = "JCA Algorithm: ";
+
+        $r38 = virtualinvoke $r36.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer578);
+
+        $r39 = virtualinvoke r3.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: java.lang.String getJCAAlgorithm()>();
+
+        $r40 = virtualinvoke $r38.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r39);
+
+        $r41 = virtualinvoke $r40.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r37.<org.slf4j.Logger: void debug(java.lang.String)>($r41);
+
+     label10:
+        $r9 = new org.apache.jcp.xml.dsig.internal.SignerOutputStream;
+
+        $r10 = r3.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: java.security.Signature signature>;
+
+        specialinvoke $r9.<org.apache.jcp.xml.dsig.internal.SignerOutputStream: void <init>(java.security.Signature)>($r10);
+
+        virtualinvoke r2.<org.apache.jcp.xml.dsig.internal.dom.DOMSignedInfo: void canonicalize(javax.xml.crypto.XMLCryptoContext,java.io.ByteArrayOutputStream)>(r8, $r9);
+
+     label11:
+        r56 = virtualinvoke r3.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: org.apache.jcp.xml.dsig.internal.dom.AbstractDOMSignatureMethod$Type getAlgorithmType()>();
+
+        $r11 = <org.apache.jcp.xml.dsig.internal.dom.AbstractDOMSignatureMethod$Type: org.apache.jcp.xml.dsig.internal.dom.AbstractDOMSignatureMethod$Type DSA>;
+
+        if r56 != $r11 goto label13;
+
+        $r18 = (java.security.interfaces.DSAKey) r0;
+
+        $r19 = interfaceinvoke $r18.<java.security.interfaces.DSAKey: java.security.interfaces.DSAParams getParams()>();
+
+        $r20 = interfaceinvoke $r19.<java.security.interfaces.DSAParams: java.math.BigInteger getQ()>();
+
+        i0 = virtualinvoke $r20.<java.math.BigInteger: int bitLength()>();
+
+        $r21 = r3.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: java.security.Signature signature>;
+
+        $r22 = virtualinvoke $r21.<java.security.Signature: byte[] sign()>();
+
+        $i1 = i0 / 8;
+
+        $r23 = staticinvoke <org.apache.xml.security.utils.JavaUtils: byte[] convertDsaASN1toXMLDSIG(byte[],int)>($r22, $i1);
+
+     label12:
+        return $r23;
+
+     label13:
+        $r12 = <org.apache.jcp.xml.dsig.internal.dom.AbstractDOMSignatureMethod$Type: org.apache.jcp.xml.dsig.internal.dom.AbstractDOMSignatureMethod$Type ECDSA>;
+
+        if r56 != $r12 goto label15;
+
+        $r15 = r3.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: java.security.Signature signature>;
+
+        $r16 = virtualinvoke $r15.<java.security.Signature: byte[] sign()>();
+
+        $r17 = staticinvoke <org.apache.xml.security.algorithms.implementations.SignatureECDSA: byte[] convertASN1toXMLDSIG(byte[])>($r16);
+
+     label14:
+        return $r17;
+
+     label15:
+        $r13 = r3.<org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: java.security.Signature signature>;
+
+        $r14 = virtualinvoke $r13.<java.security.Signature: byte[] sign()>();
+
+     label16:
+        return $r14;
+
+     label17:
+        $r49 := @caughtexception;
+
+        r57 = $r49;
+
+        $r50 = new javax.xml.crypto.dsig.XMLSignatureException;
+
+        specialinvoke $r50.<javax.xml.crypto.dsig.XMLSignatureException: void <init>(java.lang.Throwable)>(r57);
+
+        throw $r50;
+
+     label18:
+        $r47 := @caughtexception;
+
+        r58 = $r47;
+
+        $r48 = new javax.xml.crypto.dsig.XMLSignatureException;
+
+        specialinvoke $r48.<javax.xml.crypto.dsig.XMLSignatureException: void <init>(java.lang.Throwable)>(r58);
+
+        throw $r48;
+
+        catch java.security.NoSuchAlgorithmException from label04 to label07 with label08;
+        catch java.security.SignatureException from label11 to label12 with label17;
+        catch java.security.SignatureException from label13 to label14 with label17;
+        catch java.security.SignatureException from label15 to label16 with label17;
+        catch java.io.IOException from label11 to label12 with label18;
+        catch java.io.IOException from label13 to label14 with label18;
+        catch java.io.IOException from label15 to label16 with label18;
+    }
+
+    public volatile int hashCode()
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod r0;
+        int $i0;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod;
+
+        $i0 = specialinvoke r0.<org.apache.jcp.xml.dsig.internal.dom.AbstractDOMSignatureMethod: int hashCode()>();
+
+        return $i0;
+    }
+
+    public volatile boolean equals(java.lang.Object)
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod r0;
+        java.lang.Object r1;
+        boolean $z0;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod;
+
+        r1 := @parameter0: java.lang.Object;
+
+        $z0 = specialinvoke r0.<org.apache.jcp.xml.dsig.internal.dom.AbstractDOMSignatureMethod: boolean equals(java.lang.Object)>(r1);
+
+        return $z0;
+    }
+
+    public volatile void marshal(org.apache.jcp.xml.dsig.internal.dom.XmlWriter, java.lang.String) throws javax.xml.crypto.MarshalException
+    {
+        org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod r0;
+        org.apache.jcp.xml.dsig.internal.dom.XmlWriter r1;
+        java.lang.String r2;
+
+        nop;
+
+        r0 := @this: org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod;
+
+        r1 := @parameter0: org.apache.jcp.xml.dsig.internal.dom.XmlWriter;
+
+        r2 := @parameter1: java.lang.String;
+
+        specialinvoke r0.<org.apache.jcp.xml.dsig.internal.dom.AbstractDOMSignatureMethod: void marshal(org.apache.jcp.xml.dsig.internal.dom.XmlWriter,java.lang.String)>(r1, r2);
+
+        return;
+    }
+
+    static void <clinit>()
+    {
+        org.slf4j.Logger $r0;
+
+        nop;
+
+        $r0 = staticinvoke <org.slf4j.LoggerFactory: org.slf4j.Logger getLogger(java.lang.Class)>(class "Lorg/apache/jcp/xml/dsig/internal/dom/DOMSignatureMethod;");
+
+        <org.apache.jcp.xml.dsig.internal.dom.DOMSignatureMethod: org.slf4j.Logger log> = $r0;
+
+        return;
+    }
+}

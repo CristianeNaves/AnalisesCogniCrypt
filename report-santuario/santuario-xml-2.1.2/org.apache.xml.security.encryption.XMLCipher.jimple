@@ -1,0 +1,4674 @@
+public class org.apache.xml.security.encryption.XMLCipher extends java.lang.Object
+{
+    private static final org.slf4j.Logger LOG;
+    public static final java.lang.String TRIPLEDES;
+    public static final java.lang.String AES_128;
+    public static final java.lang.String AES_256;
+    public static final java.lang.String AES_192;
+    public static final java.lang.String AES_128_GCM;
+    public static final java.lang.String AES_192_GCM;
+    public static final java.lang.String AES_256_GCM;
+    public static final java.lang.String SEED_128;
+    public static final java.lang.String CAMELLIA_128;
+    public static final java.lang.String CAMELLIA_192;
+    public static final java.lang.String CAMELLIA_256;
+    public static final java.lang.String RSA_v1dot5;
+    public static final java.lang.String RSA_OAEP;
+    public static final java.lang.String RSA_OAEP_11;
+    public static final java.lang.String DIFFIE_HELLMAN;
+    public static final java.lang.String TRIPLEDES_KeyWrap;
+    public static final java.lang.String AES_128_KeyWrap;
+    public static final java.lang.String AES_256_KeyWrap;
+    public static final java.lang.String AES_192_KeyWrap;
+    public static final java.lang.String CAMELLIA_128_KeyWrap;
+    public static final java.lang.String CAMELLIA_192_KeyWrap;
+    public static final java.lang.String CAMELLIA_256_KeyWrap;
+    public static final java.lang.String SEED_128_KeyWrap;
+    public static final java.lang.String SHA1;
+    public static final java.lang.String SHA256;
+    public static final java.lang.String SHA512;
+    public static final java.lang.String RIPEMD_160;
+    public static final java.lang.String XML_DSIG;
+    public static final java.lang.String N14C_XML;
+    public static final java.lang.String N14C_XML_WITH_COMMENTS;
+    public static final java.lang.String EXCL_XML_N14C;
+    public static final java.lang.String EXCL_XML_N14C_WITH_COMMENTS;
+    public static final java.lang.String PHYSICAL_XML_N14C;
+    public static final java.lang.String BASE64_ENCODING;
+    public static final int ENCRYPT_MODE;
+    public static final int DECRYPT_MODE;
+    public static final int UNWRAP_MODE;
+    public static final int WRAP_MODE;
+    private static final java.lang.String ENC_ALGORITHMS;
+    private static final boolean HAVE_FUNCTIONAL_IDENTITY_TRANSFORMER;
+    private javax.crypto.Cipher contextCipher;
+    private int cipherMode;
+    private java.lang.String algorithm;
+    private java.lang.String requestedJCEProvider;
+    private org.apache.xml.security.c14n.Canonicalizer canon;
+    private org.w3c.dom.Document contextDocument;
+    private org.apache.xml.security.encryption.XMLCipher$Factory factory;
+    private org.apache.xml.security.encryption.Serializer serializer;
+    private java.security.Key key;
+    private java.security.Key kek;
+    private org.apache.xml.security.encryption.EncryptedKey ek;
+    private org.apache.xml.security.encryption.EncryptedData ed;
+    private boolean secureValidation;
+    private java.lang.String digestAlg;
+    private java.util.List internalKeyResolvers;
+
+    public void setSerializer(org.apache.xml.security.encryption.Serializer)
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        org.apache.xml.security.encryption.Serializer r1;
+        org.apache.xml.security.c14n.Canonicalizer $r2;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: org.apache.xml.security.encryption.Serializer;
+
+        r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.Serializer serializer> = r1;
+
+        $r2 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.c14n.Canonicalizer canon>;
+
+        interfaceinvoke r1.<org.apache.xml.security.encryption.Serializer: void setCanonicalizer(org.apache.xml.security.c14n.Canonicalizer)>($r2);
+
+        return;
+    }
+
+    public org.apache.xml.security.encryption.Serializer getSerializer()
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        org.apache.xml.security.encryption.Serializer $r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        $r1 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.Serializer serializer>;
+
+        return $r1;
+    }
+
+    private void <init>(java.lang.String, java.lang.String, java.lang.String, java.lang.String) throws org.apache.xml.security.encryption.XMLEncryptionException
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        org.slf4j.Logger $r1;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r2;
+        java.lang.String r3, r4, r5, r6, varReplacer2654, varReplacer2655;
+        org.apache.xml.security.c14n.Canonicalizer $r7, $r12, $r17;
+        org.apache.xml.security.encryption.Serializer $r8, $r16;
+        javax.crypto.Cipher $r9;
+        boolean $z0;
+        org.apache.xml.security.encryption.DocumentSerializer $r10;
+        org.apache.xml.security.encryption.TransformSerializer $r11;
+        org.apache.xml.security.c14n.InvalidCanonicalizerException $r13, r14;
+        org.apache.xml.security.encryption.XMLEncryptionException $r15;
+        int varReplacer2653;
+        null_type varReplacer2656;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r3 := @parameter0: java.lang.String;
+
+        r4 := @parameter1: java.lang.String;
+
+        r6 := @parameter2: java.lang.String;
+
+        r5 := @parameter3: java.lang.String;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        varReplacer2653 = -2147483648;
+
+        r0.<org.apache.xml.security.encryption.XMLCipher: int cipherMode> = varReplacer2653;
+
+        $r1 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2655 = "Constructing XMLCipher...";
+
+        interfaceinvoke $r1.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2655);
+
+        $r2 = new org.apache.xml.security.encryption.XMLCipher$Factory;
+
+        varReplacer2656 = null;
+
+        specialinvoke $r2.<org.apache.xml.security.encryption.XMLCipher$Factory: void <init>(org.apache.xml.security.encryption.XMLCipher,org.apache.xml.security.encryption.XMLCipher$1)>(r0, varReplacer2656);
+
+        r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory> = $r2;
+
+        r0.<org.apache.xml.security.encryption.XMLCipher: java.lang.String algorithm> = r3;
+
+        r0.<org.apache.xml.security.encryption.XMLCipher: java.lang.String requestedJCEProvider> = r4;
+
+        r0.<org.apache.xml.security.encryption.XMLCipher: java.lang.String digestAlg> = r5;
+
+     label1:
+        if r6 != null goto label2;
+
+        varReplacer2654 = "http://santuario.apache.org/c14n/physical";
+
+        $r12 = staticinvoke <org.apache.xml.security.c14n.Canonicalizer: org.apache.xml.security.c14n.Canonicalizer getInstance(java.lang.String)>(varReplacer2654);
+
+        r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.c14n.Canonicalizer canon> = $r12;
+
+        goto label3;
+
+     label2:
+        $r7 = staticinvoke <org.apache.xml.security.c14n.Canonicalizer: org.apache.xml.security.c14n.Canonicalizer getInstance(java.lang.String)>(r6);
+
+        r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.c14n.Canonicalizer canon> = $r7;
+
+     label3:
+        goto label5;
+
+     label4:
+        $r13 := @caughtexception;
+
+        r14 = $r13;
+
+        $r15 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        specialinvoke $r15.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>(r14);
+
+        throw $r15;
+
+     label5:
+        $r8 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.Serializer serializer>;
+
+        if $r8 != null goto label7;
+
+        $z0 = <org.apache.xml.security.encryption.XMLCipher: boolean HAVE_FUNCTIONAL_IDENTITY_TRANSFORMER>;
+
+        if $z0 == 0 goto label6;
+
+        $r11 = new org.apache.xml.security.encryption.TransformSerializer;
+
+        specialinvoke $r11.<org.apache.xml.security.encryption.TransformSerializer: void <init>()>();
+
+        r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.Serializer serializer> = $r11;
+
+        goto label7;
+
+     label6:
+        $r10 = new org.apache.xml.security.encryption.DocumentSerializer;
+
+        specialinvoke $r10.<org.apache.xml.security.encryption.DocumentSerializer: void <init>()>();
+
+        r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.Serializer serializer> = $r10;
+
+     label7:
+        $r16 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.Serializer serializer>;
+
+        $r17 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.c14n.Canonicalizer canon>;
+
+        interfaceinvoke $r16.<org.apache.xml.security.encryption.Serializer: void setCanonicalizer(org.apache.xml.security.c14n.Canonicalizer)>($r17);
+
+        if r3 == null goto label8;
+
+        $r9 = specialinvoke r0.<org.apache.xml.security.encryption.XMLCipher: javax.crypto.Cipher constructCipher(java.lang.String,java.lang.String)>(r3, r5);
+
+        r0.<org.apache.xml.security.encryption.XMLCipher: javax.crypto.Cipher contextCipher> = $r9;
+
+     label8:
+        return;
+
+        catch org.apache.xml.security.c14n.InvalidCanonicalizerException from label1 to label3 with label4;
+    }
+
+    private static boolean isValidEncryptionAlgorithm(java.lang.String)
+    {
+        java.lang.String r0, varReplacer2657, varReplacer2658, varReplacer2659, varReplacer2660, varReplacer2661, varReplacer2662, varReplacer2663, varReplacer2664, varReplacer2665, varReplacer2666, varReplacer2667, varReplacer2668, varReplacer2669, varReplacer2670, varReplacer2671, varReplacer2672, varReplacer2673, varReplacer2674, varReplacer2675, varReplacer2676, varReplacer2677, varReplacer2678;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, $z6, $z7, $z8, $z9, $z10, $z11, $z12, $z13, $z14, $z15, $z16, $z17, $z18, $z19, $z20, $z21, $z22;
+
+        nop;
+
+        r0 := @parameter0: java.lang.String;
+
+        varReplacer2669 = "http://www.w3.org/2001/04/xmlenc#tripledes-cbc";
+
+        $z0 = virtualinvoke r0.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2669);
+
+        if $z0 != 0 goto label1;
+
+        varReplacer2675 = "http://www.w3.org/2001/04/xmlenc#aes128-cbc";
+
+        $z1 = virtualinvoke r0.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2675);
+
+        if $z1 != 0 goto label1;
+
+        varReplacer2677 = "http://www.w3.org/2001/04/xmlenc#aes256-cbc";
+
+        $z2 = virtualinvoke r0.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2677);
+
+        if $z2 != 0 goto label1;
+
+        varReplacer2671 = "http://www.w3.org/2001/04/xmlenc#aes192-cbc";
+
+        $z3 = virtualinvoke r0.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2671);
+
+        if $z3 != 0 goto label1;
+
+        varReplacer2665 = "http://www.w3.org/2009/xmlenc11#aes128-gcm";
+
+        $z4 = virtualinvoke r0.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2665);
+
+        if $z4 != 0 goto label1;
+
+        varReplacer2657 = "http://www.w3.org/2009/xmlenc11#aes192-gcm";
+
+        $z5 = virtualinvoke r0.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2657);
+
+        if $z5 != 0 goto label1;
+
+        varReplacer2659 = "http://www.w3.org/2009/xmlenc11#aes256-gcm";
+
+        $z6 = virtualinvoke r0.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2659);
+
+        if $z6 != 0 goto label1;
+
+        varReplacer2660 = "http://www.w3.org/2007/05/xmldsig-more#seed128-cbc";
+
+        $z7 = virtualinvoke r0.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2660);
+
+        if $z7 != 0 goto label1;
+
+        varReplacer2666 = "http://www.w3.org/2001/04/xmldsig-more#camellia128-cbc";
+
+        $z8 = virtualinvoke r0.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2666);
+
+        if $z8 != 0 goto label1;
+
+        varReplacer2678 = "http://www.w3.org/2001/04/xmldsig-more#camellia192-cbc";
+
+        $z9 = virtualinvoke r0.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2678);
+
+        if $z9 != 0 goto label1;
+
+        varReplacer2670 = "http://www.w3.org/2001/04/xmldsig-more#camellia256-cbc";
+
+        $z10 = virtualinvoke r0.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2670);
+
+        if $z10 != 0 goto label1;
+
+        varReplacer2673 = "http://www.w3.org/2001/04/xmlenc#rsa-1_5";
+
+        $z11 = virtualinvoke r0.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2673);
+
+        if $z11 != 0 goto label1;
+
+        varReplacer2667 = "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p";
+
+        $z12 = virtualinvoke r0.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2667);
+
+        if $z12 != 0 goto label1;
+
+        varReplacer2658 = "http://www.w3.org/2009/xmlenc11#rsa-oaep";
+
+        $z13 = virtualinvoke r0.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2658);
+
+        if $z13 != 0 goto label1;
+
+        varReplacer2674 = "http://www.w3.org/2001/04/xmlenc#kw-tripledes";
+
+        $z14 = virtualinvoke r0.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2674);
+
+        if $z14 != 0 goto label1;
+
+        varReplacer2676 = "http://www.w3.org/2001/04/xmlenc#kw-aes128";
+
+        $z15 = virtualinvoke r0.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2676);
+
+        if $z15 != 0 goto label1;
+
+        varReplacer2661 = "http://www.w3.org/2001/04/xmlenc#kw-aes256";
+
+        $z16 = virtualinvoke r0.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2661);
+
+        if $z16 != 0 goto label1;
+
+        varReplacer2662 = "http://www.w3.org/2001/04/xmlenc#kw-aes192";
+
+        $z17 = virtualinvoke r0.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2662);
+
+        if $z17 != 0 goto label1;
+
+        varReplacer2672 = "http://www.w3.org/2001/04/xmldsig-more#kw-camellia128";
+
+        $z18 = virtualinvoke r0.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2672);
+
+        if $z18 != 0 goto label1;
+
+        varReplacer2668 = "http://www.w3.org/2001/04/xmldsig-more#kw-camellia192";
+
+        $z19 = virtualinvoke r0.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2668);
+
+        if $z19 != 0 goto label1;
+
+        varReplacer2664 = "http://www.w3.org/2001/04/xmldsig-more#kw-camellia256";
+
+        $z20 = virtualinvoke r0.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2664);
+
+        if $z20 != 0 goto label1;
+
+        varReplacer2663 = "http://www.w3.org/2007/05/xmldsig-more#kw-seed128";
+
+        $z21 = virtualinvoke r0.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2663);
+
+        if $z21 == 0 goto label2;
+
+     label1:
+        $z22 = 1;
+
+        goto label3;
+
+     label2:
+        $z22 = 0;
+
+     label3:
+        return $z22;
+    }
+
+    private static void validateTransformation(java.lang.String)
+    {
+        java.lang.String r0, varReplacer2679, varReplacer2680;
+        boolean $z0;
+        org.slf4j.Logger $r1;
+        java.lang.NullPointerException $r2;
+
+        nop;
+
+        r0 := @parameter0: java.lang.String;
+
+        if null != r0 goto label1;
+
+        $r2 = new java.lang.NullPointerException;
+
+        varReplacer2680 = "Transformation unexpectedly null...";
+
+        specialinvoke $r2.<java.lang.NullPointerException: void <init>(java.lang.String)>(varReplacer2680);
+
+        throw $r2;
+
+     label1:
+        $z0 = staticinvoke <org.apache.xml.security.encryption.XMLCipher: boolean isValidEncryptionAlgorithm(java.lang.String)>(r0);
+
+        if $z0 != 0 goto label2;
+
+        $r1 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2679 = "Algorithm non-standard, expected one of http://www.w3.org/2001/04/xmlenc#tripledes-cbc\nhttp://www.w3.org/2001/04/xmlenc#aes128-cbc\nhttp://www.w3.org/2001/04/xmlenc#aes256-cbc\nhttp://www.w3.org/2001/04/xmlenc#aes192-cbc\nhttp://www.w3.org/2001/04/xmlenc#rsa-1_5\nhttp://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p\nhttp://www.w3.org/2009/xmlenc11#rsa-oaep\nhttp://www.w3.org/2001/04/xmlenc#kw-tripledes\nhttp://www.w3.org/2001/04/xmlenc#kw-aes128\nhttp://www.w3.org/2001/04/xmlenc#kw-aes256\nhttp://www.w3.org/2001/04/xmlenc#kw-aes192\nhttp://www.w3.org/2009/xmlenc11#aes128-gcm\nhttp://www.w3.org/2009/xmlenc11#aes192-gcm\nhttp://www.w3.org/2009/xmlenc11#aes256-gcm\nhttp://www.w3.org/2007/05/xmldsig-more#seed128-cbc\nhttp://www.w3.org/2001/04/xmldsig-more#camellia128-cbc\nhttp://www.w3.org/2001/04/xmldsig-more#camellia192-cbc\nhttp://www.w3.org/2001/04/xmldsig-more#camellia256-cbc\nhttp://www.w3.org/2001/04/xmldsig-more#kw-camellia128\nhttp://www.w3.org/2001/04/xmldsig-more#kw-camellia192\nhttp://www.w3.org/2001/04/xmldsig-more#kw-camellia256\nhttp://www.w3.org/2007/05/xmldsig-more#kw-seed128\n";
+
+        interfaceinvoke $r1.<org.slf4j.Logger: void warn(java.lang.String)>(varReplacer2679);
+
+     label2:
+        return;
+    }
+
+    public static org.apache.xml.security.encryption.XMLCipher getInstance(java.lang.String) throws org.apache.xml.security.encryption.XMLEncryptionException
+    {
+        org.slf4j.Logger $r0;
+        java.lang.String r1, varReplacer2681;
+        org.apache.xml.security.encryption.XMLCipher $r2;
+        null_type varReplacer2682, varReplacer2683, varReplacer2684;
+
+        nop;
+
+        r1 := @parameter0: java.lang.String;
+
+        $r0 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2681 = "Getting XMLCipher with transformation";
+
+        interfaceinvoke $r0.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2681);
+
+        staticinvoke <org.apache.xml.security.encryption.XMLCipher: void validateTransformation(java.lang.String)>(r1);
+
+        $r2 = new org.apache.xml.security.encryption.XMLCipher;
+
+        varReplacer2682 = null;
+
+        varReplacer2683 = null;
+
+        varReplacer2684 = null;
+
+        specialinvoke $r2.<org.apache.xml.security.encryption.XMLCipher: void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>(r1, varReplacer2682, varReplacer2682, varReplacer2682);
+
+        return $r2;
+    }
+
+    public static org.apache.xml.security.encryption.XMLCipher getInstance(java.lang.String, java.lang.String) throws org.apache.xml.security.encryption.XMLEncryptionException
+    {
+        org.slf4j.Logger $r0;
+        java.lang.String r1, r3, varReplacer2685;
+        org.apache.xml.security.encryption.XMLCipher $r2;
+        null_type varReplacer2686, varReplacer2687;
+
+        nop;
+
+        r1 := @parameter0: java.lang.String;
+
+        r3 := @parameter1: java.lang.String;
+
+        $r0 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2685 = "Getting XMLCipher with transformation and c14n algorithm";
+
+        interfaceinvoke $r0.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2685);
+
+        staticinvoke <org.apache.xml.security.encryption.XMLCipher: void validateTransformation(java.lang.String)>(r1);
+
+        $r2 = new org.apache.xml.security.encryption.XMLCipher;
+
+        varReplacer2686 = null;
+
+        varReplacer2687 = null;
+
+        specialinvoke $r2.<org.apache.xml.security.encryption.XMLCipher: void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>(r1, varReplacer2686, r3, varReplacer2686);
+
+        return $r2;
+    }
+
+    public static org.apache.xml.security.encryption.XMLCipher getInstance(java.lang.String, java.lang.String, java.lang.String) throws org.apache.xml.security.encryption.XMLEncryptionException
+    {
+        org.slf4j.Logger $r0;
+        java.lang.String r1, r3, r4, varReplacer2689;
+        org.apache.xml.security.encryption.XMLCipher $r2;
+        null_type varReplacer2688;
+
+        nop;
+
+        r1 := @parameter0: java.lang.String;
+
+        r3 := @parameter1: java.lang.String;
+
+        r4 := @parameter2: java.lang.String;
+
+        $r0 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2689 = "Getting XMLCipher with transformation and c14n algorithm";
+
+        interfaceinvoke $r0.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2689);
+
+        staticinvoke <org.apache.xml.security.encryption.XMLCipher: void validateTransformation(java.lang.String)>(r1);
+
+        $r2 = new org.apache.xml.security.encryption.XMLCipher;
+
+        varReplacer2688 = null;
+
+        specialinvoke $r2.<org.apache.xml.security.encryption.XMLCipher: void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>(r1, varReplacer2688, r3, r4);
+
+        return $r2;
+    }
+
+    public static org.apache.xml.security.encryption.XMLCipher getProviderInstance(java.lang.String, java.lang.String) throws org.apache.xml.security.encryption.XMLEncryptionException
+    {
+        org.slf4j.Logger $r0;
+        java.lang.String r1, r2, varReplacer2692, varReplacer2693;
+        org.apache.xml.security.encryption.XMLCipher $r3;
+        java.lang.NullPointerException $r4;
+        null_type varReplacer2690, varReplacer2691;
+
+        nop;
+
+        r2 := @parameter0: java.lang.String;
+
+        r1 := @parameter1: java.lang.String;
+
+        $r0 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2692 = "Getting XMLCipher with transformation and provider";
+
+        interfaceinvoke $r0.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2692);
+
+        if null != r1 goto label1;
+
+        $r4 = new java.lang.NullPointerException;
+
+        varReplacer2693 = "Provider unexpectedly null..";
+
+        specialinvoke $r4.<java.lang.NullPointerException: void <init>(java.lang.String)>(varReplacer2693);
+
+        throw $r4;
+
+     label1:
+        staticinvoke <org.apache.xml.security.encryption.XMLCipher: void validateTransformation(java.lang.String)>(r2);
+
+        $r3 = new org.apache.xml.security.encryption.XMLCipher;
+
+        varReplacer2690 = null;
+
+        varReplacer2691 = null;
+
+        specialinvoke $r3.<org.apache.xml.security.encryption.XMLCipher: void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>(r2, r1, varReplacer2690, varReplacer2690);
+
+        return $r3;
+    }
+
+    public static org.apache.xml.security.encryption.XMLCipher getProviderInstance(java.lang.String, java.lang.String, java.lang.String) throws org.apache.xml.security.encryption.XMLEncryptionException
+    {
+        org.slf4j.Logger $r0;
+        java.lang.String r1, r2, r4, varReplacer2694, varReplacer2696;
+        org.apache.xml.security.encryption.XMLCipher $r3;
+        java.lang.NullPointerException $r5;
+        null_type varReplacer2695;
+
+        nop;
+
+        r2 := @parameter0: java.lang.String;
+
+        r1 := @parameter1: java.lang.String;
+
+        r4 := @parameter2: java.lang.String;
+
+        $r0 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2696 = "Getting XMLCipher with transformation, provider and c14n algorithm";
+
+        interfaceinvoke $r0.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2696);
+
+        if null != r1 goto label1;
+
+        $r5 = new java.lang.NullPointerException;
+
+        varReplacer2694 = "Provider unexpectedly null..";
+
+        specialinvoke $r5.<java.lang.NullPointerException: void <init>(java.lang.String)>(varReplacer2694);
+
+        throw $r5;
+
+     label1:
+        staticinvoke <org.apache.xml.security.encryption.XMLCipher: void validateTransformation(java.lang.String)>(r2);
+
+        $r3 = new org.apache.xml.security.encryption.XMLCipher;
+
+        varReplacer2695 = null;
+
+        specialinvoke $r3.<org.apache.xml.security.encryption.XMLCipher: void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>(r2, r1, r4, varReplacer2695);
+
+        return $r3;
+    }
+
+    public static org.apache.xml.security.encryption.XMLCipher getProviderInstance(java.lang.String, java.lang.String, java.lang.String, java.lang.String) throws org.apache.xml.security.encryption.XMLEncryptionException
+    {
+        org.slf4j.Logger $r0;
+        java.lang.String r1, r2, r4, r5, varReplacer2697, varReplacer2698;
+        org.apache.xml.security.encryption.XMLCipher $r3;
+        java.lang.NullPointerException $r6;
+
+        nop;
+
+        r2 := @parameter0: java.lang.String;
+
+        r1 := @parameter1: java.lang.String;
+
+        r4 := @parameter2: java.lang.String;
+
+        r5 := @parameter3: java.lang.String;
+
+        $r0 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2698 = "Getting XMLCipher with transformation, provider and c14n algorithm";
+
+        interfaceinvoke $r0.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2698);
+
+        if null != r1 goto label1;
+
+        $r6 = new java.lang.NullPointerException;
+
+        varReplacer2697 = "Provider unexpectedly null..";
+
+        specialinvoke $r6.<java.lang.NullPointerException: void <init>(java.lang.String)>(varReplacer2697);
+
+        throw $r6;
+
+     label1:
+        staticinvoke <org.apache.xml.security.encryption.XMLCipher: void validateTransformation(java.lang.String)>(r2);
+
+        $r3 = new org.apache.xml.security.encryption.XMLCipher;
+
+        specialinvoke $r3.<org.apache.xml.security.encryption.XMLCipher: void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>(r2, r1, r4, r5);
+
+        return $r3;
+    }
+
+    public static org.apache.xml.security.encryption.XMLCipher getInstance() throws org.apache.xml.security.encryption.XMLEncryptionException
+    {
+        org.slf4j.Logger $r0;
+        org.apache.xml.security.encryption.XMLCipher $r1;
+        null_type varReplacer2699, varReplacer2700, varReplacer2701, varReplacer2702;
+        java.lang.String varReplacer2703;
+
+        nop;
+
+        $r0 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2703 = "Getting XMLCipher with no arguments";
+
+        interfaceinvoke $r0.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2703);
+
+        $r1 = new org.apache.xml.security.encryption.XMLCipher;
+
+        varReplacer2699 = null;
+
+        varReplacer2700 = null;
+
+        varReplacer2701 = null;
+
+        varReplacer2702 = null;
+
+        specialinvoke $r1.<org.apache.xml.security.encryption.XMLCipher: void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>(varReplacer2699, varReplacer2699, varReplacer2699, varReplacer2699);
+
+        return $r1;
+    }
+
+    public static org.apache.xml.security.encryption.XMLCipher getProviderInstance(java.lang.String) throws org.apache.xml.security.encryption.XMLEncryptionException
+    {
+        org.slf4j.Logger $r0;
+        org.apache.xml.security.encryption.XMLCipher $r1;
+        java.lang.String r2, varReplacer2707;
+        null_type varReplacer2704, varReplacer2705, varReplacer2706;
+
+        nop;
+
+        r2 := @parameter0: java.lang.String;
+
+        $r0 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2707 = "Getting XMLCipher with provider";
+
+        interfaceinvoke $r0.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2707);
+
+        $r1 = new org.apache.xml.security.encryption.XMLCipher;
+
+        varReplacer2704 = null;
+
+        varReplacer2705 = null;
+
+        varReplacer2706 = null;
+
+        specialinvoke $r1.<org.apache.xml.security.encryption.XMLCipher: void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.String)>(varReplacer2704, r2, varReplacer2704, varReplacer2704);
+
+        return $r1;
+    }
+
+    public void init(int, java.security.Key) throws org.apache.xml.security.encryption.XMLEncryptionException
+    {
+        org.slf4j.Logger $r0, $r2, $r4, $r6, $r7, $r9;
+        org.apache.xml.security.encryption.XMLCipher r1;
+        int i0, varReplacer2709, varReplacer2719;
+        java.security.Key r3;
+        org.apache.xml.security.encryption.EncryptedKey $r5;
+        org.apache.xml.security.encryption.EncryptedData $r8;
+        org.apache.xml.security.encryption.XMLEncryptionException $r10;
+        java.lang.String varReplacer2708, varReplacer2710, varReplacer2711, varReplacer2713, varReplacer2715, varReplacer2716, varReplacer2717, varReplacer2718, varReplacer2720;
+        null_type varReplacer2712, varReplacer2714;
+
+        nop;
+
+        r1 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        i0 := @parameter0: int;
+
+        r3 := @parameter1: java.security.Key;
+
+        $r0 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2708 = "Initializing XMLCipher...";
+
+        interfaceinvoke $r0.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2708);
+
+        varReplacer2712 = null;
+
+        r1.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedKey ek> = varReplacer2712;
+
+        varReplacer2714 = null;
+
+        r1.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedData ed> = varReplacer2714;
+
+        tableswitch(i0)
+        {
+            case 1: goto label1;
+            case 2: goto label2;
+            case 3: goto label3;
+            case 4: goto label4;
+            default: goto label5;
+        };
+
+     label1:
+        $r7 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2715 = "opmode = ENCRYPT_MODE";
+
+        interfaceinvoke $r7.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2715);
+
+        varReplacer2709 = 1;
+
+        varReplacer2710 = "NO VALUE YET";
+
+        $r8 = virtualinvoke r1.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedData createEncryptedData(int,java.lang.String)>(varReplacer2709, varReplacer2710);
+
+        r1.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedData ed> = $r8;
+
+        goto label6;
+
+     label2:
+        $r6 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2718 = "opmode = DECRYPT_MODE";
+
+        interfaceinvoke $r6.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2718);
+
+        goto label6;
+
+     label3:
+        $r4 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2713 = "opmode = WRAP_MODE";
+
+        interfaceinvoke $r4.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2713);
+
+        varReplacer2719 = 1;
+
+        varReplacer2720 = "NO VALUE YET";
+
+        $r5 = virtualinvoke r1.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedKey createEncryptedKey(int,java.lang.String)>(varReplacer2719, varReplacer2720);
+
+        r1.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedKey ek> = $r5;
+
+        goto label6;
+
+     label4:
+        $r2 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2716 = "opmode = UNWRAP_MODE";
+
+        interfaceinvoke $r2.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2716);
+
+        goto label6;
+
+     label5:
+        $r9 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2717 = "Mode unexpectedly invalid";
+
+        interfaceinvoke $r9.<org.slf4j.Logger: void error(java.lang.String)>(varReplacer2717);
+
+        $r10 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        varReplacer2711 = "Invalid mode in init";
+
+        specialinvoke $r10.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String)>(varReplacer2711);
+
+        throw $r10;
+
+     label6:
+        r1.<org.apache.xml.security.encryption.XMLCipher: int cipherMode> = i0;
+
+        r1.<org.apache.xml.security.encryption.XMLCipher: java.security.Key key> = r3;
+
+        return;
+    }
+
+    public void setSecureValidation(boolean)
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        boolean z0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        z0 := @parameter0: boolean;
+
+        r0.<org.apache.xml.security.encryption.XMLCipher: boolean secureValidation> = z0;
+
+        return;
+    }
+
+    public void registerInternalKeyResolver(org.apache.xml.security.keys.keyresolver.KeyResolverSpi)
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        java.util.List $r1, $r3;
+        org.apache.xml.security.keys.keyresolver.KeyResolverSpi r2;
+        java.util.ArrayList $r4;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r2 := @parameter0: org.apache.xml.security.keys.keyresolver.KeyResolverSpi;
+
+        $r1 = r0.<org.apache.xml.security.encryption.XMLCipher: java.util.List internalKeyResolvers>;
+
+        if $r1 != null goto label1;
+
+        $r4 = new java.util.ArrayList;
+
+        specialinvoke $r4.<java.util.ArrayList: void <init>()>();
+
+        r0.<org.apache.xml.security.encryption.XMLCipher: java.util.List internalKeyResolvers> = $r4;
+
+     label1:
+        $r3 = r0.<org.apache.xml.security.encryption.XMLCipher: java.util.List internalKeyResolvers>;
+
+        interfaceinvoke $r3.<java.util.List: boolean add(java.lang.Object)>(r2);
+
+        return;
+    }
+
+    public org.apache.xml.security.encryption.EncryptedData getEncryptedData()
+    {
+        org.slf4j.Logger $r0;
+        org.apache.xml.security.encryption.XMLCipher r1;
+        org.apache.xml.security.encryption.EncryptedData $r2;
+        java.lang.String varReplacer2721;
+
+        nop;
+
+        r1 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        $r0 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2721 = "Returning EncryptedData";
+
+        interfaceinvoke $r0.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2721);
+
+        $r2 = r1.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedData ed>;
+
+        return $r2;
+    }
+
+    public org.apache.xml.security.encryption.EncryptedKey getEncryptedKey()
+    {
+        org.slf4j.Logger $r0;
+        org.apache.xml.security.encryption.XMLCipher r1;
+        org.apache.xml.security.encryption.EncryptedKey $r2;
+        java.lang.String varReplacer2722;
+
+        nop;
+
+        r1 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        $r0 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2722 = "Returning EncryptedKey";
+
+        interfaceinvoke $r0.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2722);
+
+        $r2 = r1.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedKey ek>;
+
+        return $r2;
+    }
+
+    public void setKEK(java.security.Key)
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        java.security.Key r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: java.security.Key;
+
+        r0.<org.apache.xml.security.encryption.XMLCipher: java.security.Key kek> = r1;
+
+        return;
+    }
+
+    public org.w3c.dom.Element martial(org.apache.xml.security.encryption.EncryptedData)
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        org.apache.xml.security.encryption.EncryptedData r1;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r2;
+        org.w3c.dom.Element $r3;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: org.apache.xml.security.encryption.EncryptedData;
+
+        $r2 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        $r3 = virtualinvoke $r2.<org.apache.xml.security.encryption.XMLCipher$Factory: org.w3c.dom.Element toElement(org.apache.xml.security.encryption.EncryptedData)>(r1);
+
+        return $r3;
+    }
+
+    public org.w3c.dom.Element martial(org.w3c.dom.Document, org.apache.xml.security.encryption.EncryptedData)
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        org.w3c.dom.Document r1;
+        org.apache.xml.security.encryption.EncryptedData r2;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r3;
+        org.w3c.dom.Element $r4;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: org.w3c.dom.Document;
+
+        r2 := @parameter1: org.apache.xml.security.encryption.EncryptedData;
+
+        r0.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document contextDocument> = r1;
+
+        $r3 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        $r4 = virtualinvoke $r3.<org.apache.xml.security.encryption.XMLCipher$Factory: org.w3c.dom.Element toElement(org.apache.xml.security.encryption.EncryptedData)>(r2);
+
+        return $r4;
+    }
+
+    public org.w3c.dom.Element martial(org.apache.xml.security.encryption.EncryptedKey)
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        org.apache.xml.security.encryption.EncryptedKey r1;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r2;
+        org.w3c.dom.Element $r3;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: org.apache.xml.security.encryption.EncryptedKey;
+
+        $r2 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        $r3 = virtualinvoke $r2.<org.apache.xml.security.encryption.XMLCipher$Factory: org.w3c.dom.Element toElement(org.apache.xml.security.encryption.EncryptedKey)>(r1);
+
+        return $r3;
+    }
+
+    public org.w3c.dom.Element martial(org.w3c.dom.Document, org.apache.xml.security.encryption.EncryptedKey)
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        org.w3c.dom.Document r1;
+        org.apache.xml.security.encryption.EncryptedKey r2;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r3;
+        org.w3c.dom.Element $r4;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: org.w3c.dom.Document;
+
+        r2 := @parameter1: org.apache.xml.security.encryption.EncryptedKey;
+
+        r0.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document contextDocument> = r1;
+
+        $r3 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        $r4 = virtualinvoke $r3.<org.apache.xml.security.encryption.XMLCipher$Factory: org.w3c.dom.Element toElement(org.apache.xml.security.encryption.EncryptedKey)>(r2);
+
+        return $r4;
+    }
+
+    public org.w3c.dom.Element martial(org.apache.xml.security.encryption.ReferenceList)
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        org.apache.xml.security.encryption.ReferenceList r1;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r2;
+        org.w3c.dom.Element $r3;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: org.apache.xml.security.encryption.ReferenceList;
+
+        $r2 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        $r3 = virtualinvoke $r2.<org.apache.xml.security.encryption.XMLCipher$Factory: org.w3c.dom.Element toElement(org.apache.xml.security.encryption.ReferenceList)>(r1);
+
+        return $r3;
+    }
+
+    public org.w3c.dom.Element martial(org.w3c.dom.Document, org.apache.xml.security.encryption.ReferenceList)
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        org.w3c.dom.Document r1;
+        org.apache.xml.security.encryption.ReferenceList r2;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r3;
+        org.w3c.dom.Element $r4;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: org.w3c.dom.Document;
+
+        r2 := @parameter1: org.apache.xml.security.encryption.ReferenceList;
+
+        r0.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document contextDocument> = r1;
+
+        $r3 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        $r4 = virtualinvoke $r3.<org.apache.xml.security.encryption.XMLCipher$Factory: org.w3c.dom.Element toElement(org.apache.xml.security.encryption.ReferenceList)>(r2);
+
+        return $r4;
+    }
+
+    private org.w3c.dom.Document encryptElement(org.w3c.dom.Element) throws java.lang.Exception
+    {
+        org.slf4j.Logger $r0;
+        org.w3c.dom.Element r1, r8;
+        org.apache.xml.security.encryption.XMLCipher r2;
+        int $i0, varReplacer2725;
+        java.lang.String $r3, varReplacer2723, varReplacer2724, varReplacer2726, varReplacer2727;
+        org.w3c.dom.Document $r4, $r11;
+        org.apache.xml.security.encryption.EncryptedData $r6;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r7;
+        org.w3c.dom.Node r9;
+        org.apache.xml.security.encryption.XMLEncryptionException $r12, $r14, $r16;
+        java.lang.Object[] $r13, $r15, $r17;
+
+        nop;
+
+        r2 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: org.w3c.dom.Element;
+
+        $r0 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2726 = "Encrypting element...";
+
+        interfaceinvoke $r0.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2726);
+
+        if null != r1 goto label1;
+
+        $r16 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r17 = newarray (java.lang.Object)[1];
+
+        $r17[0] = "Element unexpectedly null...";
+
+        varReplacer2724 = "empty";
+
+        specialinvoke $r16.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2724, $r17);
+
+        throw $r16;
+
+     label1:
+        $i0 = r2.<org.apache.xml.security.encryption.XMLCipher: int cipherMode>;
+
+        if $i0 == 1 goto label2;
+
+        $r14 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r15 = newarray (java.lang.Object)[1];
+
+        $r15[0] = "XMLCipher unexpectedly not in ENCRYPT_MODE...";
+
+        varReplacer2727 = "empty";
+
+        specialinvoke $r14.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2727, $r15);
+
+        throw $r14;
+
+     label2:
+        $r3 = r2.<org.apache.xml.security.encryption.XMLCipher: java.lang.String algorithm>;
+
+        if $r3 != null goto label3;
+
+        $r12 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r13 = newarray (java.lang.Object)[1];
+
+        $r13[0] = "XMLCipher instance without transformation specified";
+
+        varReplacer2723 = "empty";
+
+        specialinvoke $r12.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2723, $r13);
+
+        throw $r12;
+
+     label3:
+        $r4 = r2.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document contextDocument>;
+
+        varReplacer2725 = 0;
+
+        virtualinvoke r2.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedData encryptData(org.w3c.dom.Document,org.w3c.dom.Element,boolean)>($r4, r1, varReplacer2725);
+
+        $r7 = r2.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        $r6 = r2.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedData ed>;
+
+        r8 = virtualinvoke $r7.<org.apache.xml.security.encryption.XMLCipher$Factory: org.w3c.dom.Element toElement(org.apache.xml.security.encryption.EncryptedData)>($r6);
+
+        r9 = interfaceinvoke r1.<org.w3c.dom.Element: org.w3c.dom.Node getParentNode()>();
+
+        interfaceinvoke r9.<org.w3c.dom.Node: org.w3c.dom.Node replaceChild(org.w3c.dom.Node,org.w3c.dom.Node)>(r8, r1);
+
+        $r11 = r2.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document contextDocument>;
+
+        return $r11;
+    }
+
+    private org.w3c.dom.Document encryptElementContent(org.w3c.dom.Element) throws java.lang.Exception
+    {
+        org.slf4j.Logger $r0;
+        org.w3c.dom.Element r1, r8;
+        org.apache.xml.security.encryption.XMLCipher r2;
+        int $i0, varReplacer2729;
+        java.lang.String $r3, varReplacer2728, varReplacer2730, varReplacer2731, varReplacer2732;
+        org.w3c.dom.Document $r4, $r10;
+        org.apache.xml.security.encryption.EncryptedData $r6;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r7;
+        org.apache.xml.security.encryption.XMLEncryptionException $r11, $r13, $r15;
+        java.lang.Object[] $r12, $r14, $r16;
+
+        nop;
+
+        r2 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: org.w3c.dom.Element;
+
+        $r0 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2731 = "Encrypting element content...";
+
+        interfaceinvoke $r0.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2731);
+
+        if null != r1 goto label1;
+
+        $r15 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r16 = newarray (java.lang.Object)[1];
+
+        $r16[0] = "Element unexpectedly null...";
+
+        varReplacer2728 = "empty";
+
+        specialinvoke $r15.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2728, $r16);
+
+        throw $r15;
+
+     label1:
+        $i0 = r2.<org.apache.xml.security.encryption.XMLCipher: int cipherMode>;
+
+        if $i0 == 1 goto label2;
+
+        $r13 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r14 = newarray (java.lang.Object)[1];
+
+        $r14[0] = "XMLCipher unexpectedly not in ENCRYPT_MODE...";
+
+        varReplacer2730 = "empty";
+
+        specialinvoke $r13.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2730, $r14);
+
+        throw $r13;
+
+     label2:
+        $r3 = r2.<org.apache.xml.security.encryption.XMLCipher: java.lang.String algorithm>;
+
+        if $r3 != null goto label3;
+
+        $r11 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r12 = newarray (java.lang.Object)[1];
+
+        $r12[0] = "XMLCipher instance without transformation specified";
+
+        varReplacer2732 = "empty";
+
+        specialinvoke $r11.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2732, $r12);
+
+        throw $r11;
+
+     label3:
+        $r4 = r2.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document contextDocument>;
+
+        varReplacer2729 = 1;
+
+        virtualinvoke r2.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedData encryptData(org.w3c.dom.Document,org.w3c.dom.Element,boolean)>($r4, r1, varReplacer2729);
+
+        $r7 = r2.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        $r6 = r2.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedData ed>;
+
+        r8 = virtualinvoke $r7.<org.apache.xml.security.encryption.XMLCipher$Factory: org.w3c.dom.Element toElement(org.apache.xml.security.encryption.EncryptedData)>($r6);
+
+        staticinvoke <org.apache.xml.security.encryption.XMLCipher: void removeContent(org.w3c.dom.Node)>(r1);
+
+        interfaceinvoke r1.<org.w3c.dom.Element: org.w3c.dom.Node appendChild(org.w3c.dom.Node)>(r8);
+
+        $r10 = r2.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document contextDocument>;
+
+        return $r10;
+    }
+
+    public org.w3c.dom.Document doFinal(org.w3c.dom.Document, org.w3c.dom.Document) throws java.lang.Exception
+    {
+        org.slf4j.Logger $r0;
+        org.w3c.dom.Document r1, r2, r12;
+        org.apache.xml.security.encryption.XMLCipher r3;
+        int $i0;
+        org.w3c.dom.Element $r4, $r5;
+        org.apache.xml.security.encryption.XMLEncryptionException $r6, $r8, $r10;
+        java.lang.IllegalStateException $r7;
+        java.lang.Object[] $r9, $r11;
+        java.lang.String varReplacer2733, varReplacer2734, varReplacer2735;
+
+        nop;
+
+        r3 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: org.w3c.dom.Document;
+
+        r2 := @parameter1: org.w3c.dom.Document;
+
+        $r0 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2733 = "Processing source document...";
+
+        interfaceinvoke $r0.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2733);
+
+        if null != r1 goto label1;
+
+        $r10 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r11 = newarray (java.lang.Object)[1];
+
+        $r11[0] = "Context document unexpectedly null...";
+
+        varReplacer2734 = "empty";
+
+        specialinvoke $r10.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2734, $r11);
+
+        throw $r10;
+
+     label1:
+        if null != r2 goto label2;
+
+        $r8 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r9 = newarray (java.lang.Object)[1];
+
+        $r9[0] = "Source document unexpectedly null...";
+
+        varReplacer2735 = "empty";
+
+        specialinvoke $r8.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2735, $r9);
+
+        throw $r8;
+
+     label2:
+        r3.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document contextDocument> = r1;
+
+        r12 = null;
+
+        $i0 = r3.<org.apache.xml.security.encryption.XMLCipher: int cipherMode>;
+
+        tableswitch($i0)
+        {
+            case 1: goto label4;
+            case 2: goto label3;
+            case 3: goto label5;
+            case 4: goto label5;
+            default: goto label6;
+        };
+
+     label3:
+        $r4 = interfaceinvoke r2.<org.w3c.dom.Document: org.w3c.dom.Element getDocumentElement()>();
+
+        r12 = specialinvoke r3.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document decryptElement(org.w3c.dom.Element)>($r4);
+
+        goto label7;
+
+     label4:
+        $r5 = interfaceinvoke r2.<org.w3c.dom.Document: org.w3c.dom.Element getDocumentElement()>();
+
+        r12 = specialinvoke r3.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document encryptElement(org.w3c.dom.Element)>($r5);
+
+        goto label7;
+
+     label5:
+        goto label7;
+
+     label6:
+        $r6 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r7 = new java.lang.IllegalStateException;
+
+        specialinvoke $r7.<java.lang.IllegalStateException: void <init>()>();
+
+        specialinvoke $r6.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>($r7);
+
+        throw $r6;
+
+     label7:
+        return r12;
+    }
+
+    public org.w3c.dom.Document doFinal(org.w3c.dom.Document, org.w3c.dom.Element) throws java.lang.Exception
+    {
+        org.slf4j.Logger $r0;
+        org.w3c.dom.Document r1, r10;
+        org.w3c.dom.Element r2;
+        org.apache.xml.security.encryption.XMLCipher r3;
+        int $i0;
+        org.apache.xml.security.encryption.XMLEncryptionException $r4, $r6, $r8;
+        java.lang.IllegalStateException $r5;
+        java.lang.Object[] $r7, $r9;
+        java.lang.String varReplacer2736, varReplacer2737, varReplacer2738;
+
+        nop;
+
+        r3 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: org.w3c.dom.Document;
+
+        r2 := @parameter1: org.w3c.dom.Element;
+
+        $r0 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2737 = "Processing source element...";
+
+        interfaceinvoke $r0.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2737);
+
+        if null != r1 goto label1;
+
+        $r8 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r9 = newarray (java.lang.Object)[1];
+
+        $r9[0] = "Context document unexpectedly null...";
+
+        varReplacer2738 = "empty";
+
+        specialinvoke $r8.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2738, $r9);
+
+        throw $r8;
+
+     label1:
+        if null != r2 goto label2;
+
+        $r6 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r7 = newarray (java.lang.Object)[1];
+
+        $r7[0] = "Source element unexpectedly null...";
+
+        varReplacer2736 = "empty";
+
+        specialinvoke $r6.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2736, $r7);
+
+        throw $r6;
+
+     label2:
+        r3.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document contextDocument> = r1;
+
+        r10 = null;
+
+        $i0 = r3.<org.apache.xml.security.encryption.XMLCipher: int cipherMode>;
+
+        tableswitch($i0)
+        {
+            case 1: goto label4;
+            case 2: goto label3;
+            case 3: goto label5;
+            case 4: goto label5;
+            default: goto label6;
+        };
+
+     label3:
+        r10 = specialinvoke r3.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document decryptElement(org.w3c.dom.Element)>(r2);
+
+        goto label7;
+
+     label4:
+        r10 = specialinvoke r3.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document encryptElement(org.w3c.dom.Element)>(r2);
+
+        goto label7;
+
+     label5:
+        goto label7;
+
+     label6:
+        $r4 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r5 = new java.lang.IllegalStateException;
+
+        specialinvoke $r5.<java.lang.IllegalStateException: void <init>()>();
+
+        specialinvoke $r4.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>($r5);
+
+        throw $r4;
+
+     label7:
+        return r10;
+    }
+
+    public org.w3c.dom.Document doFinal(org.w3c.dom.Document, org.w3c.dom.Element, boolean) throws java.lang.Exception
+    {
+        org.slf4j.Logger $r0;
+        org.w3c.dom.Document r1, r10;
+        org.w3c.dom.Element r2;
+        org.apache.xml.security.encryption.XMLCipher r3;
+        int $i0;
+        boolean z0;
+        org.apache.xml.security.encryption.XMLEncryptionException $r4, $r6, $r8;
+        java.lang.IllegalStateException $r5;
+        java.lang.Object[] $r7, $r9;
+        java.lang.String varReplacer2739, varReplacer2740, varReplacer2741;
+
+        nop;
+
+        r3 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: org.w3c.dom.Document;
+
+        r2 := @parameter1: org.w3c.dom.Element;
+
+        z0 := @parameter2: boolean;
+
+        $r0 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2740 = "Processing source element...";
+
+        interfaceinvoke $r0.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2740);
+
+        if null != r1 goto label1;
+
+        $r8 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r9 = newarray (java.lang.Object)[1];
+
+        $r9[0] = "Context document unexpectedly null...";
+
+        varReplacer2739 = "empty";
+
+        specialinvoke $r8.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2739, $r9);
+
+        throw $r8;
+
+     label1:
+        if null != r2 goto label2;
+
+        $r6 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r7 = newarray (java.lang.Object)[1];
+
+        $r7[0] = "Source element unexpectedly null...";
+
+        varReplacer2741 = "empty";
+
+        specialinvoke $r6.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2741, $r7);
+
+        throw $r6;
+
+     label2:
+        r3.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document contextDocument> = r1;
+
+        r10 = null;
+
+        $i0 = r3.<org.apache.xml.security.encryption.XMLCipher: int cipherMode>;
+
+        tableswitch($i0)
+        {
+            case 1: goto label5;
+            case 2: goto label3;
+            case 3: goto label7;
+            case 4: goto label7;
+            default: goto label8;
+        };
+
+     label3:
+        if z0 == 0 goto label4;
+
+        r10 = specialinvoke r3.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document decryptElementContent(org.w3c.dom.Element)>(r2);
+
+        goto label9;
+
+     label4:
+        r10 = specialinvoke r3.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document decryptElement(org.w3c.dom.Element)>(r2);
+
+        goto label9;
+
+     label5:
+        if z0 == 0 goto label6;
+
+        r10 = specialinvoke r3.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document encryptElementContent(org.w3c.dom.Element)>(r2);
+
+        goto label9;
+
+     label6:
+        r10 = specialinvoke r3.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document encryptElement(org.w3c.dom.Element)>(r2);
+
+        goto label9;
+
+     label7:
+        goto label9;
+
+     label8:
+        $r4 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r5 = new java.lang.IllegalStateException;
+
+        specialinvoke $r5.<java.lang.IllegalStateException: void <init>()>();
+
+        specialinvoke $r4.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>($r5);
+
+        throw $r4;
+
+     label9:
+        return r10;
+    }
+
+    public org.apache.xml.security.encryption.EncryptedData encryptData(org.w3c.dom.Document, org.w3c.dom.Element) throws java.lang.Exception
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        org.w3c.dom.Document r1;
+        org.w3c.dom.Element r2;
+        org.apache.xml.security.encryption.EncryptedData $r3;
+        int varReplacer2742;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: org.w3c.dom.Document;
+
+        r2 := @parameter1: org.w3c.dom.Element;
+
+        varReplacer2742 = 0;
+
+        $r3 = virtualinvoke r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedData encryptData(org.w3c.dom.Document,org.w3c.dom.Element,boolean)>(r1, r2, varReplacer2742);
+
+        return $r3;
+    }
+
+    public org.apache.xml.security.encryption.EncryptedData encryptData(org.w3c.dom.Document, java.lang.String, java.io.InputStream) throws java.lang.Exception
+    {
+        org.slf4j.Logger $r0;
+        org.w3c.dom.Document r1;
+        java.io.InputStream r2;
+        org.apache.xml.security.encryption.XMLCipher r3;
+        int $i0;
+        java.lang.String r4, varReplacer2744, varReplacer2745, varReplacer2746, varReplacer2747;
+        org.apache.xml.security.encryption.EncryptedData $r5;
+        org.apache.xml.security.encryption.XMLEncryptionException $r6, $r8, $r10;
+        java.lang.Object[] $r7, $r9, $r11;
+        null_type varReplacer2743;
+
+        nop;
+
+        r3 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: org.w3c.dom.Document;
+
+        r4 := @parameter1: java.lang.String;
+
+        r2 := @parameter2: java.io.InputStream;
+
+        $r0 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2745 = "Encrypting element...";
+
+        interfaceinvoke $r0.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2745);
+
+        if null != r1 goto label1;
+
+        $r10 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r11 = newarray (java.lang.Object)[1];
+
+        $r11[0] = "Context document unexpectedly null...";
+
+        varReplacer2746 = "empty";
+
+        specialinvoke $r10.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2746, $r11);
+
+        throw $r10;
+
+     label1:
+        if null != r2 goto label2;
+
+        $r8 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r9 = newarray (java.lang.Object)[1];
+
+        $r9[0] = "Serialized data unexpectedly null...";
+
+        varReplacer2747 = "empty";
+
+        specialinvoke $r8.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2747, $r9);
+
+        throw $r8;
+
+     label2:
+        $i0 = r3.<org.apache.xml.security.encryption.XMLCipher: int cipherMode>;
+
+        if $i0 == 1 goto label3;
+
+        $r6 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r7 = newarray (java.lang.Object)[1];
+
+        $r7[0] = "XMLCipher unexpectedly not in ENCRYPT_MODE...";
+
+        varReplacer2744 = "empty";
+
+        specialinvoke $r6.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2744, $r7);
+
+        throw $r6;
+
+     label3:
+        varReplacer2743 = null;
+
+        $r5 = specialinvoke r3.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedData encryptData(org.w3c.dom.Document,org.w3c.dom.Element,java.lang.String,java.io.InputStream)>(r1, varReplacer2743, r4, r2);
+
+        return $r5;
+    }
+
+    public org.apache.xml.security.encryption.EncryptedData encryptData(org.w3c.dom.Document, org.w3c.dom.Element, boolean) throws java.lang.Exception
+    {
+        org.slf4j.Logger $r0;
+        org.w3c.dom.Document r1;
+        org.w3c.dom.Element r2;
+        org.apache.xml.security.encryption.XMLCipher r3;
+        int $i0;
+        boolean z0;
+        org.apache.xml.security.encryption.EncryptedData $r4, $r5;
+        org.apache.xml.security.encryption.XMLEncryptionException $r6, $r8, $r10;
+        java.lang.Object[] $r7, $r9, $r11;
+        java.lang.String varReplacer2748, varReplacer2750, varReplacer2751, varReplacer2753, varReplacer2754, varReplacer2755;
+        null_type varReplacer2749, varReplacer2752;
+
+        nop;
+
+        r3 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: org.w3c.dom.Document;
+
+        r2 := @parameter1: org.w3c.dom.Element;
+
+        z0 := @parameter2: boolean;
+
+        $r0 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2755 = "Encrypting element...";
+
+        interfaceinvoke $r0.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2755);
+
+        if null != r1 goto label1;
+
+        $r10 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r11 = newarray (java.lang.Object)[1];
+
+        $r11[0] = "Context document unexpectedly null...";
+
+        varReplacer2753 = "empty";
+
+        specialinvoke $r10.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2753, $r11);
+
+        throw $r10;
+
+     label1:
+        if null != r2 goto label2;
+
+        $r8 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r9 = newarray (java.lang.Object)[1];
+
+        $r9[0] = "Element unexpectedly null...";
+
+        varReplacer2754 = "empty";
+
+        specialinvoke $r8.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2754, $r9);
+
+        throw $r8;
+
+     label2:
+        $i0 = r3.<org.apache.xml.security.encryption.XMLCipher: int cipherMode>;
+
+        if $i0 == 1 goto label3;
+
+        $r6 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r7 = newarray (java.lang.Object)[1];
+
+        $r7[0] = "XMLCipher unexpectedly not in ENCRYPT_MODE...";
+
+        varReplacer2750 = "empty";
+
+        specialinvoke $r6.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2750, $r7);
+
+        throw $r6;
+
+     label3:
+        if z0 == 0 goto label4;
+
+        varReplacer2748 = "http://www.w3.org/2001/04/xmlenc#Content";
+
+        varReplacer2749 = null;
+
+        $r5 = specialinvoke r3.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedData encryptData(org.w3c.dom.Document,org.w3c.dom.Element,java.lang.String,java.io.InputStream)>(r1, r2, varReplacer2748, varReplacer2749);
+
+        return $r5;
+
+     label4:
+        varReplacer2751 = "http://www.w3.org/2001/04/xmlenc#Element";
+
+        varReplacer2752 = null;
+
+        $r4 = specialinvoke r3.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedData encryptData(org.w3c.dom.Document,org.w3c.dom.Element,java.lang.String,java.io.InputStream)>(r1, r2, varReplacer2751, varReplacer2752);
+
+        return $r4;
+    }
+
+    private org.apache.xml.security.encryption.EncryptedData encryptData(org.w3c.dom.Document, org.w3c.dom.Element, java.lang.String, java.io.InputStream) throws java.lang.Exception
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        org.w3c.dom.Document r1;
+        java.lang.String $r2, $r6, $r7, r15, $r17, $r19, $r20, $r25, $r29, $r31, $r35, $r37, $r40, $r49, r98, $r107, varReplacer2756, varReplacer2757, varReplacer2758, varReplacer2759, varReplacer2761, varReplacer2762, varReplacer2763, varReplacer2768, varReplacer2769;
+        org.apache.xml.security.encryption.Serializer $r3, $r41, $r52, $r56;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5;
+        org.w3c.dom.Element r4;
+        java.io.InputStream r5;
+        int $i0, i1, $i2, $i3, $i4, $i5, $i6, $i7, $i8, $i9, $i10, $i11, $i12, $i13, i14, varReplacer2764, varReplacer2765, varReplacer2766, varReplacer2767;
+        java.security.Key $r8;
+        org.slf4j.Logger $r9, $r11, $r12, $r27, $r33, $r42, $r44, $r92;
+        byte[] $r10, $r39, r78, r82, r85, r88, r89, r97;
+        java.lang.Integer $r13;
+        org.apache.xml.security.encryption.EncryptedData $r14, $r21, $r22, $r24;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r18;
+        java.lang.StringBuilder $r28, $r30, $r34, $r36, $r45, $r48, $r106, $r110, $r111;
+        java.nio.charset.Charset $r47;
+        java.lang.Object[] $r51, $r55, $r59;
+        org.w3c.dom.Node $r53;
+        org.apache.xml.security.encryption.AbstractSerializer $r57;
+        java.lang.Throwable $r60, $r62, $r64, $r66, $r68, $r70, r71, r72, $r73, $r74, $r75, $r76, r84, r87, r90, r91, r93, r94, r95, r96, r102;
+        org.w3c.dom.NodeList r79;
+        javax.crypto.Cipher $r80, r81;
+        java.security.spec.AlgorithmParameterSpec r83;
+        java.io.ByteArrayOutputStream r86, $r109;
+        org.apache.xml.security.encryption.CipherData r99;
+        org.apache.xml.security.encryption.CipherValue r100;
+        org.apache.xml.security.encryption.EncryptionMethod r101;
+        org.apache.xml.security.encryption.XMLEncryptionException $r103, $r104, $r105, $r108, $r112, $r113, $r114, $r115, $r118;
+        java.net.URI $r116, $r117;
+        java.lang.Exception $r119, $r120, $r121, $r122, $r123, $r124;
+        null_type varReplacer2760;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: org.w3c.dom.Document;
+
+        r4 := @parameter1: org.w3c.dom.Element;
+
+        r15 := @parameter2: java.lang.String;
+
+        r5 := @parameter3: java.io.InputStream;
+
+        r0.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document contextDocument> = r1;
+
+        $r2 = r0.<org.apache.xml.security.encryption.XMLCipher: java.lang.String algorithm>;
+
+        if $r2 != null goto label01;
+
+        $r103 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r59 = newarray (java.lang.Object)[1];
+
+        $r59[0] = "XMLCipher instance without transformation specified";
+
+        varReplacer2756 = "empty";
+
+        specialinvoke $r103.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2756, $r59);
+
+        throw $r103;
+
+     label01:
+        $r3 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.Serializer serializer>;
+
+        $z0 = $r3 instanceof org.apache.xml.security.encryption.AbstractSerializer;
+
+        if $z0 == 0 goto label02;
+
+        $r56 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.Serializer serializer>;
+
+        $r57 = (org.apache.xml.security.encryption.AbstractSerializer) $r56;
+
+        $z4 = r0.<org.apache.xml.security.encryption.XMLCipher: boolean secureValidation>;
+
+        virtualinvoke $r57.<org.apache.xml.security.encryption.AbstractSerializer: void setSecureValidation(boolean)>($z4);
+
+     label02:
+        if r4 == null goto label03;
+
+        $r53 = interfaceinvoke r4.<org.w3c.dom.Element: org.w3c.dom.Node getParentNode()>();
+
+        if $r53 != null goto label03;
+
+        $r104 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r55 = newarray (java.lang.Object)[1];
+
+        $r55[0] = "The element can\'t be serialized as it has no parent";
+
+        varReplacer2761 = "empty";
+
+        specialinvoke $r104.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2761, $r55);
+
+        throw $r104;
+
+     label03:
+        r78 = null;
+
+        if r5 != null goto label08;
+
+        varReplacer2768 = "http://www.w3.org/2001/04/xmlenc#Content";
+
+        $z2 = virtualinvoke r15.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2768);
+
+        if $z2 == 0 goto label06;
+
+        r79 = interfaceinvoke r4.<org.w3c.dom.Element: org.w3c.dom.NodeList getChildNodes()>();
+
+        if null == r79 goto label04;
+
+        $r52 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.Serializer serializer>;
+
+        r78 = interfaceinvoke $r52.<org.apache.xml.security.encryption.Serializer: byte[] serializeToByteArray(org.w3c.dom.NodeList)>(r79);
+
+        goto label05;
+
+     label04:
+        $r105 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r51 = newarray (java.lang.Object)[1];
+
+        $r51[0] = "Element has no content.";
+
+        varReplacer2763 = "empty";
+
+        specialinvoke $r105.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2763, $r51);
+
+        throw $r105;
+
+     label05:
+        goto label07;
+
+     label06:
+        $r41 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.Serializer serializer>;
+
+        r78 = interfaceinvoke $r41.<org.apache.xml.security.encryption.Serializer: byte[] serializeToByteArray(org.w3c.dom.Element)>(r4);
+
+     label07:
+        $r42 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        $z3 = interfaceinvoke $r42.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z3 == 0 goto label08;
+
+        $r44 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        $r106 = new java.lang.StringBuilder;
+
+        specialinvoke $r106.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer2758 = "Serialized octets:\n";
+
+        $r45 = virtualinvoke $r106.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2758);
+
+        $r107 = new java.lang.String;
+
+        $r47 = <java.nio.charset.StandardCharsets: java.nio.charset.Charset UTF_8>;
+
+        specialinvoke $r107.<java.lang.String: void <init>(byte[],java.nio.charset.Charset)>(r78, $r47);
+
+        $r48 = virtualinvoke $r45.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r107);
+
+        $r49 = virtualinvoke $r48.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r44.<org.slf4j.Logger: void debug(java.lang.String)>($r49);
+
+     label08:
+        $r80 = r0.<org.apache.xml.security.encryption.XMLCipher: javax.crypto.Cipher contextCipher>;
+
+        if $r80 != null goto label09;
+
+        $r40 = r0.<org.apache.xml.security.encryption.XMLCipher: java.lang.String algorithm>;
+
+        varReplacer2760 = null;
+
+        r81 = specialinvoke r0.<org.apache.xml.security.encryption.XMLCipher: javax.crypto.Cipher constructCipher(java.lang.String,java.lang.String)>($r40, varReplacer2760);
+
+        goto label10;
+
+     label09:
+        r81 = r0.<org.apache.xml.security.encryption.XMLCipher: javax.crypto.Cipher contextCipher>;
+
+     label10:
+        $r6 = r0.<org.apache.xml.security.encryption.XMLCipher: java.lang.String algorithm>;
+
+        $i0 = staticinvoke <org.apache.xml.security.algorithms.JCEMapper: int getIVLengthFromURI(java.lang.String)>($r6);
+
+        i1 = $i0 / 8;
+
+        r82 = staticinvoke <org.apache.xml.security.stax.ext.XMLSecurityConstants: byte[] generateBytes(int)>(i1);
+
+     label11:
+        $r7 = r0.<org.apache.xml.security.encryption.XMLCipher: java.lang.String algorithm>;
+
+        r83 = specialinvoke r0.<org.apache.xml.security.encryption.XMLCipher: java.security.spec.AlgorithmParameterSpec constructBlockCipherParameters(java.lang.String,byte[])>($r7, r82);
+
+        $i2 = r0.<org.apache.xml.security.encryption.XMLCipher: int cipherMode>;
+
+        $r8 = r0.<org.apache.xml.security.encryption.XMLCipher: java.security.Key key>;
+
+        virtualinvoke r81.<javax.crypto.Cipher: void init(int,java.security.Key,java.security.spec.AlgorithmParameterSpec)>($i2, $r8, r83);
+
+     label12:
+        goto label14;
+
+     label13:
+        $r76 := @caughtexception;
+
+        r84 = $r76;
+
+        $r108 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r119 = (java.lang.Exception) r84;
+
+        specialinvoke $r108.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>($r119);
+
+        throw $r108;
+
+     label14:
+        if r5 == null goto label31;
+
+        r85 = newarray (byte)[8192];
+
+        $r109 = new java.io.ByteArrayOutputStream;
+
+        specialinvoke $r109.<java.io.ByteArrayOutputStream: void <init>()>();
+
+        r86 = $r109;
+
+        r87 = null;
+
+     label15:
+        $i13 = virtualinvoke r5.<java.io.InputStream: int read(byte[])>(r85);
+
+        i14 = $i13;
+
+        if $i13 == -1 goto label16;
+
+        varReplacer2764 = 0;
+
+        r88 = virtualinvoke r81.<javax.crypto.Cipher: byte[] update(byte[],int,int)>(r85, varReplacer2764, i14);
+
+        virtualinvoke r86.<java.io.ByteArrayOutputStream: void write(byte[])>(r88);
+
+        goto label15;
+
+     label16:
+        $r39 = virtualinvoke r81.<javax.crypto.Cipher: byte[] doFinal()>();
+
+        virtualinvoke r86.<java.io.ByteArrayOutputStream: void write(byte[])>($r39);
+
+        r89 = virtualinvoke r86.<java.io.ByteArrayOutputStream: byte[] toByteArray()>();
+
+     label17:
+        if null == null goto label21;
+
+     label18:
+        virtualinvoke r86.<java.io.ByteArrayOutputStream: void close()>();
+
+     label19:
+        goto label30;
+
+     label20:
+        $r75 := @caughtexception;
+
+        r90 = $r75;
+
+        virtualinvoke r87.<java.lang.Throwable: void addSuppressed(java.lang.Throwable)>(r90);
+
+        goto label30;
+
+     label21:
+        virtualinvoke r86.<java.io.ByteArrayOutputStream: void close()>();
+
+        goto label30;
+
+     label22:
+        $r74 := @caughtexception;
+
+        r91 = $r74;
+
+        r87 = r91;
+
+        throw r91;
+
+     label23:
+        $r73 := @caughtexception;
+
+        r72 = $r73;
+
+     label24:
+        if r87 == null goto label28;
+
+     label25:
+        virtualinvoke r86.<java.io.ByteArrayOutputStream: void close()>();
+
+     label26:
+        goto label29;
+
+     label27:
+        $r70 := @caughtexception;
+
+        r71 = $r70;
+
+        virtualinvoke r87.<java.lang.Throwable: void addSuppressed(java.lang.Throwable)>(r71);
+
+        goto label29;
+
+     label28:
+        virtualinvoke r86.<java.io.ByteArrayOutputStream: void close()>();
+
+     label29:
+        throw r72;
+
+     label30:
+        goto label32;
+
+     label31:
+        r89 = virtualinvoke r81.<javax.crypto.Cipher: byte[] doFinal(byte[])>(r78);
+
+        $r9 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        $z1 = interfaceinvoke $r9.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z1 == 0 goto label32;
+
+        $r33 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        $r110 = new java.lang.StringBuilder;
+
+        specialinvoke $r110.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer2762 = "Expected cipher.outputSize = ";
+
+        $r34 = virtualinvoke $r110.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2762);
+
+        $i11 = lengthof r78;
+
+        $i12 = virtualinvoke r81.<javax.crypto.Cipher: int getOutputSize(int)>($i11);
+
+        $r35 = staticinvoke <java.lang.Integer: java.lang.String toString(int)>($i12);
+
+        $r36 = virtualinvoke $r34.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r35);
+
+        $r37 = virtualinvoke $r36.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r33.<org.slf4j.Logger: void debug(java.lang.String)>($r37);
+
+     label32:
+        $r92 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        $z5 = interfaceinvoke $r92.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z5 == 0 goto label33;
+
+        $r27 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        $r111 = new java.lang.StringBuilder;
+
+        specialinvoke $r111.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer2769 = "Actual cipher.outputSize = ";
+
+        $r28 = virtualinvoke $r111.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2769);
+
+        $i10 = lengthof r89;
+
+        $r29 = staticinvoke <java.lang.Integer: java.lang.String toString(int)>($i10);
+
+        $r30 = virtualinvoke $r28.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r29);
+
+        $r31 = virtualinvoke $r30.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r27.<org.slf4j.Logger: void debug(java.lang.String)>($r31);
+
+     label33:
+        goto label38;
+
+     label34:
+        $r68 := @caughtexception;
+
+        r93 = $r68;
+
+        $r112 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r120 = (java.lang.Exception) r93;
+
+        specialinvoke $r112.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>($r120);
+
+        throw $r112;
+
+     label35:
+        $r66 := @caughtexception;
+
+        r94 = $r66;
+
+        $r113 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r121 = (java.lang.Exception) r94;
+
+        specialinvoke $r113.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>($r121);
+
+        throw $r113;
+
+     label36:
+        $r64 := @caughtexception;
+
+        r95 = $r64;
+
+        $r114 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r122 = (java.lang.Exception) r95;
+
+        specialinvoke $r114.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>($r122);
+
+        throw $r114;
+
+     label37:
+        $r62 := @caughtexception;
+
+        r96 = $r62;
+
+        $r115 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r123 = (java.lang.Exception) r96;
+
+        specialinvoke $r115.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>($r123);
+
+        throw $r115;
+
+     label38:
+        $r10 = virtualinvoke r81.<javax.crypto.Cipher: byte[] getIV()>();
+
+        if $r10 == null goto label39;
+
+        r82 = virtualinvoke r81.<javax.crypto.Cipher: byte[] getIV()>();
+
+     label39:
+        $i4 = lengthof r82;
+
+        $i3 = lengthof r89;
+
+        $i5 = $i4 + $i3;
+
+        r97 = newarray (byte)[$i5];
+
+        $i6 = lengthof r82;
+
+        varReplacer2766 = 0;
+
+        varReplacer2767 = 0;
+
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>(r82, varReplacer2766, r97, varReplacer2766, $i6);
+
+        $i8 = lengthof r82;
+
+        $i7 = lengthof r89;
+
+        varReplacer2765 = 0;
+
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>(r89, varReplacer2765, r97, $i8, $i7);
+
+        r98 = staticinvoke <org.apache.xml.security.utils.XMLUtils: java.lang.String encodeToString(byte[])>(r97);
+
+        $r11 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2759 = "Encrypted octets:\n{}";
+
+        interfaceinvoke $r11.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object)>(varReplacer2759, r98);
+
+        $r12 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        $i9 = virtualinvoke r98.<java.lang.String: int length()>();
+
+        $r13 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($i9);
+
+        varReplacer2757 = "Encrypted octets length = {}";
+
+        interfaceinvoke $r12.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object)>(varReplacer2757, $r13);
+
+     label40:
+        $r14 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedData ed>;
+
+        r99 = interfaceinvoke $r14.<org.apache.xml.security.encryption.EncryptedData: org.apache.xml.security.encryption.CipherData getCipherData()>();
+
+        r100 = interfaceinvoke r99.<org.apache.xml.security.encryption.CipherData: org.apache.xml.security.encryption.CipherValue getCipherValue()>();
+
+        interfaceinvoke r100.<org.apache.xml.security.encryption.CipherValue: void setValue(java.lang.String)>(r98);
+
+        if r15 == null goto label41;
+
+        $r24 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedData ed>;
+
+        $r116 = new java.net.URI;
+
+        specialinvoke $r116.<java.net.URI: void <init>(java.lang.String)>(r15);
+
+        $r25 = virtualinvoke $r116.<java.net.URI: java.lang.String toString()>();
+
+        interfaceinvoke $r24.<org.apache.xml.security.encryption.EncryptedData: void setType(java.lang.String)>($r25);
+
+     label41:
+        $r18 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        $r117 = new java.net.URI;
+
+        $r17 = r0.<org.apache.xml.security.encryption.XMLCipher: java.lang.String algorithm>;
+
+        specialinvoke $r117.<java.net.URI: void <init>(java.lang.String)>($r17);
+
+        $r19 = virtualinvoke $r117.<java.net.URI: java.lang.String toString()>();
+
+        r101 = virtualinvoke $r18.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.EncryptionMethod newEncryptionMethod(java.lang.String)>($r19);
+
+        $r20 = r0.<org.apache.xml.security.encryption.XMLCipher: java.lang.String digestAlg>;
+
+        interfaceinvoke r101.<org.apache.xml.security.encryption.EncryptionMethod: void setDigestAlgorithm(java.lang.String)>($r20);
+
+        $r21 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedData ed>;
+
+        interfaceinvoke $r21.<org.apache.xml.security.encryption.EncryptedData: void setEncryptionMethod(org.apache.xml.security.encryption.EncryptionMethod)>(r101);
+
+     label42:
+        goto label44;
+
+     label43:
+        $r60 := @caughtexception;
+
+        r102 = $r60;
+
+        $r118 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r124 = (java.lang.Exception) r102;
+
+        specialinvoke $r118.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>($r124);
+
+        throw $r118;
+
+     label44:
+        $r22 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedData ed>;
+
+        return $r22;
+
+        catch java.security.InvalidKeyException from label11 to label12 with label13;
+        catch java.lang.Throwable from label18 to label19 with label20;
+        catch java.lang.Throwable from label15 to label17 with label22;
+        catch java.lang.Throwable from label25 to label26 with label27;
+        catch java.lang.Throwable from label22 to label24 with label23;
+        catch java.lang.IllegalStateException from label14 to label33 with label34;
+        catch javax.crypto.IllegalBlockSizeException from label14 to label33 with label35;
+        catch javax.crypto.BadPaddingException from label14 to label33 with label36;
+        catch java.io.UnsupportedEncodingException from label14 to label33 with label37;
+        catch java.net.URISyntaxException from label40 to label42 with label43;
+    }
+
+    private java.security.spec.AlgorithmParameterSpec constructBlockCipherParameters(java.lang.String, byte[])
+    {
+        java.lang.String r0;
+        byte[] r1;
+        org.apache.xml.security.encryption.XMLCipher r2;
+        java.lang.Class $r3;
+        java.security.spec.AlgorithmParameterSpec $r4;
+
+        nop;
+
+        r2 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r0 := @parameter0: java.lang.String;
+
+        r1 := @parameter1: byte[];
+
+        $r3 = virtualinvoke r2.<java.lang.Object: java.lang.Class getClass()>();
+
+        $r4 = staticinvoke <org.apache.xml.security.encryption.XMLCipherUtil: java.security.spec.AlgorithmParameterSpec constructBlockCipherParameters(java.lang.String,byte[],java.lang.Class)>(r0, r1, $r3);
+
+        return $r4;
+    }
+
+    public org.apache.xml.security.encryption.EncryptedData loadEncryptedData(org.w3c.dom.Document, org.w3c.dom.Element) throws org.apache.xml.security.encryption.XMLEncryptionException
+    {
+        org.slf4j.Logger $r0;
+        org.w3c.dom.Document r1;
+        org.w3c.dom.Element r2;
+        org.apache.xml.security.encryption.XMLCipher r3;
+        int $i0;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r4;
+        org.apache.xml.security.encryption.EncryptedData $r5, $r6;
+        org.apache.xml.security.encryption.XMLEncryptionException $r7, $r9, $r11;
+        java.lang.Object[] $r8, $r10, $r12;
+        java.lang.String varReplacer2770, varReplacer2771, varReplacer2772, varReplacer2773;
+
+        nop;
+
+        r3 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: org.w3c.dom.Document;
+
+        r2 := @parameter1: org.w3c.dom.Element;
+
+        $r0 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2770 = "Loading encrypted element...";
+
+        interfaceinvoke $r0.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2770);
+
+        if null != r1 goto label1;
+
+        $r11 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r12 = newarray (java.lang.Object)[1];
+
+        $r12[0] = "Context document unexpectedly null...";
+
+        varReplacer2771 = "empty";
+
+        specialinvoke $r11.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2771, $r12);
+
+        throw $r11;
+
+     label1:
+        if null != r2 goto label2;
+
+        $r9 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r10 = newarray (java.lang.Object)[1];
+
+        $r10[0] = "Element unexpectedly null...";
+
+        varReplacer2772 = "empty";
+
+        specialinvoke $r9.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2772, $r10);
+
+        throw $r9;
+
+     label2:
+        $i0 = r3.<org.apache.xml.security.encryption.XMLCipher: int cipherMode>;
+
+        if $i0 == 2 goto label3;
+
+        $r7 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r8 = newarray (java.lang.Object)[1];
+
+        $r8[0] = "XMLCipher unexpectedly not in DECRYPT_MODE...";
+
+        varReplacer2773 = "empty";
+
+        specialinvoke $r7.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2773, $r8);
+
+        throw $r7;
+
+     label3:
+        r3.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document contextDocument> = r1;
+
+        $r4 = r3.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        $r5 = virtualinvoke $r4.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.EncryptedData newEncryptedData(org.w3c.dom.Element)>(r2);
+
+        r3.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedData ed> = $r5;
+
+        $r6 = r3.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedData ed>;
+
+        return $r6;
+    }
+
+    public org.apache.xml.security.encryption.EncryptedKey loadEncryptedKey(org.w3c.dom.Document, org.w3c.dom.Element) throws org.apache.xml.security.encryption.XMLEncryptionException
+    {
+        org.slf4j.Logger $r0;
+        org.w3c.dom.Document r1;
+        org.w3c.dom.Element r2;
+        org.apache.xml.security.encryption.XMLCipher r3;
+        int $i0, $i1;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r4;
+        org.apache.xml.security.encryption.EncryptedKey $r5, $r6;
+        org.apache.xml.security.encryption.XMLEncryptionException $r7, $r9, $r11;
+        java.lang.Object[] $r8, $r10, $r12;
+        java.lang.String varReplacer2774, varReplacer2775, varReplacer2776, varReplacer2777;
+
+        nop;
+
+        r3 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: org.w3c.dom.Document;
+
+        r2 := @parameter1: org.w3c.dom.Element;
+
+        $r0 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2777 = "Loading encrypted key...";
+
+        interfaceinvoke $r0.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2777);
+
+        if null != r1 goto label1;
+
+        $r11 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r12 = newarray (java.lang.Object)[1];
+
+        $r12[0] = "Context document unexpectedly null...";
+
+        varReplacer2775 = "empty";
+
+        specialinvoke $r11.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2775, $r12);
+
+        throw $r11;
+
+     label1:
+        if null != r2 goto label2;
+
+        $r9 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r10 = newarray (java.lang.Object)[1];
+
+        $r10[0] = "Context document unexpectedly null...";
+
+        varReplacer2776 = "empty";
+
+        specialinvoke $r9.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2776, $r10);
+
+        throw $r9;
+
+     label2:
+        $i0 = r3.<org.apache.xml.security.encryption.XMLCipher: int cipherMode>;
+
+        if $i0 == 4 goto label3;
+
+        $i1 = r3.<org.apache.xml.security.encryption.XMLCipher: int cipherMode>;
+
+        if $i1 == 2 goto label3;
+
+        $r7 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r8 = newarray (java.lang.Object)[1];
+
+        $r8[0] = "XMLCipher unexpectedly not in UNWRAP_MODE or DECRYPT_MODE...";
+
+        varReplacer2774 = "empty";
+
+        specialinvoke $r7.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2774, $r8);
+
+        throw $r7;
+
+     label3:
+        r3.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document contextDocument> = r1;
+
+        $r4 = r3.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        $r5 = virtualinvoke $r4.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.EncryptedKey newEncryptedKey(org.w3c.dom.Element)>(r2);
+
+        r3.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedKey ek> = $r5;
+
+        $r6 = r3.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedKey ek>;
+
+        return $r6;
+    }
+
+    public org.apache.xml.security.encryption.EncryptedKey loadEncryptedKey(org.w3c.dom.Element) throws org.apache.xml.security.encryption.XMLEncryptionException
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        org.w3c.dom.Element r1;
+        org.w3c.dom.Document $r2;
+        org.apache.xml.security.encryption.EncryptedKey $r3;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: org.w3c.dom.Element;
+
+        $r2 = interfaceinvoke r1.<org.w3c.dom.Element: org.w3c.dom.Document getOwnerDocument()>();
+
+        $r3 = virtualinvoke r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedKey loadEncryptedKey(org.w3c.dom.Document,org.w3c.dom.Element)>($r2, r1);
+
+        return $r3;
+    }
+
+    public org.apache.xml.security.encryption.EncryptedKey encryptKey(org.w3c.dom.Document, java.security.Key) throws org.apache.xml.security.encryption.XMLEncryptionException
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        org.w3c.dom.Document r1;
+        java.security.Key r2;
+        org.apache.xml.security.encryption.EncryptedKey $r3;
+        null_type varReplacer2778, varReplacer2779;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: org.w3c.dom.Document;
+
+        r2 := @parameter1: java.security.Key;
+
+        varReplacer2778 = null;
+
+        varReplacer2779 = null;
+
+        $r3 = virtualinvoke r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedKey encryptKey(org.w3c.dom.Document,java.security.Key,java.lang.String,byte[])>(r1, r2, varReplacer2778, varReplacer2778);
+
+        return $r3;
+    }
+
+    public org.apache.xml.security.encryption.EncryptedKey encryptKey(org.w3c.dom.Document, java.security.Key, java.lang.String, byte[]) throws org.apache.xml.security.encryption.XMLEncryptionException
+    {
+        org.slf4j.Logger $r0, $r11, $r12;
+        java.security.Key r1, $r10, $r24;
+        org.apache.xml.security.encryption.XMLCipher r2;
+        int $i0, $i1, varReplacer2782, varReplacer2786;
+        java.lang.String $r3, r6, $r8, $r9, $r18, $r20, $r21, $r25, r46, varReplacer2780, varReplacer2781, varReplacer2783, varReplacer2784, varReplacer2787, varReplacer2788;
+        org.w3c.dom.Document r4;
+        javax.crypto.Cipher $r5, r40;
+        byte[] r7, r42;
+        java.lang.Integer $r13;
+        org.apache.xml.security.encryption.EncryptedKey $r14, $r22, $r23;
+        org.apache.xml.security.encryption.CipherData $r15;
+        org.apache.xml.security.encryption.CipherValue r16;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r19;
+        java.lang.Object[] $r27, $r29, $r31;
+        java.lang.Throwable $r32, $r34, $r36, $r38, r43, r44, r45, r48;
+        javax.crypto.spec.OAEPParameterSpec r41;
+        org.apache.xml.security.encryption.EncryptionMethod r47;
+        org.apache.xml.security.encryption.XMLEncryptionException $r49, $r50, $r51, $r52, $r53, $r54, $r56;
+        java.net.URI $r55;
+        java.lang.Exception $r57, $r58, $r59, $r60;
+        null_type varReplacer2785;
+
+        nop;
+
+        r2 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r4 := @parameter0: org.w3c.dom.Document;
+
+        r1 := @parameter1: java.security.Key;
+
+        r6 := @parameter2: java.lang.String;
+
+        r7 := @parameter3: byte[];
+
+        $r0 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2780 = "Encrypting key ...";
+
+        interfaceinvoke $r0.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2780);
+
+        if null != r1 goto label01;
+
+        $r49 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r31 = newarray (java.lang.Object)[1];
+
+        $r31[0] = "Key unexpectedly null...";
+
+        varReplacer2784 = "empty";
+
+        specialinvoke $r49.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2784, $r31);
+
+        throw $r49;
+
+     label01:
+        $i0 = r2.<org.apache.xml.security.encryption.XMLCipher: int cipherMode>;
+
+        if $i0 == 3 goto label02;
+
+        $r50 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r29 = newarray (java.lang.Object)[1];
+
+        $r29[0] = "XMLCipher unexpectedly not in WRAP_MODE...";
+
+        varReplacer2788 = "empty";
+
+        specialinvoke $r50.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2788, $r29);
+
+        throw $r50;
+
+     label02:
+        $r3 = r2.<org.apache.xml.security.encryption.XMLCipher: java.lang.String algorithm>;
+
+        if $r3 != null goto label03;
+
+        $r51 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r27 = newarray (java.lang.Object)[1];
+
+        $r27[0] = "XMLCipher instance without transformation specified";
+
+        varReplacer2781 = "empty";
+
+        specialinvoke $r51.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2781, $r27);
+
+        throw $r51;
+
+     label03:
+        r2.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document contextDocument> = r4;
+
+        $r5 = r2.<org.apache.xml.security.encryption.XMLCipher: javax.crypto.Cipher contextCipher>;
+
+        if $r5 != null goto label04;
+
+        $r25 = r2.<org.apache.xml.security.encryption.XMLCipher: java.lang.String algorithm>;
+
+        varReplacer2785 = null;
+
+        r40 = specialinvoke r2.<org.apache.xml.security.encryption.XMLCipher: javax.crypto.Cipher constructCipher(java.lang.String,java.lang.String)>($r25, varReplacer2785);
+
+        goto label05;
+
+     label04:
+        r40 = r2.<org.apache.xml.security.encryption.XMLCipher: javax.crypto.Cipher contextCipher>;
+
+     label05:
+        $r9 = r2.<org.apache.xml.security.encryption.XMLCipher: java.lang.String algorithm>;
+
+        $r8 = r2.<org.apache.xml.security.encryption.XMLCipher: java.lang.String digestAlg>;
+
+        r41 = specialinvoke r2.<org.apache.xml.security.encryption.XMLCipher: javax.crypto.spec.OAEPParameterSpec constructOAEPParameters(java.lang.String,java.lang.String,java.lang.String,byte[])>($r9, $r8, r6, r7);
+
+        if r41 != null goto label06;
+
+        $r24 = r2.<org.apache.xml.security.encryption.XMLCipher: java.security.Key key>;
+
+        varReplacer2786 = 3;
+
+        virtualinvoke r40.<javax.crypto.Cipher: void init(int,java.security.Key)>(varReplacer2786, $r24);
+
+        goto label07;
+
+     label06:
+        $r10 = r2.<org.apache.xml.security.encryption.XMLCipher: java.security.Key key>;
+
+        varReplacer2782 = 3;
+
+        virtualinvoke r40.<javax.crypto.Cipher: void init(int,java.security.Key,java.security.spec.AlgorithmParameterSpec)>(varReplacer2782, $r10, r41);
+
+     label07:
+        r42 = virtualinvoke r40.<javax.crypto.Cipher: byte[] wrap(java.security.Key)>(r1);
+
+     label08:
+        goto label12;
+
+     label09:
+        $r38 := @caughtexception;
+
+        r43 = $r38;
+
+        $r52 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r57 = (java.lang.Exception) r43;
+
+        specialinvoke $r52.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>($r57);
+
+        throw $r52;
+
+     label10:
+        $r36 := @caughtexception;
+
+        r44 = $r36;
+
+        $r53 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r58 = (java.lang.Exception) r44;
+
+        specialinvoke $r53.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>($r58);
+
+        throw $r53;
+
+     label11:
+        $r34 := @caughtexception;
+
+        r45 = $r34;
+
+        $r54 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r59 = (java.lang.Exception) r45;
+
+        specialinvoke $r54.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>($r59);
+
+        throw $r54;
+
+     label12:
+        r46 = staticinvoke <org.apache.xml.security.utils.XMLUtils: java.lang.String encodeToString(byte[])>(r42);
+
+        $r11 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2783 = "Encrypted key octets:\n{}";
+
+        interfaceinvoke $r11.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object)>(varReplacer2783, r46);
+
+        $r12 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        $i1 = virtualinvoke r46.<java.lang.String: int length()>();
+
+        $r13 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>($i1);
+
+        varReplacer2787 = "Encrypted key octets length = {}";
+
+        interfaceinvoke $r12.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object)>(varReplacer2787, $r13);
+
+        $r14 = r2.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedKey ek>;
+
+        $r15 = interfaceinvoke $r14.<org.apache.xml.security.encryption.EncryptedKey: org.apache.xml.security.encryption.CipherData getCipherData()>();
+
+        r16 = interfaceinvoke $r15.<org.apache.xml.security.encryption.CipherData: org.apache.xml.security.encryption.CipherValue getCipherValue()>();
+
+        interfaceinvoke r16.<org.apache.xml.security.encryption.CipherValue: void setValue(java.lang.String)>(r46);
+
+     label13:
+        $r19 = r2.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        $r55 = new java.net.URI;
+
+        $r18 = r2.<org.apache.xml.security.encryption.XMLCipher: java.lang.String algorithm>;
+
+        specialinvoke $r55.<java.net.URI: void <init>(java.lang.String)>($r18);
+
+        $r20 = virtualinvoke $r55.<java.net.URI: java.lang.String toString()>();
+
+        r47 = virtualinvoke $r19.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.EncryptionMethod newEncryptionMethod(java.lang.String)>($r20);
+
+        $r21 = r2.<org.apache.xml.security.encryption.XMLCipher: java.lang.String digestAlg>;
+
+        interfaceinvoke r47.<org.apache.xml.security.encryption.EncryptionMethod: void setDigestAlgorithm(java.lang.String)>($r21);
+
+        interfaceinvoke r47.<org.apache.xml.security.encryption.EncryptionMethod: void setMGFAlgorithm(java.lang.String)>(r6);
+
+        interfaceinvoke r47.<org.apache.xml.security.encryption.EncryptionMethod: void setOAEPparams(byte[])>(r7);
+
+        $r22 = r2.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedKey ek>;
+
+        interfaceinvoke $r22.<org.apache.xml.security.encryption.EncryptedKey: void setEncryptionMethod(org.apache.xml.security.encryption.EncryptionMethod)>(r47);
+
+     label14:
+        goto label16;
+
+     label15:
+        $r32 := @caughtexception;
+
+        r48 = $r32;
+
+        $r56 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r60 = (java.lang.Exception) r48;
+
+        specialinvoke $r56.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>($r60);
+
+        throw $r56;
+
+     label16:
+        $r23 = r2.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedKey ek>;
+
+        return $r23;
+
+        catch java.security.InvalidKeyException from label05 to label08 with label09;
+        catch javax.crypto.IllegalBlockSizeException from label05 to label08 with label10;
+        catch java.security.InvalidAlgorithmParameterException from label05 to label08 with label11;
+        catch java.net.URISyntaxException from label13 to label14 with label15;
+    }
+
+    public java.security.Key decryptKey(org.apache.xml.security.encryption.EncryptedKey, java.lang.String) throws org.apache.xml.security.encryption.XMLEncryptionException
+    {
+        org.slf4j.Logger $r0, $r6, $r15, $r21, $r22, $r41;
+        org.apache.xml.security.encryption.XMLCipher r1;
+        int $i0, varReplacer2789, varReplacer2791, varReplacer2793;
+        java.lang.String r2, $r8, $r9, $r10, $r18, $r20, $r26, $r28, $r42, r44, r45, r50, varReplacer2790, varReplacer2792, varReplacer2794, varReplacer2795, varReplacer2796, varReplacer2797, varReplacer2798, varReplacer2799;
+        java.security.Key $r3, $r13, r14, $r16, $r47;
+        org.apache.xml.security.encryption.EncryptedKey r5;
+        boolean $z0, $z1, $z2, $z3;
+        javax.crypto.Cipher $r7, r51;
+        byte[] $r11, r49;
+        javax.crypto.spec.OAEPParameterSpec r12;
+        org.apache.xml.security.encryption.EncryptionMethod $r17, $r19, $r25, r52;
+        java.lang.Object[] $r24, $r31, $r33;
+        java.security.PrivateKey $r27;
+        javax.crypto.SecretKey $r29;
+        java.lang.Throwable $r34, $r36, $r38, r53, r54, r55;
+        java.lang.Exception $r40, r46, $r63, $r64, $r65;
+        org.apache.xml.security.keys.KeyInfo r43;
+        org.apache.xml.security.encryption.XMLCipherInput r48, $r59;
+        org.apache.xml.security.encryption.XMLEncryptionException $r56, $r57, $r58, $r60, $r61, $r62;
+
+        nop;
+
+        r1 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r5 := @parameter0: org.apache.xml.security.encryption.EncryptedKey;
+
+        r2 := @parameter1: java.lang.String;
+
+        $r0 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2794 = "Decrypting key from previously loaded EncryptedKey...";
+
+        interfaceinvoke $r0.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2794);
+
+        $i0 = r1.<org.apache.xml.security.encryption.XMLCipher: int cipherMode>;
+
+        if $i0 == 4 goto label01;
+
+        $r56 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r33 = newarray (java.lang.Object)[1];
+
+        $r33[0] = "XMLCipher unexpectedly not in UNWRAP_MODE...";
+
+        varReplacer2790 = "empty";
+
+        specialinvoke $r56.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2790, $r33);
+
+        throw $r56;
+
+     label01:
+        if r2 != null goto label02;
+
+        $r57 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r31 = newarray (java.lang.Object)[1];
+
+        $r31[0] = "Cannot decrypt a key without knowing the algorithm";
+
+        varReplacer2799 = "empty";
+
+        specialinvoke $r57.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2799, $r31);
+
+        throw $r57;
+
+     label02:
+        $r3 = r1.<org.apache.xml.security.encryption.XMLCipher: java.security.Key key>;
+
+        if $r3 != null goto label09;
+
+        $r21 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2797 = "Trying to find a KEK via key resolvers";
+
+        interfaceinvoke $r21.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2797);
+
+        r43 = interfaceinvoke r5.<org.apache.xml.security.encryption.EncryptedKey: org.apache.xml.security.keys.KeyInfo getKeyInfo()>();
+
+        if r43 == null goto label08;
+
+        $z1 = r1.<org.apache.xml.security.encryption.XMLCipher: boolean secureValidation>;
+
+        virtualinvoke r43.<org.apache.xml.security.keys.KeyInfo: void setSecureValidation(boolean)>($z1);
+
+     label03:
+        $r25 = interfaceinvoke r5.<org.apache.xml.security.encryption.EncryptedKey: org.apache.xml.security.encryption.EncryptionMethod getEncryptionMethod()>();
+
+        r44 = interfaceinvoke $r25.<org.apache.xml.security.encryption.EncryptionMethod: java.lang.String getAlgorithm()>();
+
+        r45 = staticinvoke <org.apache.xml.security.algorithms.JCEMapper: java.lang.String getJCEKeyAlgorithmFromURI(java.lang.String)>(r44);
+
+        $r26 = "RSA";
+
+        $z2 = virtualinvoke $r26.<java.lang.String: boolean equals(java.lang.Object)>(r45);
+
+        if $z2 != 0 goto label04;
+
+        $r28 = "EC";
+
+        $z3 = virtualinvoke $r28.<java.lang.String: boolean equals(java.lang.Object)>(r45);
+
+        if $z3 == 0 goto label05;
+
+     label04:
+        $r27 = virtualinvoke r43.<org.apache.xml.security.keys.KeyInfo: java.security.PrivateKey getPrivateKey()>();
+
+        r1.<org.apache.xml.security.encryption.XMLCipher: java.security.Key key> = $r27;
+
+        goto label06;
+
+     label05:
+        $r29 = virtualinvoke r43.<org.apache.xml.security.keys.KeyInfo: javax.crypto.SecretKey getSecretKey()>();
+
+        r1.<org.apache.xml.security.encryption.XMLCipher: java.security.Key key> = $r29;
+
+     label06:
+        goto label08;
+
+     label07:
+        $r40 := @caughtexception;
+
+        r46 = $r40;
+
+        $r41 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        $r42 = virtualinvoke r46.<java.lang.Exception: java.lang.String getMessage()>();
+
+        interfaceinvoke $r41.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Throwable)>($r42, r46);
+
+     label08:
+        $r47 = r1.<org.apache.xml.security.encryption.XMLCipher: java.security.Key key>;
+
+        if $r47 != null goto label09;
+
+        $r22 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2798 = "XMLCipher::decryptKey called without a KEK and cannot resolve";
+
+        interfaceinvoke $r22.<org.slf4j.Logger: void error(java.lang.String)>(varReplacer2798);
+
+        $r58 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r24 = newarray (java.lang.Object)[1];
+
+        $r24[0] = "Unable to decrypt without a KEK";
+
+        varReplacer2792 = "empty";
+
+        specialinvoke $r58.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2792, $r24);
+
+        throw $r58;
+
+     label09:
+        $r59 = new org.apache.xml.security.encryption.XMLCipherInput;
+
+        specialinvoke $r59.<org.apache.xml.security.encryption.XMLCipherInput: void <init>(org.apache.xml.security.encryption.EncryptedType)>(r5);
+
+        r48 = $r59;
+
+        $z0 = r1.<org.apache.xml.security.encryption.XMLCipher: boolean secureValidation>;
+
+        virtualinvoke r48.<org.apache.xml.security.encryption.XMLCipherInput: void setSecureValidation(boolean)>($z0);
+
+        r49 = virtualinvoke r48.<org.apache.xml.security.encryption.XMLCipherInput: byte[] getBytes()>();
+
+        r50 = staticinvoke <org.apache.xml.security.algorithms.JCEMapper: java.lang.String getJCEKeyAlgorithmFromURI(java.lang.String)>(r2);
+
+        $r6 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2795 = "JCE Key Algorithm: {}";
+
+        interfaceinvoke $r6.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object)>(varReplacer2795, r50);
+
+        $r7 = r1.<org.apache.xml.security.encryption.XMLCipher: javax.crypto.Cipher contextCipher>;
+
+        if $r7 != null goto label10;
+
+        $r17 = interfaceinvoke r5.<org.apache.xml.security.encryption.EncryptedKey: org.apache.xml.security.encryption.EncryptionMethod getEncryptionMethod()>();
+
+        $r18 = interfaceinvoke $r17.<org.apache.xml.security.encryption.EncryptionMethod: java.lang.String getAlgorithm()>();
+
+        $r19 = interfaceinvoke r5.<org.apache.xml.security.encryption.EncryptedKey: org.apache.xml.security.encryption.EncryptionMethod getEncryptionMethod()>();
+
+        $r20 = interfaceinvoke $r19.<org.apache.xml.security.encryption.EncryptionMethod: java.lang.String getDigestAlgorithm()>();
+
+        r51 = specialinvoke r1.<org.apache.xml.security.encryption.XMLCipher: javax.crypto.Cipher constructCipher(java.lang.String,java.lang.String)>($r18, $r20);
+
+        goto label11;
+
+     label10:
+        r51 = r1.<org.apache.xml.security.encryption.XMLCipher: javax.crypto.Cipher contextCipher>;
+
+     label11:
+        r52 = interfaceinvoke r5.<org.apache.xml.security.encryption.EncryptedKey: org.apache.xml.security.encryption.EncryptionMethod getEncryptionMethod()>();
+
+        $r8 = interfaceinvoke r52.<org.apache.xml.security.encryption.EncryptionMethod: java.lang.String getAlgorithm()>();
+
+        $r9 = interfaceinvoke r52.<org.apache.xml.security.encryption.EncryptionMethod: java.lang.String getDigestAlgorithm()>();
+
+        $r10 = interfaceinvoke r52.<org.apache.xml.security.encryption.EncryptionMethod: java.lang.String getMGFAlgorithm()>();
+
+        $r11 = interfaceinvoke r52.<org.apache.xml.security.encryption.EncryptionMethod: byte[] getOAEPparams()>();
+
+        r12 = specialinvoke r1.<org.apache.xml.security.encryption.XMLCipher: javax.crypto.spec.OAEPParameterSpec constructOAEPParameters(java.lang.String,java.lang.String,java.lang.String,byte[])>($r8, $r9, $r10, $r11);
+
+        if r12 != null goto label12;
+
+        $r16 = r1.<org.apache.xml.security.encryption.XMLCipher: java.security.Key key>;
+
+        varReplacer2793 = 4;
+
+        virtualinvoke r51.<javax.crypto.Cipher: void init(int,java.security.Key)>(varReplacer2793, $r16);
+
+        goto label13;
+
+     label12:
+        $r13 = r1.<org.apache.xml.security.encryption.XMLCipher: java.security.Key key>;
+
+        varReplacer2789 = 4;
+
+        virtualinvoke r51.<javax.crypto.Cipher: void init(int,java.security.Key,java.security.spec.AlgorithmParameterSpec)>(varReplacer2789, $r13, r12);
+
+     label13:
+        varReplacer2791 = 3;
+
+        r14 = virtualinvoke r51.<javax.crypto.Cipher: java.security.Key unwrap(byte[],java.lang.String,int)>(r49, r50, varReplacer2791);
+
+     label14:
+        goto label18;
+
+     label15:
+        $r38 := @caughtexception;
+
+        r53 = $r38;
+
+        $r60 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r63 = (java.lang.Exception) r53;
+
+        specialinvoke $r60.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>($r63);
+
+        throw $r60;
+
+     label16:
+        $r36 := @caughtexception;
+
+        r54 = $r36;
+
+        $r61 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r64 = (java.lang.Exception) r54;
+
+        specialinvoke $r61.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>($r64);
+
+        throw $r61;
+
+     label17:
+        $r34 := @caughtexception;
+
+        r55 = $r34;
+
+        $r62 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r65 = (java.lang.Exception) r55;
+
+        specialinvoke $r62.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>($r65);
+
+        throw $r62;
+
+     label18:
+        $r15 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2796 = "Decryption of key type {} OK";
+
+        interfaceinvoke $r15.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object)>(varReplacer2796, r2);
+
+        return r14;
+
+        catch java.lang.Exception from label03 to label06 with label07;
+        catch java.security.InvalidKeyException from label11 to label14 with label15;
+        catch java.security.NoSuchAlgorithmException from label11 to label14 with label16;
+        catch java.security.InvalidAlgorithmParameterException from label11 to label14 with label17;
+    }
+
+    private javax.crypto.spec.OAEPParameterSpec constructOAEPParameters(java.lang.String, java.lang.String, java.lang.String, byte[])
+    {
+        java.lang.String r0, $r1, r2, $r5, r6, $r7, $r8, $r9, $r14, r16, varReplacer2800, varReplacer2801, varReplacer2802, varReplacer2803, varReplacer2804;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5;
+        byte[] r3;
+        java.security.spec.MGF1ParameterSpec $r4, $r10, $r11, $r12, r18;
+        javax.crypto.spec.PSource$PSpecified $r13, r17;
+        org.apache.xml.security.encryption.XMLCipher r15;
+        javax.crypto.spec.OAEPParameterSpec $r19;
+        null_type varReplacer2805;
+
+        nop;
+
+        r15 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r0 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: java.lang.String;
+
+        r6 := @parameter2: java.lang.String;
+
+        r3 := @parameter3: byte[];
+
+        $r1 = "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p";
+
+        $z0 = virtualinvoke $r1.<java.lang.String: boolean equals(java.lang.Object)>(r0);
+
+        if $z0 != 0 goto label1;
+
+        $r14 = "http://www.w3.org/2009/xmlenc11#rsa-oaep";
+
+        $z5 = virtualinvoke $r14.<java.lang.String: boolean equals(java.lang.Object)>(r0);
+
+        if $z5 == 0 goto label7;
+
+     label1:
+        r16 = "SHA-1";
+
+        if r2 == null goto label2;
+
+        r16 = staticinvoke <org.apache.xml.security.algorithms.JCEMapper: java.lang.String translateURItoJCEID(java.lang.String)>(r2);
+
+     label2:
+        r17 = <javax.crypto.spec.PSource$PSpecified: javax.crypto.spec.PSource$PSpecified DEFAULT>;
+
+        if r3 == null goto label3;
+
+        $r13 = new javax.crypto.spec.PSource$PSpecified;
+
+        specialinvoke $r13.<javax.crypto.spec.PSource$PSpecified: void <init>(byte[])>(r3);
+
+        r17 = $r13;
+
+     label3:
+        $r4 = new java.security.spec.MGF1ParameterSpec;
+
+        varReplacer2800 = "SHA-1";
+
+        specialinvoke $r4.<java.security.spec.MGF1ParameterSpec: void <init>(java.lang.String)>(varReplacer2800);
+
+        r18 = $r4;
+
+        $r5 = "http://www.w3.org/2009/xmlenc11#rsa-oaep";
+
+        $z1 = virtualinvoke $r5.<java.lang.String: boolean equals(java.lang.Object)>(r0);
+
+        if $z1 == 0 goto label6;
+
+        $r7 = "http://www.w3.org/2009/xmlenc11#mgf1sha256";
+
+        $z2 = virtualinvoke $r7.<java.lang.String: boolean equals(java.lang.Object)>(r6);
+
+        if $z2 == 0 goto label4;
+
+        $r12 = new java.security.spec.MGF1ParameterSpec;
+
+        varReplacer2802 = "SHA-256";
+
+        specialinvoke $r12.<java.security.spec.MGF1ParameterSpec: void <init>(java.lang.String)>(varReplacer2802);
+
+        r18 = $r12;
+
+        goto label6;
+
+     label4:
+        $r8 = "http://www.w3.org/2009/xmlenc11#mgf1sha384";
+
+        $z3 = virtualinvoke $r8.<java.lang.String: boolean equals(java.lang.Object)>(r6);
+
+        if $z3 == 0 goto label5;
+
+        $r11 = new java.security.spec.MGF1ParameterSpec;
+
+        varReplacer2801 = "SHA-384";
+
+        specialinvoke $r11.<java.security.spec.MGF1ParameterSpec: void <init>(java.lang.String)>(varReplacer2801);
+
+        r18 = $r11;
+
+        goto label6;
+
+     label5:
+        $r9 = "http://www.w3.org/2009/xmlenc11#mgf1sha512";
+
+        $z4 = virtualinvoke $r9.<java.lang.String: boolean equals(java.lang.Object)>(r6);
+
+        if $z4 == 0 goto label6;
+
+        $r10 = new java.security.spec.MGF1ParameterSpec;
+
+        varReplacer2803 = "SHA-512";
+
+        specialinvoke $r10.<java.security.spec.MGF1ParameterSpec: void <init>(java.lang.String)>(varReplacer2803);
+
+        r18 = $r10;
+
+     label6:
+        $r19 = new javax.crypto.spec.OAEPParameterSpec;
+
+        varReplacer2804 = "MGF1";
+
+        specialinvoke $r19.<javax.crypto.spec.OAEPParameterSpec: void <init>(java.lang.String,java.lang.String,java.security.spec.AlgorithmParameterSpec,javax.crypto.spec.PSource)>(r16, varReplacer2804, r18, r17);
+
+        return $r19;
+
+     label7:
+        varReplacer2805 = null;
+
+        return varReplacer2805;
+    }
+
+    private javax.crypto.Cipher constructCipher(java.lang.String, java.lang.String) throws org.apache.xml.security.encryption.XMLEncryptionException
+    {
+        java.lang.String r0, r1, $r4, $r5, r11, varReplacer2806;
+        org.slf4j.Logger $r2;
+        org.apache.xml.security.encryption.XMLCipher r3;
+        java.lang.Throwable $r6, $r8, $r10, r13, r14, r15;
+        javax.crypto.Cipher r12;
+        org.apache.xml.security.encryption.XMLEncryptionException $r16, $r17;
+        java.lang.Exception $r18, $r19, $r20;
+
+        nop;
+
+        r3 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r0 := @parameter0: java.lang.String;
+
+        r11 := @parameter1: java.lang.String;
+
+        r1 = staticinvoke <org.apache.xml.security.algorithms.JCEMapper: java.lang.String translateURItoJCEID(java.lang.String)>(r0);
+
+        $r2 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2806 = "JCE Algorithm = {}";
+
+        interfaceinvoke $r2.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object)>(varReplacer2806, r1);
+
+     label1:
+        $r4 = r3.<org.apache.xml.security.encryption.XMLCipher: java.lang.String requestedJCEProvider>;
+
+        if $r4 != null goto label2;
+
+        r12 = staticinvoke <javax.crypto.Cipher: javax.crypto.Cipher getInstance(java.lang.String)>(r1);
+
+        goto label3;
+
+     label2:
+        $r5 = r3.<org.apache.xml.security.encryption.XMLCipher: java.lang.String requestedJCEProvider>;
+
+        r12 = staticinvoke <javax.crypto.Cipher: javax.crypto.Cipher getInstance(java.lang.String,java.lang.String)>(r1, $r5);
+
+     label3:
+        goto label7;
+
+     label4:
+        $r10 := @caughtexception;
+
+        r13 = $r10;
+
+        $r18 = (java.lang.Exception) r13;
+
+        r12 = specialinvoke r3.<org.apache.xml.security.encryption.XMLCipher: javax.crypto.Cipher constructCipher(java.lang.String,java.lang.String,java.lang.Exception)>(r0, r11, $r18);
+
+        goto label7;
+
+     label5:
+        $r8 := @caughtexception;
+
+        r14 = $r8;
+
+        $r16 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r19 = (java.lang.Exception) r14;
+
+        specialinvoke $r16.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>($r19);
+
+        throw $r16;
+
+     label6:
+        $r6 := @caughtexception;
+
+        r15 = $r6;
+
+        $r17 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r20 = (java.lang.Exception) r15;
+
+        specialinvoke $r17.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>($r20);
+
+        throw $r17;
+
+     label7:
+        return r12;
+
+        catch java.security.NoSuchAlgorithmException from label1 to label3 with label4;
+        catch java.security.NoSuchProviderException from label1 to label3 with label5;
+        catch javax.crypto.NoSuchPaddingException from label1 to label3 with label6;
+    }
+
+    private javax.crypto.Cipher constructCipher(java.lang.String, java.lang.String, java.lang.Exception) throws org.apache.xml.security.encryption.XMLEncryptionException
+    {
+        java.lang.String r0, $r1, r2, $r4, $r5, $r8, $r9, $r10, $r11, $r14, $r15, $r18, $r19, $r22, $r23, varReplacer2807, varReplacer2808, varReplacer2809, varReplacer2810, varReplacer2811, varReplacer2812, varReplacer2813, varReplacer2814;
+        boolean $z0, $z1, $z2, $z3, $z4;
+        org.apache.xml.security.encryption.XMLCipher r3;
+        javax.crypto.Cipher $r6, $r7, $r16, $r17, $r20, $r21, $r24, $r25;
+        org.apache.xml.security.encryption.XMLEncryptionException $r12, $r26, $r28, $r30, $r32, $r34;
+        java.lang.Exception r13, $r27, $r29, $r31, $r33, r35, r36, r37, r38;
+
+        nop;
+
+        r3 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r0 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: java.lang.String;
+
+        r13 := @parameter2: java.lang.Exception;
+
+        $r1 = "http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p";
+
+        $z0 = virtualinvoke $r1.<java.lang.String: boolean equals(java.lang.Object)>(r0);
+
+        if $z0 != 0 goto label01;
+
+        $r26 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        specialinvoke $r26.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>(r13);
+
+        throw $r26;
+
+     label01:
+        if r2 == null goto label02;
+
+        $r8 = "http://www.w3.org/2000/09/xmldsig#sha1";
+
+        $z1 = virtualinvoke $r8.<java.lang.String: boolean equals(java.lang.Object)>(r2);
+
+        if $z1 == 0 goto label07;
+
+     label02:
+        $r4 = r3.<org.apache.xml.security.encryption.XMLCipher: java.lang.String requestedJCEProvider>;
+
+        if $r4 != null goto label04;
+
+        varReplacer2808 = "RSA/ECB/OAEPWithSHA1AndMGF1Padding";
+
+        $r7 = staticinvoke <javax.crypto.Cipher: javax.crypto.Cipher getInstance(java.lang.String)>(varReplacer2808);
+
+     label03:
+        return $r7;
+
+     label04:
+        $r5 = r3.<org.apache.xml.security.encryption.XMLCipher: java.lang.String requestedJCEProvider>;
+
+        varReplacer2812 = "RSA/ECB/OAEPWithSHA1AndMGF1Padding";
+
+        $r6 = staticinvoke <javax.crypto.Cipher: javax.crypto.Cipher getInstance(java.lang.String,java.lang.String)>(varReplacer2812, $r5);
+
+     label05:
+        return $r6;
+
+     label06:
+        $r33 := @caughtexception;
+
+        r35 = $r33;
+
+        $r34 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        specialinvoke $r34.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>(r35);
+
+        throw $r34;
+
+     label07:
+        $r9 = "http://www.w3.org/2001/04/xmlenc#sha256";
+
+        $z2 = virtualinvoke $r9.<java.lang.String: boolean equals(java.lang.Object)>(r2);
+
+        if $z2 == 0 goto label13;
+
+     label08:
+        $r22 = r3.<org.apache.xml.security.encryption.XMLCipher: java.lang.String requestedJCEProvider>;
+
+        if $r22 != null goto label10;
+
+        varReplacer2807 = "RSA/ECB/OAEPWithSHA-256AndMGF1Padding";
+
+        $r25 = staticinvoke <javax.crypto.Cipher: javax.crypto.Cipher getInstance(java.lang.String)>(varReplacer2807);
+
+     label09:
+        return $r25;
+
+     label10:
+        $r23 = r3.<org.apache.xml.security.encryption.XMLCipher: java.lang.String requestedJCEProvider>;
+
+        varReplacer2814 = "RSA/ECB/OAEPWithSHA-256AndMGF1Padding";
+
+        $r24 = staticinvoke <javax.crypto.Cipher: javax.crypto.Cipher getInstance(java.lang.String,java.lang.String)>(varReplacer2814, $r23);
+
+     label11:
+        return $r24;
+
+     label12:
+        $r31 := @caughtexception;
+
+        r36 = $r31;
+
+        $r32 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        specialinvoke $r32.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>(r36);
+
+        throw $r32;
+
+     label13:
+        $r10 = "http://www.w3.org/2001/04/xmldsig-more#sha384";
+
+        $z3 = virtualinvoke $r10.<java.lang.String: boolean equals(java.lang.Object)>(r2);
+
+        if $z3 == 0 goto label19;
+
+     label14:
+        $r18 = r3.<org.apache.xml.security.encryption.XMLCipher: java.lang.String requestedJCEProvider>;
+
+        if $r18 != null goto label16;
+
+        varReplacer2809 = "RSA/ECB/OAEPWithSHA-384AndMGF1Padding";
+
+        $r21 = staticinvoke <javax.crypto.Cipher: javax.crypto.Cipher getInstance(java.lang.String)>(varReplacer2809);
+
+     label15:
+        return $r21;
+
+     label16:
+        $r19 = r3.<org.apache.xml.security.encryption.XMLCipher: java.lang.String requestedJCEProvider>;
+
+        varReplacer2813 = "RSA/ECB/OAEPWithSHA-384AndMGF1Padding";
+
+        $r20 = staticinvoke <javax.crypto.Cipher: javax.crypto.Cipher getInstance(java.lang.String,java.lang.String)>(varReplacer2813, $r19);
+
+     label17:
+        return $r20;
+
+     label18:
+        $r29 := @caughtexception;
+
+        r37 = $r29;
+
+        $r30 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        specialinvoke $r30.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>(r37);
+
+        throw $r30;
+
+     label19:
+        $r11 = "http://www.w3.org/2001/04/xmlenc#sha512";
+
+        $z4 = virtualinvoke $r11.<java.lang.String: boolean equals(java.lang.Object)>(r2);
+
+        if $z4 == 0 goto label25;
+
+     label20:
+        $r14 = r3.<org.apache.xml.security.encryption.XMLCipher: java.lang.String requestedJCEProvider>;
+
+        if $r14 != null goto label22;
+
+        varReplacer2810 = "RSA/ECB/OAEPWithSHA-512AndMGF1Padding";
+
+        $r17 = staticinvoke <javax.crypto.Cipher: javax.crypto.Cipher getInstance(java.lang.String)>(varReplacer2810);
+
+     label21:
+        return $r17;
+
+     label22:
+        $r15 = r3.<org.apache.xml.security.encryption.XMLCipher: java.lang.String requestedJCEProvider>;
+
+        varReplacer2811 = "RSA/ECB/OAEPWithSHA-512AndMGF1Padding";
+
+        $r16 = staticinvoke <javax.crypto.Cipher: javax.crypto.Cipher getInstance(java.lang.String,java.lang.String)>(varReplacer2811, $r15);
+
+     label23:
+        return $r16;
+
+     label24:
+        $r27 := @caughtexception;
+
+        r38 = $r27;
+
+        $r28 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        specialinvoke $r28.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>(r38);
+
+        throw $r28;
+
+     label25:
+        $r12 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        specialinvoke $r12.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>(r13);
+
+        throw $r12;
+
+        catch java.lang.Exception from label02 to label03 with label06;
+        catch java.lang.Exception from label04 to label05 with label06;
+        catch java.lang.Exception from label08 to label09 with label12;
+        catch java.lang.Exception from label10 to label11 with label12;
+        catch java.lang.Exception from label14 to label15 with label18;
+        catch java.lang.Exception from label16 to label17 with label18;
+        catch java.lang.Exception from label20 to label21 with label24;
+        catch java.lang.Exception from label22 to label23 with label24;
+    }
+
+    public java.security.Key decryptKey(org.apache.xml.security.encryption.EncryptedKey) throws org.apache.xml.security.encryption.XMLEncryptionException
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        org.apache.xml.security.encryption.EncryptedKey r1;
+        org.apache.xml.security.encryption.EncryptedData $r2;
+        org.apache.xml.security.encryption.EncryptionMethod $r3;
+        java.lang.String $r4;
+        java.security.Key $r5;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: org.apache.xml.security.encryption.EncryptedKey;
+
+        $r2 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedData ed>;
+
+        $r3 = interfaceinvoke $r2.<org.apache.xml.security.encryption.EncryptedData: org.apache.xml.security.encryption.EncryptionMethod getEncryptionMethod()>();
+
+        $r4 = interfaceinvoke $r3.<org.apache.xml.security.encryption.EncryptionMethod: java.lang.String getAlgorithm()>();
+
+        $r5 = virtualinvoke r0.<org.apache.xml.security.encryption.XMLCipher: java.security.Key decryptKey(org.apache.xml.security.encryption.EncryptedKey,java.lang.String)>(r1, $r4);
+
+        return $r5;
+    }
+
+    private static void removeContent(org.w3c.dom.Node)
+    {
+        org.w3c.dom.Node r0, $r1;
+        boolean $z0;
+
+        nop;
+
+        r0 := @parameter0: org.w3c.dom.Node;
+
+     label1:
+        $z0 = interfaceinvoke r0.<org.w3c.dom.Node: boolean hasChildNodes()>();
+
+        if $z0 == 0 goto label2;
+
+        $r1 = interfaceinvoke r0.<org.w3c.dom.Node: org.w3c.dom.Node getFirstChild()>();
+
+        interfaceinvoke r0.<org.w3c.dom.Node: org.w3c.dom.Node removeChild(org.w3c.dom.Node)>($r1);
+
+        goto label1;
+
+     label2:
+        return;
+    }
+
+    private org.w3c.dom.Document decryptElement(org.w3c.dom.Element) throws org.apache.xml.security.encryption.XMLEncryptionException
+    {
+        org.slf4j.Logger $r0, $r5, $r17;
+        org.apache.xml.security.encryption.XMLCipher r1;
+        org.apache.xml.security.encryption.Serializer $r2, $r7, $r27;
+        boolean $z0, $z1, $z2;
+        org.w3c.dom.Element r3, $r12;
+        int $i0;
+        byte[] r4;
+        org.w3c.dom.Node r6, $r24, r31;
+        org.w3c.dom.Document $r8, $r10, $r11, $r14;
+        short $s1;
+        java.lang.StringBuilder $r18, $r20, $r35;
+        java.lang.String $r21, $r36, varReplacer2815, varReplacer2816, varReplacer2817, varReplacer2818;
+        java.lang.Object[] $r23, $r26;
+        org.apache.xml.security.encryption.AbstractSerializer $r28;
+        java.lang.Throwable $r29, r32;
+        org.apache.xml.security.encryption.XMLEncryptionException $r33, $r34, $r37;
+        java.lang.Exception $r38;
+
+        nop;
+
+        r1 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r3 := @parameter0: org.w3c.dom.Element;
+
+        $r0 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2817 = "Decrypting element...";
+
+        interfaceinvoke $r0.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2817);
+
+        $r2 = r1.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.Serializer serializer>;
+
+        $z0 = $r2 instanceof org.apache.xml.security.encryption.AbstractSerializer;
+
+        if $z0 == 0 goto label1;
+
+        $r27 = r1.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.Serializer serializer>;
+
+        $r28 = (org.apache.xml.security.encryption.AbstractSerializer) $r27;
+
+        $z2 = r1.<org.apache.xml.security.encryption.XMLCipher: boolean secureValidation>;
+
+        virtualinvoke $r28.<org.apache.xml.security.encryption.AbstractSerializer: void setSecureValidation(boolean)>($z2);
+
+     label1:
+        if r3 == null goto label2;
+
+        $r24 = interfaceinvoke r3.<org.w3c.dom.Element: org.w3c.dom.Node getParentNode()>();
+
+        if $r24 != null goto label2;
+
+        $r33 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r26 = newarray (java.lang.Object)[1];
+
+        $r26[0] = "The element can\'t be serialized as it has no parent";
+
+        varReplacer2815 = "empty";
+
+        specialinvoke $r33.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2815, $r26);
+
+        throw $r33;
+
+     label2:
+        $i0 = r1.<org.apache.xml.security.encryption.XMLCipher: int cipherMode>;
+
+        if $i0 == 2 goto label3;
+
+        $r34 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r23 = newarray (java.lang.Object)[1];
+
+        $r23[0] = "XMLCipher unexpectedly not in DECRYPT_MODE...";
+
+        varReplacer2818 = "empty";
+
+        specialinvoke $r34.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2818, $r23);
+
+        throw $r34;
+
+     label3:
+        r4 = virtualinvoke r1.<org.apache.xml.security.encryption.XMLCipher: byte[] decryptToByteArray(org.w3c.dom.Element)>(r3);
+
+        $r5 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        $z1 = interfaceinvoke $r5.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z1 == 0 goto label4;
+
+        $r17 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        $r35 = new java.lang.StringBuilder;
+
+        specialinvoke $r35.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer2816 = "Decrypted octets:\n";
+
+        $r18 = virtualinvoke $r35.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2816);
+
+        $r36 = new java.lang.String;
+
+        specialinvoke $r36.<java.lang.String: void <init>(byte[])>(r4);
+
+        $r20 = virtualinvoke $r18.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r36);
+
+        $r21 = virtualinvoke $r20.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r17.<org.slf4j.Logger: void debug(java.lang.String)>($r21);
+
+     label4:
+        r6 = interfaceinvoke r3.<org.w3c.dom.Element: org.w3c.dom.Node getParentNode()>();
+
+     label5:
+        $r7 = r1.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.Serializer serializer>;
+
+        r31 = interfaceinvoke $r7.<org.apache.xml.security.encryption.Serializer: org.w3c.dom.Node deserialize(byte[],org.w3c.dom.Node)>(r4, r6);
+
+        if r6 == null goto label6;
+
+        $s1 = interfaceinvoke r6.<org.w3c.dom.Node: short getNodeType()>();
+
+        if 9 != $s1 goto label6;
+
+        $r11 = r1.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document contextDocument>;
+
+        $r10 = r1.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document contextDocument>;
+
+        $r12 = interfaceinvoke $r10.<org.w3c.dom.Document: org.w3c.dom.Element getDocumentElement()>();
+
+        interfaceinvoke $r11.<org.w3c.dom.Document: org.w3c.dom.Node removeChild(org.w3c.dom.Node)>($r12);
+
+        $r14 = r1.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document contextDocument>;
+
+        interfaceinvoke $r14.<org.w3c.dom.Document: org.w3c.dom.Node appendChild(org.w3c.dom.Node)>(r31);
+
+        goto label7;
+
+     label6:
+        if r6 == null goto label7;
+
+        interfaceinvoke r6.<org.w3c.dom.Node: org.w3c.dom.Node replaceChild(org.w3c.dom.Node,org.w3c.dom.Node)>(r31, r3);
+
+     label7:
+        goto label9;
+
+     label8:
+        $r29 := @caughtexception;
+
+        r32 = $r29;
+
+        $r37 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r38 = (java.lang.Exception) r32;
+
+        specialinvoke $r37.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>($r38);
+
+        throw $r37;
+
+     label9:
+        $r8 = r1.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document contextDocument>;
+
+        return $r8;
+
+        catch java.io.IOException from label5 to label7 with label8;
+    }
+
+    private org.w3c.dom.Document decryptElementContent(org.w3c.dom.Element) throws org.apache.xml.security.encryption.XMLEncryptionException
+    {
+        org.w3c.dom.Element r0, r3;
+        org.w3c.dom.NodeList $r1;
+        org.w3c.dom.Node $r2;
+        org.apache.xml.security.encryption.XMLCipher r4;
+        org.w3c.dom.Document $r5;
+        org.apache.xml.security.encryption.XMLEncryptionException $r6;
+        java.lang.Object[] $r7;
+        int varReplacer2819;
+        java.lang.String varReplacer2820, varReplacer2821, varReplacer2822;
+
+        nop;
+
+        r4 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r0 := @parameter0: org.w3c.dom.Element;
+
+        varReplacer2820 = "http://www.w3.org/2001/04/xmlenc#";
+
+        varReplacer2821 = "EncryptedData";
+
+        $r1 = interfaceinvoke r0.<org.w3c.dom.Element: org.w3c.dom.NodeList getElementsByTagNameNS(java.lang.String,java.lang.String)>(varReplacer2820, varReplacer2821);
+
+        varReplacer2819 = 0;
+
+        $r2 = interfaceinvoke $r1.<org.w3c.dom.NodeList: org.w3c.dom.Node item(int)>(varReplacer2819);
+
+        r3 = (org.w3c.dom.Element) $r2;
+
+        if null != r3 goto label1;
+
+        $r6 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r7 = newarray (java.lang.Object)[1];
+
+        $r7[0] = "No EncryptedData child element.";
+
+        varReplacer2822 = "empty";
+
+        specialinvoke $r6.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2822, $r7);
+
+        throw $r6;
+
+     label1:
+        $r5 = specialinvoke r4.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document decryptElement(org.w3c.dom.Element)>(r3);
+
+        return $r5;
+    }
+
+    public byte[] decryptToByteArray(org.w3c.dom.Element) throws org.apache.xml.security.encryption.XMLEncryptionException
+    {
+        org.slf4j.Logger $r0, $r9, $r16, $r44;
+        org.apache.xml.security.encryption.XMLCipher r1;
+        int $i0, $i1, $i2, $i3, $i4, i5, i6, i7, varReplacer2823, varReplacer2824;
+        org.w3c.dom.Element r2;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r3;
+        org.apache.xml.security.encryption.EncryptedData r4;
+        org.apache.xml.security.encryption.EncryptionMethod $r5;
+        java.lang.String r6, $r10, $r11, $r45, r52, r57, varReplacer2825, varReplacer2826, varReplacer2827, varReplacer2828, varReplacer2829;
+        java.security.Key $r7, $r14, $r20, $r49;
+        boolean $z0, $z1;
+        byte[] r12, $r15, r51;
+        java.security.spec.AlgorithmParameterSpec r13;
+        java.lang.Object[] $r18, $r28;
+        java.util.List $r21, $r23, $r24;
+        javax.crypto.SecretKey $r22;
+        java.lang.Object $r25;
+        org.apache.xml.security.keys.keyresolver.KeyResolverSpi $r26;
+        java.lang.Throwable $r29, $r31, $r33, $r35, $r37, $r39, $r41, r54, r55, r56, r58, r59, r60, r61;
+        org.apache.xml.security.keys.keyresolver.KeyResolverException $r43, r48;
+        org.apache.xml.security.keys.KeyInfo r46;
+        org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver r47, $r63;
+        org.apache.xml.security.encryption.XMLCipherInput r50, $r65;
+        javax.crypto.Cipher r53;
+        org.apache.xml.security.encryption.XMLEncryptionException $r62, $r64, $r66, $r67, $r68, $r69, $r70, $r71, $r72;
+        java.lang.Exception $r73, $r74, $r75, $r76, $r77, $r78, $r79;
+
+        nop;
+
+        r1 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r2 := @parameter0: org.w3c.dom.Element;
+
+        $r0 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2825 = "Decrypting to ByteArray...";
+
+        interfaceinvoke $r0.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2825);
+
+        $i0 = r1.<org.apache.xml.security.encryption.XMLCipher: int cipherMode>;
+
+        if $i0 == 2 goto label01;
+
+        $r62 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r28 = newarray (java.lang.Object)[1];
+
+        $r28[0] = "XMLCipher unexpectedly not in DECRYPT_MODE...";
+
+        varReplacer2828 = "empty";
+
+        specialinvoke $r62.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2828, $r28);
+
+        throw $r62;
+
+     label01:
+        $r3 = r1.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        r4 = virtualinvoke $r3.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.EncryptedData newEncryptedData(org.w3c.dom.Element)>(r2);
+
+        $r5 = interfaceinvoke r4.<org.apache.xml.security.encryption.EncryptedData: org.apache.xml.security.encryption.EncryptionMethod getEncryptionMethod()>();
+
+        r6 = interfaceinvoke $r5.<org.apache.xml.security.encryption.EncryptionMethod: java.lang.String getAlgorithm()>();
+
+        $r7 = r1.<org.apache.xml.security.encryption.XMLCipher: java.security.Key key>;
+
+        if $r7 != null goto label08;
+
+        r46 = interfaceinvoke r4.<org.apache.xml.security.encryption.EncryptedData: org.apache.xml.security.keys.KeyInfo getKeyInfo()>();
+
+        if r46 == null goto label07;
+
+     label02:
+        $r63 = new org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver;
+
+        $r20 = r1.<org.apache.xml.security.encryption.XMLCipher: java.security.Key kek>;
+
+        specialinvoke $r63.<org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver: void <init>(java.lang.String,java.security.Key)>(r6, $r20);
+
+        r47 = $r63;
+
+        $r21 = r1.<org.apache.xml.security.encryption.XMLCipher: java.util.List internalKeyResolvers>;
+
+        if $r21 == null goto label04;
+
+        $r23 = r1.<org.apache.xml.security.encryption.XMLCipher: java.util.List internalKeyResolvers>;
+
+        i5 = interfaceinvoke $r23.<java.util.List: int size()>();
+
+        i6 = 0;
+
+     label03:
+        if i6 >= i5 goto label04;
+
+        $r24 = r1.<org.apache.xml.security.encryption.XMLCipher: java.util.List internalKeyResolvers>;
+
+        $r25 = interfaceinvoke $r24.<java.util.List: java.lang.Object get(int)>(i6);
+
+        $r26 = (org.apache.xml.security.keys.keyresolver.KeyResolverSpi) $r25;
+
+        virtualinvoke r47.<org.apache.xml.security.keys.keyresolver.implementations.EncryptedKeyResolver: void registerInternalKeyResolver(org.apache.xml.security.keys.keyresolver.KeyResolverSpi)>($r26);
+
+        i6 = i6 + 1;
+
+        goto label03;
+
+     label04:
+        virtualinvoke r46.<org.apache.xml.security.keys.KeyInfo: void registerInternalKeyResolver(org.apache.xml.security.keys.keyresolver.KeyResolverSpi)>(r47);
+
+        $z1 = r1.<org.apache.xml.security.encryption.XMLCipher: boolean secureValidation>;
+
+        virtualinvoke r46.<org.apache.xml.security.keys.KeyInfo: void setSecureValidation(boolean)>($z1);
+
+        $r22 = virtualinvoke r46.<org.apache.xml.security.keys.KeyInfo: javax.crypto.SecretKey getSecretKey()>();
+
+        r1.<org.apache.xml.security.encryption.XMLCipher: java.security.Key key> = $r22;
+
+     label05:
+        goto label07;
+
+     label06:
+        $r43 := @caughtexception;
+
+        r48 = $r43;
+
+        $r44 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        $r45 = virtualinvoke r48.<org.apache.xml.security.keys.keyresolver.KeyResolverException: java.lang.String getMessage()>();
+
+        interfaceinvoke $r44.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Throwable)>($r45, r48);
+
+     label07:
+        $r49 = r1.<org.apache.xml.security.encryption.XMLCipher: java.security.Key key>;
+
+        if $r49 != null goto label08;
+
+        $r16 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2826 = "XMLCipher::decryptElement called without a key and unable to resolve";
+
+        interfaceinvoke $r16.<org.slf4j.Logger: void error(java.lang.String)>(varReplacer2826);
+
+        $r64 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r18 = newarray (java.lang.Object)[1];
+
+        $r18[0] = "encryption.nokey";
+
+        varReplacer2829 = "empty";
+
+        specialinvoke $r64.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2829, $r18);
+
+        throw $r64;
+
+     label08:
+        $r65 = new org.apache.xml.security.encryption.XMLCipherInput;
+
+        specialinvoke $r65.<org.apache.xml.security.encryption.XMLCipherInput: void <init>(org.apache.xml.security.encryption.EncryptedType)>(r4);
+
+        r50 = $r65;
+
+        $z0 = r1.<org.apache.xml.security.encryption.XMLCipher: boolean secureValidation>;
+
+        virtualinvoke r50.<org.apache.xml.security.encryption.XMLCipherInput: void setSecureValidation(boolean)>($z0);
+
+        r51 = virtualinvoke r50.<org.apache.xml.security.encryption.XMLCipherInput: byte[] getBytes()>();
+
+        r52 = staticinvoke <org.apache.xml.security.algorithms.JCEMapper: java.lang.String translateURItoJCEID(java.lang.String)>(r6);
+
+        $r9 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        varReplacer2827 = "JCE Algorithm = {}";
+
+        interfaceinvoke $r9.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object)>(varReplacer2827, r52);
+
+     label09:
+        $r10 = r1.<org.apache.xml.security.encryption.XMLCipher: java.lang.String requestedJCEProvider>;
+
+        if $r10 != null goto label10;
+
+        r53 = staticinvoke <javax.crypto.Cipher: javax.crypto.Cipher getInstance(java.lang.String)>(r52);
+
+        goto label11;
+
+     label10:
+        $r11 = r1.<org.apache.xml.security.encryption.XMLCipher: java.lang.String requestedJCEProvider>;
+
+        r53 = staticinvoke <javax.crypto.Cipher: javax.crypto.Cipher getInstance(java.lang.String,java.lang.String)>(r52, $r11);
+
+     label11:
+        goto label15;
+
+     label12:
+        $r41 := @caughtexception;
+
+        r54 = $r41;
+
+        $r66 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r73 = (java.lang.Exception) r54;
+
+        specialinvoke $r66.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>($r73);
+
+        throw $r66;
+
+     label13:
+        $r39 := @caughtexception;
+
+        r55 = $r39;
+
+        $r67 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r74 = (java.lang.Exception) r55;
+
+        specialinvoke $r67.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>($r74);
+
+        throw $r67;
+
+     label14:
+        $r37 := @caughtexception;
+
+        r56 = $r37;
+
+        $r68 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r75 = (java.lang.Exception) r56;
+
+        specialinvoke $r68.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>($r75);
+
+        throw $r68;
+
+     label15:
+        $i1 = staticinvoke <org.apache.xml.security.algorithms.JCEMapper: int getIVLengthFromURI(java.lang.String)>(r6);
+
+        i7 = $i1 / 8;
+
+        r12 = newarray (byte)[i7];
+
+        varReplacer2823 = 0;
+
+        varReplacer2824 = 0;
+
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>(r51, varReplacer2823, r12, varReplacer2823, i7);
+
+        r57 = r1.<org.apache.xml.security.encryption.XMLCipher: java.lang.String algorithm>;
+
+        if r57 != null goto label16;
+
+        r57 = r6;
+
+     label16:
+        r13 = specialinvoke r1.<org.apache.xml.security.encryption.XMLCipher: java.security.spec.AlgorithmParameterSpec constructBlockCipherParameters(java.lang.String,byte[])>(r57, r12);
+
+     label17:
+        $i2 = r1.<org.apache.xml.security.encryption.XMLCipher: int cipherMode>;
+
+        $r14 = r1.<org.apache.xml.security.encryption.XMLCipher: java.security.Key key>;
+
+        virtualinvoke r53.<javax.crypto.Cipher: void init(int,java.security.Key,java.security.spec.AlgorithmParameterSpec)>($i2, $r14, r13);
+
+     label18:
+        goto label21;
+
+     label19:
+        $r35 := @caughtexception;
+
+        r58 = $r35;
+
+        $r69 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r76 = (java.lang.Exception) r58;
+
+        specialinvoke $r69.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>($r76);
+
+        throw $r69;
+
+     label20:
+        $r33 := @caughtexception;
+
+        r59 = $r33;
+
+        $r70 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r77 = (java.lang.Exception) r59;
+
+        specialinvoke $r70.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>($r77);
+
+        throw $r70;
+
+     label21:
+        $i3 = lengthof r51;
+
+        $i4 = $i3 - i7;
+
+        $r15 = virtualinvoke r53.<javax.crypto.Cipher: byte[] doFinal(byte[],int,int)>(r51, i7, $i4);
+
+     label22:
+        return $r15;
+
+     label23:
+        $r31 := @caughtexception;
+
+        r60 = $r31;
+
+        $r71 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r78 = (java.lang.Exception) r60;
+
+        specialinvoke $r71.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>($r78);
+
+        throw $r71;
+
+     label24:
+        $r29 := @caughtexception;
+
+        r61 = $r29;
+
+        $r72 = new org.apache.xml.security.encryption.XMLEncryptionException;
+
+        $r79 = (java.lang.Exception) r61;
+
+        specialinvoke $r72.<org.apache.xml.security.encryption.XMLEncryptionException: void <init>(java.lang.Exception)>($r79);
+
+        throw $r72;
+
+        catch org.apache.xml.security.keys.keyresolver.KeyResolverException from label02 to label05 with label06;
+        catch java.security.NoSuchAlgorithmException from label09 to label11 with label12;
+        catch java.security.NoSuchProviderException from label09 to label11 with label13;
+        catch javax.crypto.NoSuchPaddingException from label09 to label11 with label14;
+        catch java.security.InvalidKeyException from label17 to label18 with label19;
+        catch java.security.InvalidAlgorithmParameterException from label17 to label18 with label20;
+        catch javax.crypto.IllegalBlockSizeException from label21 to label22 with label23;
+        catch javax.crypto.BadPaddingException from label21 to label22 with label24;
+    }
+
+    public org.apache.xml.security.encryption.EncryptedData createEncryptedData(int, java.lang.String) throws org.apache.xml.security.encryption.XMLEncryptionException
+    {
+        int i0;
+        org.apache.xml.security.encryption.XMLCipher r0;
+        java.lang.String r1;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r2, $r4, $r5, $r6, $r8, $r9;
+        org.apache.xml.security.encryption.CipherReference r3;
+        org.apache.xml.security.encryption.CipherValue r7;
+        org.apache.xml.security.encryption.EncryptedData r10;
+        org.apache.xml.security.encryption.CipherData r11, r12;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        i0 := @parameter0: int;
+
+        r1 := @parameter1: java.lang.String;
+
+        r10 = null;
+
+        lookupswitch(i0)
+        {
+            case 1: goto label2;
+            case 2: goto label1;
+            default: goto label3;
+        };
+
+     label1:
+        $r2 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        r3 = virtualinvoke $r2.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.CipherReference newCipherReference(java.lang.String)>(r1);
+
+        $r4 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        r11 = virtualinvoke $r4.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.CipherData newCipherData(int)>(i0);
+
+        interfaceinvoke r11.<org.apache.xml.security.encryption.CipherData: void setCipherReference(org.apache.xml.security.encryption.CipherReference)>(r3);
+
+        $r5 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        r10 = virtualinvoke $r5.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.EncryptedData newEncryptedData(org.apache.xml.security.encryption.CipherData)>(r11);
+
+        goto label3;
+
+     label2:
+        $r6 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        r7 = virtualinvoke $r6.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.CipherValue newCipherValue(java.lang.String)>(r1);
+
+        $r8 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        r12 = virtualinvoke $r8.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.CipherData newCipherData(int)>(i0);
+
+        interfaceinvoke r12.<org.apache.xml.security.encryption.CipherData: void setCipherValue(org.apache.xml.security.encryption.CipherValue)>(r7);
+
+        $r9 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        r10 = virtualinvoke $r9.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.EncryptedData newEncryptedData(org.apache.xml.security.encryption.CipherData)>(r12);
+
+     label3:
+        return r10;
+    }
+
+    public org.apache.xml.security.encryption.EncryptedKey createEncryptedKey(int, java.lang.String) throws org.apache.xml.security.encryption.XMLEncryptionException
+    {
+        int i0;
+        org.apache.xml.security.encryption.XMLCipher r0;
+        java.lang.String r1;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r2, $r4, $r5, $r6, $r8, $r9;
+        org.apache.xml.security.encryption.CipherReference r3;
+        org.apache.xml.security.encryption.CipherValue r7;
+        org.apache.xml.security.encryption.EncryptedKey r10;
+        org.apache.xml.security.encryption.CipherData r11, r12;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        i0 := @parameter0: int;
+
+        r1 := @parameter1: java.lang.String;
+
+        r10 = null;
+
+        lookupswitch(i0)
+        {
+            case 1: goto label2;
+            case 2: goto label1;
+            default: goto label3;
+        };
+
+     label1:
+        $r2 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        r3 = virtualinvoke $r2.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.CipherReference newCipherReference(java.lang.String)>(r1);
+
+        $r4 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        r11 = virtualinvoke $r4.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.CipherData newCipherData(int)>(i0);
+
+        interfaceinvoke r11.<org.apache.xml.security.encryption.CipherData: void setCipherReference(org.apache.xml.security.encryption.CipherReference)>(r3);
+
+        $r5 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        r10 = virtualinvoke $r5.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.EncryptedKey newEncryptedKey(org.apache.xml.security.encryption.CipherData)>(r11);
+
+        goto label3;
+
+     label2:
+        $r6 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        r7 = virtualinvoke $r6.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.CipherValue newCipherValue(java.lang.String)>(r1);
+
+        $r8 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        r12 = virtualinvoke $r8.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.CipherData newCipherData(int)>(i0);
+
+        interfaceinvoke r12.<org.apache.xml.security.encryption.CipherData: void setCipherValue(org.apache.xml.security.encryption.CipherValue)>(r7);
+
+        $r9 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        r10 = virtualinvoke $r9.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.EncryptedKey newEncryptedKey(org.apache.xml.security.encryption.CipherData)>(r12);
+
+     label3:
+        return r10;
+    }
+
+    public org.apache.xml.security.encryption.AgreementMethod createAgreementMethod(java.lang.String)
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        java.lang.String r1;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r2;
+        org.apache.xml.security.encryption.AgreementMethod $r3;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: java.lang.String;
+
+        $r2 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        $r3 = virtualinvoke $r2.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.AgreementMethod newAgreementMethod(java.lang.String)>(r1);
+
+        return $r3;
+    }
+
+    public org.apache.xml.security.encryption.CipherData createCipherData(int)
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        int i0;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r1;
+        org.apache.xml.security.encryption.CipherData $r2;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        i0 := @parameter0: int;
+
+        $r1 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        $r2 = virtualinvoke $r1.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.CipherData newCipherData(int)>(i0);
+
+        return $r2;
+    }
+
+    public org.apache.xml.security.encryption.CipherReference createCipherReference(java.lang.String)
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        java.lang.String r1;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r2;
+        org.apache.xml.security.encryption.CipherReference $r3;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: java.lang.String;
+
+        $r2 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        $r3 = virtualinvoke $r2.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.CipherReference newCipherReference(java.lang.String)>(r1);
+
+        return $r3;
+    }
+
+    public org.apache.xml.security.encryption.CipherValue createCipherValue(java.lang.String)
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        java.lang.String r1;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r2;
+        org.apache.xml.security.encryption.CipherValue $r3;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: java.lang.String;
+
+        $r2 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        $r3 = virtualinvoke $r2.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.CipherValue newCipherValue(java.lang.String)>(r1);
+
+        return $r3;
+    }
+
+    public org.apache.xml.security.encryption.EncryptionMethod createEncryptionMethod(java.lang.String)
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        java.lang.String r1;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r2;
+        org.apache.xml.security.encryption.EncryptionMethod $r3;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: java.lang.String;
+
+        $r2 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        $r3 = virtualinvoke $r2.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.EncryptionMethod newEncryptionMethod(java.lang.String)>(r1);
+
+        return $r3;
+    }
+
+    public org.apache.xml.security.encryption.EncryptionProperties createEncryptionProperties()
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r1;
+        org.apache.xml.security.encryption.EncryptionProperties $r2;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        $r1 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        $r2 = virtualinvoke $r1.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.EncryptionProperties newEncryptionProperties()>();
+
+        return $r2;
+    }
+
+    public org.apache.xml.security.encryption.EncryptionProperty createEncryptionProperty()
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r1;
+        org.apache.xml.security.encryption.EncryptionProperty $r2;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        $r1 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        $r2 = virtualinvoke $r1.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.EncryptionProperty newEncryptionProperty()>();
+
+        return $r2;
+    }
+
+    public org.apache.xml.security.encryption.ReferenceList createReferenceList(int)
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        int i0;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r1;
+        org.apache.xml.security.encryption.ReferenceList $r2;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        i0 := @parameter0: int;
+
+        $r1 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        $r2 = virtualinvoke $r1.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.ReferenceList newReferenceList(int)>(i0);
+
+        return $r2;
+    }
+
+    public org.apache.xml.security.encryption.Transforms createTransforms()
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r1;
+        org.apache.xml.security.encryption.Transforms $r2;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        $r1 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        $r2 = virtualinvoke $r1.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.Transforms newTransforms()>();
+
+        return $r2;
+    }
+
+    public org.apache.xml.security.encryption.Transforms createTransforms(org.w3c.dom.Document)
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        org.w3c.dom.Document r1;
+        org.apache.xml.security.encryption.XMLCipher$Factory $r2;
+        org.apache.xml.security.encryption.Transforms $r3;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.encryption.XMLCipher;
+
+        r1 := @parameter0: org.w3c.dom.Document;
+
+        $r2 = r0.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher$Factory factory>;
+
+        $r3 = virtualinvoke $r2.<org.apache.xml.security.encryption.XMLCipher$Factory: org.apache.xml.security.encryption.Transforms newTransforms(org.w3c.dom.Document)>(r1);
+
+        return $r3;
+    }
+
+    private static boolean haveFunctionalIdentityTransformer()
+    {
+        java.lang.String r0, $r7, $r16, $r22, $r25, varReplacer2830;
+        javax.xml.transform.dom.DOMResult $r1, r26;
+        javax.xml.transform.TransformerFactory r2;
+        javax.xml.transform.Transformer $r3;
+        javax.xml.transform.stream.StreamSource $r4;
+        java.io.ByteArrayInputStream $r5;
+        java.nio.charset.Charset $r6;
+        byte[] $r8;
+        org.w3c.dom.Node $r9, $r10, $r11, $r12, $r13, $r14, $r17, $r18, $r19, $r21;
+        boolean $z0, z1;
+        org.w3c.dom.NamedNodeMap $r15, $r20;
+        int $i0, varReplacer2831, varReplacer2832;
+        java.lang.Exception $r23, r29;
+        org.slf4j.Logger $r24, $r27;
+        java.lang.Boolean $r28;
+
+        nop;
+
+        r0 = "<a:e1 xmlns:a=\"a\" xmlns:b=\"b\"><a xmlns=\"a\" xmlns:b=\"b\"/></a:e1>";
+
+     label1:
+        $r1 = new javax.xml.transform.dom.DOMResult;
+
+        specialinvoke $r1.<javax.xml.transform.dom.DOMResult: void <init>()>();
+
+        r26 = $r1;
+
+        r2 = staticinvoke <javax.xml.transform.TransformerFactory: javax.xml.transform.TransformerFactory newInstance()>();
+
+        $r3 = virtualinvoke r2.<javax.xml.transform.TransformerFactory: javax.xml.transform.Transformer newTransformer()>();
+
+        $r4 = new javax.xml.transform.stream.StreamSource;
+
+        $r5 = new java.io.ByteArrayInputStream;
+
+        $r7 = "<a:e1 xmlns:a=\"a\" xmlns:b=\"b\"><a xmlns=\"a\" xmlns:b=\"b\"/></a:e1>";
+
+        $r6 = <java.nio.charset.StandardCharsets: java.nio.charset.Charset UTF_8>;
+
+        $r8 = virtualinvoke $r7.<java.lang.String: byte[] getBytes(java.nio.charset.Charset)>($r6);
+
+        specialinvoke $r5.<java.io.ByteArrayInputStream: void <init>(byte[])>($r8);
+
+        specialinvoke $r4.<javax.xml.transform.stream.StreamSource: void <init>(java.io.InputStream)>($r5);
+
+        virtualinvoke $r3.<javax.xml.transform.Transformer: void transform(javax.xml.transform.Source,javax.xml.transform.Result)>($r4, r26);
+
+        z1 = 0;
+
+        $r9 = virtualinvoke r26.<javax.xml.transform.dom.DOMResult: org.w3c.dom.Node getNode()>();
+
+        $r10 = interfaceinvoke $r9.<org.w3c.dom.Node: org.w3c.dom.Node getFirstChild()>();
+
+        $r11 = interfaceinvoke $r10.<org.w3c.dom.Node: org.w3c.dom.Node getFirstChild()>();
+
+        $z0 = interfaceinvoke $r11.<org.w3c.dom.Node: boolean hasAttributes()>();
+
+        if $z0 == 0 goto label2;
+
+        $r12 = virtualinvoke r26.<javax.xml.transform.dom.DOMResult: org.w3c.dom.Node getNode()>();
+
+        $r13 = interfaceinvoke $r12.<org.w3c.dom.Node: org.w3c.dom.Node getFirstChild()>();
+
+        $r14 = interfaceinvoke $r13.<org.w3c.dom.Node: org.w3c.dom.Node getFirstChild()>();
+
+        $r15 = interfaceinvoke $r14.<org.w3c.dom.Node: org.w3c.dom.NamedNodeMap getAttributes()>();
+
+        $i0 = interfaceinvoke $r15.<org.w3c.dom.NamedNodeMap: int getLength()>();
+
+        if $i0 < 1 goto label2;
+
+        $r16 = "http://www.w3.org/2000/xmlns/";
+
+        $r17 = virtualinvoke r26.<javax.xml.transform.dom.DOMResult: org.w3c.dom.Node getNode()>();
+
+        $r18 = interfaceinvoke $r17.<org.w3c.dom.Node: org.w3c.dom.Node getFirstChild()>();
+
+        $r19 = interfaceinvoke $r18.<org.w3c.dom.Node: org.w3c.dom.Node getFirstChild()>();
+
+        $r20 = interfaceinvoke $r19.<org.w3c.dom.Node: org.w3c.dom.NamedNodeMap getAttributes()>();
+
+        varReplacer2831 = 1;
+
+        $r21 = interfaceinvoke $r20.<org.w3c.dom.NamedNodeMap: org.w3c.dom.Node item(int)>(varReplacer2831);
+
+        $r22 = interfaceinvoke $r21.<org.w3c.dom.Node: java.lang.String getNamespaceURI()>();
+
+        z1 = virtualinvoke $r16.<java.lang.String: boolean equals(java.lang.Object)>($r22);
+
+     label2:
+        $r27 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        $r28 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(z1);
+
+        varReplacer2830 = "Have functional IdentityTransformer: {}";
+
+        interfaceinvoke $r27.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Object)>(varReplacer2830, $r28);
+
+     label3:
+        return z1;
+
+     label4:
+        $r23 := @caughtexception;
+
+        r29 = $r23;
+
+        $r24 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        $r25 = virtualinvoke r29.<java.lang.Exception: java.lang.String getMessage()>();
+
+        interfaceinvoke $r24.<org.slf4j.Logger: void debug(java.lang.String,java.lang.Throwable)>($r25, r29);
+
+        varReplacer2832 = 0;
+
+        return varReplacer2832;
+
+        catch java.lang.Exception from label1 to label3 with label4;
+    }
+
+    static org.slf4j.Logger access$100()
+    {
+        org.slf4j.Logger $r0;
+
+        nop;
+
+        $r0 = <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG>;
+
+        return $r0;
+    }
+
+    static boolean access$200(org.apache.xml.security.encryption.XMLCipher)
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        boolean $z0;
+
+        nop;
+
+        r0 := @parameter0: org.apache.xml.security.encryption.XMLCipher;
+
+        $z0 = r0.<org.apache.xml.security.encryption.XMLCipher: boolean secureValidation>;
+
+        return $z0;
+    }
+
+    static java.util.List access$300(org.apache.xml.security.encryption.XMLCipher)
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        java.util.List $r1;
+
+        nop;
+
+        r0 := @parameter0: org.apache.xml.security.encryption.XMLCipher;
+
+        $r1 = r0.<org.apache.xml.security.encryption.XMLCipher: java.util.List internalKeyResolvers>;
+
+        return $r1;
+    }
+
+    static java.lang.String access$400(org.apache.xml.security.encryption.XMLCipher)
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        java.lang.String $r1;
+
+        nop;
+
+        r0 := @parameter0: org.apache.xml.security.encryption.XMLCipher;
+
+        $r1 = r0.<org.apache.xml.security.encryption.XMLCipher: java.lang.String algorithm>;
+
+        return $r1;
+    }
+
+    static org.w3c.dom.Document access$500(org.apache.xml.security.encryption.XMLCipher)
+    {
+        org.apache.xml.security.encryption.XMLCipher r0;
+        org.w3c.dom.Document $r1;
+
+        nop;
+
+        r0 := @parameter0: org.apache.xml.security.encryption.XMLCipher;
+
+        $r1 = r0.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Document contextDocument>;
+
+        return $r1;
+    }
+
+    static void <clinit>()
+    {
+        org.slf4j.Logger $r0;
+        boolean $z0;
+
+        nop;
+
+        $r0 = staticinvoke <org.slf4j.LoggerFactory: org.slf4j.Logger getLogger(java.lang.Class)>(class "Lorg/apache/xml/security/encryption/XMLCipher;");
+
+        <org.apache.xml.security.encryption.XMLCipher: org.slf4j.Logger LOG> = $r0;
+
+        $z0 = staticinvoke <org.apache.xml.security.encryption.XMLCipher: boolean haveFunctionalIdentityTransformer()>();
+
+        <org.apache.xml.security.encryption.XMLCipher: boolean HAVE_FUNCTIONAL_IDENTITY_TRANSFORMER> = $z0;
+
+        return;
+    }
+}

@@ -1,0 +1,2388 @@
+public class org.apache.xml.security.utils.Base64 extends java.lang.Object
+{
+    public static final int BASE64DEFAULTLENGTH;
+    private static final int BASELENGTH;
+    private static final int LOOKUPLENGTH;
+    private static final int TWENTYFOURBITGROUP;
+    private static final int EIGHTBIT;
+    private static final int SIXTEENBIT;
+    private static final int FOURBYTE;
+    private static final int SIGN;
+    private static final char PAD;
+    private static final byte[] base64Alphabet;
+    private static final char[] lookUpBase64Alphabet;
+
+    private void <init>()
+    {
+        org.apache.xml.security.utils.Base64 r0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.utils.Base64;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    static final byte[] getBytes(java.math.BigInteger, int)
+    {
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, i8, $i9, $i10, $i11, $i12, $i13, i14, i15, i17;
+        java.math.BigInteger r0;
+        byte[] r1, r2;
+        java.lang.IllegalArgumentException $r3;
+        java.lang.String $r4, varReplacer5422;
+        byte b16;
+
+        nop;
+
+        r0 := @parameter0: java.math.BigInteger;
+
+        i14 := @parameter1: int;
+
+        $i0 = i14 + 7;
+
+        $i1 = $i0 >> 3;
+
+        i15 = $i1 << 3;
+
+        $i2 = virtualinvoke r0.<java.math.BigInteger: int bitLength()>();
+
+        if i15 >= $i2 goto label1;
+
+        $r3 = new java.lang.IllegalArgumentException;
+
+        varReplacer5422 = "utils.Base64.IllegalBitlength";
+
+        $r4 = staticinvoke <org.apache.xml.security.utils.I18n: java.lang.String translate(java.lang.String)>(varReplacer5422);
+
+        specialinvoke $r3.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($r4);
+
+        throw $r3;
+
+     label1:
+        r1 = virtualinvoke r0.<java.math.BigInteger: byte[] toByteArray()>();
+
+        $i3 = virtualinvoke r0.<java.math.BigInteger: int bitLength()>();
+
+        $i4 = $i3 % 8;
+
+        if $i4 == 0 goto label2;
+
+        $i10 = virtualinvoke r0.<java.math.BigInteger: int bitLength()>();
+
+        $i11 = $i10 / 8;
+
+        $i13 = $i11 + 1;
+
+        $i12 = i15 / 8;
+
+        if $i13 != $i12 goto label2;
+
+        return r1;
+
+     label2:
+        b16 = 0;
+
+        i17 = lengthof r1;
+
+        $i5 = virtualinvoke r0.<java.math.BigInteger: int bitLength()>();
+
+        $i6 = $i5 % 8;
+
+        if $i6 != 0 goto label3;
+
+        b16 = 1;
+
+        i17 = i17 + -1;
+
+     label3:
+        $i7 = i15 / 8;
+
+        i8 = $i7 - i17;
+
+        $i9 = i15 / 8;
+
+        r2 = newarray (byte)[$i9];
+
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>(r1, b16, r2, i8, i17);
+
+        return r2;
+    }
+
+    public static final java.lang.String encode(java.math.BigInteger)
+    {
+        java.math.BigInteger r0;
+        int $i0;
+        byte[] $r1;
+        java.lang.String $r2;
+
+        nop;
+
+        r0 := @parameter0: java.math.BigInteger;
+
+        $i0 = virtualinvoke r0.<java.math.BigInteger: int bitLength()>();
+
+        $r1 = staticinvoke <org.apache.xml.security.utils.Base64: byte[] getBytes(java.math.BigInteger,int)>(r0, $i0);
+
+        $r2 = staticinvoke <org.apache.xml.security.utils.Base64: java.lang.String encode(byte[])>($r1);
+
+        return $r2;
+    }
+
+    public static final byte[] encode(java.math.BigInteger, int)
+    {
+        int $i0, $i1, $i2, $i3, $i4, $i5, $i6, $i7, i8, $i9, $i10, $i11, $i12, $i13, i14, i15, i17;
+        java.math.BigInteger r0;
+        byte[] r1, r2;
+        java.lang.IllegalArgumentException $r3;
+        java.lang.String $r4, varReplacer5423;
+        byte b16;
+
+        nop;
+
+        r0 := @parameter0: java.math.BigInteger;
+
+        i14 := @parameter1: int;
+
+        $i0 = i14 + 7;
+
+        $i1 = $i0 >> 3;
+
+        i15 = $i1 << 3;
+
+        $i2 = virtualinvoke r0.<java.math.BigInteger: int bitLength()>();
+
+        if i15 >= $i2 goto label1;
+
+        $r3 = new java.lang.IllegalArgumentException;
+
+        varReplacer5423 = "utils.Base64.IllegalBitlength";
+
+        $r4 = staticinvoke <org.apache.xml.security.utils.I18n: java.lang.String translate(java.lang.String)>(varReplacer5423);
+
+        specialinvoke $r3.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($r4);
+
+        throw $r3;
+
+     label1:
+        r1 = virtualinvoke r0.<java.math.BigInteger: byte[] toByteArray()>();
+
+        $i3 = virtualinvoke r0.<java.math.BigInteger: int bitLength()>();
+
+        $i4 = $i3 % 8;
+
+        if $i4 == 0 goto label2;
+
+        $i10 = virtualinvoke r0.<java.math.BigInteger: int bitLength()>();
+
+        $i11 = $i10 / 8;
+
+        $i13 = $i11 + 1;
+
+        $i12 = i15 / 8;
+
+        if $i13 != $i12 goto label2;
+
+        return r1;
+
+     label2:
+        b16 = 0;
+
+        i17 = lengthof r1;
+
+        $i5 = virtualinvoke r0.<java.math.BigInteger: int bitLength()>();
+
+        $i6 = $i5 % 8;
+
+        if $i6 != 0 goto label3;
+
+        b16 = 1;
+
+        i17 = i17 + -1;
+
+     label3:
+        $i7 = i15 / 8;
+
+        i8 = $i7 - i17;
+
+        $i9 = i15 / 8;
+
+        r2 = newarray (byte)[$i9];
+
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>(r1, b16, r2, i8, i17);
+
+        return r2;
+    }
+
+    public static final java.math.BigInteger decodeBigIntegerFromElement(org.w3c.dom.Element) throws org.apache.xml.security.exceptions.Base64DecodingException
+    {
+        java.math.BigInteger $r0;
+        org.w3c.dom.Element r1;
+        byte[] $r2;
+        int varReplacer5424;
+
+        nop;
+
+        r1 := @parameter0: org.w3c.dom.Element;
+
+        $r0 = new java.math.BigInteger;
+
+        $r2 = staticinvoke <org.apache.xml.security.utils.Base64: byte[] decode(org.w3c.dom.Element)>(r1);
+
+        varReplacer5424 = 1;
+
+        specialinvoke $r0.<java.math.BigInteger: void <init>(int,byte[])>(varReplacer5424, $r2);
+
+        return $r0;
+    }
+
+    public static java.math.BigInteger decodeBigIntegerFromString(java.lang.String) throws org.apache.xml.security.exceptions.Base64DecodingException
+    {
+        java.math.BigInteger $r0;
+        java.lang.String r1;
+        byte[] $r2;
+        int varReplacer5425;
+
+        nop;
+
+        r1 := @parameter0: java.lang.String;
+
+        $r0 = new java.math.BigInteger;
+
+        $r2 = staticinvoke <org.apache.xml.security.utils.Base64: byte[] decode(java.lang.String)>(r1);
+
+        varReplacer5425 = 1;
+
+        specialinvoke $r0.<java.math.BigInteger: void <init>(int,byte[])>(varReplacer5425, $r2);
+
+        return $r0;
+    }
+
+    public static final void fillElementWithBigInteger(org.w3c.dom.Element, java.math.BigInteger)
+    {
+        java.math.BigInteger r0;
+        boolean $z0;
+        org.w3c.dom.Element r1;
+        org.w3c.dom.Document r2;
+        org.w3c.dom.Text r3;
+        int $i0;
+        java.lang.StringBuilder $r5, $r6, $r7, $r8;
+        java.lang.String r9, varReplacer5426, varReplacer5427;
+
+        nop;
+
+        r1 := @parameter0: org.w3c.dom.Element;
+
+        r0 := @parameter1: java.math.BigInteger;
+
+        r9 = staticinvoke <org.apache.xml.security.utils.Base64: java.lang.String encode(java.math.BigInteger)>(r0);
+
+        $z0 = staticinvoke <org.apache.xml.security.utils.XMLUtils: boolean ignoreLineBreaks()>();
+
+        if $z0 != 0 goto label1;
+
+        $i0 = virtualinvoke r9.<java.lang.String: int length()>();
+
+        if $i0 <= 76 goto label1;
+
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer5426 = "\n";
+
+        $r6 = virtualinvoke $r5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer5426);
+
+        $r7 = virtualinvoke $r6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r9);
+
+        varReplacer5427 = "\n";
+
+        $r8 = virtualinvoke $r7.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer5427);
+
+        r9 = virtualinvoke $r8.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label1:
+        r2 = interfaceinvoke r1.<org.w3c.dom.Element: org.w3c.dom.Document getOwnerDocument()>();
+
+        r3 = interfaceinvoke r2.<org.w3c.dom.Document: org.w3c.dom.Text createTextNode(java.lang.String)>(r9);
+
+        interfaceinvoke r1.<org.w3c.dom.Element: org.w3c.dom.Node appendChild(org.w3c.dom.Node)>(r3);
+
+        return;
+    }
+
+    public static final byte[] decode(org.w3c.dom.Element) throws org.apache.xml.security.exceptions.Base64DecodingException
+    {
+        org.w3c.dom.Element r0;
+        java.lang.StringBuilder $r1, r2;
+        java.lang.String $r3, $r6;
+        byte[] $r4;
+        short $s0;
+        org.w3c.dom.Text r5;
+        org.w3c.dom.Node r8;
+
+        nop;
+
+        r0 := @parameter0: org.w3c.dom.Element;
+
+        r8 = interfaceinvoke r0.<org.w3c.dom.Element: org.w3c.dom.Node getFirstChild()>();
+
+        $r1 = new java.lang.StringBuilder;
+
+        specialinvoke $r1.<java.lang.StringBuilder: void <init>()>();
+
+        r2 = $r1;
+
+     label1:
+        if r8 == null goto label3;
+
+        $s0 = interfaceinvoke r8.<org.w3c.dom.Node: short getNodeType()>();
+
+        if $s0 != 3 goto label2;
+
+        r5 = (org.w3c.dom.Text) r8;
+
+        $r6 = interfaceinvoke r5.<org.w3c.dom.Text: java.lang.String getData()>();
+
+        virtualinvoke r2.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r6);
+
+     label2:
+        r8 = interfaceinvoke r8.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+
+        goto label1;
+
+     label3:
+        $r3 = virtualinvoke r2.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $r4 = staticinvoke <org.apache.xml.security.utils.Base64: byte[] decode(java.lang.String)>($r3);
+
+        return $r4;
+    }
+
+    public static final org.w3c.dom.Element encodeToElement(org.w3c.dom.Document, java.lang.String, byte[])
+    {
+        org.w3c.dom.Document r0;
+        java.lang.String r1, $r4;
+        org.w3c.dom.Element r2;
+        byte[] r3;
+        org.w3c.dom.Text r5;
+
+        nop;
+
+        r0 := @parameter0: org.w3c.dom.Document;
+
+        r1 := @parameter1: java.lang.String;
+
+        r3 := @parameter2: byte[];
+
+        r2 = staticinvoke <org.apache.xml.security.utils.XMLUtils: org.w3c.dom.Element createElementInSignatureSpace(org.w3c.dom.Document,java.lang.String)>(r0, r1);
+
+        $r4 = staticinvoke <org.apache.xml.security.utils.Base64: java.lang.String encode(byte[])>(r3);
+
+        r5 = interfaceinvoke r0.<org.w3c.dom.Document: org.w3c.dom.Text createTextNode(java.lang.String)>($r4);
+
+        interfaceinvoke r2.<org.w3c.dom.Element: org.w3c.dom.Node appendChild(org.w3c.dom.Node)>(r5);
+
+        return r2;
+    }
+
+    public static final byte[] decode(byte[]) throws org.apache.xml.security.exceptions.Base64DecodingException
+    {
+        byte[] r0, $r1;
+        int varReplacer5428;
+
+        nop;
+
+        r0 := @parameter0: byte[];
+
+        varReplacer5428 = -1;
+
+        $r1 = staticinvoke <org.apache.xml.security.utils.Base64: byte[] decodeInternal(byte[],int)>(r0, varReplacer5428);
+
+        return $r1;
+    }
+
+    public static final java.lang.String encode(byte[])
+    {
+        boolean $z0;
+        byte[] r0;
+        java.lang.String $r1;
+        int varReplacer5429, varReplacer5430;
+
+        nop;
+
+        r0 := @parameter0: byte[];
+
+        $z0 = staticinvoke <org.apache.xml.security.utils.XMLUtils: boolean ignoreLineBreaks()>();
+
+        if $z0 == 0 goto label1;
+
+        varReplacer5429 = 2147483647;
+
+        $r1 = staticinvoke <org.apache.xml.security.utils.Base64: java.lang.String encode(byte[],int)>(r0, varReplacer5429);
+
+        goto label2;
+
+     label1:
+        varReplacer5430 = 76;
+
+        $r1 = staticinvoke <org.apache.xml.security.utils.Base64: java.lang.String encode(byte[],int)>(r0, varReplacer5430);
+
+     label2:
+        return $r1;
+    }
+
+    public static final byte[] decode(java.io.BufferedReader) throws java.io.IOException, org.apache.xml.security.exceptions.Base64DecodingException
+    {
+        org.apache.xml.security.utils.UnsyncByteArrayOutputStream $r0, r1;
+        java.io.BufferedReader r2;
+        java.lang.String $r3, r4;
+        byte[] r5, r8;
+        java.lang.Throwable $r6, r7;
+
+        nop;
+
+        r2 := @parameter0: java.io.BufferedReader;
+
+        $r0 = new org.apache.xml.security.utils.UnsyncByteArrayOutputStream;
+
+        specialinvoke $r0.<org.apache.xml.security.utils.UnsyncByteArrayOutputStream: void <init>()>();
+
+        r1 = $r0;
+
+     label1:
+        $r3 = virtualinvoke r2.<java.io.BufferedReader: java.lang.String readLine()>();
+
+        r4 = $r3;
+
+        if null == $r3 goto label2;
+
+        r5 = staticinvoke <org.apache.xml.security.utils.Base64: byte[] decode(java.lang.String)>(r4);
+
+        virtualinvoke r1.<org.apache.xml.security.utils.UnsyncByteArrayOutputStream: void write(byte[])>(r5);
+
+        goto label1;
+
+     label2:
+        r8 = virtualinvoke r1.<org.apache.xml.security.utils.UnsyncByteArrayOutputStream: byte[] toByteArray()>();
+
+     label3:
+        virtualinvoke r1.<org.apache.xml.security.utils.UnsyncByteArrayOutputStream: void close()>();
+
+        goto label6;
+
+     label4:
+        $r6 := @caughtexception;
+
+        r7 = $r6;
+
+     label5:
+        virtualinvoke r1.<org.apache.xml.security.utils.UnsyncByteArrayOutputStream: void close()>();
+
+        throw r7;
+
+     label6:
+        return r8;
+
+        catch java.lang.Throwable from label1 to label3 with label4;
+        catch java.lang.Throwable from label4 to label5 with label4;
+    }
+
+    protected static final boolean isWhiteSpace(byte)
+    {
+        byte b0;
+        boolean $z0;
+
+        nop;
+
+        b0 := @parameter0: byte;
+
+        if b0 == 32 goto label1;
+
+        if b0 == 13 goto label1;
+
+        if b0 == 10 goto label1;
+
+        if b0 != 9 goto label2;
+
+     label1:
+        $z0 = 1;
+
+        goto label3;
+
+     label2:
+        $z0 = 0;
+
+     label3:
+        return $z0;
+    }
+
+    protected static final boolean isPad(byte)
+    {
+        byte b0;
+        boolean $z0;
+
+        nop;
+
+        b0 := @parameter0: byte;
+
+        if b0 != 61 goto label1;
+
+        $z0 = 1;
+
+        goto label2;
+
+     label1:
+        $z0 = 0;
+
+     label2:
+        return $z0;
+    }
+
+    public static final java.lang.String encode(byte[], int)
+    {
+        byte[] r0;
+        int $i0, i6, i8, i9, $i10, i11, $i12, $i13, $i14, $i17, $i18, $i19, $i20, $i21, $i22, $i23, $i24, $i25, $i27, $i28, $i30, $i32, $i33, $i34, $i35, $i36, $i37, $i39, $i41, $i42, $i43, $i44, $i45, $i46, $i47, $i48, $i49, $i50, $i51, $i52, $i54, $i55, $i57, $i58, $i60, $i62, $i63, $i64, $i65, $i66, $i67, $i68, $i69, $i70, $i71, $i72, $i74, $i75, $i76, $i79, $i80, $i82, $i83, $i85, $i87, $i88, $i89, i90, $i91, i92, i93, i94, i95, i96, i97, i99, i108, i109, i110, i111, i112, i114, i125, i126, i127, i132, i133, i134, i143, i144, i145;
+        long $l1, l2, l4, $l5;
+        byte $b3, $b7, $b15, $b16, b73, b77, b98, b100, b101, b102, b103, $b104, b105, $b106, $b107, b113, b115, b116, b117, b118, $b119, b120, $b121, b122, $b123, b124, b128, b129, $b130, b131, b135, b136, b137, b138, $b139, b140, $b141, b142;
+        char[] $r1, $r2, $r3, $r4, $r5, $r6, $r7, $r8, $r9, $r10, $r11, $r12, $r13, r14;
+        char $c26, $c29, $c31, $c38, $c40, $c53, $c56, $c59, $c61, $c78, $c81, $c84, $c86;
+        java.lang.String $r15, varReplacer5431;
+        null_type varReplacer5432;
+
+        nop;
+
+        r0 := @parameter0: byte[];
+
+        i90 := @parameter1: int;
+
+        if i90 >= 4 goto label01;
+
+        i90 = 2147483647;
+
+     label01:
+        if r0 != null goto label02;
+
+        varReplacer5432 = null;
+
+        return varReplacer5432;
+
+     label02:
+        $i0 = lengthof r0;
+
+        $l1 = (long) $i0;
+
+        l2 = $l1 * 8L;
+
+        $b3 = l2 cmp 0L;
+
+        if $b3 != 0 goto label03;
+
+        varReplacer5431 = "";
+
+        return varReplacer5431;
+
+     label03:
+        l4 = l2 % 24L;
+
+        $l5 = l2 / 24L;
+
+        i6 = (int) $l5;
+
+        $b7 = l4 cmp 0L;
+
+        if $b7 == 0 goto label04;
+
+        $i91 = i6 + 1;
+
+        goto label05;
+
+     label04:
+        $i91 = i6;
+
+     label05:
+        i8 = $i91;
+
+        i9 = i90 / 4;
+
+        $i10 = i8 - 1;
+
+        i11 = $i10 / i9;
+
+        $i13 = i8 * 4;
+
+        $i12 = i11 * 2;
+
+        $i14 = $i13 + $i12;
+
+        r14 = newarray (char)[$i14];
+
+        i92 = 0;
+
+        i93 = 0;
+
+        i94 = 0;
+
+        i95 = 0;
+
+     label06:
+        if i95 >= i11 goto label15;
+
+        i96 = 0;
+
+     label07:
+        if i96 >= 19 goto label14;
+
+        i97 = i93 + 1;
+
+        b98 = r0[i93];
+
+        i99 = i97 + 1;
+
+        b100 = r0[i97];
+
+        i93 = i99 + 1;
+
+        b101 = r0[i99];
+
+        $i65 = b100 & 15;
+
+        b102 = (byte) $i65;
+
+        $i66 = b98 & 3;
+
+        b103 = (byte) $i66;
+
+        $i67 = b98 & -128;
+
+        if $i67 != 0 goto label08;
+
+        $i89 = b98 >> 2;
+
+        $b104 = (byte) $i89;
+
+        goto label09;
+
+     label08:
+        $i68 = b98 >> 2;
+
+        $i69 = $i68 ^ 192;
+
+        $b104 = (byte) $i69;
+
+     label09:
+        b105 = $b104;
+
+        $i70 = b100 & -128;
+
+        if $i70 != 0 goto label10;
+
+        $i88 = b100 >> 4;
+
+        $b106 = (byte) $i88;
+
+        goto label11;
+
+     label10:
+        $i71 = b100 >> 4;
+
+        $i72 = $i71 ^ 240;
+
+        $b106 = (byte) $i72;
+
+     label11:
+        b73 = $b106;
+
+        $i74 = b101 & -128;
+
+        if $i74 != 0 goto label12;
+
+        $i87 = b101 >> 6;
+
+        $b107 = (byte) $i87;
+
+        goto label13;
+
+     label12:
+        $i75 = b101 >> 6;
+
+        $i76 = $i75 ^ 252;
+
+        $b107 = (byte) $i76;
+
+     label13:
+        b77 = $b107;
+
+        i108 = i92 + 1;
+
+        $r10 = <org.apache.xml.security.utils.Base64: char[] lookUpBase64Alphabet>;
+
+        $c78 = $r10[b105];
+
+        r14[i92] = $c78;
+
+        i109 = i108 + 1;
+
+        $r11 = <org.apache.xml.security.utils.Base64: char[] lookUpBase64Alphabet>;
+
+        $i79 = b103 << 4;
+
+        $i80 = b73 | $i79;
+
+        $c81 = $r11[$i80];
+
+        r14[i108] = $c81;
+
+        i110 = i109 + 1;
+
+        $r12 = <org.apache.xml.security.utils.Base64: char[] lookUpBase64Alphabet>;
+
+        $i82 = b102 << 2;
+
+        $i83 = $i82 | b77;
+
+        $c84 = $r12[$i83];
+
+        r14[i109] = $c84;
+
+        i92 = i110 + 1;
+
+        $r13 = <org.apache.xml.security.utils.Base64: char[] lookUpBase64Alphabet>;
+
+        $i85 = b101 & 63;
+
+        $c86 = $r13[$i85];
+
+        r14[i110] = $c86;
+
+        i94 = i94 + 1;
+
+        i96 = i96 + 1;
+
+        goto label07;
+
+     label14:
+        i111 = i92 + 1;
+
+        r14[i92] = 13;
+
+        i92 = i111 + 1;
+
+        r14[i111] = 10;
+
+        i95 = i95 + 1;
+
+        goto label06;
+
+     label15:
+        if i94 >= i6 goto label22;
+
+        i112 = i93 + 1;
+
+        b113 = r0[i93];
+
+        i114 = i112 + 1;
+
+        b115 = r0[i112];
+
+        i93 = i114 + 1;
+
+        b116 = r0[i114];
+
+        $i42 = b115 & 15;
+
+        b117 = (byte) $i42;
+
+        $i43 = b113 & 3;
+
+        b118 = (byte) $i43;
+
+        $i44 = b113 & -128;
+
+        if $i44 != 0 goto label16;
+
+        $i64 = b113 >> 2;
+
+        $b119 = (byte) $i64;
+
+        goto label17;
+
+     label16:
+        $i45 = b113 >> 2;
+
+        $i46 = $i45 ^ 192;
+
+        $b119 = (byte) $i46;
+
+     label17:
+        b120 = $b119;
+
+        $i47 = b115 & -128;
+
+        if $i47 != 0 goto label18;
+
+        $i63 = b115 >> 4;
+
+        $b121 = (byte) $i63;
+
+        goto label19;
+
+     label18:
+        $i48 = b115 >> 4;
+
+        $i49 = $i48 ^ 240;
+
+        $b121 = (byte) $i49;
+
+     label19:
+        b122 = $b121;
+
+        $i50 = b116 & -128;
+
+        if $i50 != 0 goto label20;
+
+        $i62 = b116 >> 6;
+
+        $b123 = (byte) $i62;
+
+        goto label21;
+
+     label20:
+        $i51 = b116 >> 6;
+
+        $i52 = $i51 ^ 252;
+
+        $b123 = (byte) $i52;
+
+     label21:
+        b124 = $b123;
+
+        i125 = i92 + 1;
+
+        $r6 = <org.apache.xml.security.utils.Base64: char[] lookUpBase64Alphabet>;
+
+        $c53 = $r6[b120];
+
+        r14[i92] = $c53;
+
+        i126 = i125 + 1;
+
+        $r7 = <org.apache.xml.security.utils.Base64: char[] lookUpBase64Alphabet>;
+
+        $i54 = b118 << 4;
+
+        $i55 = b122 | $i54;
+
+        $c56 = $r7[$i55];
+
+        r14[i125] = $c56;
+
+        i127 = i126 + 1;
+
+        $r8 = <org.apache.xml.security.utils.Base64: char[] lookUpBase64Alphabet>;
+
+        $i57 = b117 << 2;
+
+        $i58 = $i57 | b124;
+
+        $c59 = $r8[$i58];
+
+        r14[i126] = $c59;
+
+        i92 = i127 + 1;
+
+        $r9 = <org.apache.xml.security.utils.Base64: char[] lookUpBase64Alphabet>;
+
+        $i60 = b116 & 63;
+
+        $c61 = $r9[$i60];
+
+        r14[i127] = $c61;
+
+        i94 = i94 + 1;
+
+        goto label15;
+
+     label22:
+        $b15 = l4 cmp 8L;
+
+        if $b15 != 0 goto label25;
+
+        b128 = r0[i93];
+
+        $i34 = b128 & 3;
+
+        b129 = (byte) $i34;
+
+        $i35 = b128 & -128;
+
+        if $i35 != 0 goto label23;
+
+        $i41 = b128 >> 2;
+
+        $b130 = (byte) $i41;
+
+        goto label24;
+
+     label23:
+        $i36 = b128 >> 2;
+
+        $i37 = $i36 ^ 192;
+
+        $b130 = (byte) $i37;
+
+     label24:
+        b131 = $b130;
+
+        i132 = i92 + 1;
+
+        $r4 = <org.apache.xml.security.utils.Base64: char[] lookUpBase64Alphabet>;
+
+        $c38 = $r4[b131];
+
+        r14[i92] = $c38;
+
+        i133 = i132 + 1;
+
+        $r5 = <org.apache.xml.security.utils.Base64: char[] lookUpBase64Alphabet>;
+
+        $i39 = b129 << 4;
+
+        $c40 = $r5[$i39];
+
+        r14[i132] = $c40;
+
+        i134 = i133 + 1;
+
+        r14[i133] = 61;
+
+        r14[i134] = 61;
+
+        goto label30;
+
+     label25:
+        $b16 = l4 cmp 16L;
+
+        if $b16 != 0 goto label30;
+
+        b135 = r0[i93];
+
+        $i17 = i93 + 1;
+
+        b136 = r0[$i17];
+
+        $i18 = b136 & 15;
+
+        b137 = (byte) $i18;
+
+        $i19 = b135 & 3;
+
+        b138 = (byte) $i19;
+
+        $i20 = b135 & -128;
+
+        if $i20 != 0 goto label26;
+
+        $i33 = b135 >> 2;
+
+        $b139 = (byte) $i33;
+
+        goto label27;
+
+     label26:
+        $i21 = b135 >> 2;
+
+        $i22 = $i21 ^ 192;
+
+        $b139 = (byte) $i22;
+
+     label27:
+        b140 = $b139;
+
+        $i23 = b136 & -128;
+
+        if $i23 != 0 goto label28;
+
+        $i32 = b136 >> 4;
+
+        $b141 = (byte) $i32;
+
+        goto label29;
+
+     label28:
+        $i24 = b136 >> 4;
+
+        $i25 = $i24 ^ 240;
+
+        $b141 = (byte) $i25;
+
+     label29:
+        b142 = $b141;
+
+        i143 = i92 + 1;
+
+        $r1 = <org.apache.xml.security.utils.Base64: char[] lookUpBase64Alphabet>;
+
+        $c26 = $r1[b140];
+
+        r14[i92] = $c26;
+
+        i144 = i143 + 1;
+
+        $r2 = <org.apache.xml.security.utils.Base64: char[] lookUpBase64Alphabet>;
+
+        $i27 = b138 << 4;
+
+        $i28 = b142 | $i27;
+
+        $c29 = $r2[$i28];
+
+        r14[i143] = $c29;
+
+        i145 = i144 + 1;
+
+        $r3 = <org.apache.xml.security.utils.Base64: char[] lookUpBase64Alphabet>;
+
+        $i30 = b137 << 2;
+
+        $c31 = $r3[$i30];
+
+        r14[i144] = $c31;
+
+        r14[i145] = 61;
+
+     label30:
+        $r15 = new java.lang.String;
+
+        specialinvoke $r15.<java.lang.String: void <init>(char[])>(r14);
+
+        return $r15;
+    }
+
+    public static final byte[] decode(java.lang.String) throws org.apache.xml.security.exceptions.Base64DecodingException
+    {
+        java.lang.String r0;
+        int $i0, i1;
+        byte[] r1, $r2;
+        null_type varReplacer5433;
+
+        nop;
+
+        r0 := @parameter0: java.lang.String;
+
+        if r0 != null goto label1;
+
+        varReplacer5433 = null;
+
+        return varReplacer5433;
+
+     label1:
+        $i0 = virtualinvoke r0.<java.lang.String: int length()>();
+
+        r1 = newarray (byte)[$i0];
+
+        i1 = staticinvoke <org.apache.xml.security.utils.Base64: int getBytesInternal(java.lang.String,byte[])>(r0, r1);
+
+        $r2 = staticinvoke <org.apache.xml.security.utils.Base64: byte[] decodeInternal(byte[],int)>(r1, i1);
+
+        return $r2;
+    }
+
+    protected static final int getBytesInternal(java.lang.String, byte[])
+    {
+        java.lang.String r0;
+        int i0, $i3, i4, i5;
+        char $c1;
+        byte b2;
+        boolean $z0;
+        byte[] r1;
+
+        nop;
+
+        r0 := @parameter0: java.lang.String;
+
+        r1 := @parameter1: byte[];
+
+        i0 = virtualinvoke r0.<java.lang.String: int length()>();
+
+        i4 = 0;
+
+        i5 = 0;
+
+     label1:
+        if i5 >= i0 goto label3;
+
+        $c1 = virtualinvoke r0.<java.lang.String: char charAt(int)>(i5);
+
+        b2 = (byte) $c1;
+
+        $z0 = staticinvoke <org.apache.xml.security.utils.Base64: boolean isWhiteSpace(byte)>(b2);
+
+        if $z0 != 0 goto label2;
+
+        $i3 = i4;
+
+        i4 = i4 + 1;
+
+        r1[$i3] = b2;
+
+     label2:
+        i5 = i5 + 1;
+
+        goto label1;
+
+     label3:
+        return i4;
+    }
+
+    protected static final byte[] decodeInternal(byte[], int) throws org.apache.xml.security.exceptions.Base64DecodingException
+    {
+        int $i0, i1, $i2, $i3, $i10, $i11, $i12, $i13, $i14, $i16, $i17, $i18, $i19, $i20, $i26, $i27, $i28, $i30, $i31, $i32, $i33, $i34, $i36, $i37, $i39, $i40, $i41, $i42, $i43, $i45, $i46, $i47, $i48, $i50, $i51, $i52, $i53, $i54, $i56, $i57, i59, i60, i61, i62, i64, i66, i69, i70, i71, i72, i73, i74, i75, i77, i79, i82, i83;
+        byte[] r0, $r1, $r2, $r4, $r5, $r7, $r8, $r9, $r10, $r13, r15;
+        byte $b4, $b5, $b6, b7, $b8, b9, $b15, $b21, $b22, $b23, $b24, $b25, $b29, $b35, $b38, $b44, $b49, $b55, $b58, b63, b65, b67, b68, b76, b78, b80, b81;
+        org.apache.xml.security.exceptions.Base64DecodingException $r3, $r6, $r11, $r12, $r14, $r16;
+        boolean $z0, $z1, $z2, $z3;
+        java.lang.String varReplacer5434, varReplacer5435, varReplacer5436, varReplacer5437, varReplacer5438, varReplacer5439;
+
+        nop;
+
+        r0 := @parameter0: byte[];
+
+        i59 := @parameter1: int;
+
+        if i59 != -1 goto label01;
+
+        i59 = staticinvoke <org.apache.xml.security.utils.Base64: int removeWhiteSpace(byte[])>(r0);
+
+     label01:
+        $i0 = i59 % 4;
+
+        if $i0 == 0 goto label02;
+
+        $r14 = new org.apache.xml.security.exceptions.Base64DecodingException;
+
+        varReplacer5439 = "decoding.divisible.four";
+
+        specialinvoke $r14.<org.apache.xml.security.exceptions.Base64DecodingException: void <init>(java.lang.String)>(varReplacer5439);
+
+        throw $r14;
+
+     label02:
+        i1 = i59 / 4;
+
+        if i1 != 0 goto label03;
+
+        $r13 = newarray (byte)[0];
+
+        return $r13;
+
+     label03:
+        $i2 = i1 - 1;
+
+        i60 = $i2 * 4;
+
+        $i3 = i1 - 1;
+
+        i61 = $i3 * 3;
+
+        $r1 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        i62 = i60 + 1;
+
+        $b4 = r0[i60];
+
+        b63 = $r1[$b4];
+
+        $r2 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        i64 = i62 + 1;
+
+        $b5 = r0[i62];
+
+        b65 = $r2[$b5];
+
+        if b63 == -1 goto label04;
+
+        if b65 != -1 goto label05;
+
+     label04:
+        $r3 = new org.apache.xml.security.exceptions.Base64DecodingException;
+
+        varReplacer5435 = "decoding.general";
+
+        specialinvoke $r3.<org.apache.xml.security.exceptions.Base64DecodingException: void <init>(java.lang.String)>(varReplacer5435);
+
+        throw $r3;
+
+     label05:
+        $r4 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        i66 = i64 + 1;
+
+        $b6 = r0[i64];
+
+        b7 = $b6;
+
+        b67 = $r4[$b6];
+
+        $r5 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        $b8 = r0[i66];
+
+        b9 = $b8;
+
+        b68 = $r5[$b8];
+
+        if b67 == -1 goto label06;
+
+        if b68 != -1 goto label11;
+
+     label06:
+        $z0 = staticinvoke <org.apache.xml.security.utils.Base64: boolean isPad(byte)>(b7);
+
+        if $z0 == 0 goto label08;
+
+        $z3 = staticinvoke <org.apache.xml.security.utils.Base64: boolean isPad(byte)>(b9);
+
+        if $z3 == 0 goto label08;
+
+        $i39 = b65 & 15;
+
+        if $i39 == 0 goto label07;
+
+        $r12 = new org.apache.xml.security.exceptions.Base64DecodingException;
+
+        varReplacer5437 = "decoding.general";
+
+        specialinvoke $r12.<org.apache.xml.security.exceptions.Base64DecodingException: void <init>(java.lang.String)>(varReplacer5437);
+
+        throw $r12;
+
+     label07:
+        $i40 = i61 + 1;
+
+        r15 = newarray (byte)[$i40];
+
+        $i42 = b63 << 2;
+
+        $i41 = b65 >> 4;
+
+        $i43 = $i42 | $i41;
+
+        $b44 = (byte) $i43;
+
+        r15[i61] = $b44;
+
+        goto label12;
+
+     label08:
+        $z1 = staticinvoke <org.apache.xml.security.utils.Base64: boolean isPad(byte)>(b7);
+
+        if $z1 != 0 goto label10;
+
+        $z2 = staticinvoke <org.apache.xml.security.utils.Base64: boolean isPad(byte)>(b9);
+
+        if $z2 == 0 goto label10;
+
+        $i10 = b67 & 3;
+
+        if $i10 == 0 goto label09;
+
+        $r11 = new org.apache.xml.security.exceptions.Base64DecodingException;
+
+        varReplacer5434 = "decoding.general";
+
+        specialinvoke $r11.<org.apache.xml.security.exceptions.Base64DecodingException: void <init>(java.lang.String)>(varReplacer5434);
+
+        throw $r11;
+
+     label09:
+        $i11 = i61 + 2;
+
+        r15 = newarray (byte)[$i11];
+
+        i69 = i61 + 1;
+
+        $i13 = b63 << 2;
+
+        $i12 = b65 >> 4;
+
+        $i14 = $i13 | $i12;
+
+        $b15 = (byte) $i14;
+
+        r15[i61] = $b15;
+
+        $i16 = b65 & 15;
+
+        $i19 = $i16 << 4;
+
+        $i17 = b67 >> 2;
+
+        $i18 = $i17 & 15;
+
+        $i20 = $i19 | $i18;
+
+        $b21 = (byte) $i20;
+
+        r15[i69] = $b21;
+
+        goto label12;
+
+     label10:
+        $r6 = new org.apache.xml.security.exceptions.Base64DecodingException;
+
+        varReplacer5438 = "decoding.general";
+
+        specialinvoke $r6.<org.apache.xml.security.exceptions.Base64DecodingException: void <init>(java.lang.String)>(varReplacer5438);
+
+        throw $r6;
+
+     label11:
+        $i45 = i61 + 3;
+
+        r15 = newarray (byte)[$i45];
+
+        i70 = i61 + 1;
+
+        $i47 = b63 << 2;
+
+        $i46 = b65 >> 4;
+
+        $i48 = $i47 | $i46;
+
+        $b49 = (byte) $i48;
+
+        r15[i61] = $b49;
+
+        i71 = i70 + 1;
+
+        $i50 = b65 & 15;
+
+        $i53 = $i50 << 4;
+
+        $i51 = b67 >> 2;
+
+        $i52 = $i51 & 15;
+
+        $i54 = $i53 | $i52;
+
+        $b55 = (byte) $i54;
+
+        r15[i70] = $b55;
+
+        $i56 = b67 << 6;
+
+        $i57 = $i56 | b68;
+
+        $b58 = (byte) $i57;
+
+        r15[i71] = $b58;
+
+     label12:
+        i72 = 0;
+
+        i73 = 0;
+
+        i74 = i1 - 1;
+
+     label13:
+        if i74 <= 0 goto label16;
+
+        $r7 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        i75 = i73 + 1;
+
+        $b22 = r0[i73];
+
+        b76 = $r7[$b22];
+
+        $r8 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        i77 = i75 + 1;
+
+        $b23 = r0[i75];
+
+        b78 = $r8[$b23];
+
+        $r9 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        i79 = i77 + 1;
+
+        $b24 = r0[i77];
+
+        b80 = $r9[$b24];
+
+        $r10 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        i73 = i79 + 1;
+
+        $b25 = r0[i79];
+
+        b81 = $r10[$b25];
+
+        if b76 == -1 goto label14;
+
+        if b78 == -1 goto label14;
+
+        if b80 == -1 goto label14;
+
+        if b81 != -1 goto label15;
+
+     label14:
+        $r16 = new org.apache.xml.security.exceptions.Base64DecodingException;
+
+        varReplacer5436 = "decoding.general";
+
+        specialinvoke $r16.<org.apache.xml.security.exceptions.Base64DecodingException: void <init>(java.lang.String)>(varReplacer5436);
+
+        throw $r16;
+
+     label15:
+        i82 = i72 + 1;
+
+        $i27 = b76 << 2;
+
+        $i26 = b78 >> 4;
+
+        $i28 = $i27 | $i26;
+
+        $b29 = (byte) $i28;
+
+        r15[i72] = $b29;
+
+        i83 = i82 + 1;
+
+        $i30 = b78 & 15;
+
+        $i33 = $i30 << 4;
+
+        $i31 = b80 >> 2;
+
+        $i32 = $i31 & 15;
+
+        $i34 = $i33 | $i32;
+
+        $b35 = (byte) $i34;
+
+        r15[i82] = $b35;
+
+        i72 = i83 + 1;
+
+        $i36 = b80 << 6;
+
+        $i37 = $i36 | b81;
+
+        $b38 = (byte) $i37;
+
+        r15[i83] = $b38;
+
+        i74 = i74 + -1;
+
+        goto label13;
+
+     label16:
+        return r15;
+    }
+
+    public static final void decode(java.lang.String, java.io.OutputStream) throws org.apache.xml.security.exceptions.Base64DecodingException, java.io.IOException
+    {
+        java.lang.String r0;
+        int $i0, i1;
+        byte[] r1;
+        java.io.OutputStream r2;
+
+        nop;
+
+        r0 := @parameter0: java.lang.String;
+
+        r2 := @parameter1: java.io.OutputStream;
+
+        $i0 = virtualinvoke r0.<java.lang.String: int length()>();
+
+        r1 = newarray (byte)[$i0];
+
+        i1 = staticinvoke <org.apache.xml.security.utils.Base64: int getBytesInternal(java.lang.String,byte[])>(r0, r1);
+
+        staticinvoke <org.apache.xml.security.utils.Base64: void decode(byte[],java.io.OutputStream,int)>(r1, r2, i1);
+
+        return;
+    }
+
+    public static final void decode(byte[], java.io.OutputStream) throws org.apache.xml.security.exceptions.Base64DecodingException, java.io.IOException
+    {
+        byte[] r0;
+        java.io.OutputStream r1;
+        int varReplacer5440;
+
+        nop;
+
+        r0 := @parameter0: byte[];
+
+        r1 := @parameter1: java.io.OutputStream;
+
+        varReplacer5440 = -1;
+
+        staticinvoke <org.apache.xml.security.utils.Base64: void decode(byte[],java.io.OutputStream,int)>(r0, r1, varReplacer5440);
+
+        return;
+    }
+
+    protected static final void decode(byte[], java.io.OutputStream, int) throws org.apache.xml.security.exceptions.Base64DecodingException, java.io.IOException
+    {
+        int $i0, i1, $i8, $i9, $i10, $i11, $i13, $i14, $i15, $i16, $i17, $i19, $i20, $i21, $i22, $i24, $i25, $i26, $i28, $i29, $i30, $i31, $i32, $i34, $i35, $i41, $i42, $i43, $i45, $i46, $i47, $i48, $i49, $i51, $i52, i54, i55, i56, i57, i59, i61, i64, i66, i68, i70;
+        byte[] r0, $r1, $r2, $r4, $r5, $r10, $r11, $r12, $r13;
+        byte $b2, $b3, $b4, b5, $b6, b7, $b12, $b18, $b23, $b27, $b33, $b36, $b37, $b38, $b39, $b40, $b44, $b50, $b53, b58, b60, b62, b63, b65, b67, b69, b71;
+        org.apache.xml.security.exceptions.Base64DecodingException $r3, $r6, $r8, $r9, $r14, $r15;
+        boolean $z0, $z1, $z2, $z3, z4, z5, z6, z7, z8;
+        java.io.OutputStream r7;
+        java.lang.String varReplacer5441, varReplacer5442, varReplacer5443, varReplacer5444, varReplacer5445, varReplacer5446;
+
+        nop;
+
+        r0 := @parameter0: byte[];
+
+        r7 := @parameter1: java.io.OutputStream;
+
+        i54 := @parameter2: int;
+
+        if i54 != -1 goto label01;
+
+        i54 = staticinvoke <org.apache.xml.security.utils.Base64: int removeWhiteSpace(byte[])>(r0);
+
+     label01:
+        $i0 = i54 % 4;
+
+        if $i0 == 0 goto label02;
+
+        $r14 = new org.apache.xml.security.exceptions.Base64DecodingException;
+
+        varReplacer5441 = "decoding.divisible.four";
+
+        specialinvoke $r14.<org.apache.xml.security.exceptions.Base64DecodingException: void <init>(java.lang.String)>(varReplacer5441);
+
+        throw $r14;
+
+     label02:
+        i1 = i54 / 4;
+
+        if i1 != 0 goto label03;
+
+        return;
+
+     label03:
+        z4 = 0;
+
+        z5 = 0;
+
+        z6 = 0;
+
+        z7 = 0;
+
+        z8 = 0;
+
+        i55 = 0;
+
+        i56 = i1 - 1;
+
+     label04:
+        if i56 <= 0 goto label07;
+
+        $r10 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        i57 = i55 + 1;
+
+        $b37 = r0[i55];
+
+        b58 = $r10[$b37];
+
+        $r11 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        i59 = i57 + 1;
+
+        $b38 = r0[i57];
+
+        b60 = $r11[$b38];
+
+        $r12 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        i61 = i59 + 1;
+
+        $b39 = r0[i59];
+
+        b62 = $r12[$b39];
+
+        $r13 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        i55 = i61 + 1;
+
+        $b40 = r0[i61];
+
+        b63 = $r13[$b40];
+
+        if b58 == -1 goto label05;
+
+        if b60 == -1 goto label05;
+
+        if b62 == -1 goto label05;
+
+        if b63 != -1 goto label06;
+
+     label05:
+        $r15 = new org.apache.xml.security.exceptions.Base64DecodingException;
+
+        varReplacer5442 = "decoding.general";
+
+        specialinvoke $r15.<org.apache.xml.security.exceptions.Base64DecodingException: void <init>(java.lang.String)>(varReplacer5442);
+
+        throw $r15;
+
+     label06:
+        $i42 = b58 << 2;
+
+        $i41 = b60 >> 4;
+
+        $i43 = $i42 | $i41;
+
+        $b44 = (byte) $i43;
+
+        virtualinvoke r7.<java.io.OutputStream: void write(int)>($b44);
+
+        $i45 = b60 & 15;
+
+        $i48 = $i45 << 4;
+
+        $i46 = b62 >> 2;
+
+        $i47 = $i46 & 15;
+
+        $i49 = $i48 | $i47;
+
+        $b50 = (byte) $i49;
+
+        virtualinvoke r7.<java.io.OutputStream: void write(int)>($b50);
+
+        $i51 = b62 << 6;
+
+        $i52 = $i51 | b63;
+
+        $b53 = (byte) $i52;
+
+        virtualinvoke r7.<java.io.OutputStream: void write(int)>($b53);
+
+        i56 = i56 + -1;
+
+        goto label04;
+
+     label07:
+        $r1 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        i64 = i55 + 1;
+
+        $b2 = r0[i55];
+
+        b65 = $r1[$b2];
+
+        $r2 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        i66 = i64 + 1;
+
+        $b3 = r0[i64];
+
+        b67 = $r2[$b3];
+
+        if b65 == -1 goto label08;
+
+        if b67 != -1 goto label09;
+
+     label08:
+        $r3 = new org.apache.xml.security.exceptions.Base64DecodingException;
+
+        varReplacer5446 = "decoding.general";
+
+        specialinvoke $r3.<org.apache.xml.security.exceptions.Base64DecodingException: void <init>(java.lang.String)>(varReplacer5446);
+
+        throw $r3;
+
+     label09:
+        $r4 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        i68 = i66 + 1;
+
+        $b4 = r0[i66];
+
+        b5 = $b4;
+
+        b69 = $r4[$b4];
+
+        $r5 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        i70 = i68 + 1;
+
+        $b6 = r0[i68];
+
+        b7 = $b6;
+
+        b71 = $r5[$b6];
+
+        if b69 == -1 goto label10;
+
+        if b71 != -1 goto label15;
+
+     label10:
+        $z0 = staticinvoke <org.apache.xml.security.utils.Base64: boolean isPad(byte)>(b5);
+
+        if $z0 == 0 goto label12;
+
+        $z3 = staticinvoke <org.apache.xml.security.utils.Base64: boolean isPad(byte)>(b7);
+
+        if $z3 == 0 goto label12;
+
+        $i19 = b67 & 15;
+
+        if $i19 == 0 goto label11;
+
+        $r9 = new org.apache.xml.security.exceptions.Base64DecodingException;
+
+        varReplacer5444 = "decoding.general";
+
+        specialinvoke $r9.<org.apache.xml.security.exceptions.Base64DecodingException: void <init>(java.lang.String)>(varReplacer5444);
+
+        throw $r9;
+
+     label11:
+        $i21 = b65 << 2;
+
+        $i20 = b67 >> 4;
+
+        $i22 = $i21 | $i20;
+
+        $b23 = (byte) $i22;
+
+        virtualinvoke r7.<java.io.OutputStream: void write(int)>($b23);
+
+        goto label16;
+
+     label12:
+        $z1 = staticinvoke <org.apache.xml.security.utils.Base64: boolean isPad(byte)>(b5);
+
+        if $z1 != 0 goto label14;
+
+        $z2 = staticinvoke <org.apache.xml.security.utils.Base64: boolean isPad(byte)>(b7);
+
+        if $z2 == 0 goto label14;
+
+        $i8 = b69 & 3;
+
+        if $i8 == 0 goto label13;
+
+        $r8 = new org.apache.xml.security.exceptions.Base64DecodingException;
+
+        varReplacer5445 = "decoding.general";
+
+        specialinvoke $r8.<org.apache.xml.security.exceptions.Base64DecodingException: void <init>(java.lang.String)>(varReplacer5445);
+
+        throw $r8;
+
+     label13:
+        $i10 = b65 << 2;
+
+        $i9 = b67 >> 4;
+
+        $i11 = $i10 | $i9;
+
+        $b12 = (byte) $i11;
+
+        virtualinvoke r7.<java.io.OutputStream: void write(int)>($b12);
+
+        $i13 = b67 & 15;
+
+        $i16 = $i13 << 4;
+
+        $i14 = b69 >> 2;
+
+        $i15 = $i14 & 15;
+
+        $i17 = $i16 | $i15;
+
+        $b18 = (byte) $i17;
+
+        virtualinvoke r7.<java.io.OutputStream: void write(int)>($b18);
+
+        goto label16;
+
+     label14:
+        $r6 = new org.apache.xml.security.exceptions.Base64DecodingException;
+
+        varReplacer5443 = "decoding.general";
+
+        specialinvoke $r6.<org.apache.xml.security.exceptions.Base64DecodingException: void <init>(java.lang.String)>(varReplacer5443);
+
+        throw $r6;
+
+     label15:
+        $i25 = b65 << 2;
+
+        $i24 = b67 >> 4;
+
+        $i26 = $i25 | $i24;
+
+        $b27 = (byte) $i26;
+
+        virtualinvoke r7.<java.io.OutputStream: void write(int)>($b27);
+
+        $i28 = b67 & 15;
+
+        $i31 = $i28 << 4;
+
+        $i29 = b69 >> 2;
+
+        $i30 = $i29 & 15;
+
+        $i32 = $i31 | $i30;
+
+        $b33 = (byte) $i32;
+
+        virtualinvoke r7.<java.io.OutputStream: void write(int)>($b33);
+
+        $i34 = b69 << 6;
+
+        $i35 = $i34 | b71;
+
+        $b36 = (byte) $i35;
+
+        virtualinvoke r7.<java.io.OutputStream: void write(int)>($b36);
+
+     label16:
+        return;
+    }
+
+    public static final void decode(java.io.InputStream, java.io.OutputStream) throws org.apache.xml.security.exceptions.Base64DecodingException, java.io.IOException
+    {
+        byte[] r0, $r3, $r7, $r8, $r9, $r10, $r12, $r13, $r14, $r15;
+        java.io.InputStream r1;
+        int i0, $i4, $i5, $i6, $i7, $i9, $i10, $i11, $i12, $i13, $i15, $i16, $i17, $i18, $i20, $i21, $i22, $i24, $i25, $i26, $i27, $i28, $i30, $i31, $i33, $i38, $i39, $i40, $i42, $i43, $i44, $i45, $i46, $i48, $i49, $i51, i53, $i54, i56, i57;
+        byte b1, b2, b3, $b8, $b14, $b19, $b23, $b29, $b32, $b34, $b35, $b36, $b37, $b41, $b47, $b50, $b52, b55, b58, b59, b60, b61, b62, b63, b64, b65, b66, b67;
+        boolean $z0, $z1, $z2, $z3, $z4, $z5, z6, z7, z8, z9;
+        org.apache.xml.security.exceptions.Base64DecodingException $r2, $r5, $r6, $r11;
+        java.io.OutputStream r4;
+        java.lang.String varReplacer5447, varReplacer5448, varReplacer5449, varReplacer5450;
+
+        nop;
+
+        r1 := @parameter0: java.io.InputStream;
+
+        r4 := @parameter1: java.io.OutputStream;
+
+        z6 = 0;
+
+        z7 = 0;
+
+        z8 = 0;
+
+        z9 = 0;
+
+        i53 = 0;
+
+        r0 = newarray (byte)[4];
+
+     label01:
+        $i54 = virtualinvoke r1.<java.io.InputStream: int read()>();
+
+        i0 = $i54;
+
+        if $i54 <= 0 goto label06;
+
+        b55 = (byte) i0;
+
+        $z4 = staticinvoke <org.apache.xml.security.utils.Base64: boolean isWhiteSpace(byte)>(b55);
+
+        if $z4 == 0 goto label02;
+
+        goto label01;
+
+     label02:
+        $z5 = staticinvoke <org.apache.xml.security.utils.Base64: boolean isPad(byte)>(b55);
+
+        if $z5 == 0 goto label03;
+
+        i56 = i53 + 1;
+
+        r0[i53] = b55;
+
+        if i56 != 3 goto label06;
+
+        i57 = i56 + 1;
+
+        $i51 = virtualinvoke r1.<java.io.InputStream: int read()>();
+
+        $b52 = (byte) $i51;
+
+        r0[i56] = $b52;
+
+        goto label06;
+
+     label03:
+        $i33 = i53;
+
+        i53 = i53 + 1;
+
+        r0[$i33] = b55;
+
+        if b55 != -1 goto label04;
+
+        $r11 = new org.apache.xml.security.exceptions.Base64DecodingException;
+
+        varReplacer5449 = "decoding.general";
+
+        specialinvoke $r11.<org.apache.xml.security.exceptions.Base64DecodingException: void <init>(java.lang.String)>(varReplacer5449);
+
+        throw $r11;
+
+     label04:
+        if i53 == 4 goto label05;
+
+        goto label01;
+
+     label05:
+        i53 = 0;
+
+        $r7 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        $b34 = r0[0];
+
+        b58 = $r7[$b34];
+
+        $r8 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        $b35 = r0[1];
+
+        b59 = $r8[$b35];
+
+        $r9 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        $b36 = r0[2];
+
+        b60 = $r9[$b36];
+
+        $r10 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        $b37 = r0[3];
+
+        b61 = $r10[$b37];
+
+        $i39 = b58 << 2;
+
+        $i38 = b59 >> 4;
+
+        $i40 = $i39 | $i38;
+
+        $b41 = (byte) $i40;
+
+        virtualinvoke r4.<java.io.OutputStream: void write(int)>($b41);
+
+        $i42 = b59 & 15;
+
+        $i45 = $i42 << 4;
+
+        $i43 = b60 >> 2;
+
+        $i44 = $i43 & 15;
+
+        $i46 = $i45 | $i44;
+
+        $b47 = (byte) $i46;
+
+        virtualinvoke r4.<java.io.OutputStream: void write(int)>($b47);
+
+        $i48 = b60 << 6;
+
+        $i49 = $i48 | b61;
+
+        $b50 = (byte) $i49;
+
+        virtualinvoke r4.<java.io.OutputStream: void write(int)>($b50);
+
+        goto label01;
+
+     label06:
+        b62 = r0[0];
+
+        b1 = r0[1];
+
+        b2 = r0[2];
+
+        b3 = r0[3];
+
+        $r12 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        b63 = $r12[b62];
+
+        $r13 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        b64 = $r13[b1];
+
+        $r14 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        b65 = $r14[b2];
+
+        $r15 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        b66 = $r15[b3];
+
+        if b65 == -1 goto label07;
+
+        if b66 != -1 goto label12;
+
+     label07:
+        $z0 = staticinvoke <org.apache.xml.security.utils.Base64: boolean isPad(byte)>(b2);
+
+        if $z0 == 0 goto label09;
+
+        $z3 = staticinvoke <org.apache.xml.security.utils.Base64: boolean isPad(byte)>(b3);
+
+        if $z3 == 0 goto label09;
+
+        $i15 = b64 & 15;
+
+        if $i15 == 0 goto label08;
+
+        $r6 = new org.apache.xml.security.exceptions.Base64DecodingException;
+
+        varReplacer5447 = "decoding.general";
+
+        specialinvoke $r6.<org.apache.xml.security.exceptions.Base64DecodingException: void <init>(java.lang.String)>(varReplacer5447);
+
+        throw $r6;
+
+     label08:
+        $i17 = b63 << 2;
+
+        $i16 = b64 >> 4;
+
+        $i18 = $i17 | $i16;
+
+        $b19 = (byte) $i18;
+
+        virtualinvoke r4.<java.io.OutputStream: void write(int)>($b19);
+
+        goto label13;
+
+     label09:
+        $z1 = staticinvoke <org.apache.xml.security.utils.Base64: boolean isPad(byte)>(b2);
+
+        if $z1 != 0 goto label11;
+
+        $z2 = staticinvoke <org.apache.xml.security.utils.Base64: boolean isPad(byte)>(b3);
+
+        if $z2 == 0 goto label11;
+
+        $r3 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        b67 = $r3[b2];
+
+        $i4 = b67 & 3;
+
+        if $i4 == 0 goto label10;
+
+        $r5 = new org.apache.xml.security.exceptions.Base64DecodingException;
+
+        varReplacer5448 = "decoding.general";
+
+        specialinvoke $r5.<org.apache.xml.security.exceptions.Base64DecodingException: void <init>(java.lang.String)>(varReplacer5448);
+
+        throw $r5;
+
+     label10:
+        $i6 = b63 << 2;
+
+        $i5 = b64 >> 4;
+
+        $i7 = $i6 | $i5;
+
+        $b8 = (byte) $i7;
+
+        virtualinvoke r4.<java.io.OutputStream: void write(int)>($b8);
+
+        $i9 = b64 & 15;
+
+        $i12 = $i9 << 4;
+
+        $i10 = b67 >> 2;
+
+        $i11 = $i10 & 15;
+
+        $i13 = $i12 | $i11;
+
+        $b14 = (byte) $i13;
+
+        virtualinvoke r4.<java.io.OutputStream: void write(int)>($b14);
+
+        goto label13;
+
+     label11:
+        $r2 = new org.apache.xml.security.exceptions.Base64DecodingException;
+
+        varReplacer5450 = "decoding.general";
+
+        specialinvoke $r2.<org.apache.xml.security.exceptions.Base64DecodingException: void <init>(java.lang.String)>(varReplacer5450);
+
+        throw $r2;
+
+     label12:
+        $i21 = b63 << 2;
+
+        $i20 = b64 >> 4;
+
+        $i22 = $i21 | $i20;
+
+        $b23 = (byte) $i22;
+
+        virtualinvoke r4.<java.io.OutputStream: void write(int)>($b23);
+
+        $i24 = b64 & 15;
+
+        $i27 = $i24 << 4;
+
+        $i25 = b65 >> 2;
+
+        $i26 = $i25 & 15;
+
+        $i28 = $i27 | $i26;
+
+        $b29 = (byte) $i28;
+
+        virtualinvoke r4.<java.io.OutputStream: void write(int)>($b29);
+
+        $i30 = b65 << 6;
+
+        $i31 = $i30 | b66;
+
+        $b32 = (byte) $i31;
+
+        virtualinvoke r4.<java.io.OutputStream: void write(int)>($b32);
+
+     label13:
+        return;
+    }
+
+    protected static final int removeWhiteSpace(byte[])
+    {
+        byte[] r0;
+        int i0, $i2, i3, i4, varReplacer5451;
+        byte b1;
+        boolean $z0;
+
+        nop;
+
+        r0 := @parameter0: byte[];
+
+        if r0 != null goto label1;
+
+        varReplacer5451 = 0;
+
+        return varReplacer5451;
+
+     label1:
+        i3 = 0;
+
+        i0 = lengthof r0;
+
+        i4 = 0;
+
+     label2:
+        if i4 >= i0 goto label4;
+
+        b1 = r0[i4];
+
+        $z0 = staticinvoke <org.apache.xml.security.utils.Base64: boolean isWhiteSpace(byte)>(b1);
+
+        if $z0 != 0 goto label3;
+
+        $i2 = i3;
+
+        i3 = i3 + 1;
+
+        r0[$i2] = b1;
+
+     label3:
+        i4 = i4 + 1;
+
+        goto label2;
+
+     label4:
+        return i3;
+    }
+
+    static void <clinit>()
+    {
+        byte[] $r0, $r2, $r3, $r9, $r10, $r11, $r12;
+        char[] $r1, $r4, $r5, $r6, $r7, $r8;
+        int $i0, $i2, $i4, $i6, $i7, $i9, $i10, $i12, i14, i15, i16, i17, i18, i19, i20, i21, i22;
+        char $c1, $c3, $c5;
+        byte $b8, $b11, $b13;
+
+        nop;
+
+        $r0 = newarray (byte)[255];
+
+        <org.apache.xml.security.utils.Base64: byte[] base64Alphabet> = $r0;
+
+        $r1 = newarray (char)[64];
+
+        <org.apache.xml.security.utils.Base64: char[] lookUpBase64Alphabet> = $r1;
+
+        i14 = 0;
+
+     label01:
+        if i14 >= 255 goto label02;
+
+        $r12 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        $r12[i14] = -1;
+
+        i14 = i14 + 1;
+
+        goto label01;
+
+     label02:
+        i15 = 90;
+
+     label03:
+        if i15 < 65 goto label04;
+
+        $r11 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        $i12 = i15 - 65;
+
+        $b13 = (byte) $i12;
+
+        $r11[i15] = $b13;
+
+        i15 = i15 + -1;
+
+        goto label03;
+
+     label04:
+        i16 = 122;
+
+     label05:
+        if i16 < 97 goto label06;
+
+        $r10 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        $i9 = i16 - 97;
+
+        $i10 = $i9 + 26;
+
+        $b11 = (byte) $i10;
+
+        $r10[i16] = $b11;
+
+        i16 = i16 + -1;
+
+        goto label05;
+
+     label06:
+        i17 = 57;
+
+     label07:
+        if i17 < 48 goto label08;
+
+        $r9 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        $i6 = i17 - 48;
+
+        $i7 = $i6 + 52;
+
+        $b8 = (byte) $i7;
+
+        $r9[i17] = $b8;
+
+        i17 = i17 + -1;
+
+        goto label07;
+
+     label08:
+        $r2 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        $r2[43] = 62;
+
+        $r3 = <org.apache.xml.security.utils.Base64: byte[] base64Alphabet>;
+
+        $r3[47] = 63;
+
+        i18 = 0;
+
+     label09:
+        if i18 > 25 goto label10;
+
+        $r8 = <org.apache.xml.security.utils.Base64: char[] lookUpBase64Alphabet>;
+
+        $i4 = 65 + i18;
+
+        $c5 = (char) $i4;
+
+        $r8[i18] = $c5;
+
+        i18 = i18 + 1;
+
+        goto label09;
+
+     label10:
+        i19 = 26;
+
+        i20 = 0;
+
+     label11:
+        if i19 > 51 goto label12;
+
+        $r7 = <org.apache.xml.security.utils.Base64: char[] lookUpBase64Alphabet>;
+
+        $i2 = 97 + i20;
+
+        $c3 = (char) $i2;
+
+        $r7[i19] = $c3;
+
+        i19 = i19 + 1;
+
+        i20 = i20 + 1;
+
+        goto label11;
+
+     label12:
+        i21 = 52;
+
+        i22 = 0;
+
+     label13:
+        if i21 > 61 goto label14;
+
+        $r6 = <org.apache.xml.security.utils.Base64: char[] lookUpBase64Alphabet>;
+
+        $i0 = 48 + i22;
+
+        $c1 = (char) $i0;
+
+        $r6[i21] = $c1;
+
+        i21 = i21 + 1;
+
+        i22 = i22 + 1;
+
+        goto label13;
+
+     label14:
+        $r4 = <org.apache.xml.security.utils.Base64: char[] lookUpBase64Alphabet>;
+
+        $r4[62] = 43;
+
+        $r5 = <org.apache.xml.security.utils.Base64: char[] lookUpBase64Alphabet>;
+
+        $r5[63] = 47;
+
+        return;
+    }
+}

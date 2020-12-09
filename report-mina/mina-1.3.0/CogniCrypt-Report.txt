@@ -1,0 +1,600 @@
+Ruleset: 
+	java.security.KeyPair
+	void
+	javax.crypto.CipherInputStream
+	java.security.spec.DSAGenParameterSpec
+	java.security.SecureRandom
+	javax.crypto.CipherOutputStream
+	java.security.KeyStore
+	javax.crypto.spec.GCMParameterSpec
+	java.security.MessageDigest
+	javax.net.ssl.KeyManagerFactory
+	java.security.DigestInputStream
+	javax.xml.crypto.dsig.spec.HMACParameterSpec
+	java.security.Signature
+	java.security.cert.PKIXParameters
+	javax.net.ssl.SSLEngine
+	javax.crypto.spec.PBEKeySpec
+	javax.net.ssl.SSLParameters
+	java.security.spec.RSAKeyGenParameterSpec
+	javax.net.ssl.TrustManagerFactory
+	javax.crypto.spec.DHGenParameterSpec
+	java.security.cert.PKIXBuilderParameters
+	java.security.AlgorithmParameters
+	javax.crypto.spec.PBEParameterSpec
+	java.security.cert.TrustAnchor
+	javax.net.ssl.KeyStoreBuilderParameters
+	javax.crypto.KeyGenerator
+	javax.crypto.spec.DHParameterSpec
+	javax.crypto.SecretKey
+	javax.crypto.Mac
+	javax.crypto.spec.SecretKeySpec
+	javax.net.ssl.SSLContext
+	javax.crypto.SecretKeyFactory
+	java.security.spec.DSAParameterSpec
+	java.security.KeyPairGenerator
+	java.security.DigestOutputStream
+	javax.crypto.spec.IvParameterSpec
+	javax.net.ssl.CertPathTrustManagerParameters
+	java.security.Key
+	javax.crypto.Cipher
+
+Analyzed Objects: 
+	Object:
+		Variable: $r3
+		Type: javax.crypto.Cipher
+		Statement: $r3 = staticinvoke <javax.crypto.Cipher: javax.crypto.Cipher getInstance(java.lang.String)>(r1)
+		Method: <org.apache.sshd.common.util.SecurityUtils: javax.crypto.Cipher getCipher(java.lang.String)>
+		SHA-256: d426f6ae0bfa2a749c532323d90af288dcc08138ea89c1c2149fc94603ef6aa
+		Secure: false
+	Object:
+		Variable: $r2
+		Type: java.security.MessageDigest
+		Statement: $r2 = staticinvoke <java.security.MessageDigest: java.security.MessageDigest getInstance(java.lang.String,java.lang.String)>(r1, r0)
+		Method: <org.apache.sshd.common.util.SecurityUtils: java.security.MessageDigest getMessageDigest(java.lang.String)>
+		SHA-256: fdd9ce5816331ba051c7c224dc0191992282bb762a8ef46cd7804d5d28e253a7
+		Secure: false
+	Object:
+		Variable: $r6
+		Type: java.security.KeyPair
+		Statement: specialinvoke $r6.<java.security.KeyPair: void <init>(java.security.PublicKey,java.security.PrivateKey)>(r30, r32)
+		Method: <org.apache.sshd.common.config.keys.AbstractPublicKeyEntryDecoder: java.security.KeyPair cloneKeyPair(java.security.KeyPair)>
+		SHA-256: 924f30a49b0c36b64677de6039eae0681c6ed90c511ddc6499e3a7e41c3fbe9d
+		Secure: true
+	Object:
+		Variable: $r8
+		Type: javax.crypto.spec.IvParameterSpec
+		Statement: specialinvoke $r8.<javax.crypto.spec.IvParameterSpec: void <init>(byte[])>(r19)
+		Method: <org.apache.sshd.common.cipher.BaseCipher: void init(org.apache.sshd.common.cipher.Cipher$Mode,byte[],byte[])>
+		SHA-256: c47c0caef47b86a7571551e312f9dede56e8bec5d614ab8eac6424a0312dddef
+		Secure: false
+	Object:
+		Variable: $r3
+		Type: java.security.MessageDigest
+		Statement: $r3 = staticinvoke <java.security.MessageDigest: java.security.MessageDigest getInstance(java.lang.String)>(r1)
+		Method: <org.apache.sshd.common.util.SecurityUtils: java.security.MessageDigest getMessageDigest(java.lang.String)>
+		SHA-256: 33c29188600efc8c8f14643afc4fe78bb7edb75ce846f5b5122cde9b651daee7
+		Secure: false
+	Object:
+		Variable: r9
+		Type: java.security.KeyPair
+		Statement: r9 = virtualinvoke $r8.<java.security.KeyPairGenerator: java.security.KeyPair generateKeyPair()>()
+		Method: <org.apache.sshd.common.kex.DHG: byte[] getE()>
+		SHA-256: 78b91a5c28b3fb59e1d632e27c629ed6235cb43a98a1df6986290be534949b24
+		Secure: true
+	Object:
+		Variable: $r1
+		Type: javax.crypto.spec.SecretKeySpec
+		Statement: specialinvoke $r1.<javax.crypto.spec.SecretKeySpec: void <init>(byte[],java.lang.String)>(r6, $r2)
+		Method: <org.apache.sshd.common.mac.BaseMac: void init(byte[])>
+		SHA-256: bd9a3236c2c1b260417860e32b10086f980f5f153b506ff03c43b0c873c76fe3
+		Secure: false
+	Object:
+		Variable: $r2
+		Type: java.security.KeyPairGenerator
+		Statement: $r2 = staticinvoke <java.security.KeyPairGenerator: java.security.KeyPairGenerator getInstance(java.lang.String,java.lang.String)>(r1, r0)
+		Method: <org.apache.sshd.common.util.SecurityUtils: java.security.KeyPairGenerator getKeyPairGenerator(java.lang.String)>
+		SHA-256: 77667c3313f187f63229b37b8849f8cceb5b4855ccd0748651c4e857470ff946
+		Secure: false
+	Object:
+		Variable: $r2
+		Type: java.security.Signature
+		Statement: $r2 = staticinvoke <java.security.Signature: java.security.Signature getInstance(java.lang.String,java.lang.String)>(r1, r0)
+		Method: <org.apache.sshd.common.util.SecurityUtils: java.security.Signature getSignature(java.lang.String)>
+		SHA-256: 341d41713cb1e318d0b150e8e3c654d71ff8d9a0351c6ab389d637844fbdd830
+		Secure: false
+	Object:
+		Variable: $r2
+		Type: java.security.KeyPair
+		Statement: $r2 = virtualinvoke r1.<java.security.KeyPairGenerator: java.security.KeyPair generateKeyPair()>()
+		Method: <org.apache.sshd.common.config.keys.AbstractPublicKeyEntryDecoder: java.security.KeyPair generateKeyPair(int)>
+		SHA-256: 8ebb662702eabec99df9613959df9b1ba4d56a4d454e01a23d1a43990597ff14
+		Secure: true
+	Object:
+		Variable: $r6
+		Type: javax.crypto.spec.SecretKeySpec
+		Statement: specialinvoke $r6.<javax.crypto.spec.SecretKeySpec: void <init>(byte[],java.lang.String)>(r18, $r7)
+		Method: <org.apache.sshd.common.cipher.BaseCipher: void init(org.apache.sshd.common.cipher.Cipher$Mode,byte[],byte[])>
+		SHA-256: 36b44142a452d17b115c02dbe493876d3cde0fbe7c10bd8e37fb09a877c9f947
+		Secure: false
+	Object:
+		Variable: $r4
+		Type: java.security.KeyPair
+		Statement: $r4 = virtualinvoke r2.<java.security.KeyPairGenerator: java.security.KeyPair generateKeyPair()>()
+		Method: <org.apache.sshd.common.config.keys.ECDSAPublicKeyEntryDecoder: java.security.KeyPair generateKeyPair(int)>
+		SHA-256: a9b94cdc22bf436c659f61495856497484d921ed008f8af25655198f7c584e37
+		Secure: true
+	Object:
+		Variable: $r11
+		Type: java.security.PublicKey
+		Statement: $r11 = virtualinvoke r8.<java.security.KeyPair: java.security.PublicKey getPublic()>()
+		Method: <org.apache.sshd.common.kex.ECDH: byte[] getE()>
+		SHA-256: b634015c979070eea700f818f4ac99d7b7e82682e425a5b94624234f7b6b6f97
+		Secure: true
+	Object:
+		Variable: $r7
+		Type: java.lang.String
+		Statement: specialinvoke $r6.<javax.crypto.spec.SecretKeySpec: void <init>(byte[],java.lang.String)>(r12, $r7)
+		Method: <org.apache.sshd.common.cipher.BaseRC4Cipher: void init(org.apache.sshd.common.cipher.Cipher$Mode,byte[],byte[])>
+		SHA-256: b3b589e9e802ab794b8de3eeac336396f43d7230818cb838e9b0e6d3e0cdbc57
+		Secure: false
+	Object:
+		Variable: $r12
+		Type: java.security.KeyPair
+		Statement: specialinvoke $r12.<java.security.KeyPair: void <init>(java.security.PublicKey,java.security.PrivateKey)>(r30, r31)
+		Method: <org.apache.sshd.common.util.buffer.Buffer: java.security.KeyPair getKeyPair()>
+		SHA-256: f25ffcc127b557db33f08f0c1a7f4067096e50602be88537c54876ca6a1af40d
+		Secure: true
+	Object:
+		Variable: $r6
+		Type: javax.crypto.spec.SecretKeySpec
+		Statement: specialinvoke $r6.<javax.crypto.spec.SecretKeySpec: void <init>(byte[],java.lang.String)>(r12, $r7)
+		Method: <org.apache.sshd.common.cipher.BaseRC4Cipher: void init(org.apache.sshd.common.cipher.Cipher$Mode,byte[],byte[])>
+		SHA-256: 1e34a0b9923921a76646acdc41e2d97cbaca464860179031851b0c94b42562b2
+		Secure: false
+	Object:
+		Variable: $r11
+		Type: java.security.KeyPair
+		Statement: specialinvoke $r11.<java.security.KeyPair: void <init>(java.security.PublicKey,java.security.PrivateKey)>(r8, r10)
+		Method: <org.apache.sshd.common.util.buffer.Buffer: java.security.KeyPair extractEC(java.lang.String,java.security.spec.ECParameterSpec)>
+		SHA-256: 3ba499d88a7f4a65ccf58e04294a5e02105dc6900ed5e7abc3eab0b8c202608c
+		Secure: true
+	Object:
+		Variable: r8
+		Type: java.security.KeyPair
+		Statement: r8 = virtualinvoke $r7.<java.security.KeyPairGenerator: java.security.KeyPair generateKeyPair()>()
+		Method: <org.apache.sshd.common.kex.ECDH: byte[] getE()>
+		SHA-256: 620f755f1da2999e559fc6ee4e45663d5d589f5d396f0d651d1ff0da316887ee
+		Secure: true
+	Object:
+		Variable: $r28
+		Type: java.security.KeyPair
+		Statement: $r28 = virtualinvoke r1.<java.security.KeyPairGenerator: java.security.KeyPair generateKeyPair()>()
+		Method: <org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.KeyPair generateKeyPair(java.lang.String)>
+		SHA-256: f796b45cc668e4995e67463e770b1fe1c574f664c7f7552147310320ee0d38b4
+		Secure: true
+	Object:
+		Variable: $r3
+		Type: java.security.Signature
+		Statement: $r3 = staticinvoke <java.security.Signature: java.security.Signature getInstance(java.lang.String)>(r1)
+		Method: <org.apache.sshd.common.util.SecurityUtils: java.security.Signature getSignature(java.lang.String)>
+		SHA-256: 81da71bf7578775af119f074ef7735fa8af3c4dd01eb3999d95f91ac0179ad5c
+		Secure: false
+	Object:
+		Variable: $r3
+		Type: javax.crypto.Mac
+		Statement: $r3 = staticinvoke <javax.crypto.Mac: javax.crypto.Mac getInstance(java.lang.String)>(r1)
+		Method: <org.apache.sshd.common.util.SecurityUtils: javax.crypto.Mac getMac(java.lang.String)>
+		SHA-256: ffe5c0aceec40e5eaaa8f20022a49839800ac44d28dec45e4e2893a7d7d2e9d6
+		Secure: false
+	Object:
+		Variable: r55
+		Type: java.security.PublicKey
+		Statement: r55 = virtualinvoke r54.<java.security.KeyPair: java.security.PublicKey getPublic()>()
+		Method: <org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider: java.security.KeyPair resolveKeyPair(java.nio.file.Path)>
+		SHA-256: 2f5aea3704867b981325ec76033a6486bdbe0449931ec5f86a1dd7f720711b80
+		Secure: true
+	Object:
+		Variable: $r12
+		Type: java.security.PublicKey
+		Statement: $r12 = virtualinvoke r9.<java.security.KeyPair: java.security.PublicKey getPublic()>()
+		Method: <org.apache.sshd.common.kex.DHG: byte[] getE()>
+		SHA-256: 279127668941ef32c312605ad6ecffd064c29c1efe98f8e4be9957b0df086bf
+		Secure: true
+	Object:
+		Variable: r3
+		Type: byte[]
+		Statement: r3 = virtualinvoke $r6.<java.security.SecureRandom: byte[] generateSeed(int)>(varReplacer3576)
+		Method: <org.apache.sshd.common.util.SecurityUtils$BouncyCastleRandom: void <init>()>
+		SHA-256: 96357b3b5bc021374f04becab5c63d81c3343d388ba82572ae28fdb017fdfd88
+		Secure: true
+	Object:
+		Variable: $r2
+		Type: java.lang.String
+		Statement: specialinvoke $r1.<javax.crypto.spec.SecretKeySpec: void <init>(byte[],java.lang.String)>(r6, $r2)
+		Method: <org.apache.sshd.common.mac.BaseMac: void init(byte[])>
+		SHA-256: 727df5f7292b9b1469174a17b141850166e8d1b2b11bf57ffbc3c278ad51fa28
+		Secure: false
+	Object:
+		Variable: $r1
+		Type: javax.crypto.spec.DHParameterSpec
+		Statement: specialinvoke $r1.<javax.crypto.spec.DHParameterSpec: void <init>(java.math.BigInteger,java.math.BigInteger)>(r5, r5)
+		Method: <org.apache.sshd.common.util.SecurityUtils: boolean isDHGroupExchangeSupported(int)>
+		SHA-256: 684621fbf3bb1e58dbdfafc9c1b19cc893f1c5857bc22de0113a7c02ce2ee2bc
+		Secure: true
+	Object:
+		Variable: $r2
+		Type: java.security.SecureRandom
+		Statement: specialinvoke $r2.<java.security.SecureRandom: void <init>()>()
+		Method: <org.apache.sshd.common.random.JceRandom: void <init>()>
+		SHA-256: 467144ba17400fa24baa1f93c306729e3889011fbf34f2626d36888840b5ccd7
+		Secure: true
+	Object:
+		Variable: $r11
+		Type: java.security.PrivateKey
+		Statement: $r11 = virtualinvoke r9.<java.security.KeyPair: java.security.PrivateKey getPrivate()>()
+		Method: <org.apache.sshd.common.kex.DHG: byte[] getE()>
+		SHA-256: f349819042ea17fdf187b3a6ec7c7bd9bee019f1f6b8a14f8df21b14c511618a
+		Secure: true
+	Object:
+		Variable: $r2
+		Type: javax.crypto.Cipher
+		Statement: $r2 = staticinvoke <javax.crypto.Cipher: javax.crypto.Cipher getInstance(java.lang.String,java.lang.String)>(r1, r0)
+		Method: <org.apache.sshd.common.util.SecurityUtils: javax.crypto.Cipher getCipher(java.lang.String)>
+		SHA-256: 8fc84c8396733269939076e4f8f67ed8f5c2d605806b63f01502d268b72a08f9
+		Secure: false
+	Object:
+		Variable: $r3
+		Type: java.security.KeyPairGenerator
+		Statement: $r3 = staticinvoke <java.security.KeyPairGenerator: java.security.KeyPairGenerator getInstance(java.lang.String)>(r1)
+		Method: <org.apache.sshd.common.util.SecurityUtils: java.security.KeyPairGenerator getKeyPairGenerator(java.lang.String)>
+		SHA-256: d216c358f6f15ccede069128b6378341f3951f3bf72caa9b7fac6ea72a297e95
+		Secure: false
+	Object:
+		Variable: $r7
+		Type: java.lang.String
+		Statement: specialinvoke $r6.<javax.crypto.spec.SecretKeySpec: void <init>(byte[],java.lang.String)>(r18, $r7)
+		Method: <org.apache.sshd.common.cipher.BaseCipher: void init(org.apache.sshd.common.cipher.Cipher$Mode,byte[],byte[])>
+		SHA-256: 3e96cfebaed0ddeeacd0395d0ccead13677813a6714ceea37309890077875fb0
+		Secure: false
+	Object:
+		Variable: $r10
+		Type: java.security.PrivateKey
+		Statement: $r10 = virtualinvoke r8.<java.security.KeyPair: java.security.PrivateKey getPrivate()>()
+		Method: <org.apache.sshd.common.kex.ECDH: byte[] getE()>
+		SHA-256: d9e1fd3ffe99a1b3916a4be9be0fff3da3ac7301f98fdf138b76025604018c6b
+		Secure: true
+	Object:
+		Variable: $r6
+		Type: java.security.SecureRandom
+		Statement: specialinvoke $r6.<java.security.SecureRandom: void <init>()>()
+		Method: <org.apache.sshd.common.util.SecurityUtils$BouncyCastleRandom: void <init>()>
+		SHA-256: 3e2f967a89f3143c35b2d2dac3395f851f00ae08c99fc48362e20aecedd79d27
+		Secure: true
+	Object:
+		Variable: $r3
+		Type: javax.crypto.spec.DHParameterSpec
+		Statement: specialinvoke $r3.<javax.crypto.spec.DHParameterSpec: void <init>(java.math.BigInteger,java.math.BigInteger)>($r5, $r4)
+		Method: <org.apache.sshd.common.kex.DHG: byte[] getE()>
+		SHA-256: 710c4407057370b57e25c51f288da824757d289852b8a0eb171e6b0689062bb9
+		Secure: true
+
+Findings in Java Class: org.apache.sshd.common.cipher.BaseRC4Cipher
+
+	 in Method: void init(org.apache.sshd.common.cipher.Cipher$Mode,byte[],byte[])
+		IncompleteOperationError violating CrySL rule for javax.crypto.Cipher (on Object #8fc84c8396733269939076e4f8f67ed8f5c2d605806b63f01502d268b72a08f9)
+			Operation on object of type javax.crypto.Cipher object not completed. Expected call to update, wrap, doFinal
+			at statement: virtualinvoke $r5.<javax.crypto.Cipher: void init(int,java.security.Key)>($b2, $r6)
+
+		IncompleteOperationError violating CrySL rule for javax.crypto.Cipher (on Object #d426f6ae0bfa2a749c532323d90af288dcc08138ea89c1c2149fc94603ef6aa)
+			Operation on object of type javax.crypto.Cipher object not completed. Expected call to update, wrap, doFinal
+			at statement: virtualinvoke $r5.<javax.crypto.Cipher: void init(int,java.security.Key)>($b2, $r6)
+
+		RequiredPredicateError violating CrySL rule for javax.crypto.spec.SecretKeySpec
+			First parameter was not properly generated as prepared Key Material
+			at statement: specialinvoke $r6.<javax.crypto.spec.SecretKeySpec: void <init>(byte[],java.lang.String)>(r12, $r7)
+
+
+Findings in Java Class: org.apache.sshd.common.cipher.BaseCipher
+
+	 in Method: void init(org.apache.sshd.common.cipher.Cipher$Mode,byte[],byte[])
+		RequiredPredicateError violating CrySL rule for javax.crypto.spec.SecretKeySpec
+			First parameter was not properly generated as prepared Key Material
+			at statement: specialinvoke $r6.<javax.crypto.spec.SecretKeySpec: void <init>(byte[],java.lang.String)>(r18, $r7)
+
+		IncompleteOperationError violating CrySL rule for javax.crypto.Cipher (on Object #8fc84c8396733269939076e4f8f67ed8f5c2d605806b63f01502d268b72a08f9)
+			Operation on object of type javax.crypto.Cipher object not completed. Expected call to update, wrap, doFinal
+			at statement: virtualinvoke $r5.<javax.crypto.Cipher: void init(int,java.security.Key,java.security.spec.AlgorithmParameterSpec)>($b2, $r6, $r8)
+
+		IncompleteOperationError violating CrySL rule for javax.crypto.Cipher (on Object #d426f6ae0bfa2a749c532323d90af288dcc08138ea89c1c2149fc94603ef6aa)
+			Operation on object of type javax.crypto.Cipher object not completed. Expected call to update, wrap, doFinal
+			at statement: virtualinvoke $r5.<javax.crypto.Cipher: void init(int,java.security.Key,java.security.spec.AlgorithmParameterSpec)>($b2, $r6, $r8)
+
+		RequiredPredicateError violating CrySL rule for javax.crypto.spec.IvParameterSpec
+			First parameter was not properly generated as randomized
+			at statement: specialinvoke $r8.<javax.crypto.spec.IvParameterSpec: void <init>(byte[])>(r19)
+
+
+Findings in Java Class: org.apache.sshd.server.kex.DHGEXServer
+
+	 in Method: boolean next(int,org.apache.sshd.common.util.buffer.Buffer)
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #33c29188600efc8c8f14643afc4fe78bb7edb75ce846f5b5122cde9b651daee7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to digest, update
+			at statement: interfaceinvoke $r91.<org.apache.sshd.common.digest.Digest: void init()>()
+
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #33c29188600efc8c8f14643afc4fe78bb7edb75ce846f5b5122cde9b651daee7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to digest, update
+			at statement: interfaceinvoke $r78.<org.apache.sshd.common.digest.Digest: void init()>()
+
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #fdd9ce5816331ba051c7c224dc0191992282bb762a8ef46cd7804d5d28e253a7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to digest, update
+			at statement: interfaceinvoke $r91.<org.apache.sshd.common.digest.Digest: void init()>()
+
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #fdd9ce5816331ba051c7c224dc0191992282bb762a8ef46cd7804d5d28e253a7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to digest, update
+			at statement: interfaceinvoke $r78.<org.apache.sshd.common.digest.Digest: void init()>()
+
+
+Findings in Java Class: org.apache.sshd.server.kex.DHGServer
+
+	 in Method: void init(org.apache.sshd.common.session.Session,byte[],byte[],byte[],byte[])
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #33c29188600efc8c8f14643afc4fe78bb7edb75ce846f5b5122cde9b651daee7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to digest, update
+			at statement: interfaceinvoke $r11.<org.apache.sshd.common.digest.Digest: void init()>()
+
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #fdd9ce5816331ba051c7c224dc0191992282bb762a8ef46cd7804d5d28e253a7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to digest, update
+			at statement: interfaceinvoke $r11.<org.apache.sshd.common.digest.Digest: void init()>()
+
+
+Findings in Java Class: org.apache.sshd.common.digest.DigestUtils
+
+	 in Method: boolean checkSupported(java.lang.String)
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #33c29188600efc8c8f14643afc4fe78bb7edb75ce846f5b5122cde9b651daee7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to digest, update
+			at statement: r3 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.security.MessageDigest getMessageDigest(java.lang.String)>(r0)
+
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #fdd9ce5816331ba051c7c224dc0191992282bb762a8ef46cd7804d5d28e253a7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to digest, update
+			at statement: r3 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.security.MessageDigest getMessageDigest(java.lang.String)>(r0)
+
+
+	 in Method: byte[] getRawFingerprint(org.apache.sshd.common.digest.Digest,byte[],int,int)
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #33c29188600efc8c8f14643afc4fe78bb7edb75ce846f5b5122cde9b651daee7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to digest, update
+			at statement: interfaceinvoke $r2.<org.apache.sshd.common.digest.Digest: void init()>()
+
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #fdd9ce5816331ba051c7c224dc0191992282bb762a8ef46cd7804d5d28e253a7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to digest, update
+			at statement: interfaceinvoke $r2.<org.apache.sshd.common.digest.Digest: void init()>()
+
+
+Findings in Java Class: org.apache.sshd.server.subsystem.sftp.SftpSubsystem
+
+	 in Method: void doCheckFileHash(int,java.nio.file.Path,org.apache.sshd.common.NamedFactory,long,long,int,org.apache.sshd.common.util.buffer.Buffer)
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #33c29188600efc8c8f14643afc4fe78bb7edb75ce846f5b5122cde9b651daee7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to digest, update
+			at statement: interfaceinvoke r40.<org.apache.sshd.common.digest.Digest: void init()>()
+
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #fdd9ce5816331ba051c7c224dc0191992282bb762a8ef46cd7804d5d28e253a7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to digest, update
+			at statement: interfaceinvoke r40.<org.apache.sshd.common.digest.Digest: void init()>()
+
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #33c29188600efc8c8f14643afc4fe78bb7edb75ce846f5b5122cde9b651daee7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to update, java.security.MessageDigest: byte[] digest(byte[])
+			at statement: r42 = interfaceinvoke r40.<org.apache.sshd.common.digest.Digest: byte[] digest()>()
+
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #33c29188600efc8c8f14643afc4fe78bb7edb75ce846f5b5122cde9b651daee7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to update, java.security.MessageDigest: byte[] digest(byte[])
+			at statement: r11 = interfaceinvoke r40.<org.apache.sshd.common.digest.Digest: byte[] digest()>()
+
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #fdd9ce5816331ba051c7c224dc0191992282bb762a8ef46cd7804d5d28e253a7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to update, java.security.MessageDigest: byte[] digest(byte[])
+			at statement: r42 = interfaceinvoke r40.<org.apache.sshd.common.digest.Digest: byte[] digest()>()
+
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #fdd9ce5816331ba051c7c224dc0191992282bb762a8ef46cd7804d5d28e253a7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to update, java.security.MessageDigest: byte[] digest(byte[])
+			at statement: r11 = interfaceinvoke r40.<org.apache.sshd.common.digest.Digest: byte[] digest()>()
+
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #33c29188600efc8c8f14643afc4fe78bb7edb75ce846f5b5122cde9b651daee7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to digest, update
+			at statement: $r28 = interfaceinvoke r40.<org.apache.sshd.common.digest.Digest: java.lang.String getAlgorithm()>()
+
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #33c29188600efc8c8f14643afc4fe78bb7edb75ce846f5b5122cde9b651daee7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to digest, update
+			at statement: $r20 = interfaceinvoke r40.<org.apache.sshd.common.digest.Digest: java.lang.String getAlgorithm()>()
+
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #fdd9ce5816331ba051c7c224dc0191992282bb762a8ef46cd7804d5d28e253a7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to digest, update
+			at statement: $r28 = interfaceinvoke r40.<org.apache.sshd.common.digest.Digest: java.lang.String getAlgorithm()>()
+
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #fdd9ce5816331ba051c7c224dc0191992282bb762a8ef46cd7804d5d28e253a7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to digest, update
+			at statement: $r20 = interfaceinvoke r40.<org.apache.sshd.common.digest.Digest: java.lang.String getAlgorithm()>()
+
+
+	 in Method: byte[] doMD5Hash(int,java.nio.file.Path,long,long,byte[])
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #33c29188600efc8c8f14643afc4fe78bb7edb75ce846f5b5122cde9b651daee7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to digest, java.security.MessageDigest: void update(byte[],int,int), java.security.MessageDigest: void update(java.nio.ByteBuffer), java.security.MessageDigest: void update(byte[]), java.security.MessageDigest: void update(byte)
+			at statement: interfaceinvoke r47.<org.apache.sshd.common.digest.Digest: void update(byte[],int,int)>(r2, varReplacer7876, i12)
+
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #33c29188600efc8c8f14643afc4fe78bb7edb75ce846f5b5122cde9b651daee7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to digest, java.security.MessageDigest: void update(byte[],int,int), java.security.MessageDigest: void update(java.nio.ByteBuffer), java.security.MessageDigest: void update(byte[]), java.security.MessageDigest: void update(byte)
+			at statement: interfaceinvoke r47.<org.apache.sshd.common.digest.Digest: void update(byte[],int,int)>(r2, varReplacer7875, i17)
+
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #fdd9ce5816331ba051c7c224dc0191992282bb762a8ef46cd7804d5d28e253a7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to digest, java.security.MessageDigest: void update(byte[],int,int), java.security.MessageDigest: void update(java.nio.ByteBuffer), java.security.MessageDigest: void update(byte[]), java.security.MessageDigest: void update(byte)
+			at statement: interfaceinvoke r47.<org.apache.sshd.common.digest.Digest: void update(byte[],int,int)>(r2, varReplacer7876, i12)
+
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #fdd9ce5816331ba051c7c224dc0191992282bb762a8ef46cd7804d5d28e253a7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to digest, java.security.MessageDigest: void update(byte[],int,int), java.security.MessageDigest: void update(java.nio.ByteBuffer), java.security.MessageDigest: void update(byte[]), java.security.MessageDigest: void update(byte)
+			at statement: interfaceinvoke r47.<org.apache.sshd.common.digest.Digest: void update(byte[],int,int)>(r2, varReplacer7875, i17)
+
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #33c29188600efc8c8f14643afc4fe78bb7edb75ce846f5b5122cde9b651daee7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to update, java.security.MessageDigest: byte[] digest(byte[])
+			at statement: r48 = interfaceinvoke r47.<org.apache.sshd.common.digest.Digest: byte[] digest()>()
+
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #33c29188600efc8c8f14643afc4fe78bb7edb75ce846f5b5122cde9b651daee7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to update, java.security.MessageDigest: byte[] digest(byte[])
+			at statement: r48 = interfaceinvoke r47.<org.apache.sshd.common.digest.Digest: byte[] digest()>()
+
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #fdd9ce5816331ba051c7c224dc0191992282bb762a8ef46cd7804d5d28e253a7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to update, java.security.MessageDigest: byte[] digest(byte[])
+			at statement: r48 = interfaceinvoke r47.<org.apache.sshd.common.digest.Digest: byte[] digest()>()
+
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #fdd9ce5816331ba051c7c224dc0191992282bb762a8ef46cd7804d5d28e253a7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to update, java.security.MessageDigest: byte[] digest(byte[])
+			at statement: r48 = interfaceinvoke r47.<org.apache.sshd.common.digest.Digest: byte[] digest()>()
+
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #33c29188600efc8c8f14643afc4fe78bb7edb75ce846f5b5122cde9b651daee7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to digest, update
+			at statement: interfaceinvoke r47.<org.apache.sshd.common.digest.Digest: void init()>()
+
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #fdd9ce5816331ba051c7c224dc0191992282bb762a8ef46cd7804d5d28e253a7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to digest, update
+			at statement: interfaceinvoke r47.<org.apache.sshd.common.digest.Digest: void init()>()
+
+
+Findings in Java Class: org.apache.sshd.client.kex.DHGClient
+
+	 in Method: void init(org.apache.sshd.common.session.Session,byte[],byte[],byte[],byte[])
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #33c29188600efc8c8f14643afc4fe78bb7edb75ce846f5b5122cde9b651daee7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to digest, update
+			at statement: interfaceinvoke $r9.<org.apache.sshd.common.digest.Digest: void init()>()
+
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #fdd9ce5816331ba051c7c224dc0191992282bb762a8ef46cd7804d5d28e253a7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to digest, update
+			at statement: interfaceinvoke $r9.<org.apache.sshd.common.digest.Digest: void init()>()
+
+
+Findings in Java Class: org.apache.sshd.client.kex.DHGEXClient
+
+	 in Method: boolean next(int,org.apache.sshd.common.util.buffer.Buffer)
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #33c29188600efc8c8f14643afc4fe78bb7edb75ce846f5b5122cde9b651daee7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to digest, update
+			at statement: interfaceinvoke $r55.<org.apache.sshd.common.digest.Digest: void init()>()
+
+		IncompleteOperationError violating CrySL rule for java.security.MessageDigest (on Object #fdd9ce5816331ba051c7c224dc0191992282bb762a8ef46cd7804d5d28e253a7)
+			Operation on object of type java.security.MessageDigest object not completed. Expected call to digest, update
+			at statement: interfaceinvoke $r55.<org.apache.sshd.common.digest.Digest: void init()>()
+
+
+Findings in Java Class: org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider
+
+	 in Method: java.security.KeyPair generateKeyPair(java.lang.String)
+		TypestateError violating CrySL rule for java.security.KeyPairGenerator (on Object #d216c358f6f15ccede069128b6378341f3951f3bf72caa9b7fac6ea72a297e95)
+			Unexpected call to method generateKeyPair on object of type java.security.KeyPairGenerator. Expect a call to one of the following methods initialize
+			at statement: $r28 = virtualinvoke r1.<java.security.KeyPairGenerator: java.security.KeyPair generateKeyPair()>()
+
+		TypestateError violating CrySL rule for java.security.KeyPairGenerator (on Object #77667c3313f187f63229b37b8849f8cceb5b4855ccd0748651c4e857470ff946)
+			Unexpected call to method generateKeyPair on object of type java.security.KeyPairGenerator. Expect a call to one of the following methods initialize
+			at statement: $r28 = virtualinvoke r1.<java.security.KeyPairGenerator: java.security.KeyPair generateKeyPair()>()
+
+
+Findings in Java Class: org.apache.sshd.common.kex.ECDH
+
+	 in Method: void <init>()
+		IncompleteOperationError violating CrySL rule for java.security.KeyPairGenerator (on Object #d216c358f6f15ccede069128b6378341f3951f3bf72caa9b7fac6ea72a297e95)
+			Operation on object of type java.security.KeyPairGenerator object not completed. Expected call to initialize
+			at statement: specialinvoke r0.<org.apache.sshd.common.kex.ECDH: void <init>(java.security.spec.ECParameterSpec)>($r1)
+
+		IncompleteOperationError violating CrySL rule for java.security.KeyPairGenerator (on Object #77667c3313f187f63229b37b8849f8cceb5b4855ccd0748651c4e857470ff946)
+			Operation on object of type java.security.KeyPairGenerator object not completed. Expected call to initialize
+			at statement: specialinvoke r0.<org.apache.sshd.common.kex.ECDH: void <init>(java.security.spec.ECParameterSpec)>($r1)
+
+
+	 in Method: void <init>(java.lang.String)
+		IncompleteOperationError violating CrySL rule for java.security.KeyPairGenerator (on Object #d216c358f6f15ccede069128b6378341f3951f3bf72caa9b7fac6ea72a297e95)
+			Operation on object of type java.security.KeyPairGenerator object not completed. Expected call to initialize
+			at statement: specialinvoke r0.<org.apache.sshd.common.kex.ECDH: void <init>(org.apache.sshd.common.cipher.ECCurves)>($r4)
+
+		IncompleteOperationError violating CrySL rule for java.security.KeyPairGenerator (on Object #77667c3313f187f63229b37b8849f8cceb5b4855ccd0748651c4e857470ff946)
+			Operation on object of type java.security.KeyPairGenerator object not completed. Expected call to initialize
+			at statement: specialinvoke r0.<org.apache.sshd.common.kex.ECDH: void <init>(org.apache.sshd.common.cipher.ECCurves)>($r4)
+
+
+Findings in Java Class: org.apache.sshd.common.session.helpers.AbstractSession
+
+	 in Method: void handleKexInit(org.apache.sshd.common.util.buffer.Buffer)
+		IncompleteOperationError violating CrySL rule for java.security.KeyPairGenerator (on Object #d216c358f6f15ccede069128b6378341f3951f3bf72caa9b7fac6ea72a297e95)
+			Operation on object of type java.security.KeyPairGenerator object not completed. Expected call to initialize
+			at statement: interfaceinvoke $r19.<org.apache.sshd.common.kex.KeyExchange: void init(org.apache.sshd.common.session.Session,byte[],byte[],byte[],byte[])>(r0, $r20, $r23, $r25, $r24)
+
+		IncompleteOperationError violating CrySL rule for java.security.KeyPairGenerator (on Object #77667c3313f187f63229b37b8849f8cceb5b4855ccd0748651c4e857470ff946)
+			Operation on object of type java.security.KeyPairGenerator object not completed. Expected call to initialize
+			at statement: interfaceinvoke $r19.<org.apache.sshd.common.kex.KeyExchange: void init(org.apache.sshd.common.session.Session,byte[],byte[],byte[],byte[])>(r0, $r20, $r23, $r25, $r24)
+
+
+	 in Method: void handleKexMessage(int,org.apache.sshd.common.util.buffer.Buffer)
+		IncompleteOperationError violating CrySL rule for java.security.KeyPairGenerator (on Object #d216c358f6f15ccede069128b6378341f3951f3bf72caa9b7fac6ea72a297e95)
+			Operation on object of type java.security.KeyPairGenerator object not completed. Expected call to initialize
+			at statement: $z0 = interfaceinvoke $r3.<org.apache.sshd.common.kex.KeyExchange: boolean next(int,org.apache.sshd.common.util.buffer.Buffer)>(i0, r2)
+
+		IncompleteOperationError violating CrySL rule for java.security.KeyPairGenerator (on Object #77667c3313f187f63229b37b8849f8cceb5b4855ccd0748651c4e857470ff946)
+			Operation on object of type java.security.KeyPairGenerator object not completed. Expected call to initialize
+			at statement: $z0 = interfaceinvoke $r3.<org.apache.sshd.common.kex.KeyExchange: boolean next(int,org.apache.sshd.common.util.buffer.Buffer)>(i0, r2)
+
+
+	 in Method: void receiveNewKeys()
+		IncompleteOperationError violating CrySL rule for javax.crypto.Mac (on Object #ffe5c0aceec40e5eaaa8f20022a49839800ac44d28dec45e4e2893a7d7d2e9d6)
+			Operation on object of type javax.crypto.Mac object not completed. Expected call to update, doFinal
+			at statement: interfaceinvoke r16.<org.apache.sshd.common.mac.Mac: void init(byte[])>(r107)
+
+		IncompleteOperationError violating CrySL rule for javax.crypto.Mac (on Object #ffe5c0aceec40e5eaaa8f20022a49839800ac44d28dec45e4e2893a7d7d2e9d6)
+			Operation on object of type javax.crypto.Mac object not completed. Expected call to update, doFinal
+			at statement: interfaceinvoke r29.<org.apache.sshd.common.mac.Mac: void init(byte[])>(r113)
+
+
+Findings in Java Class: org.apache.sshd.common.kex.DHG
+
+	 in Method: void <init>(org.apache.sshd.common.Factory)
+		IncompleteOperationError violating CrySL rule for java.security.KeyPairGenerator (on Object #d216c358f6f15ccede069128b6378341f3951f3bf72caa9b7fac6ea72a297e95)
+			Operation on object of type java.security.KeyPairGenerator object not completed. Expected call to initialize
+			at statement: specialinvoke r0.<org.apache.sshd.common.kex.DHG: void <init>(org.apache.sshd.common.Factory,java.math.BigInteger,java.math.BigInteger)>(r1, varReplacer2825, varReplacer2825)
+
+		IncompleteOperationError violating CrySL rule for java.security.KeyPairGenerator (on Object #77667c3313f187f63229b37b8849f8cceb5b4855ccd0748651c4e857470ff946)
+			Operation on object of type java.security.KeyPairGenerator object not completed. Expected call to initialize
+			at statement: specialinvoke r0.<org.apache.sshd.common.kex.DHG: void <init>(org.apache.sshd.common.Factory,java.math.BigInteger,java.math.BigInteger)>(r1, varReplacer2825, varReplacer2825)
+
+
+Findings in Java Class: org.apache.sshd.common.util.SecurityUtils
+
+	 in Method: boolean isDHGroupExchangeSupported(int)
+		IncompleteOperationError violating CrySL rule for java.security.KeyPairGenerator (on Object #d216c358f6f15ccede069128b6378341f3951f3bf72caa9b7fac6ea72a297e95)
+			Operation on object of type java.security.KeyPairGenerator object not completed. Expected call to genKeyPair, generateKeyPair
+			at statement: virtualinvoke r3.<java.security.KeyPairGenerator: void initialize(java.security.spec.AlgorithmParameterSpec)>(r2)
+
+		IncompleteOperationError violating CrySL rule for java.security.KeyPairGenerator (on Object #77667c3313f187f63229b37b8849f8cceb5b4855ccd0748651c4e857470ff946)
+			Operation on object of type java.security.KeyPairGenerator object not completed. Expected call to genKeyPair, generateKeyPair
+			at statement: virtualinvoke r3.<java.security.KeyPairGenerator: void initialize(java.security.spec.AlgorithmParameterSpec)>(r2)
+
+
+Findings in Java Class: org.apache.sshd.server.auth.pubkey.UserAuthPublicKey
+
+	 in Method: java.lang.Boolean doAuth(org.apache.sshd.common.util.buffer.Buffer,boolean)
+		IncompleteOperationError violating CrySL rule for java.security.Signature (on Object #81da71bf7578775af119f074ef7735fa8af3c4dd01eb3999d95f91ac0179ad5c)
+			Operation on object of type java.security.Signature object not completed. Expected call to verify, update
+			at statement: interfaceinvoke r12.<org.apache.sshd.common.signature.Signature: void initVerifier(java.security.PublicKey)>(r5)
+
+		IncompleteOperationError violating CrySL rule for java.security.Signature (on Object #341d41713cb1e318d0b150e8e3c654d71ff8d9a0351c6ab389d637844fbdd830)
+			Operation on object of type java.security.Signature object not completed. Expected call to verify, update
+			at statement: interfaceinvoke r12.<org.apache.sshd.common.signature.Signature: void initVerifier(java.security.PublicKey)>(r5)
+
+
+Findings in Java Class: org.apache.sshd.common.mac.BaseMac
+
+	 in Method: void init(byte[])
+		RequiredPredicateError violating CrySL rule for javax.crypto.spec.SecretKeySpec
+			First parameter was not properly generated as prepared Key Material
+			at statement: specialinvoke $r1.<javax.crypto.spec.SecretKeySpec: void <init>(byte[],java.lang.String)>(r6, $r2)
+
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 39
+	Number of Objects Analyzed: 34
+
+	CogniCrypt found the following violations. For details see description above.
+	IncompleteOperationError: 54
+	RequiredPredicateError: 4
+	TypestateError: 2
+=====================================================================

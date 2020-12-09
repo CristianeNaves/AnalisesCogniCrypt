@@ -1,0 +1,2329 @@
+public abstract class org.apache.xml.security.c14n.implementations.CanonicalizerBase extends org.apache.xml.security.c14n.CanonicalizerSpi
+{
+    public static final java.lang.String XML;
+    public static final java.lang.String XMLNS;
+    protected static final org.apache.xml.security.c14n.helper.AttrCompare COMPARE;
+    private static final byte[] END_PI;
+    private static final byte[] BEGIN_PI;
+    private static final byte[] END_COMM;
+    private static final byte[] BEGIN_COMM;
+    private static final byte[] XA;
+    private static final byte[] X9;
+    private static final byte[] QUOT;
+    private static final byte[] XD;
+    private static final byte[] GT;
+    private static final byte[] LT;
+    private static final byte[] END_TAG;
+    private static final byte[] AMP;
+    private static final byte[] EQUALS_STR;
+    protected static final int NODE_BEFORE_DOCUMENT_ELEMENT;
+    protected static final int NODE_NOT_BEFORE_OR_AFTER_DOCUMENT_ELEMENT;
+    protected static final int NODE_AFTER_DOCUMENT_ELEMENT;
+    private java.util.List nodeFilter;
+    private boolean includeComments;
+    private java.util.Set xpathNodeSet;
+    private org.w3c.dom.Node excludeNode;
+    private java.io.OutputStream writer;
+    private org.w3c.dom.Attr nullNode;
+
+    public void <init>(boolean)
+    {
+        org.apache.xml.security.c14n.implementations.CanonicalizerBase r0;
+        java.io.ByteArrayOutputStream $r1;
+        boolean z0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.c14n.implementations.CanonicalizerBase;
+
+        z0 := @parameter0: boolean;
+
+        specialinvoke r0.<org.apache.xml.security.c14n.CanonicalizerSpi: void <init>()>();
+
+        $r1 = new java.io.ByteArrayOutputStream;
+
+        specialinvoke $r1.<java.io.ByteArrayOutputStream: void <init>()>();
+
+        r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.io.OutputStream writer> = $r1;
+
+        r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: boolean includeComments> = z0;
+
+        return;
+    }
+
+    public byte[] engineCanonicalizeSubTree(org.w3c.dom.Node) throws org.apache.xml.security.c14n.CanonicalizationException
+    {
+        org.apache.xml.security.c14n.implementations.CanonicalizerBase r0;
+        org.w3c.dom.Node r1, $r2;
+        byte[] $r3;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.c14n.implementations.CanonicalizerBase;
+
+        r1 := @parameter0: org.w3c.dom.Node;
+
+        $r2 = (org.w3c.dom.Node) null;
+
+        $r3 = virtualinvoke r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] engineCanonicalizeSubTree(org.w3c.dom.Node,org.w3c.dom.Node)>(r1, $r2);
+
+        return $r3;
+    }
+
+    public byte[] engineCanonicalizeXPathNodeSet(java.util.Set) throws org.apache.xml.security.c14n.CanonicalizationException
+    {
+        org.apache.xml.security.c14n.implementations.CanonicalizerBase r0;
+        java.util.Set r1, $r2;
+        org.w3c.dom.Document $r3;
+        byte[] $r4;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.c14n.implementations.CanonicalizerBase;
+
+        r1 := @parameter0: java.util.Set;
+
+        r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.util.Set xpathNodeSet> = r1;
+
+        $r2 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.util.Set xpathNodeSet>;
+
+        $r3 = staticinvoke <org.apache.xml.security.utils.XMLUtils: org.w3c.dom.Document getOwnerDocument(java.util.Set)>($r2);
+
+        $r4 = specialinvoke r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] engineCanonicalizeXPathNodeSetInternal(org.w3c.dom.Node)>($r3);
+
+        return $r4;
+    }
+
+    public byte[] engineCanonicalize(org.apache.xml.security.signature.XMLSignatureInput) throws org.apache.xml.security.c14n.CanonicalizationException
+    {
+        org.apache.xml.security.signature.XMLSignatureInput r0;
+        boolean $z0, $z1, $z2, $z3;
+        org.apache.xml.security.c14n.implementations.CanonicalizerBase r1;
+        java.util.List $r2;
+        org.w3c.dom.Node $r3, $r6, $r8, $r9;
+        java.util.Set $r4;
+        byte[] $r5, $r7, $r10, $r11, $r12;
+        java.lang.Throwable $r13, $r15, $r17, r19, r20, r21;
+        org.apache.xml.security.c14n.CanonicalizationException $r22, $r23, $r24;
+        java.lang.Exception $r25, $r26, $r27;
+        null_type varReplacer2406;
+        int varReplacer2407;
+
+        nop;
+
+        r1 := @this: org.apache.xml.security.c14n.implementations.CanonicalizerBase;
+
+        r0 := @parameter0: org.apache.xml.security.signature.XMLSignatureInput;
+
+     label01:
+        $z0 = virtualinvoke r0.<org.apache.xml.security.signature.XMLSignatureInput: boolean isExcludeComments()>();
+
+        if $z0 == 0 goto label02;
+
+        varReplacer2407 = 0;
+
+        r1.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: boolean includeComments> = varReplacer2407;
+
+     label02:
+        $z1 = virtualinvoke r0.<org.apache.xml.security.signature.XMLSignatureInput: boolean isOctetStream()>();
+
+        if $z1 == 0 goto label04;
+
+        $r11 = virtualinvoke r0.<org.apache.xml.security.signature.XMLSignatureInput: byte[] getBytes()>();
+
+        $r12 = virtualinvoke r1.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] engineCanonicalize(byte[])>($r11);
+
+     label03:
+        return $r12;
+
+     label04:
+        $z2 = virtualinvoke r0.<org.apache.xml.security.signature.XMLSignatureInput: boolean isElement()>();
+
+        if $z2 == 0 goto label06;
+
+        $r8 = virtualinvoke r0.<org.apache.xml.security.signature.XMLSignatureInput: org.w3c.dom.Node getSubNode()>();
+
+        $r9 = virtualinvoke r0.<org.apache.xml.security.signature.XMLSignatureInput: org.w3c.dom.Node getExcludeNode()>();
+
+        $r10 = virtualinvoke r1.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] engineCanonicalizeSubTree(org.w3c.dom.Node,org.w3c.dom.Node)>($r8, $r9);
+
+     label05:
+        return $r10;
+
+     label06:
+        $z3 = virtualinvoke r0.<org.apache.xml.security.signature.XMLSignatureInput: boolean isNodeSet()>();
+
+        if $z3 == 0 goto label10;
+
+        $r2 = virtualinvoke r0.<org.apache.xml.security.signature.XMLSignatureInput: java.util.List getNodeFilters()>();
+
+        r1.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.util.List nodeFilter> = $r2;
+
+        virtualinvoke r1.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: void circumventBugIfNeeded(org.apache.xml.security.signature.XMLSignatureInput)>(r0);
+
+        $r3 = virtualinvoke r0.<org.apache.xml.security.signature.XMLSignatureInput: org.w3c.dom.Node getSubNode()>();
+
+        if $r3 == null goto label08;
+
+        $r6 = virtualinvoke r0.<org.apache.xml.security.signature.XMLSignatureInput: org.w3c.dom.Node getSubNode()>();
+
+        $r7 = specialinvoke r1.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] engineCanonicalizeXPathNodeSetInternal(org.w3c.dom.Node)>($r6);
+
+     label07:
+        return $r7;
+
+     label08:
+        $r4 = virtualinvoke r0.<org.apache.xml.security.signature.XMLSignatureInput: java.util.Set getNodeSet()>();
+
+        $r5 = virtualinvoke r1.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] engineCanonicalizeXPathNodeSet(java.util.Set)>($r4);
+
+     label09:
+        return $r5;
+
+     label10:
+        varReplacer2406 = null;
+
+        return varReplacer2406;
+
+     label11:
+        $r17 := @caughtexception;
+
+        r19 = $r17;
+
+        $r22 = new org.apache.xml.security.c14n.CanonicalizationException;
+
+        $r25 = (java.lang.Exception) r19;
+
+        specialinvoke $r22.<org.apache.xml.security.c14n.CanonicalizationException: void <init>(java.lang.Exception)>($r25);
+
+        throw $r22;
+
+     label12:
+        $r15 := @caughtexception;
+
+        r20 = $r15;
+
+        $r23 = new org.apache.xml.security.c14n.CanonicalizationException;
+
+        $r26 = (java.lang.Exception) r20;
+
+        specialinvoke $r23.<org.apache.xml.security.c14n.CanonicalizationException: void <init>(java.lang.Exception)>($r26);
+
+        throw $r23;
+
+     label13:
+        $r13 := @caughtexception;
+
+        r21 = $r13;
+
+        $r24 = new org.apache.xml.security.c14n.CanonicalizationException;
+
+        $r27 = (java.lang.Exception) r21;
+
+        specialinvoke $r24.<org.apache.xml.security.c14n.CanonicalizationException: void <init>(java.lang.Exception)>($r27);
+
+        throw $r24;
+
+        catch javax.xml.parsers.ParserConfigurationException from label01 to label03 with label11;
+        catch javax.xml.parsers.ParserConfigurationException from label04 to label05 with label11;
+        catch javax.xml.parsers.ParserConfigurationException from label06 to label07 with label11;
+        catch javax.xml.parsers.ParserConfigurationException from label08 to label09 with label11;
+        catch java.io.IOException from label01 to label03 with label12;
+        catch java.io.IOException from label04 to label05 with label12;
+        catch java.io.IOException from label06 to label07 with label12;
+        catch java.io.IOException from label08 to label09 with label12;
+        catch org.xml.sax.SAXException from label01 to label03 with label13;
+        catch org.xml.sax.SAXException from label04 to label05 with label13;
+        catch org.xml.sax.SAXException from label06 to label07 with label13;
+        catch org.xml.sax.SAXException from label08 to label09 with label13;
+    }
+
+    public void setWriter(java.io.OutputStream)
+    {
+        org.apache.xml.security.c14n.implementations.CanonicalizerBase r0;
+        java.io.OutputStream r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.c14n.implementations.CanonicalizerBase;
+
+        r1 := @parameter0: java.io.OutputStream;
+
+        r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.io.OutputStream writer> = r1;
+
+        return;
+    }
+
+    protected byte[] engineCanonicalizeSubTree(org.w3c.dom.Node, org.w3c.dom.Node) throws org.apache.xml.security.c14n.CanonicalizationException
+    {
+        org.apache.xml.security.c14n.implementations.CanonicalizerBase r0;
+        org.w3c.dom.Node r1, r3;
+        java.io.OutputStream $r4, $r5, $r6, $r8, $r9, $r12, $r14, $r15, $r24, $r25;
+        boolean $z0, $z1, $z2, $z3;
+        org.apache.xml.security.utils.UnsyncByteArrayOutputStream $r7, $r10;
+        java.io.ByteArrayOutputStream $r13, $r16;
+        short $s0;
+        org.w3c.dom.Element $r18;
+        java.lang.Throwable $r19, $r21, r28, r29;
+        org.apache.xml.security.c14n.implementations.NameSpaceSymbTable r23, $r30;
+        byte b1;
+        byte[] r26, r27;
+        org.apache.xml.security.c14n.CanonicalizationException $r31, $r32;
+        java.lang.Exception $r33, $r34;
+        null_type varReplacer2408;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.c14n.implementations.CanonicalizerBase;
+
+        r3 := @parameter0: org.w3c.dom.Node;
+
+        r1 := @parameter1: org.w3c.dom.Node;
+
+        r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: org.w3c.dom.Node excludeNode> = r1;
+
+     label01:
+        $r30 = new org.apache.xml.security.c14n.implementations.NameSpaceSymbTable;
+
+        specialinvoke $r30.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: void <init>()>();
+
+        r23 = $r30;
+
+        b1 = -1;
+
+        if r3 == null goto label02;
+
+        $s0 = interfaceinvoke r3.<org.w3c.dom.Node: short getNodeType()>();
+
+        if 1 != $s0 goto label02;
+
+        $r18 = (org.w3c.dom.Element) r3;
+
+        virtualinvoke r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: void getParentNameSpaces(org.w3c.dom.Element,org.apache.xml.security.c14n.implementations.NameSpaceSymbTable)>($r18, r23);
+
+        b1 = 0;
+
+     label02:
+        virtualinvoke r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: void canonicalizeSubTree(org.w3c.dom.Node,org.apache.xml.security.c14n.implementations.NameSpaceSymbTable,org.w3c.dom.Node,int)>(r3, r23, r3, b1);
+
+        $r24 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.io.OutputStream writer>;
+
+        virtualinvoke $r24.<java.io.OutputStream: void flush()>();
+
+        $r25 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.io.OutputStream writer>;
+
+        $z3 = $r25 instanceof java.io.ByteArrayOutputStream;
+
+        if $z3 == 0 goto label05;
+
+        $r12 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.io.OutputStream writer>;
+
+        $r13 = (java.io.ByteArrayOutputStream) $r12;
+
+        r26 = virtualinvoke $r13.<java.io.ByteArrayOutputStream: byte[] toByteArray()>();
+
+        $z2 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: boolean reset>;
+
+        if $z2 == 0 goto label03;
+
+        $r15 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.io.OutputStream writer>;
+
+        $r16 = (java.io.ByteArrayOutputStream) $r15;
+
+        virtualinvoke $r16.<java.io.ByteArrayOutputStream: void reset()>();
+
+        goto label04;
+
+     label03:
+        $r14 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.io.OutputStream writer>;
+
+        virtualinvoke $r14.<java.io.OutputStream: void close()>();
+
+     label04:
+        return r26;
+
+     label05:
+        $r4 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.io.OutputStream writer>;
+
+        $z0 = $r4 instanceof org.apache.xml.security.utils.UnsyncByteArrayOutputStream;
+
+        if $z0 == 0 goto label08;
+
+        $r6 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.io.OutputStream writer>;
+
+        $r7 = (org.apache.xml.security.utils.UnsyncByteArrayOutputStream) $r6;
+
+        r27 = virtualinvoke $r7.<org.apache.xml.security.utils.UnsyncByteArrayOutputStream: byte[] toByteArray()>();
+
+        $z1 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: boolean reset>;
+
+        if $z1 == 0 goto label06;
+
+        $r9 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.io.OutputStream writer>;
+
+        $r10 = (org.apache.xml.security.utils.UnsyncByteArrayOutputStream) $r9;
+
+        virtualinvoke $r10.<org.apache.xml.security.utils.UnsyncByteArrayOutputStream: void reset()>();
+
+        goto label07;
+
+     label06:
+        $r8 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.io.OutputStream writer>;
+
+        virtualinvoke $r8.<java.io.OutputStream: void close()>();
+
+     label07:
+        return r27;
+
+     label08:
+        $r5 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.io.OutputStream writer>;
+
+        virtualinvoke $r5.<java.io.OutputStream: void close()>();
+
+     label09:
+        varReplacer2408 = null;
+
+        return varReplacer2408;
+
+     label10:
+        $r21 := @caughtexception;
+
+        r28 = $r21;
+
+        $r31 = new org.apache.xml.security.c14n.CanonicalizationException;
+
+        $r33 = (java.lang.Exception) r28;
+
+        specialinvoke $r31.<org.apache.xml.security.c14n.CanonicalizationException: void <init>(java.lang.Exception)>($r33);
+
+        throw $r31;
+
+     label11:
+        $r19 := @caughtexception;
+
+        r29 = $r19;
+
+        $r32 = new org.apache.xml.security.c14n.CanonicalizationException;
+
+        $r34 = (java.lang.Exception) r29;
+
+        specialinvoke $r32.<org.apache.xml.security.c14n.CanonicalizationException: void <init>(java.lang.Exception)>($r34);
+
+        throw $r32;
+
+        catch java.io.UnsupportedEncodingException from label01 to label04 with label10;
+        catch java.io.UnsupportedEncodingException from label05 to label07 with label10;
+        catch java.io.UnsupportedEncodingException from label08 to label09 with label10;
+        catch java.io.IOException from label01 to label04 with label11;
+        catch java.io.IOException from label05 to label07 with label11;
+        catch java.io.IOException from label08 to label09 with label11;
+    }
+
+    protected final void canonicalizeSubTree(org.w3c.dom.Node, org.apache.xml.security.c14n.implementations.NameSpaceSymbTable, org.w3c.dom.Node, int) throws org.apache.xml.security.c14n.CanonicalizationException, java.io.IOException
+    {
+        org.apache.xml.security.c14n.implementations.CanonicalizerBase r0;
+        int $i0, i3, varReplacer2409, varReplacer2410, varReplacer2411, varReplacer2412;
+        java.io.OutputStream r1;
+        org.w3c.dom.Node r2, r11, r27, r28, $r32, $r33, $r34;
+        boolean z0, $z1;
+        java.util.HashMap r4, $r30;
+        short $s1, $s2;
+        org.apache.xml.security.c14n.implementations.NameSpaceSymbTable r5;
+        byte[] $r6, $r8, $r20, $r22;
+        java.lang.Object $r7, $r21, $r23, r29;
+        org.w3c.dom.Element $r9, r17;
+        java.lang.String $r10, $r14, r18, $r25, $r26, varReplacer2413;
+        org.w3c.dom.Comment $r12;
+        org.w3c.dom.ProcessingInstruction $r13;
+        java.lang.Object[] $r16;
+        java.util.Iterator r19;
+        org.w3c.dom.Attr r24;
+        org.apache.xml.security.c14n.CanonicalizationException $r31;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.c14n.implementations.CanonicalizerBase;
+
+        r27 := @parameter0: org.w3c.dom.Node;
+
+        r5 := @parameter1: org.apache.xml.security.c14n.implementations.NameSpaceSymbTable;
+
+        r11 := @parameter2: org.w3c.dom.Node;
+
+        i3 := @parameter3: int;
+
+        if r27 == null goto label01;
+
+        $i0 = virtualinvoke r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: int isVisibleInt(org.w3c.dom.Node)>(r27);
+
+        if $i0 != -1 goto label02;
+
+     label01:
+        return;
+
+     label02:
+        r28 = null;
+
+        r29 = null;
+
+        r1 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.io.OutputStream writer>;
+
+        r2 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: org.w3c.dom.Node excludeNode>;
+
+        z0 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: boolean includeComments>;
+
+        $r30 = new java.util.HashMap;
+
+        specialinvoke $r30.<java.util.HashMap: void <init>()>();
+
+        r4 = $r30;
+
+     label03:
+        $s1 = interfaceinvoke r27.<org.w3c.dom.Node: short getNodeType()>();
+
+        tableswitch($s1)
+        {
+            case 1: goto label09;
+            case 2: goto label04;
+            case 3: goto label08;
+            case 4: goto label08;
+            case 5: goto label14;
+            case 6: goto label04;
+            case 7: goto label07;
+            case 8: goto label06;
+            case 9: goto label05;
+            case 10: goto label14;
+            case 11: goto label05;
+            case 12: goto label04;
+            default: goto label14;
+        };
+
+     label04:
+        $r31 = new org.apache.xml.security.c14n.CanonicalizationException;
+
+        $r16 = newarray (java.lang.Object)[1];
+
+        $r16[0] = "illegal node type during traversal";
+
+        varReplacer2413 = "empty";
+
+        specialinvoke $r31.<org.apache.xml.security.c14n.CanonicalizationException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2413, $r16);
+
+        throw $r31;
+
+     label05:
+        virtualinvoke r5.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: void outputNodePush()>();
+
+        r28 = interfaceinvoke r27.<org.w3c.dom.Node: org.w3c.dom.Node getFirstChild()>();
+
+        goto label14;
+
+     label06:
+        if z0 == 0 goto label14;
+
+        $r12 = (org.w3c.dom.Comment) r27;
+
+        virtualinvoke r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: void outputCommentToWriter(org.w3c.dom.Comment,java.io.OutputStream,int)>($r12, r1, i3);
+
+        goto label14;
+
+     label07:
+        $r13 = (org.w3c.dom.ProcessingInstruction) r27;
+
+        virtualinvoke r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: void outputPItoWriter(org.w3c.dom.ProcessingInstruction,java.io.OutputStream,int)>($r13, r1, i3);
+
+        goto label14;
+
+     label08:
+        $r14 = interfaceinvoke r27.<org.w3c.dom.Node: java.lang.String getNodeValue()>();
+
+        staticinvoke <org.apache.xml.security.c14n.implementations.CanonicalizerBase: void outputTextToWriter(java.lang.String,java.io.OutputStream)>($r14, r1);
+
+        goto label14;
+
+     label09:
+        i3 = 0;
+
+        if r27 != r2 goto label10;
+
+        goto label14;
+
+     label10:
+        r17 = (org.w3c.dom.Element) r27;
+
+        virtualinvoke r5.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: void outputNodePush()>();
+
+        varReplacer2409 = 60;
+
+        virtualinvoke r1.<java.io.OutputStream: void write(int)>(varReplacer2409);
+
+        r18 = interfaceinvoke r17.<org.w3c.dom.Element: java.lang.String getTagName()>();
+
+        staticinvoke <org.apache.xml.security.c14n.implementations.UtfHelpper: void writeByte(java.lang.String,java.io.OutputStream,java.util.Map)>(r18, r1, r4);
+
+        r19 = virtualinvoke r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.util.Iterator handleAttributesSubtree(org.w3c.dom.Element,org.apache.xml.security.c14n.implementations.NameSpaceSymbTable)>(r17, r5);
+
+        if r19 == null goto label12;
+
+     label11:
+        $z1 = interfaceinvoke r19.<java.util.Iterator: boolean hasNext()>();
+
+        if $z1 == 0 goto label12;
+
+        $r23 = interfaceinvoke r19.<java.util.Iterator: java.lang.Object next()>();
+
+        r24 = (org.w3c.dom.Attr) $r23;
+
+        $r25 = interfaceinvoke r24.<org.w3c.dom.Attr: java.lang.String getNodeName()>();
+
+        $r26 = interfaceinvoke r24.<org.w3c.dom.Attr: java.lang.String getNodeValue()>();
+
+        staticinvoke <org.apache.xml.security.c14n.implementations.CanonicalizerBase: void outputAttrToWriter(java.lang.String,java.lang.String,java.io.OutputStream,java.util.Map)>($r25, $r26, r1, r4);
+
+        goto label11;
+
+     label12:
+        varReplacer2412 = 62;
+
+        virtualinvoke r1.<java.io.OutputStream: void write(int)>(varReplacer2412);
+
+        r28 = interfaceinvoke r27.<org.w3c.dom.Node: org.w3c.dom.Node getFirstChild()>();
+
+        if r28 != null goto label13;
+
+        $r20 = <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] END_TAG>;
+
+        $r21 = virtualinvoke $r20.<java.lang.Object: java.lang.Object clone()>();
+
+        $r22 = (byte[]) $r21;
+
+        virtualinvoke r1.<java.io.OutputStream: void write(byte[])>($r22);
+
+        staticinvoke <org.apache.xml.security.c14n.implementations.UtfHelpper: void writeStringToUtf8(java.lang.String,java.io.OutputStream)>(r18, r1);
+
+        varReplacer2410 = 62;
+
+        virtualinvoke r1.<java.io.OutputStream: void write(int)>(varReplacer2410);
+
+        virtualinvoke r5.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: void outputNodePop()>();
+
+        if r29 == null goto label14;
+
+        r28 = interfaceinvoke r27.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+
+        goto label14;
+
+     label13:
+        r29 = r17;
+
+        goto label14;
+
+     label14:
+        if r28 != null goto label17;
+
+        if r29 == null goto label17;
+
+        $r6 = <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] END_TAG>;
+
+        $r7 = virtualinvoke $r6.<java.lang.Object: java.lang.Object clone()>();
+
+        $r8 = (byte[]) $r7;
+
+        virtualinvoke r1.<java.io.OutputStream: void write(byte[])>($r8);
+
+        $r9 = (org.w3c.dom.Element) r29;
+
+        $r10 = interfaceinvoke $r9.<org.w3c.dom.Element: java.lang.String getTagName()>();
+
+        staticinvoke <org.apache.xml.security.c14n.implementations.UtfHelpper: void writeByte(java.lang.String,java.io.OutputStream,java.util.Map)>($r10, r1, r4);
+
+        varReplacer2411 = 62;
+
+        virtualinvoke r1.<java.io.OutputStream: void write(int)>(varReplacer2411);
+
+        virtualinvoke r5.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: void outputNodePop()>();
+
+        if r29 != r11 goto label15;
+
+        return;
+
+     label15:
+        $r32 = (org.w3c.dom.Node) r29;
+
+        r28 = interfaceinvoke $r32.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+
+        $r33 = (org.w3c.dom.Node) r29;
+
+        r29 = interfaceinvoke $r33.<org.w3c.dom.Node: org.w3c.dom.Node getParentNode()>();
+
+        if r29 == null goto label16;
+
+        $r34 = (org.w3c.dom.Node) r29;
+
+        $s2 = interfaceinvoke $r34.<org.w3c.dom.Node: short getNodeType()>();
+
+        if 1 == $s2 goto label14;
+
+     label16:
+        i3 = 1;
+
+        r29 = null;
+
+        goto label14;
+
+     label17:
+        if r28 != null goto label18;
+
+        return;
+
+     label18:
+        r27 = r28;
+
+        r28 = interfaceinvoke r27.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+
+        goto label03;
+    }
+
+    private byte[] engineCanonicalizeXPathNodeSetInternal(org.w3c.dom.Node) throws org.apache.xml.security.c14n.CanonicalizationException
+    {
+        org.apache.xml.security.c14n.implementations.CanonicalizerBase r0;
+        org.w3c.dom.Node r1;
+        java.io.OutputStream $r2, $r3, $r4, $r5, $r6, $r8, $r9, $r12, $r14, $r15;
+        boolean $z0, $z1, $z2, $z3;
+        org.apache.xml.security.utils.UnsyncByteArrayOutputStream $r7, $r10;
+        java.io.ByteArrayOutputStream $r13, $r16;
+        java.lang.Throwable $r18, $r20, r24, r25;
+        byte[] r22, r23;
+        org.apache.xml.security.c14n.CanonicalizationException $r26, $r27;
+        java.lang.Exception $r28, $r29;
+        null_type varReplacer2414;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.c14n.implementations.CanonicalizerBase;
+
+        r1 := @parameter0: org.w3c.dom.Node;
+
+     label01:
+        virtualinvoke r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: void canonicalizeXPathNodeSet(org.w3c.dom.Node,org.w3c.dom.Node)>(r1, r1);
+
+        $r2 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.io.OutputStream writer>;
+
+        virtualinvoke $r2.<java.io.OutputStream: void flush()>();
+
+        $r3 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.io.OutputStream writer>;
+
+        $z0 = $r3 instanceof java.io.ByteArrayOutputStream;
+
+        if $z0 == 0 goto label04;
+
+        $r12 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.io.OutputStream writer>;
+
+        $r13 = (java.io.ByteArrayOutputStream) $r12;
+
+        r22 = virtualinvoke $r13.<java.io.ByteArrayOutputStream: byte[] toByteArray()>();
+
+        $z3 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: boolean reset>;
+
+        if $z3 == 0 goto label02;
+
+        $r15 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.io.OutputStream writer>;
+
+        $r16 = (java.io.ByteArrayOutputStream) $r15;
+
+        virtualinvoke $r16.<java.io.ByteArrayOutputStream: void reset()>();
+
+        goto label03;
+
+     label02:
+        $r14 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.io.OutputStream writer>;
+
+        virtualinvoke $r14.<java.io.OutputStream: void close()>();
+
+     label03:
+        return r22;
+
+     label04:
+        $r4 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.io.OutputStream writer>;
+
+        $z1 = $r4 instanceof org.apache.xml.security.utils.UnsyncByteArrayOutputStream;
+
+        if $z1 == 0 goto label07;
+
+        $r6 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.io.OutputStream writer>;
+
+        $r7 = (org.apache.xml.security.utils.UnsyncByteArrayOutputStream) $r6;
+
+        r23 = virtualinvoke $r7.<org.apache.xml.security.utils.UnsyncByteArrayOutputStream: byte[] toByteArray()>();
+
+        $z2 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: boolean reset>;
+
+        if $z2 == 0 goto label05;
+
+        $r9 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.io.OutputStream writer>;
+
+        $r10 = (org.apache.xml.security.utils.UnsyncByteArrayOutputStream) $r9;
+
+        virtualinvoke $r10.<org.apache.xml.security.utils.UnsyncByteArrayOutputStream: void reset()>();
+
+        goto label06;
+
+     label05:
+        $r8 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.io.OutputStream writer>;
+
+        virtualinvoke $r8.<java.io.OutputStream: void close()>();
+
+     label06:
+        return r23;
+
+     label07:
+        $r5 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.io.OutputStream writer>;
+
+        virtualinvoke $r5.<java.io.OutputStream: void close()>();
+
+     label08:
+        varReplacer2414 = null;
+
+        return varReplacer2414;
+
+     label09:
+        $r20 := @caughtexception;
+
+        r24 = $r20;
+
+        $r26 = new org.apache.xml.security.c14n.CanonicalizationException;
+
+        $r28 = (java.lang.Exception) r24;
+
+        specialinvoke $r26.<org.apache.xml.security.c14n.CanonicalizationException: void <init>(java.lang.Exception)>($r28);
+
+        throw $r26;
+
+     label10:
+        $r18 := @caughtexception;
+
+        r25 = $r18;
+
+        $r27 = new org.apache.xml.security.c14n.CanonicalizationException;
+
+        $r29 = (java.lang.Exception) r25;
+
+        specialinvoke $r27.<org.apache.xml.security.c14n.CanonicalizationException: void <init>(java.lang.Exception)>($r29);
+
+        throw $r27;
+
+        catch java.io.UnsupportedEncodingException from label01 to label03 with label09;
+        catch java.io.UnsupportedEncodingException from label04 to label06 with label09;
+        catch java.io.UnsupportedEncodingException from label07 to label08 with label09;
+        catch java.io.IOException from label01 to label03 with label10;
+        catch java.io.IOException from label04 to label06 with label10;
+        catch java.io.IOException from label07 to label08 with label10;
+    }
+
+    protected final void canonicalizeXPathNodeSet(org.w3c.dom.Node, org.w3c.dom.Node) throws org.apache.xml.security.c14n.CanonicalizationException, java.io.IOException
+    {
+        org.apache.xml.security.c14n.implementations.CanonicalizerBase r0;
+        int $i0, $i3, $i4, $i7, i8, varReplacer2415, varReplacer2416, varReplacer2418, varReplacer2419;
+        org.apache.xml.security.c14n.implementations.NameSpaceSymbTable r2, $r34;
+        java.io.OutputStream r3;
+        java.util.HashMap r5, $r35;
+        short $s1, $s2, $s5, $s6, $s9;
+        boolean $z0, $z1, $z2, $z3, $z4, z5, $z6, z7;
+        org.w3c.dom.Node r6, r27, r28, r30, r31, $r37, $r38, $r39, $r40;
+        byte[] $r7, $r9, $r19, $r21;
+        java.lang.Object $r8, $r20, $r22, r29;
+        org.w3c.dom.Element $r10, $r26, r32;
+        java.lang.String $r11, $r14, $r15, $r24, $r25, r33, varReplacer2417;
+        org.w3c.dom.Comment $r12;
+        org.w3c.dom.ProcessingInstruction $r13;
+        java.lang.Object[] $r17;
+        java.util.Iterator r18;
+        org.w3c.dom.Attr r23;
+        byte b10;
+        org.apache.xml.security.c14n.CanonicalizationException $r36;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.c14n.implementations.CanonicalizerBase;
+
+        r27 := @parameter0: org.w3c.dom.Node;
+
+        r6 := @parameter1: org.w3c.dom.Node;
+
+        $i0 = virtualinvoke r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: int isVisibleInt(org.w3c.dom.Node)>(r27);
+
+        if $i0 != -1 goto label01;
+
+        return;
+
+     label01:
+        z5 = 0;
+
+        $r34 = new org.apache.xml.security.c14n.implementations.NameSpaceSymbTable;
+
+        specialinvoke $r34.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: void <init>()>();
+
+        r2 = $r34;
+
+        if r27 == null goto label02;
+
+        $s9 = interfaceinvoke r27.<org.w3c.dom.Node: short getNodeType()>();
+
+        if 1 != $s9 goto label02;
+
+        $r26 = (org.w3c.dom.Element) r27;
+
+        virtualinvoke r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: void getParentNameSpaces(org.w3c.dom.Element,org.apache.xml.security.c14n.implementations.NameSpaceSymbTable)>($r26, r2);
+
+     label02:
+        if r27 != null goto label03;
+
+        return;
+
+     label03:
+        r28 = null;
+
+        r29 = null;
+
+        r3 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.io.OutputStream writer>;
+
+        b10 = -1;
+
+        $r35 = new java.util.HashMap;
+
+        specialinvoke $r35.<java.util.HashMap: void <init>()>();
+
+        r5 = $r35;
+
+     label04:
+        $s1 = interfaceinvoke r27.<org.w3c.dom.Node: short getNodeType()>();
+
+        tableswitch($s1)
+        {
+            case 1: goto label13;
+            case 2: goto label05;
+            case 3: goto label09;
+            case 4: goto label09;
+            case 5: goto label25;
+            case 6: goto label05;
+            case 7: goto label08;
+            case 8: goto label07;
+            case 9: goto label06;
+            case 10: goto label25;
+            case 11: goto label06;
+            case 12: goto label05;
+            default: goto label25;
+        };
+
+     label05:
+        $r36 = new org.apache.xml.security.c14n.CanonicalizationException;
+
+        $r17 = newarray (java.lang.Object)[1];
+
+        $r17[0] = "illegal node type during traversal";
+
+        varReplacer2417 = "empty";
+
+        specialinvoke $r36.<org.apache.xml.security.c14n.CanonicalizationException: void <init>(java.lang.String,java.lang.Object[])>(varReplacer2417, $r17);
+
+        throw $r36;
+
+     label06:
+        virtualinvoke r2.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: void outputNodePush()>();
+
+        r28 = interfaceinvoke r27.<org.w3c.dom.Node: org.w3c.dom.Node getFirstChild()>();
+
+        goto label25;
+
+     label07:
+        $z1 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: boolean includeComments>;
+
+        if $z1 == 0 goto label25;
+
+        $i3 = virtualinvoke r2.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: int getLevel()>();
+
+        $i4 = virtualinvoke r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: int isVisibleDO(org.w3c.dom.Node,int)>(r27, $i3);
+
+        if $i4 != 1 goto label25;
+
+        $r12 = (org.w3c.dom.Comment) r27;
+
+        virtualinvoke r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: void outputCommentToWriter(org.w3c.dom.Comment,java.io.OutputStream,int)>($r12, r3, b10);
+
+        goto label25;
+
+     label08:
+        $z2 = virtualinvoke r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: boolean isVisible(org.w3c.dom.Node)>(r27);
+
+        if $z2 == 0 goto label25;
+
+        $r13 = (org.w3c.dom.ProcessingInstruction) r27;
+
+        virtualinvoke r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: void outputPItoWriter(org.w3c.dom.ProcessingInstruction,java.io.OutputStream,int)>($r13, r3, b10);
+
+        goto label25;
+
+     label09:
+        $z3 = virtualinvoke r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: boolean isVisible(org.w3c.dom.Node)>(r27);
+
+        if $z3 == 0 goto label25;
+
+        $r14 = interfaceinvoke r27.<org.w3c.dom.Node: java.lang.String getNodeValue()>();
+
+        staticinvoke <org.apache.xml.security.c14n.implementations.CanonicalizerBase: void outputTextToWriter(java.lang.String,java.io.OutputStream)>($r14, r3);
+
+        r30 = interfaceinvoke r27.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+
+     label10:
+        if r30 == null goto label12;
+
+        $s5 = interfaceinvoke r30.<org.w3c.dom.Node: short getNodeType()>();
+
+        if $s5 == 3 goto label11;
+
+        $s6 = interfaceinvoke r30.<org.w3c.dom.Node: short getNodeType()>();
+
+        if $s6 != 4 goto label12;
+
+     label11:
+        $r15 = interfaceinvoke r30.<org.w3c.dom.Node: java.lang.String getNodeValue()>();
+
+        staticinvoke <org.apache.xml.security.c14n.implementations.CanonicalizerBase: void outputTextToWriter(java.lang.String,java.io.OutputStream)>($r15, r3);
+
+        r31 = r30;
+
+        r28 = interfaceinvoke r31.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+
+        r30 = interfaceinvoke r30.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+
+        goto label10;
+
+     label12:
+        goto label25;
+
+     label13:
+        b10 = 0;
+
+        r32 = (org.w3c.dom.Element) r27;
+
+        r33 = null;
+
+        $i7 = virtualinvoke r2.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: int getLevel()>();
+
+        i8 = virtualinvoke r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: int isVisibleDO(org.w3c.dom.Node,int)>(r27, $i7);
+
+        if i8 != -1 goto label14;
+
+        r28 = interfaceinvoke r27.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+
+        goto label25;
+
+     label14:
+        if i8 != 1 goto label15;
+
+        $z6 = 1;
+
+        goto label16;
+
+     label15:
+        $z6 = 0;
+
+     label16:
+        z7 = $z6;
+
+        if z7 == 0 goto label17;
+
+        virtualinvoke r2.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: void outputNodePush()>();
+
+        varReplacer2419 = 60;
+
+        virtualinvoke r3.<java.io.OutputStream: void write(int)>(varReplacer2419);
+
+        r33 = interfaceinvoke r32.<org.w3c.dom.Element: java.lang.String getTagName()>();
+
+        staticinvoke <org.apache.xml.security.c14n.implementations.UtfHelpper: void writeByte(java.lang.String,java.io.OutputStream,java.util.Map)>(r33, r3, r5);
+
+        goto label18;
+
+     label17:
+        virtualinvoke r2.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: void push()>();
+
+     label18:
+        r18 = virtualinvoke r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.util.Iterator handleAttributes(org.w3c.dom.Element,org.apache.xml.security.c14n.implementations.NameSpaceSymbTable)>(r32, r2);
+
+        if r18 == null goto label20;
+
+     label19:
+        $z4 = interfaceinvoke r18.<java.util.Iterator: boolean hasNext()>();
+
+        if $z4 == 0 goto label20;
+
+        $r22 = interfaceinvoke r18.<java.util.Iterator: java.lang.Object next()>();
+
+        r23 = (org.w3c.dom.Attr) $r22;
+
+        $r24 = interfaceinvoke r23.<org.w3c.dom.Attr: java.lang.String getNodeName()>();
+
+        $r25 = interfaceinvoke r23.<org.w3c.dom.Attr: java.lang.String getNodeValue()>();
+
+        staticinvoke <org.apache.xml.security.c14n.implementations.CanonicalizerBase: void outputAttrToWriter(java.lang.String,java.lang.String,java.io.OutputStream,java.util.Map)>($r24, $r25, r3, r5);
+
+        goto label19;
+
+     label20:
+        if z7 == 0 goto label21;
+
+        varReplacer2418 = 62;
+
+        virtualinvoke r3.<java.io.OutputStream: void write(int)>(varReplacer2418);
+
+     label21:
+        r28 = interfaceinvoke r27.<org.w3c.dom.Node: org.w3c.dom.Node getFirstChild()>();
+
+        if r28 != null goto label24;
+
+        if z7 == 0 goto label22;
+
+        $r19 = <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] END_TAG>;
+
+        $r20 = virtualinvoke $r19.<java.lang.Object: java.lang.Object clone()>();
+
+        $r21 = (byte[]) $r20;
+
+        virtualinvoke r3.<java.io.OutputStream: void write(byte[])>($r21);
+
+        staticinvoke <org.apache.xml.security.c14n.implementations.UtfHelpper: void writeByte(java.lang.String,java.io.OutputStream,java.util.Map)>(r33, r3, r5);
+
+        varReplacer2416 = 62;
+
+        virtualinvoke r3.<java.io.OutputStream: void write(int)>(varReplacer2416);
+
+        virtualinvoke r2.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: void outputNodePop()>();
+
+        goto label23;
+
+     label22:
+        virtualinvoke r2.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: void pop()>();
+
+     label23:
+        if r29 == null goto label25;
+
+        r28 = interfaceinvoke r27.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+
+        goto label25;
+
+     label24:
+        r29 = r32;
+
+        goto label25;
+
+     label25:
+        if r28 != null goto label30;
+
+        if r29 == null goto label30;
+
+        $r37 = (org.w3c.dom.Node) r29;
+
+        $z0 = virtualinvoke r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: boolean isVisible(org.w3c.dom.Node)>($r37);
+
+        if $z0 == 0 goto label26;
+
+        $r7 = <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] END_TAG>;
+
+        $r8 = virtualinvoke $r7.<java.lang.Object: java.lang.Object clone()>();
+
+        $r9 = (byte[]) $r8;
+
+        virtualinvoke r3.<java.io.OutputStream: void write(byte[])>($r9);
+
+        $r10 = (org.w3c.dom.Element) r29;
+
+        $r11 = interfaceinvoke $r10.<org.w3c.dom.Element: java.lang.String getTagName()>();
+
+        staticinvoke <org.apache.xml.security.c14n.implementations.UtfHelpper: void writeByte(java.lang.String,java.io.OutputStream,java.util.Map)>($r11, r3, r5);
+
+        varReplacer2415 = 62;
+
+        virtualinvoke r3.<java.io.OutputStream: void write(int)>(varReplacer2415);
+
+        virtualinvoke r2.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: void outputNodePop()>();
+
+        goto label27;
+
+     label26:
+        virtualinvoke r2.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: void pop()>();
+
+     label27:
+        if r29 != r6 goto label28;
+
+        return;
+
+     label28:
+        $r38 = (org.w3c.dom.Node) r29;
+
+        r28 = interfaceinvoke $r38.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+
+        $r39 = (org.w3c.dom.Node) r29;
+
+        r29 = interfaceinvoke $r39.<org.w3c.dom.Node: org.w3c.dom.Node getParentNode()>();
+
+        if r29 == null goto label29;
+
+        $r40 = (org.w3c.dom.Node) r29;
+
+        $s2 = interfaceinvoke $r40.<org.w3c.dom.Node: short getNodeType()>();
+
+        if 1 == $s2 goto label25;
+
+     label29:
+        r29 = null;
+
+        b10 = 1;
+
+        goto label25;
+
+     label30:
+        if r28 != null goto label31;
+
+        return;
+
+     label31:
+        r27 = r28;
+
+        r28 = interfaceinvoke r27.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+
+        goto label04;
+    }
+
+    protected int isVisibleDO(org.w3c.dom.Node, int)
+    {
+        org.apache.xml.security.c14n.implementations.CanonicalizerBase r0;
+        java.util.List $r1, $r5;
+        java.util.Set $r2, $r4;
+        org.w3c.dom.Node r3;
+        boolean $z0, $z1;
+        java.util.Iterator r6;
+        java.lang.Object $r7;
+        int i0, i1, varReplacer2420, varReplacer2421;
+        org.apache.xml.security.signature.NodeFilter $r8;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.c14n.implementations.CanonicalizerBase;
+
+        r3 := @parameter0: org.w3c.dom.Node;
+
+        i0 := @parameter1: int;
+
+        $r1 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.util.List nodeFilter>;
+
+        if $r1 == null goto label3;
+
+        $r5 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.util.List nodeFilter>;
+
+        r6 = interfaceinvoke $r5.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $z1 = interfaceinvoke r6.<java.util.Iterator: boolean hasNext()>();
+
+        if $z1 == 0 goto label3;
+
+        $r7 = interfaceinvoke r6.<java.util.Iterator: java.lang.Object next()>();
+
+        $r8 = (org.apache.xml.security.signature.NodeFilter) $r7;
+
+        i1 = interfaceinvoke $r8.<org.apache.xml.security.signature.NodeFilter: int isNodeIncludeDO(org.w3c.dom.Node,int)>(r3, i0);
+
+        if i1 == 1 goto label2;
+
+        return i1;
+
+     label2:
+        goto label1;
+
+     label3:
+        $r2 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.util.Set xpathNodeSet>;
+
+        if $r2 == null goto label4;
+
+        $r4 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.util.Set xpathNodeSet>;
+
+        $z0 = interfaceinvoke $r4.<java.util.Set: boolean contains(java.lang.Object)>(r3);
+
+        if $z0 != 0 goto label4;
+
+        varReplacer2421 = 0;
+
+        return varReplacer2421;
+
+     label4:
+        varReplacer2420 = 1;
+
+        return varReplacer2420;
+    }
+
+    protected int isVisibleInt(org.w3c.dom.Node)
+    {
+        org.apache.xml.security.c14n.implementations.CanonicalizerBase r0;
+        java.util.List $r1, $r5;
+        java.util.Set $r2, $r4;
+        org.w3c.dom.Node r3;
+        boolean $z0, $z1;
+        java.util.Iterator r6;
+        java.lang.Object $r7;
+        org.apache.xml.security.signature.NodeFilter $r8;
+        int i0, varReplacer2422, varReplacer2423;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.c14n.implementations.CanonicalizerBase;
+
+        r3 := @parameter0: org.w3c.dom.Node;
+
+        $r1 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.util.List nodeFilter>;
+
+        if $r1 == null goto label3;
+
+        $r5 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.util.List nodeFilter>;
+
+        r6 = interfaceinvoke $r5.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $z1 = interfaceinvoke r6.<java.util.Iterator: boolean hasNext()>();
+
+        if $z1 == 0 goto label3;
+
+        $r7 = interfaceinvoke r6.<java.util.Iterator: java.lang.Object next()>();
+
+        $r8 = (org.apache.xml.security.signature.NodeFilter) $r7;
+
+        i0 = interfaceinvoke $r8.<org.apache.xml.security.signature.NodeFilter: int isNodeInclude(org.w3c.dom.Node)>(r3);
+
+        if i0 == 1 goto label2;
+
+        return i0;
+
+     label2:
+        goto label1;
+
+     label3:
+        $r2 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.util.Set xpathNodeSet>;
+
+        if $r2 == null goto label4;
+
+        $r4 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.util.Set xpathNodeSet>;
+
+        $z0 = interfaceinvoke $r4.<java.util.Set: boolean contains(java.lang.Object)>(r3);
+
+        if $z0 != 0 goto label4;
+
+        varReplacer2423 = 0;
+
+        return varReplacer2423;
+
+     label4:
+        varReplacer2422 = 1;
+
+        return varReplacer2422;
+    }
+
+    protected boolean isVisible(org.w3c.dom.Node)
+    {
+        org.apache.xml.security.c14n.implementations.CanonicalizerBase r0;
+        java.util.List $r1, $r5;
+        java.util.Set $r2, $r4;
+        org.w3c.dom.Node r3;
+        boolean $z0, $z1;
+        java.util.Iterator r6;
+        java.lang.Object $r7;
+        org.apache.xml.security.signature.NodeFilter $r8;
+        int $i0, varReplacer2424, varReplacer2425, varReplacer2426;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.c14n.implementations.CanonicalizerBase;
+
+        r3 := @parameter0: org.w3c.dom.Node;
+
+        $r1 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.util.List nodeFilter>;
+
+        if $r1 == null goto label2;
+
+        $r5 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.util.List nodeFilter>;
+
+        r6 = interfaceinvoke $r5.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $z1 = interfaceinvoke r6.<java.util.Iterator: boolean hasNext()>();
+
+        if $z1 == 0 goto label2;
+
+        $r7 = interfaceinvoke r6.<java.util.Iterator: java.lang.Object next()>();
+
+        $r8 = (org.apache.xml.security.signature.NodeFilter) $r7;
+
+        $i0 = interfaceinvoke $r8.<org.apache.xml.security.signature.NodeFilter: int isNodeInclude(org.w3c.dom.Node)>(r3);
+
+        if $i0 == 1 goto label1;
+
+        varReplacer2425 = 0;
+
+        return varReplacer2425;
+
+     label2:
+        $r2 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.util.Set xpathNodeSet>;
+
+        if $r2 == null goto label3;
+
+        $r4 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: java.util.Set xpathNodeSet>;
+
+        $z0 = interfaceinvoke $r4.<java.util.Set: boolean contains(java.lang.Object)>(r3);
+
+        if $z0 != 0 goto label3;
+
+        varReplacer2426 = 0;
+
+        return varReplacer2426;
+
+     label3:
+        varReplacer2424 = 1;
+
+        return varReplacer2424;
+    }
+
+    protected void handleParent(org.w3c.dom.Element, org.apache.xml.security.c14n.implementations.NameSpaceSymbTable)
+    {
+        org.w3c.dom.Element r0;
+        boolean $z0, $z2, $z3, $z4, $z6;
+        org.w3c.dom.NamedNodeMap r1;
+        int i0, i1;
+        java.lang.String $r2, $r9, $r10, $r11, $r12, $r13, r16, r17, r18, r19, r20, varReplacer2427, varReplacer2428, varReplacer2429;
+        org.w3c.dom.Document $r3;
+        org.apache.xml.security.c14n.implementations.NameSpaceSymbTable r4;
+        java.lang.StringBuilder $r5, $r6, $r7;
+        org.w3c.dom.Node $r8;
+        org.apache.xml.security.c14n.implementations.CanonicalizerBase r14;
+        org.w3c.dom.Attr r15, r21;
+
+        nop;
+
+        r14 := @this: org.apache.xml.security.c14n.implementations.CanonicalizerBase;
+
+        r0 := @parameter0: org.w3c.dom.Element;
+
+        r4 := @parameter1: org.apache.xml.security.c14n.implementations.NameSpaceSymbTable;
+
+        $z0 = interfaceinvoke r0.<org.w3c.dom.Element: boolean hasAttributes()>();
+
+        if $z0 != 0 goto label1;
+
+        $r13 = interfaceinvoke r0.<org.w3c.dom.Element: java.lang.String getNamespaceURI()>();
+
+        if $r13 != null goto label1;
+
+        return;
+
+     label1:
+        r1 = interfaceinvoke r0.<org.w3c.dom.Element: org.w3c.dom.NamedNodeMap getAttributes()>();
+
+        i0 = interfaceinvoke r1.<org.w3c.dom.NamedNodeMap: int getLength()>();
+
+        i1 = 0;
+
+     label2:
+        if i1 >= i0 goto label5;
+
+        $r8 = interfaceinvoke r1.<org.w3c.dom.NamedNodeMap: org.w3c.dom.Node item(int)>(i1);
+
+        r15 = (org.w3c.dom.Attr) $r8;
+
+        r16 = interfaceinvoke r15.<org.w3c.dom.Attr: java.lang.String getLocalName()>();
+
+        r17 = interfaceinvoke r15.<org.w3c.dom.Attr: java.lang.String getNodeValue()>();
+
+        $r9 = "http://www.w3.org/2000/xmlns/";
+
+        $r10 = interfaceinvoke r15.<org.w3c.dom.Attr: java.lang.String getNamespaceURI()>();
+
+        $z3 = virtualinvoke $r9.<java.lang.String: boolean equals(java.lang.Object)>($r10);
+
+        if $z3 == 0 goto label4;
+
+        $r11 = "xml";
+
+        $z4 = virtualinvoke $r11.<java.lang.String: boolean equals(java.lang.Object)>(r16);
+
+        if $z4 == 0 goto label3;
+
+        $r12 = "http://www.w3.org/XML/1998/namespace";
+
+        $z6 = virtualinvoke $r12.<java.lang.String: boolean equals(java.lang.Object)>(r17);
+
+        if $z6 != 0 goto label4;
+
+     label3:
+        virtualinvoke r4.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: boolean addMapping(java.lang.String,java.lang.String,org.w3c.dom.Attr)>(r16, r17, r15);
+
+     label4:
+        i1 = i1 + 1;
+
+        goto label2;
+
+     label5:
+        $r2 = interfaceinvoke r0.<org.w3c.dom.Element: java.lang.String getNamespaceURI()>();
+
+        if $r2 == null goto label9;
+
+        r18 = interfaceinvoke r0.<org.w3c.dom.Element: java.lang.String getPrefix()>();
+
+        r19 = interfaceinvoke r0.<org.w3c.dom.Element: java.lang.String getNamespaceURI()>();
+
+        if r18 == null goto label6;
+
+        varReplacer2429 = "";
+
+        $z2 = virtualinvoke r18.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2429);
+
+        if $z2 == 0 goto label7;
+
+     label6:
+        r18 = "xmlns";
+
+        r20 = "xmlns";
+
+        goto label8;
+
+     label7:
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer2427 = "xmlns:";
+
+        $r6 = virtualinvoke $r5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2427);
+
+        $r7 = virtualinvoke $r6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r18);
+
+        r20 = virtualinvoke $r7.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label8:
+        $r3 = interfaceinvoke r0.<org.w3c.dom.Element: org.w3c.dom.Document getOwnerDocument()>();
+
+        varReplacer2428 = "http://www.w3.org/2000/xmlns/";
+
+        r21 = interfaceinvoke $r3.<org.w3c.dom.Document: org.w3c.dom.Attr createAttributeNS(java.lang.String,java.lang.String)>(varReplacer2428, r20);
+
+        interfaceinvoke r21.<org.w3c.dom.Attr: void setValue(java.lang.String)>(r19);
+
+        virtualinvoke r4.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: boolean addMapping(java.lang.String,java.lang.String,org.w3c.dom.Attr)>(r18, r19, r21);
+
+     label9:
+        return;
+    }
+
+    protected final void getParentNameSpaces(org.w3c.dom.Element, org.apache.xml.security.c14n.implementations.NameSpaceSymbTable)
+    {
+        org.w3c.dom.Element r0, $r13, r15;
+        org.w3c.dom.Node r1, r14;
+        short $s0, $s2;
+        java.util.ArrayList $r2, r3;
+        int $i1;
+        java.util.ListIterator r4;
+        org.apache.xml.security.c14n.implementations.NameSpaceSymbTable r5;
+        java.lang.String $r6, $r7, varReplacer2430, varReplacer2431, varReplacer2432;
+        boolean $z0, $z2;
+        org.apache.xml.security.c14n.implementations.CanonicalizerBase r8;
+        org.w3c.dom.Document $r9;
+        org.w3c.dom.Attr $r10, r16;
+        java.lang.Object $r12;
+
+        nop;
+
+        r8 := @this: org.apache.xml.security.c14n.implementations.CanonicalizerBase;
+
+        r0 := @parameter0: org.w3c.dom.Element;
+
+        r5 := @parameter1: org.apache.xml.security.c14n.implementations.NameSpaceSymbTable;
+
+        r1 = interfaceinvoke r0.<org.w3c.dom.Element: org.w3c.dom.Node getParentNode()>();
+
+        if r1 == null goto label1;
+
+        $s0 = interfaceinvoke r1.<org.w3c.dom.Node: short getNodeType()>();
+
+        if 1 == $s0 goto label2;
+
+     label1:
+        return;
+
+     label2:
+        $r2 = new java.util.ArrayList;
+
+        specialinvoke $r2.<java.util.ArrayList: void <init>()>();
+
+        r3 = $r2;
+
+        r14 = r1;
+
+     label3:
+        if r14 == null goto label4;
+
+        $s2 = interfaceinvoke r14.<org.w3c.dom.Node: short getNodeType()>();
+
+        if 1 != $s2 goto label4;
+
+        $r13 = (org.w3c.dom.Element) r14;
+
+        interfaceinvoke r3.<java.util.List: boolean add(java.lang.Object)>($r13);
+
+        r14 = interfaceinvoke r14.<org.w3c.dom.Node: org.w3c.dom.Node getParentNode()>();
+
+        goto label3;
+
+     label4:
+        $i1 = interfaceinvoke r3.<java.util.List: int size()>();
+
+        r4 = interfaceinvoke r3.<java.util.List: java.util.ListIterator listIterator(int)>($i1);
+
+     label5:
+        $z2 = interfaceinvoke r4.<java.util.ListIterator: boolean hasPrevious()>();
+
+        if $z2 == 0 goto label6;
+
+        $r12 = interfaceinvoke r4.<java.util.ListIterator: java.lang.Object previous()>();
+
+        r15 = (org.w3c.dom.Element) $r12;
+
+        virtualinvoke r8.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: void handleParent(org.w3c.dom.Element,org.apache.xml.security.c14n.implementations.NameSpaceSymbTable)>(r15, r5);
+
+        goto label5;
+
+     label6:
+        interfaceinvoke r3.<java.util.List: void clear()>();
+
+        varReplacer2430 = "xmlns";
+
+        r16 = virtualinvoke r5.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: org.w3c.dom.Attr getMappingWithoutRendered(java.lang.String)>(varReplacer2430);
+
+        if r16 == null goto label7;
+
+        $r6 = "";
+
+        $r7 = interfaceinvoke r16.<org.w3c.dom.Attr: java.lang.String getValue()>();
+
+        $z0 = virtualinvoke $r6.<java.lang.String: boolean equals(java.lang.Object)>($r7);
+
+        if $z0 == 0 goto label7;
+
+        $r9 = interfaceinvoke r16.<org.w3c.dom.Attr: org.w3c.dom.Document getOwnerDocument()>();
+
+        $r10 = virtualinvoke r8.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: org.w3c.dom.Attr getNullNode(org.w3c.dom.Document)>($r9);
+
+        varReplacer2431 = "xmlns";
+
+        varReplacer2432 = "";
+
+        virtualinvoke r5.<org.apache.xml.security.c14n.implementations.NameSpaceSymbTable: org.w3c.dom.Node addMappingAndRender(java.lang.String,java.lang.String,org.w3c.dom.Attr)>(varReplacer2431, varReplacer2432, $r10);
+
+     label7:
+        return;
+    }
+
+    abstract java.util.Iterator handleAttributes(org.w3c.dom.Element, org.apache.xml.security.c14n.implementations.NameSpaceSymbTable) throws org.apache.xml.security.c14n.CanonicalizationException;
+
+    abstract java.util.Iterator handleAttributesSubtree(org.w3c.dom.Element, org.apache.xml.security.c14n.implementations.NameSpaceSymbTable) throws org.apache.xml.security.c14n.CanonicalizationException;
+
+    abstract void circumventBugIfNeeded(org.apache.xml.security.signature.XMLSignatureInput) throws org.apache.xml.security.c14n.CanonicalizationException, javax.xml.parsers.ParserConfigurationException, java.io.IOException, org.xml.sax.SAXException;
+
+    protected static final void outputAttrToWriter(java.lang.String, java.lang.String, java.io.OutputStream, java.util.Map) throws java.io.IOException
+    {
+        java.io.OutputStream r0;
+        java.lang.String r1, r6;
+        java.util.Map r2;
+        byte[] $r3, $r5, $r7, $r9, $r11, $r13, $r15, $r17, r19;
+        java.lang.Object $r4, $r8, $r10, $r12, $r14, $r16, $r18;
+        int i0, i1, $i2, i3, varReplacer2433, varReplacer2434;
+
+        nop;
+
+        r1 := @parameter0: java.lang.String;
+
+        r6 := @parameter1: java.lang.String;
+
+        r0 := @parameter2: java.io.OutputStream;
+
+        r2 := @parameter3: java.util.Map;
+
+        varReplacer2434 = 32;
+
+        virtualinvoke r0.<java.io.OutputStream: void write(int)>(varReplacer2434);
+
+        staticinvoke <org.apache.xml.security.c14n.implementations.UtfHelpper: void writeByte(java.lang.String,java.io.OutputStream,java.util.Map)>(r1, r0, r2);
+
+        $r3 = <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] EQUALS_STR>;
+
+        $r4 = virtualinvoke $r3.<java.lang.Object: java.lang.Object clone()>();
+
+        $r5 = (byte[]) $r4;
+
+        virtualinvoke r0.<java.io.OutputStream: void write(byte[])>($r5);
+
+        i0 = virtualinvoke r6.<java.lang.String: int length()>();
+
+        i3 = 0;
+
+     label01:
+        if i3 >= i0 goto label11;
+
+        i1 = virtualinvoke r6.<java.lang.String: int codePointAt(int)>(i3);
+
+        $i2 = staticinvoke <java.lang.Character: int charCount(int)>(i1);
+
+        i3 = i3 + $i2;
+
+        lookupswitch(i1)
+        {
+            case 9: goto label05;
+            case 10: goto label06;
+            case 13: goto label07;
+            case 34: goto label04;
+            case 38: goto label02;
+            case 60: goto label03;
+            default: goto label08;
+        };
+
+     label02:
+        $r9 = <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] AMP>;
+
+        $r10 = virtualinvoke $r9.<java.lang.Object: java.lang.Object clone()>();
+
+        r19 = (byte[]) $r10;
+
+        goto label10;
+
+     label03:
+        $r7 = <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] LT>;
+
+        $r8 = virtualinvoke $r7.<java.lang.Object: java.lang.Object clone()>();
+
+        r19 = (byte[]) $r8;
+
+        goto label10;
+
+     label04:
+        $r11 = <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] QUOT>;
+
+        $r12 = virtualinvoke $r11.<java.lang.Object: java.lang.Object clone()>();
+
+        r19 = (byte[]) $r12;
+
+        goto label10;
+
+     label05:
+        $r17 = <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] X9>;
+
+        $r18 = virtualinvoke $r17.<java.lang.Object: java.lang.Object clone()>();
+
+        r19 = (byte[]) $r18;
+
+        goto label10;
+
+     label06:
+        $r15 = <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] XA>;
+
+        $r16 = virtualinvoke $r15.<java.lang.Object: java.lang.Object clone()>();
+
+        r19 = (byte[]) $r16;
+
+        goto label10;
+
+     label07:
+        $r13 = <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] XD>;
+
+        $r14 = virtualinvoke $r13.<java.lang.Object: java.lang.Object clone()>();
+
+        r19 = (byte[]) $r14;
+
+        goto label10;
+
+     label08:
+        if i1 >= 128 goto label09;
+
+        virtualinvoke r0.<java.io.OutputStream: void write(int)>(i1);
+
+        goto label01;
+
+     label09:
+        staticinvoke <org.apache.xml.security.c14n.implementations.UtfHelpper: void writeCodePointToUtf8(int,java.io.OutputStream)>(i1, r0);
+
+        goto label01;
+
+     label10:
+        virtualinvoke r0.<java.io.OutputStream: void write(byte[])>(r19);
+
+        goto label01;
+
+     label11:
+        varReplacer2433 = 34;
+
+        virtualinvoke r0.<java.io.OutputStream: void write(int)>(varReplacer2433);
+
+        return;
+    }
+
+    protected void outputPItoWriter(org.w3c.dom.ProcessingInstruction, java.io.OutputStream, int) throws java.io.IOException
+    {
+        int i0, i1, $i2, $i3, i4, i5, i6, i7, i8, varReplacer2435, varReplacer2436, varReplacer2437;
+        java.io.OutputStream r0;
+        byte[] $r1, $r3, $r6, $r8, $r9, $r11, $r12, $r14;
+        java.lang.Object $r2, $r7, $r10, $r13;
+        org.w3c.dom.ProcessingInstruction r4;
+        java.lang.String r5, r16;
+        org.apache.xml.security.c14n.implementations.CanonicalizerBase r15;
+
+        nop;
+
+        r15 := @this: org.apache.xml.security.c14n.implementations.CanonicalizerBase;
+
+        r4 := @parameter0: org.w3c.dom.ProcessingInstruction;
+
+        r0 := @parameter1: java.io.OutputStream;
+
+        i0 := @parameter2: int;
+
+        if i0 != 1 goto label01;
+
+        varReplacer2436 = 10;
+
+        virtualinvoke r0.<java.io.OutputStream: void write(int)>(varReplacer2436);
+
+     label01:
+        $r1 = <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] BEGIN_PI>;
+
+        $r2 = virtualinvoke $r1.<java.lang.Object: java.lang.Object clone()>();
+
+        $r3 = (byte[]) $r2;
+
+        virtualinvoke r0.<java.io.OutputStream: void write(byte[])>($r3);
+
+        r5 = interfaceinvoke r4.<org.w3c.dom.ProcessingInstruction: java.lang.String getTarget()>();
+
+        i4 = virtualinvoke r5.<java.lang.String: int length()>();
+
+        i5 = 0;
+
+     label02:
+        if i5 >= i4 goto label06;
+
+        i6 = virtualinvoke r5.<java.lang.String: int codePointAt(int)>(i5);
+
+        $i3 = staticinvoke <java.lang.Character: int charCount(int)>(i6);
+
+        i5 = i5 + $i3;
+
+        if i6 != 13 goto label03;
+
+        $r12 = <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] XD>;
+
+        $r13 = virtualinvoke $r12.<java.lang.Object: java.lang.Object clone()>();
+
+        $r14 = (byte[]) $r13;
+
+        virtualinvoke r0.<java.io.OutputStream: void write(byte[])>($r14);
+
+        goto label05;
+
+     label03:
+        if i6 >= 128 goto label04;
+
+        virtualinvoke r0.<java.io.OutputStream: void write(int)>(i6);
+
+        goto label05;
+
+     label04:
+        staticinvoke <org.apache.xml.security.c14n.implementations.UtfHelpper: void writeCodePointToUtf8(int,java.io.OutputStream)>(i6, r0);
+
+     label05:
+        goto label02;
+
+     label06:
+        r16 = interfaceinvoke r4.<org.w3c.dom.ProcessingInstruction: java.lang.String getData()>();
+
+        i7 = virtualinvoke r16.<java.lang.String: int length()>();
+
+        if i7 <= 0 goto label10;
+
+        varReplacer2437 = 32;
+
+        virtualinvoke r0.<java.io.OutputStream: void write(int)>(varReplacer2437);
+
+        i8 = 0;
+
+     label07:
+        if i8 >= i7 goto label10;
+
+        i1 = virtualinvoke r16.<java.lang.String: int codePointAt(int)>(i8);
+
+        $i2 = staticinvoke <java.lang.Character: int charCount(int)>(i1);
+
+        i8 = i8 + $i2;
+
+        if i1 != 13 goto label08;
+
+        $r9 = <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] XD>;
+
+        $r10 = virtualinvoke $r9.<java.lang.Object: java.lang.Object clone()>();
+
+        $r11 = (byte[]) $r10;
+
+        virtualinvoke r0.<java.io.OutputStream: void write(byte[])>($r11);
+
+        goto label09;
+
+     label08:
+        staticinvoke <org.apache.xml.security.c14n.implementations.UtfHelpper: void writeCodePointToUtf8(int,java.io.OutputStream)>(i1, r0);
+
+     label09:
+        goto label07;
+
+     label10:
+        $r6 = <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] END_PI>;
+
+        $r7 = virtualinvoke $r6.<java.lang.Object: java.lang.Object clone()>();
+
+        $r8 = (byte[]) $r7;
+
+        virtualinvoke r0.<java.io.OutputStream: void write(byte[])>($r8);
+
+        if i0 != -1 goto label11;
+
+        varReplacer2435 = 10;
+
+        virtualinvoke r0.<java.io.OutputStream: void write(int)>(varReplacer2435);
+
+     label11:
+        return;
+    }
+
+    protected void outputCommentToWriter(org.w3c.dom.Comment, java.io.OutputStream, int) throws java.io.IOException
+    {
+        int i0, i1, i2, $i3, i4, varReplacer2438, varReplacer2439;
+        java.io.OutputStream r0;
+        byte[] $r1, $r3, $r6, $r8, $r9, $r11;
+        java.lang.Object $r2, $r7, $r10;
+        org.w3c.dom.Comment r4;
+        java.lang.String r5;
+        org.apache.xml.security.c14n.implementations.CanonicalizerBase r12;
+
+        nop;
+
+        r12 := @this: org.apache.xml.security.c14n.implementations.CanonicalizerBase;
+
+        r4 := @parameter0: org.w3c.dom.Comment;
+
+        r0 := @parameter1: java.io.OutputStream;
+
+        i0 := @parameter2: int;
+
+        if i0 != 1 goto label1;
+
+        varReplacer2438 = 10;
+
+        virtualinvoke r0.<java.io.OutputStream: void write(int)>(varReplacer2438);
+
+     label1:
+        $r1 = <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] BEGIN_COMM>;
+
+        $r2 = virtualinvoke $r1.<java.lang.Object: java.lang.Object clone()>();
+
+        $r3 = (byte[]) $r2;
+
+        virtualinvoke r0.<java.io.OutputStream: void write(byte[])>($r3);
+
+        r5 = interfaceinvoke r4.<org.w3c.dom.Comment: java.lang.String getData()>();
+
+        i1 = virtualinvoke r5.<java.lang.String: int length()>();
+
+        i4 = 0;
+
+     label2:
+        if i4 >= i1 goto label6;
+
+        i2 = virtualinvoke r5.<java.lang.String: int codePointAt(int)>(i4);
+
+        $i3 = staticinvoke <java.lang.Character: int charCount(int)>(i2);
+
+        i4 = i4 + $i3;
+
+        if i2 != 13 goto label3;
+
+        $r9 = <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] XD>;
+
+        $r10 = virtualinvoke $r9.<java.lang.Object: java.lang.Object clone()>();
+
+        $r11 = (byte[]) $r10;
+
+        virtualinvoke r0.<java.io.OutputStream: void write(byte[])>($r11);
+
+        goto label5;
+
+     label3:
+        if i2 >= 128 goto label4;
+
+        virtualinvoke r0.<java.io.OutputStream: void write(int)>(i2);
+
+        goto label5;
+
+     label4:
+        staticinvoke <org.apache.xml.security.c14n.implementations.UtfHelpper: void writeCodePointToUtf8(int,java.io.OutputStream)>(i2, r0);
+
+     label5:
+        goto label2;
+
+     label6:
+        $r6 = <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] END_COMM>;
+
+        $r7 = virtualinvoke $r6.<java.lang.Object: java.lang.Object clone()>();
+
+        $r8 = (byte[]) $r7;
+
+        virtualinvoke r0.<java.io.OutputStream: void write(byte[])>($r8);
+
+        if i0 != -1 goto label7;
+
+        varReplacer2439 = 10;
+
+        virtualinvoke r0.<java.io.OutputStream: void write(int)>(varReplacer2439);
+
+     label7:
+        return;
+    }
+
+    protected static final void outputTextToWriter(java.lang.String, java.io.OutputStream) throws java.io.IOException
+    {
+        java.lang.String r0;
+        int i0, i1, $i2, i3;
+        byte[] $r1, $r4, $r6, $r8, r10;
+        java.lang.Object $r2, $r5, $r7, $r9;
+        java.io.OutputStream r3;
+
+        nop;
+
+        r0 := @parameter0: java.lang.String;
+
+        r3 := @parameter1: java.io.OutputStream;
+
+        i0 = virtualinvoke r0.<java.lang.String: int length()>();
+
+        i3 = 0;
+
+     label1:
+        if i3 >= i0 goto label9;
+
+        i1 = virtualinvoke r0.<java.lang.String: int codePointAt(int)>(i3);
+
+        $i2 = staticinvoke <java.lang.Character: int charCount(int)>(i1);
+
+        i3 = i3 + $i2;
+
+        lookupswitch(i1)
+        {
+            case 13: goto label5;
+            case 38: goto label2;
+            case 60: goto label3;
+            case 62: goto label4;
+            default: goto label6;
+        };
+
+     label2:
+        $r6 = <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] AMP>;
+
+        $r7 = virtualinvoke $r6.<java.lang.Object: java.lang.Object clone()>();
+
+        r10 = (byte[]) $r7;
+
+        goto label8;
+
+     label3:
+        $r4 = <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] LT>;
+
+        $r5 = virtualinvoke $r4.<java.lang.Object: java.lang.Object clone()>();
+
+        r10 = (byte[]) $r5;
+
+        goto label8;
+
+     label4:
+        $r1 = <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] GT>;
+
+        $r2 = virtualinvoke $r1.<java.lang.Object: java.lang.Object clone()>();
+
+        r10 = (byte[]) $r2;
+
+        goto label8;
+
+     label5:
+        $r8 = <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] XD>;
+
+        $r9 = virtualinvoke $r8.<java.lang.Object: java.lang.Object clone()>();
+
+        r10 = (byte[]) $r9;
+
+        goto label8;
+
+     label6:
+        if i1 >= 128 goto label7;
+
+        virtualinvoke r3.<java.io.OutputStream: void write(int)>(i1);
+
+        goto label1;
+
+     label7:
+        staticinvoke <org.apache.xml.security.c14n.implementations.UtfHelpper: void writeCodePointToUtf8(int,java.io.OutputStream)>(i1, r3);
+
+        goto label1;
+
+     label8:
+        virtualinvoke r3.<java.io.OutputStream: void write(byte[])>(r10);
+
+        goto label1;
+
+     label9:
+        return;
+    }
+
+    protected org.w3c.dom.Attr getNullNode(org.w3c.dom.Document)
+    {
+        org.apache.xml.security.c14n.implementations.CanonicalizerBase r0;
+        org.w3c.dom.Attr $r1, $r2, $r4, $r5;
+        org.w3c.dom.Document r3;
+        java.lang.Exception $r6, r7;
+        java.lang.RuntimeException $r8;
+        java.lang.StringBuilder $r9, $r10, $r11;
+        java.lang.String $r12, varReplacer2440, varReplacer2441, varReplacer2442, varReplacer2443;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.c14n.implementations.CanonicalizerBase;
+
+        r3 := @parameter0: org.w3c.dom.Document;
+
+        $r1 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: org.w3c.dom.Attr nullNode>;
+
+        if $r1 != null goto label4;
+
+     label1:
+        varReplacer2441 = "http://www.w3.org/2000/xmlns/";
+
+        varReplacer2442 = "xmlns";
+
+        $r4 = interfaceinvoke r3.<org.w3c.dom.Document: org.w3c.dom.Attr createAttributeNS(java.lang.String,java.lang.String)>(varReplacer2441, varReplacer2442);
+
+        r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: org.w3c.dom.Attr nullNode> = $r4;
+
+        $r5 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: org.w3c.dom.Attr nullNode>;
+
+        varReplacer2443 = "";
+
+        interfaceinvoke $r5.<org.w3c.dom.Attr: void setValue(java.lang.String)>(varReplacer2443);
+
+     label2:
+        goto label4;
+
+     label3:
+        $r6 := @caughtexception;
+
+        r7 = $r6;
+
+        $r8 = new java.lang.RuntimeException;
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer2440 = "Unable to create nullNode: ";
+
+        $r10 = virtualinvoke $r9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2440);
+
+        $r11 = virtualinvoke $r10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.Object)>(r7);
+
+        $r12 = virtualinvoke $r11.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        specialinvoke $r8.<java.lang.RuntimeException: void <init>(java.lang.String)>($r12);
+
+        throw $r8;
+
+     label4:
+        $r2 = r0.<org.apache.xml.security.c14n.implementations.CanonicalizerBase: org.w3c.dom.Attr nullNode>;
+
+        return $r2;
+
+        catch java.lang.Exception from label1 to label2 with label3;
+    }
+
+    static void <clinit>()
+    {
+        org.apache.xml.security.c14n.helper.AttrCompare $r0;
+        byte[] $r1, $r2, $r3, $r4, $r5, $r6, $r7, $r8, $r9, $r10, $r11, $r12, $r13;
+
+        nop;
+
+        $r0 = new org.apache.xml.security.c14n.helper.AttrCompare;
+
+        specialinvoke $r0.<org.apache.xml.security.c14n.helper.AttrCompare: void <init>()>();
+
+        <org.apache.xml.security.c14n.implementations.CanonicalizerBase: org.apache.xml.security.c14n.helper.AttrCompare COMPARE> = $r0;
+
+        $r1 = newarray (byte)[2];
+
+        $r1[0] = 63;
+
+        $r1[1] = 62;
+
+        <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] END_PI> = $r1;
+
+        $r2 = newarray (byte)[2];
+
+        $r2[0] = 60;
+
+        $r2[1] = 63;
+
+        <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] BEGIN_PI> = $r2;
+
+        $r3 = newarray (byte)[3];
+
+        $r3[0] = 45;
+
+        $r3[1] = 45;
+
+        $r3[2] = 62;
+
+        <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] END_COMM> = $r3;
+
+        $r4 = newarray (byte)[4];
+
+        $r4[0] = 60;
+
+        $r4[1] = 33;
+
+        $r4[2] = 45;
+
+        $r4[3] = 45;
+
+        <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] BEGIN_COMM> = $r4;
+
+        $r5 = newarray (byte)[5];
+
+        $r5[0] = 38;
+
+        $r5[1] = 35;
+
+        $r5[2] = 120;
+
+        $r5[3] = 65;
+
+        $r5[4] = 59;
+
+        <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] XA> = $r5;
+
+        $r6 = newarray (byte)[5];
+
+        $r6[0] = 38;
+
+        $r6[1] = 35;
+
+        $r6[2] = 120;
+
+        $r6[3] = 57;
+
+        $r6[4] = 59;
+
+        <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] X9> = $r6;
+
+        $r7 = newarray (byte)[6];
+
+        $r7[0] = 38;
+
+        $r7[1] = 113;
+
+        $r7[2] = 117;
+
+        $r7[3] = 111;
+
+        $r7[4] = 116;
+
+        $r7[5] = 59;
+
+        <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] QUOT> = $r7;
+
+        $r8 = newarray (byte)[5];
+
+        $r8[0] = 38;
+
+        $r8[1] = 35;
+
+        $r8[2] = 120;
+
+        $r8[3] = 68;
+
+        $r8[4] = 59;
+
+        <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] XD> = $r8;
+
+        $r9 = newarray (byte)[4];
+
+        $r9[0] = 38;
+
+        $r9[1] = 103;
+
+        $r9[2] = 116;
+
+        $r9[3] = 59;
+
+        <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] GT> = $r9;
+
+        $r10 = newarray (byte)[4];
+
+        $r10[0] = 38;
+
+        $r10[1] = 108;
+
+        $r10[2] = 116;
+
+        $r10[3] = 59;
+
+        <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] LT> = $r10;
+
+        $r11 = newarray (byte)[2];
+
+        $r11[0] = 60;
+
+        $r11[1] = 47;
+
+        <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] END_TAG> = $r11;
+
+        $r12 = newarray (byte)[5];
+
+        $r12[0] = 38;
+
+        $r12[1] = 97;
+
+        $r12[2] = 109;
+
+        $r12[3] = 112;
+
+        $r12[4] = 59;
+
+        <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] AMP> = $r12;
+
+        $r13 = newarray (byte)[2];
+
+        $r13[0] = 61;
+
+        $r13[1] = 34;
+
+        <org.apache.xml.security.c14n.implementations.CanonicalizerBase: byte[] EQUALS_STR> = $r13;
+
+        return;
+    }
+}

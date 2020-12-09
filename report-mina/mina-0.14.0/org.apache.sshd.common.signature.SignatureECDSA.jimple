@@ -1,0 +1,392 @@
+public class org.apache.sshd.common.signature.SignatureECDSA extends org.apache.sshd.common.signature.AbstractSignature
+{
+    private static final java.lang.String SIGNATURE_ALGORITHM_512;
+    private static final java.lang.String SIGNATURE_ALGORITHM_384;
+    private static final java.lang.String SIGNATURE_ALGORITHM_256;
+
+    protected void <init>(java.lang.String)
+    {
+        org.apache.sshd.common.signature.SignatureECDSA r0;
+        java.lang.String r1;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.signature.SignatureECDSA;
+
+        r1 := @parameter0: java.lang.String;
+
+        specialinvoke r0.<org.apache.sshd.common.signature.AbstractSignature: void <init>(java.lang.String)>(r1);
+
+        return;
+    }
+
+    public static org.apache.sshd.common.Signature getByCurveSize(java.security.spec.ECParameterSpec)
+    {
+        java.security.spec.ECParameterSpec r0;
+        int i0;
+        org.apache.sshd.common.signature.SignatureECDSA $r1, $r2, $r3;
+        java.lang.String varReplacer734, varReplacer735, varReplacer736;
+
+        nop;
+
+        r0 := @parameter0: java.security.spec.ECParameterSpec;
+
+        i0 = staticinvoke <org.apache.sshd.common.cipher.ECCurves: int getCurveSize(java.security.spec.ECParameterSpec)>(r0);
+
+        if i0 > 256 goto label1;
+
+        $r3 = new org.apache.sshd.common.signature.SignatureECDSA;
+
+        varReplacer736 = "SHA256withECDSA";
+
+        specialinvoke $r3.<org.apache.sshd.common.signature.SignatureECDSA: void <init>(java.lang.String)>(varReplacer736);
+
+        return $r3;
+
+     label1:
+        if i0 > 384 goto label2;
+
+        $r2 = new org.apache.sshd.common.signature.SignatureECDSA;
+
+        varReplacer734 = "SHA384withECDSA";
+
+        specialinvoke $r2.<org.apache.sshd.common.signature.SignatureECDSA: void <init>(java.lang.String)>(varReplacer734);
+
+        return $r2;
+
+     label2:
+        $r1 = new org.apache.sshd.common.signature.SignatureECDSA;
+
+        varReplacer735 = "SHA512withECDSA";
+
+        specialinvoke $r1.<org.apache.sshd.common.signature.SignatureECDSA: void <init>(java.lang.String)>(varReplacer735);
+
+        return $r1;
+    }
+
+    public byte[] sign() throws java.lang.Exception
+    {
+        org.apache.sshd.common.signature.SignatureECDSA r0;
+        java.security.Signature $r1;
+        byte[] r2, r4, r5, $r12;
+        byte $b0, $b3, $b4, b5, $b9, b11;
+        int $i1, $i2, $i6, $i7, $i8, $i10, $i12, $i13, $i14, $i15, varReplacer739, varReplacer740, varReplacer741;
+        java.io.IOException $r3, $r13, $r14;
+        java.math.BigInteger $r6, r7, $r8, r9;
+        org.apache.sshd.common.util.Buffer $r10, r11;
+        java.lang.String varReplacer737, varReplacer738, varReplacer742;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.signature.SignatureECDSA;
+
+        $r1 = r0.<org.apache.sshd.common.signature.SignatureECDSA: java.security.Signature signature>;
+
+        r2 = virtualinvoke $r1.<java.security.Signature: byte[] sign()>();
+
+        $b0 = r2[0];
+
+        if $b0 != 48 goto label1;
+
+        $b3 = r2[1];
+
+        $i1 = lengthof r2;
+
+        $i2 = $i1 - 2;
+
+        if $b3 != $i2 goto label1;
+
+        $b4 = r2[2];
+
+        if $b4 == 2 goto label2;
+
+     label1:
+        $r14 = new java.io.IOException;
+
+        varReplacer737 = "Invalid signature format";
+
+        specialinvoke $r14.<java.io.IOException: void <init>(java.lang.String)>(varReplacer737);
+
+        throw $r14;
+
+     label2:
+        b5 = r2[3];
+
+        $i7 = b5 + 6;
+
+        $i6 = lengthof r2;
+
+        if $i7 > $i6 goto label3;
+
+        $i8 = 4 + b5;
+
+        $b9 = r2[$i8];
+
+        if $b9 == 2 goto label4;
+
+     label3:
+        $r3 = new java.io.IOException;
+
+        varReplacer742 = "Invalid signature format";
+
+        specialinvoke $r3.<java.io.IOException: void <init>(java.lang.String)>(varReplacer742);
+
+        throw $r3;
+
+     label4:
+        $i10 = 5 + b5;
+
+        b11 = r2[$i10];
+
+        $i12 = 6 + b5;
+
+        $i14 = $i12 + b11;
+
+        $i13 = lengthof r2;
+
+        if $i14 <= $i13 goto label5;
+
+        $r13 = new java.io.IOException;
+
+        varReplacer738 = "Invalid signature format";
+
+        specialinvoke $r13.<java.io.IOException: void <init>(java.lang.String)>(varReplacer738);
+
+        throw $r13;
+
+     label5:
+        r4 = newarray (byte)[b5];
+
+        r5 = newarray (byte)[b11];
+
+        varReplacer740 = 4;
+
+        varReplacer741 = 0;
+
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>(r2, varReplacer740, r4, varReplacer741, b5);
+
+        $i15 = 6 + b5;
+
+        varReplacer739 = 0;
+
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>(r2, $i15, r5, varReplacer739, b11);
+
+        $r6 = new java.math.BigInteger;
+
+        specialinvoke $r6.<java.math.BigInteger: void <init>(byte[])>(r4);
+
+        r7 = $r6;
+
+        $r8 = new java.math.BigInteger;
+
+        specialinvoke $r8.<java.math.BigInteger: void <init>(byte[])>(r5);
+
+        r9 = $r8;
+
+        $r10 = new org.apache.sshd.common.util.Buffer;
+
+        specialinvoke $r10.<org.apache.sshd.common.util.Buffer: void <init>()>();
+
+        r11 = $r10;
+
+        virtualinvoke r11.<org.apache.sshd.common.util.Buffer: void putMPInt(java.math.BigInteger)>(r7);
+
+        virtualinvoke r11.<org.apache.sshd.common.util.Buffer: void putMPInt(java.math.BigInteger)>(r9);
+
+        $r12 = virtualinvoke r11.<org.apache.sshd.common.util.Buffer: byte[] getCompactData()>();
+
+        return $r12;
+    }
+
+    public boolean verify(byte[]) throws java.lang.Exception
+    {
+        org.apache.sshd.common.signature.SignatureECDSA r0;
+        org.apache.sshd.common.util.Buffer $r1, r2;
+        byte[] r3, r4, r5, r12, r13, r14;
+        int $i0, $i2, $i5, $i7, $i8, $i9, $i10, $i11, i12, $i13, $i14, $i15, $i16, $i19, $i22, $i24, $i27, $i29, $i30, $i32, $i34, $i36, $i38, $i40, $i43, $i44, $i45, varReplacer743, varReplacer745;
+        byte $b1, b3, $b4, b6, $b17, $b18, $b20, $b21, $b23, $b25, $b26, $b28, $b31, $b33, $b35, $b37, $b39, $b41, $b42, $b49, $b50;
+        java.security.Signature $r6;
+        boolean $z0;
+        java.io.IOException $r11;
+        java.lang.String varReplacer744;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.signature.SignatureECDSA;
+
+        r12 := @parameter0: byte[];
+
+        r13 = virtualinvoke r0.<org.apache.sshd.common.signature.SignatureECDSA: byte[] extractSig(byte[])>(r12);
+
+        $r1 = new org.apache.sshd.common.util.Buffer;
+
+        specialinvoke $r1.<org.apache.sshd.common.util.Buffer: void <init>(byte[])>(r13);
+
+        r2 = $r1;
+
+        r3 = virtualinvoke r2.<org.apache.sshd.common.util.Buffer: byte[] getMPIntAsBytes()>();
+
+        r4 = virtualinvoke r2.<org.apache.sshd.common.util.Buffer: byte[] getMPIntAsBytes()>();
+
+        $i0 = virtualinvoke r2.<org.apache.sshd.common.util.Buffer: int available()>();
+
+        if $i0 == 0 goto label1;
+
+        $r11 = new java.io.IOException;
+
+        varReplacer744 = "Signature had padding";
+
+        specialinvoke $r11.<java.io.IOException: void <init>(java.lang.String)>(varReplacer744);
+
+        throw $r11;
+
+     label1:
+        $b1 = r3[0];
+
+        $i2 = $b1 & 128;
+
+        if $i2 == 0 goto label2;
+
+        $b49 = 1;
+
+        goto label3;
+
+     label2:
+        $b49 = 0;
+
+     label3:
+        b3 = $b49;
+
+        $b4 = r4[0];
+
+        $i5 = $b4 & 128;
+
+        if $i5 == 0 goto label4;
+
+        $b50 = 1;
+
+        goto label5;
+
+     label4:
+        $b50 = 0;
+
+     label5:
+        b6 = $b50;
+
+        $i8 = lengthof r3;
+
+        $i7 = lengthof r4;
+
+        $i9 = $i8 + $i7;
+
+        $i10 = $i9 + 6;
+
+        $i11 = $i10 + b3;
+
+        i12 = $i11 + b6;
+
+        r5 = newarray (byte)[i12];
+
+        r5[0] = 48;
+
+        $i14 = lengthof r3;
+
+        $i13 = lengthof r4;
+
+        $i15 = $i14 + $i13;
+
+        $i16 = $i15 + 4;
+
+        $b17 = (byte) $i16;
+
+        r5[1] = $b17;
+
+        $b18 = r5[1];
+
+        $i19 = $b18 + b3;
+
+        $b20 = (byte) $i19;
+
+        r5[1] = $b20;
+
+        $b21 = r5[1];
+
+        $i22 = $b21 + b6;
+
+        $b23 = (byte) $i22;
+
+        r5[1] = $b23;
+
+        r5[2] = 2;
+
+        $i24 = lengthof r3;
+
+        $b25 = (byte) $i24;
+
+        r5[3] = $b25;
+
+        $b26 = r5[3];
+
+        $i27 = $b26 + b3;
+
+        $b28 = (byte) $i27;
+
+        r5[3] = $b28;
+
+        $i30 = 4 + b3;
+
+        $i29 = lengthof r3;
+
+        varReplacer743 = 0;
+
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>(r3, varReplacer743, r5, $i30, $i29);
+
+        $b31 = r5[3];
+
+        $i32 = 4 + $b31;
+
+        r5[$i32] = 2;
+
+        $b33 = r5[3];
+
+        $i36 = 5 + $b33;
+
+        $i34 = lengthof r4;
+
+        $b35 = (byte) $i34;
+
+        r5[$i36] = $b35;
+
+        $b37 = r5[3];
+
+        $i38 = 5 + $b37;
+
+        $b39 = r5[$i38];
+
+        $i40 = $b39 + b6;
+
+        $b41 = (byte) $i40;
+
+        r5[$i38] = $b41;
+
+        $b42 = r5[3];
+
+        $i43 = 6 + $b42;
+
+        $i45 = $i43 + b6;
+
+        $i44 = lengthof r4;
+
+        varReplacer745 = 0;
+
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>(r4, varReplacer745, r5, $i45, $i44);
+
+        r14 = r5;
+
+        $r6 = r0.<org.apache.sshd.common.signature.SignatureECDSA: java.security.Signature signature>;
+
+        $z0 = virtualinvoke $r6.<java.security.Signature: boolean verify(byte[])>(r14);
+
+        return $z0;
+    }
+}

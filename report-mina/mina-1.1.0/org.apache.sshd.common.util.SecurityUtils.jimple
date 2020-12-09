@@ -1,0 +1,959 @@
+public final class org.apache.sshd.common.util.SecurityUtils extends java.lang.Object
+{
+    public static final java.lang.String BOUNCY_CASTLE;
+    public static final java.lang.String MAX_DHGEX_KEY_SIZE_PROP;
+    public static final int MIN_DHGEX_KEY_SIZE;
+    public static final int DEFAULT_DHGEX_KEY_SIZE;
+    public static final int PREFERRED_DHGEX_KEY_SIZE;
+    public static final int MAX_DHGEX_KEY_SIZE;
+    public static final java.lang.String REGISTER_BOUNCY_CASTLE_PROP;
+    public static final java.lang.String ECC_SUPPORTED_PROP;
+    private static final java.util.concurrent.atomic.AtomicInteger MAX_DHG_KEY_SIZE_HOLDER;
+    private static java.lang.String securityProvider;
+    private static java.lang.Boolean registerBouncyCastle;
+    private static boolean registrationDone;
+    private static java.lang.Boolean hasEcc;
+
+    private void <init>()
+    {
+        org.apache.sshd.common.util.SecurityUtils r0;
+        java.lang.UnsupportedOperationException $r1;
+        java.lang.String varReplacer3163;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.util.SecurityUtils;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        $r1 = new java.lang.UnsupportedOperationException;
+
+        varReplacer3163 = "No instance";
+
+        specialinvoke $r1.<java.lang.UnsupportedOperationException: void <init>(java.lang.String)>(varReplacer3163);
+
+        throw $r1;
+    }
+
+    public static boolean hasEcc()
+    {
+        java.lang.Boolean $r0, $r6, $r8, $r10, $r13;
+        java.lang.String r1, $r5, varReplacer3164, varReplacer3165, varReplacer3166;
+        boolean $z0, $z1;
+        java.lang.StringBuilder $r2, $r3, $r4;
+        java.lang.Throwable $r9, r11;
+        org.slf4j.Logger r12;
+
+        nop;
+
+        $r0 = <org.apache.sshd.common.util.SecurityUtils: java.lang.Boolean hasEcc>;
+
+        if $r0 != null goto label5;
+
+        varReplacer3165 = "org.apache.sshd.eccSupport";
+
+        r1 = staticinvoke <java.lang.System: java.lang.String getProperty(java.lang.String)>(varReplacer3165);
+
+        $z0 = staticinvoke <org.apache.sshd.common.util.GenericUtils: boolean isEmpty(java.lang.CharSequence)>(r1);
+
+        if $z0 == 0 goto label4;
+
+     label1:
+        varReplacer3166 = "EC";
+
+        staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.security.KeyPairGenerator getKeyPairGenerator(java.lang.String)>(varReplacer3166);
+
+        $r8 = <java.lang.Boolean: java.lang.Boolean TRUE>;
+
+        <org.apache.sshd.common.util.SecurityUtils: java.lang.Boolean hasEcc> = $r8;
+
+     label2:
+        goto label5;
+
+     label3:
+        $r9 := @caughtexception;
+
+        r11 = $r9;
+
+        $r10 = <java.lang.Boolean: java.lang.Boolean FALSE>;
+
+        <org.apache.sshd.common.util.SecurityUtils: java.lang.Boolean hasEcc> = $r10;
+
+        goto label5;
+
+     label4:
+        r12 = staticinvoke <org.slf4j.LoggerFactory: org.slf4j.Logger getLogger(java.lang.Class)>(class "Lorg/apache/sshd/common/util/SecurityUtils;");
+
+        $r2 = new java.lang.StringBuilder;
+
+        specialinvoke $r2.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer3164 = "Override ECC support value: ";
+
+        $r3 = virtualinvoke $r2.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer3164);
+
+        $r4 = virtualinvoke $r3.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r1);
+
+        $r5 = virtualinvoke $r4.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke r12.<org.slf4j.Logger: void info(java.lang.String)>($r5);
+
+        $r6 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(java.lang.String)>(r1);
+
+        <org.apache.sshd.common.util.SecurityUtils: java.lang.Boolean hasEcc> = $r6;
+
+     label5:
+        $r13 = <org.apache.sshd.common.util.SecurityUtils: java.lang.Boolean hasEcc>;
+
+        $z1 = virtualinvoke $r13.<java.lang.Boolean: boolean booleanValue()>();
+
+        return $z1;
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+    }
+
+    public static boolean isDHGroupExchangeSupported()
+    {
+        int $i0;
+        boolean $z0;
+
+        nop;
+
+        $i0 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: int getMaxDHGroupExchangeKeySize()>();
+
+        if $i0 <= 0 goto label1;
+
+        $z0 = 1;
+
+        goto label2;
+
+     label1:
+        $z0 = 0;
+
+     label2:
+        return $z0;
+    }
+
+    public static boolean isDHOakelyGroupSupported(int)
+    {
+        int $i0, i1;
+        boolean $z0;
+
+        nop;
+
+        i1 := @parameter0: int;
+
+        $i0 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: int getMaxDHGroupExchangeKeySize()>();
+
+        if $i0 < i1 goto label1;
+
+        $z0 = 1;
+
+        goto label2;
+
+     label1:
+        $z0 = 0;
+
+     label2:
+        return $z0;
+    }
+
+    public static int getMaxDHGroupExchangeKeySize()
+    {
+        java.util.concurrent.atomic.AtomicInteger $r0, r1, $r2, $r11;
+        java.lang.String r3, $r7, varReplacer3167, varReplacer3168, varReplacer3169;
+        boolean $z0, $z1, $z2;
+        java.lang.StringBuilder $r4, $r5, $r6;
+        long $l0;
+        java.lang.Throwable $r8, r9;
+        int i1, i2, i3;
+        org.slf4j.Logger r10;
+
+        nop;
+
+        $r0 = <org.apache.sshd.common.util.SecurityUtils: java.util.concurrent.atomic.AtomicInteger MAX_DHG_KEY_SIZE_HOLDER>;
+
+        r1 = $r0;
+
+        entermonitor $r0;
+
+     label01:
+        $r2 = <org.apache.sshd.common.util.SecurityUtils: java.util.concurrent.atomic.AtomicInteger MAX_DHG_KEY_SIZE_HOLDER>;
+
+        i1 = virtualinvoke $r2.<java.util.concurrent.atomic.AtomicInteger: int get()>();
+
+        if i1 == 0 goto label03;
+
+        exitmonitor r1;
+
+     label02:
+        return i1;
+
+     label03:
+        varReplacer3169 = "org.apache.sshd.maxDHGexKeySize";
+
+        r3 = staticinvoke <java.lang.System: java.lang.String getProperty(java.lang.String)>(varReplacer3169);
+
+        $z0 = staticinvoke <org.apache.sshd.common.util.GenericUtils: boolean isEmpty(java.lang.CharSequence)>(r3);
+
+        if $z0 == 0 goto label07;
+
+        i2 = -1;
+
+        i3 = 8192;
+
+     label04:
+        if i3 < 1024 goto label06;
+
+        $z1 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: boolean isDHGroupExchangeSupported(int)>(i3);
+
+        if $z1 == 0 goto label05;
+
+        i2 = i3;
+
+        goto label06;
+
+     label05:
+        i3 = i3 + -1024;
+
+        goto label04;
+
+     label06:
+        goto label10;
+
+     label07:
+        r10 = staticinvoke <org.slf4j.LoggerFactory: org.slf4j.Logger getLogger(java.lang.Class)>(class "Lorg/apache/sshd/common/util/SecurityUtils;");
+
+        $r4 = new java.lang.StringBuilder;
+
+        specialinvoke $r4.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer3168 = "Override max. DH group exchange key size: ";
+
+        $r5 = virtualinvoke $r4.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer3168);
+
+        $r6 = virtualinvoke $r5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r3);
+
+        $r7 = virtualinvoke $r6.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke r10.<org.slf4j.Logger: void info(java.lang.String)>($r7);
+
+        i2 = staticinvoke <java.lang.Integer: int parseInt(java.lang.String)>(r3);
+
+        if i2 == 0 goto label08;
+
+        $z2 = 1;
+
+        goto label09;
+
+     label08:
+        $z2 = 0;
+
+     label09:
+        $l0 = (long) i2;
+
+        varReplacer3167 = "Configured org.apache.sshd.maxDHGexKeySize value must be non-zero: %d";
+
+        staticinvoke <org.apache.sshd.common.util.ValidateUtils: void checkTrue(boolean,java.lang.String,long)>($z2, varReplacer3167, $l0);
+
+     label10:
+        $r11 = <org.apache.sshd.common.util.SecurityUtils: java.util.concurrent.atomic.AtomicInteger MAX_DHG_KEY_SIZE_HOLDER>;
+
+        virtualinvoke $r11.<java.util.concurrent.atomic.AtomicInteger: void set(int)>(i2);
+
+        exitmonitor r1;
+
+     label11:
+        goto label14;
+
+     label12:
+        $r8 := @caughtexception;
+
+        r9 = $r8;
+
+        exitmonitor r1;
+
+     label13:
+        throw r9;
+
+     label14:
+        return i2;
+
+        catch java.lang.Throwable from label01 to label02 with label12;
+        catch java.lang.Throwable from label03 to label11 with label12;
+        catch java.lang.Throwable from label12 to label13 with label12;
+    }
+
+    public static void setMaxDHGroupExchangeKeySize(int)
+    {
+        java.util.concurrent.atomic.AtomicInteger $r0, r1, $r2;
+        int i0;
+        java.lang.Throwable $r3, r4;
+
+        nop;
+
+        i0 := @parameter0: int;
+
+        $r0 = <org.apache.sshd.common.util.SecurityUtils: java.util.concurrent.atomic.AtomicInteger MAX_DHG_KEY_SIZE_HOLDER>;
+
+        r1 = $r0;
+
+        entermonitor $r0;
+
+     label1:
+        $r2 = <org.apache.sshd.common.util.SecurityUtils: java.util.concurrent.atomic.AtomicInteger MAX_DHG_KEY_SIZE_HOLDER>;
+
+        virtualinvoke $r2.<java.util.concurrent.atomic.AtomicInteger: void set(int)>(i0);
+
+        exitmonitor r1;
+
+     label2:
+        goto label5;
+
+     label3:
+        $r3 := @caughtexception;
+
+        r4 = $r3;
+
+        exitmonitor r1;
+
+     label4:
+        throw r4;
+
+     label5:
+        return;
+
+        catch java.lang.Throwable from label1 to label2 with label3;
+        catch java.lang.Throwable from label3 to label4 with label3;
+    }
+
+    public static boolean isDHGroupExchangeSupported(int)
+    {
+        int i0, $i2, varReplacer3173, varReplacer3174;
+        long $l1;
+        java.math.BigInteger $r0, r5;
+        javax.crypto.spec.DHParameterSpec $r1, r2;
+        java.security.KeyPairGenerator r3;
+        java.lang.Throwable $r4, r6;
+        boolean $z1;
+        java.lang.String varReplacer3170, varReplacer3171, varReplacer3172;
+
+        nop;
+
+        i0 := @parameter0: int;
+
+        if i0 <= 8 goto label1;
+
+        $z1 = 1;
+
+        goto label2;
+
+     label1:
+        $z1 = 0;
+
+     label2:
+        $l1 = (long) i0;
+
+        varReplacer3170 = "Invalid max. key size: %d";
+
+        staticinvoke <org.apache.sshd.common.util.ValidateUtils: void checkTrue(boolean,java.lang.String,long)>($z1, varReplacer3170, $l1);
+
+     label3:
+        $r0 = new java.math.BigInteger;
+
+        varReplacer3171 = "0";
+
+        specialinvoke $r0.<java.math.BigInteger: void <init>(java.lang.String)>(varReplacer3171);
+
+        $i2 = i0 - 1;
+
+        r5 = virtualinvoke $r0.<java.math.BigInteger: java.math.BigInteger setBit(int)>($i2);
+
+        $r1 = new javax.crypto.spec.DHParameterSpec;
+
+        specialinvoke $r1.<javax.crypto.spec.DHParameterSpec: void <init>(java.math.BigInteger,java.math.BigInteger)>(r5, r5);
+
+        r2 = $r1;
+
+        varReplacer3172 = "DH";
+
+        r3 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.security.KeyPairGenerator getKeyPairGenerator(java.lang.String)>(varReplacer3172);
+
+        virtualinvoke r3.<java.security.KeyPairGenerator: void initialize(java.security.spec.AlgorithmParameterSpec)>(r2);
+
+     label4:
+        varReplacer3174 = 1;
+
+        return varReplacer3174;
+
+     label5:
+        $r4 := @caughtexception;
+
+        r6 = $r4;
+
+        varReplacer3173 = 0;
+
+        return varReplacer3173;
+
+        catch java.security.GeneralSecurityException from label3 to label4 with label5;
+    }
+
+    public static synchronized void setSecurityProvider(java.lang.String)
+    {
+        java.lang.String r0;
+        int varReplacer3175;
+
+        nop;
+
+        r0 := @parameter0: java.lang.String;
+
+        <org.apache.sshd.common.util.SecurityUtils: java.lang.String securityProvider> = r0;
+
+        varReplacer3175 = 0;
+
+        <org.apache.sshd.common.util.SecurityUtils: boolean registrationDone> = varReplacer3175;
+
+        return;
+    }
+
+    public static synchronized void setRegisterBouncyCastle(boolean)
+    {
+        boolean z0;
+        java.lang.Boolean $r0;
+        int varReplacer3176;
+
+        nop;
+
+        z0 := @parameter0: boolean;
+
+        $r0 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(z0);
+
+        <org.apache.sshd.common.util.SecurityUtils: java.lang.Boolean registerBouncyCastle> = $r0;
+
+        varReplacer3176 = 0;
+
+        <org.apache.sshd.common.util.SecurityUtils: boolean registrationDone> = varReplacer3176;
+
+        return;
+    }
+
+    public static synchronized java.lang.String getSecurityProvider()
+    {
+        java.lang.String $r0;
+
+        nop;
+
+        staticinvoke <org.apache.sshd.common.util.SecurityUtils: void register()>();
+
+        $r0 = <org.apache.sshd.common.util.SecurityUtils: java.lang.String securityProvider>;
+
+        return $r0;
+    }
+
+    public static synchronized boolean isBouncyCastleRegistered()
+    {
+        java.lang.String $r0, $r1;
+        boolean $z0;
+
+        nop;
+
+        staticinvoke <org.apache.sshd.common.util.SecurityUtils: void register()>();
+
+        $r1 = "BC";
+
+        $r0 = <org.apache.sshd.common.util.SecurityUtils: java.lang.String securityProvider>;
+
+        $z0 = virtualinvoke $r1.<java.lang.String: boolean equals(java.lang.Object)>($r0);
+
+        return $z0;
+    }
+
+    private static void register()
+    {
+        boolean $z0, $z1, $z2;
+        java.lang.Boolean $r0, $r1, $r4, $r9, $r11;
+        org.apache.sshd.common.util.SecurityUtils$BouncyCastleRegistration $r2;
+        java.lang.StringBuilder $r5, $r6, $r7;
+        java.lang.String $r8, $r13, $r14, r16, $r18, varReplacer3177, varReplacer3180, varReplacer3181, varReplacer3182, varReplacer3183;
+        java.lang.Throwable $r10, r19;
+        java.lang.Class $r12;
+        java.lang.RuntimeException $r15;
+        org.slf4j.Logger r17, r20;
+        int varReplacer3178;
+        null_type varReplacer3179;
+
+        nop;
+
+        $z0 = <org.apache.sshd.common.util.SecurityUtils: boolean registrationDone>;
+
+        if $z0 != 0 goto label7;
+
+        $r0 = <org.apache.sshd.common.util.SecurityUtils: java.lang.Boolean registerBouncyCastle>;
+
+        if $r0 != null goto label1;
+
+        varReplacer3177 = "org.apache.sshd.registerBouncyCastle";
+
+        r16 = staticinvoke <java.lang.System: java.lang.String getProperty(java.lang.String)>(varReplacer3177);
+
+        $z2 = staticinvoke <org.apache.sshd.common.util.GenericUtils: boolean isEmpty(java.lang.CharSequence)>(r16);
+
+        if $z2 != 0 goto label1;
+
+        r17 = staticinvoke <org.slf4j.LoggerFactory: org.slf4j.Logger getLogger(java.lang.Class)>(class "Lorg/apache/sshd/common/util/SecurityUtils;");
+
+        $r5 = new java.lang.StringBuilder;
+
+        specialinvoke $r5.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer3182 = "Override BouncyCastle registration value: ";
+
+        $r6 = virtualinvoke $r5.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer3182);
+
+        $r7 = virtualinvoke $r6.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r16);
+
+        $r8 = virtualinvoke $r7.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke r17.<org.slf4j.Logger: void info(java.lang.String)>($r8);
+
+        $r9 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(java.lang.String)>(r16);
+
+        <org.apache.sshd.common.util.SecurityUtils: java.lang.Boolean registerBouncyCastle> = $r9;
+
+     label1:
+        $r18 = <org.apache.sshd.common.util.SecurityUtils: java.lang.String securityProvider>;
+
+        if $r18 != null goto label6;
+
+        $r1 = <org.apache.sshd.common.util.SecurityUtils: java.lang.Boolean registerBouncyCastle>;
+
+        if $r1 == null goto label2;
+
+        $r4 = <org.apache.sshd.common.util.SecurityUtils: java.lang.Boolean registerBouncyCastle>;
+
+        $z1 = virtualinvoke $r4.<java.lang.Boolean: boolean booleanValue()>();
+
+        if $z1 == 0 goto label6;
+
+     label2:
+        $r2 = new org.apache.sshd.common.util.SecurityUtils$BouncyCastleRegistration;
+
+        varReplacer3179 = null;
+
+        specialinvoke $r2.<org.apache.sshd.common.util.SecurityUtils$BouncyCastleRegistration: void <init>(org.apache.sshd.common.util.SecurityUtils$1)>(varReplacer3179);
+
+        virtualinvoke $r2.<org.apache.sshd.common.util.SecurityUtils$BouncyCastleRegistration: java.lang.Void call()>();
+
+     label3:
+        goto label6;
+
+     label4:
+        $r10 := @caughtexception;
+
+        r19 = $r10;
+
+        r20 = staticinvoke <org.slf4j.LoggerFactory: org.slf4j.Logger getLogger(java.lang.Class)>(class "Lorg/apache/sshd/common/util/SecurityUtils;");
+
+        $r11 = <org.apache.sshd.common.util.SecurityUtils: java.lang.Boolean registerBouncyCastle>;
+
+        if $r11 != null goto label5;
+
+        varReplacer3183 = "BouncyCastle not registered, using the default JCE provider";
+
+        interfaceinvoke r20.<org.slf4j.Logger: void info(java.lang.String)>(varReplacer3183);
+
+        goto label6;
+
+     label5:
+        $r12 = virtualinvoke r19.<java.lang.Object: java.lang.Class getClass()>();
+
+        $r13 = virtualinvoke $r12.<java.lang.Class: java.lang.String getSimpleName()>();
+
+        $r14 = virtualinvoke r19.<java.lang.Throwable: java.lang.String getMessage()>();
+
+        varReplacer3181 = "Failed {} to register BouncyCastle as the defaut JCE provider: {}";
+
+        interfaceinvoke r20.<org.slf4j.Logger: void error(java.lang.String,java.lang.Object,java.lang.Object)>(varReplacer3181, $r13, $r14);
+
+        $r15 = new java.lang.RuntimeException;
+
+        varReplacer3180 = "Failed to register BouncyCastle as the defaut JCE provider";
+
+        specialinvoke $r15.<java.lang.RuntimeException: void <init>(java.lang.String,java.lang.Throwable)>(varReplacer3180, r19);
+
+        throw $r15;
+
+     label6:
+        varReplacer3178 = 1;
+
+        <org.apache.sshd.common.util.SecurityUtils: boolean registrationDone> = varReplacer3178;
+
+     label7:
+        return;
+
+        catch java.lang.Throwable from label2 to label3 with label4;
+    }
+
+    public static java.security.KeyPair loadKeyPairIdentity(java.lang.String, java.io.InputStream, org.apache.sshd.common.config.keys.FilePasswordProvider) throws java.io.IOException, java.security.GeneralSecurityException
+    {
+        boolean $z0;
+        java.lang.String r0, varReplacer3184;
+        java.io.InputStream r1;
+        org.apache.sshd.common.config.keys.FilePasswordProvider r2;
+        java.security.KeyPair $r3;
+        java.security.NoSuchProviderException $r4;
+
+        nop;
+
+        r0 := @parameter0: java.lang.String;
+
+        r1 := @parameter1: java.io.InputStream;
+
+        r2 := @parameter2: org.apache.sshd.common.config.keys.FilePasswordProvider;
+
+        $z0 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: boolean isBouncyCastleRegistered()>();
+
+        if $z0 != 0 goto label1;
+
+        $r4 = new java.security.NoSuchProviderException;
+
+        varReplacer3184 = "BouncyCastle not registered";
+
+        specialinvoke $r4.<java.security.NoSuchProviderException: void <init>(java.lang.String)>(varReplacer3184);
+
+        throw $r4;
+
+     label1:
+        $r3 = staticinvoke <org.apache.sshd.common.util.SecurityUtils$BouncyCastleInputStreamLoader: java.security.KeyPair loadKeyPair(java.lang.String,java.io.InputStream,org.apache.sshd.common.config.keys.FilePasswordProvider)>(r0, r1, r2);
+
+        return $r3;
+    }
+
+    public static org.apache.sshd.common.keyprovider.AbstractFileKeyPairProvider createFileKeyPairProvider()
+    {
+        org.apache.sshd.common.util.SecurityUtils$BouncyCastleFileKeyPairProvider $r0;
+        null_type varReplacer3185;
+
+        nop;
+
+        $r0 = new org.apache.sshd.common.util.SecurityUtils$BouncyCastleFileKeyPairProvider;
+
+        varReplacer3185 = null;
+
+        specialinvoke $r0.<org.apache.sshd.common.util.SecurityUtils$BouncyCastleFileKeyPairProvider: void <init>(org.apache.sshd.common.util.SecurityUtils$1)>(varReplacer3185);
+
+        return $r0;
+    }
+
+    public static org.apache.sshd.common.keyprovider.AbstractClassLoadableResourceKeyPairProvider createClassLoadableResourceKeyPairProvider()
+    {
+        org.apache.sshd.common.util.SecurityUtils$BouncyCastleClassLoadableResourceKeyPairProvider $r0;
+        null_type varReplacer3186;
+
+        nop;
+
+        $r0 = new org.apache.sshd.common.util.SecurityUtils$BouncyCastleClassLoadableResourceKeyPairProvider;
+
+        varReplacer3186 = null;
+
+        specialinvoke $r0.<org.apache.sshd.common.util.SecurityUtils$BouncyCastleClassLoadableResourceKeyPairProvider: void <init>(org.apache.sshd.common.util.SecurityUtils$1)>(varReplacer3186);
+
+        return $r0;
+    }
+
+    public static org.apache.sshd.server.keyprovider.AbstractGeneratorHostKeyProvider createGeneratorHostKeyProvider(java.nio.file.Path)
+    {
+        org.apache.sshd.common.util.SecurityUtils$BouncyCastleGeneratorHostKeyProvider $r0;
+        java.nio.file.Path r1;
+        null_type varReplacer3187;
+
+        nop;
+
+        r1 := @parameter0: java.nio.file.Path;
+
+        $r0 = new org.apache.sshd.common.util.SecurityUtils$BouncyCastleGeneratorHostKeyProvider;
+
+        varReplacer3187 = null;
+
+        specialinvoke $r0.<org.apache.sshd.common.util.SecurityUtils$BouncyCastleGeneratorHostKeyProvider: void <init>(java.nio.file.Path,org.apache.sshd.common.util.SecurityUtils$1)>(r1, varReplacer3187);
+
+        return $r0;
+    }
+
+    public static org.apache.sshd.common.random.RandomFactory getRandomFactory()
+    {
+        boolean $z0;
+        org.apache.sshd.common.random.JceRandomFactory $r0;
+        org.apache.sshd.common.util.SecurityUtils$BouncyCastleRandomFactory $r1;
+
+        nop;
+
+        $z0 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: boolean isBouncyCastleRegistered()>();
+
+        if $z0 == 0 goto label1;
+
+        $r1 = staticinvoke <org.apache.sshd.common.util.SecurityUtils$BouncyCastleRandomFactory: org.apache.sshd.common.util.SecurityUtils$BouncyCastleRandomFactory access$500()>();
+
+        return $r1;
+
+     label1:
+        $r0 = <org.apache.sshd.common.random.JceRandomFactory: org.apache.sshd.common.random.JceRandomFactory INSTANCE>;
+
+        return $r0;
+    }
+
+    public static synchronized java.security.KeyFactory getKeyFactory(java.lang.String) throws java.security.GeneralSecurityException
+    {
+        java.lang.String r0, r1;
+        boolean $z0;
+        java.security.KeyFactory $r2, $r3;
+
+        nop;
+
+        r1 := @parameter0: java.lang.String;
+
+        staticinvoke <org.apache.sshd.common.util.SecurityUtils: void register()>();
+
+        r0 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.lang.String getSecurityProvider()>();
+
+        $z0 = staticinvoke <org.apache.sshd.common.util.GenericUtils: boolean isEmpty(java.lang.CharSequence)>(r0);
+
+        if $z0 == 0 goto label1;
+
+        $r3 = staticinvoke <java.security.KeyFactory: java.security.KeyFactory getInstance(java.lang.String)>(r1);
+
+        return $r3;
+
+     label1:
+        $r2 = staticinvoke <java.security.KeyFactory: java.security.KeyFactory getInstance(java.lang.String,java.lang.String)>(r1, r0);
+
+        return $r2;
+    }
+
+    public static synchronized javax.crypto.Cipher getCipher(java.lang.String) throws java.security.GeneralSecurityException
+    {
+        java.lang.String r0, r1;
+        boolean $z0;
+        javax.crypto.Cipher $r2, $r3;
+
+        nop;
+
+        r1 := @parameter0: java.lang.String;
+
+        staticinvoke <org.apache.sshd.common.util.SecurityUtils: void register()>();
+
+        r0 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.lang.String getSecurityProvider()>();
+
+        $z0 = staticinvoke <org.apache.sshd.common.util.GenericUtils: boolean isEmpty(java.lang.CharSequence)>(r0);
+
+        if $z0 == 0 goto label1;
+
+        $r3 = staticinvoke <javax.crypto.Cipher: javax.crypto.Cipher getInstance(java.lang.String)>(r1);
+
+        return $r3;
+
+     label1:
+        $r2 = staticinvoke <javax.crypto.Cipher: javax.crypto.Cipher getInstance(java.lang.String,java.lang.String)>(r1, r0);
+
+        return $r2;
+    }
+
+    public static synchronized java.security.MessageDigest getMessageDigest(java.lang.String) throws java.security.GeneralSecurityException
+    {
+        java.lang.String r0, r1;
+        boolean $z0;
+        java.security.MessageDigest $r2, $r3;
+
+        nop;
+
+        r1 := @parameter0: java.lang.String;
+
+        staticinvoke <org.apache.sshd.common.util.SecurityUtils: void register()>();
+
+        r0 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.lang.String getSecurityProvider()>();
+
+        $z0 = staticinvoke <org.apache.sshd.common.util.GenericUtils: boolean isEmpty(java.lang.CharSequence)>(r0);
+
+        if $z0 == 0 goto label1;
+
+        $r3 = staticinvoke <java.security.MessageDigest: java.security.MessageDigest getInstance(java.lang.String)>(r1);
+
+        return $r3;
+
+     label1:
+        $r2 = staticinvoke <java.security.MessageDigest: java.security.MessageDigest getInstance(java.lang.String,java.lang.String)>(r1, r0);
+
+        return $r2;
+    }
+
+    public static synchronized java.security.KeyPairGenerator getKeyPairGenerator(java.lang.String) throws java.security.GeneralSecurityException
+    {
+        java.lang.String r0, r1;
+        boolean $z0;
+        java.security.KeyPairGenerator $r2, $r3;
+
+        nop;
+
+        r1 := @parameter0: java.lang.String;
+
+        staticinvoke <org.apache.sshd.common.util.SecurityUtils: void register()>();
+
+        r0 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.lang.String getSecurityProvider()>();
+
+        $z0 = staticinvoke <org.apache.sshd.common.util.GenericUtils: boolean isEmpty(java.lang.CharSequence)>(r0);
+
+        if $z0 == 0 goto label1;
+
+        $r3 = staticinvoke <java.security.KeyPairGenerator: java.security.KeyPairGenerator getInstance(java.lang.String)>(r1);
+
+        return $r3;
+
+     label1:
+        $r2 = staticinvoke <java.security.KeyPairGenerator: java.security.KeyPairGenerator getInstance(java.lang.String,java.lang.String)>(r1, r0);
+
+        return $r2;
+    }
+
+    public static synchronized javax.crypto.KeyAgreement getKeyAgreement(java.lang.String) throws java.security.GeneralSecurityException
+    {
+        java.lang.String r0, r1;
+        boolean $z0;
+        javax.crypto.KeyAgreement $r2, $r3;
+
+        nop;
+
+        r1 := @parameter0: java.lang.String;
+
+        staticinvoke <org.apache.sshd.common.util.SecurityUtils: void register()>();
+
+        r0 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.lang.String getSecurityProvider()>();
+
+        $z0 = staticinvoke <org.apache.sshd.common.util.GenericUtils: boolean isEmpty(java.lang.CharSequence)>(r0);
+
+        if $z0 == 0 goto label1;
+
+        $r3 = staticinvoke <javax.crypto.KeyAgreement: javax.crypto.KeyAgreement getInstance(java.lang.String)>(r1);
+
+        return $r3;
+
+     label1:
+        $r2 = staticinvoke <javax.crypto.KeyAgreement: javax.crypto.KeyAgreement getInstance(java.lang.String,java.lang.String)>(r1, r0);
+
+        return $r2;
+    }
+
+    public static synchronized javax.crypto.Mac getMac(java.lang.String) throws java.security.GeneralSecurityException
+    {
+        java.lang.String r0, r1;
+        boolean $z0;
+        javax.crypto.Mac $r2, $r3;
+
+        nop;
+
+        r1 := @parameter0: java.lang.String;
+
+        staticinvoke <org.apache.sshd.common.util.SecurityUtils: void register()>();
+
+        r0 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.lang.String getSecurityProvider()>();
+
+        $z0 = staticinvoke <org.apache.sshd.common.util.GenericUtils: boolean isEmpty(java.lang.CharSequence)>(r0);
+
+        if $z0 == 0 goto label1;
+
+        $r3 = staticinvoke <javax.crypto.Mac: javax.crypto.Mac getInstance(java.lang.String)>(r1);
+
+        return $r3;
+
+     label1:
+        $r2 = staticinvoke <javax.crypto.Mac: javax.crypto.Mac getInstance(java.lang.String,java.lang.String)>(r1, r0);
+
+        return $r2;
+    }
+
+    public static synchronized java.security.Signature getSignature(java.lang.String) throws java.security.GeneralSecurityException
+    {
+        java.lang.String r0, r1;
+        boolean $z0;
+        java.security.Signature $r2, $r3;
+
+        nop;
+
+        r1 := @parameter0: java.lang.String;
+
+        staticinvoke <org.apache.sshd.common.util.SecurityUtils: void register()>();
+
+        r0 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.lang.String getSecurityProvider()>();
+
+        $z0 = staticinvoke <org.apache.sshd.common.util.GenericUtils: boolean isEmpty(java.lang.CharSequence)>(r0);
+
+        if $z0 == 0 goto label1;
+
+        $r3 = staticinvoke <java.security.Signature: java.security.Signature getInstance(java.lang.String)>(r1);
+
+        return $r3;
+
+     label1:
+        $r2 = staticinvoke <java.security.Signature: java.security.Signature getInstance(java.lang.String,java.lang.String)>(r1, r0);
+
+        return $r2;
+    }
+
+    public static synchronized java.security.cert.CertificateFactory getCertificateFactory(java.lang.String) throws java.security.GeneralSecurityException
+    {
+        java.lang.String r0, r1;
+        boolean $z0;
+        java.security.cert.CertificateFactory $r2, $r3;
+
+        nop;
+
+        r1 := @parameter0: java.lang.String;
+
+        staticinvoke <org.apache.sshd.common.util.SecurityUtils: void register()>();
+
+        r0 = staticinvoke <org.apache.sshd.common.util.SecurityUtils: java.lang.String getSecurityProvider()>();
+
+        $z0 = staticinvoke <org.apache.sshd.common.util.GenericUtils: boolean isEmpty(java.lang.CharSequence)>(r0);
+
+        if $z0 == 0 goto label1;
+
+        $r3 = staticinvoke <java.security.cert.CertificateFactory: java.security.cert.CertificateFactory getInstance(java.lang.String)>(r1);
+
+        return $r3;
+
+     label1:
+        $r2 = staticinvoke <java.security.cert.CertificateFactory: java.security.cert.CertificateFactory getInstance(java.lang.String,java.lang.String)>(r1, r0);
+
+        return $r2;
+    }
+
+    static java.lang.String access$102(java.lang.String)
+    {
+        java.lang.String r0;
+
+        nop;
+
+        r0 := @parameter0: java.lang.String;
+
+        <org.apache.sshd.common.util.SecurityUtils: java.lang.String securityProvider> = r0;
+
+        return r0;
+    }
+
+    static void <clinit>()
+    {
+        java.util.concurrent.atomic.AtomicInteger $r0;
+        int varReplacer3188;
+
+        nop;
+
+        $r0 = new java.util.concurrent.atomic.AtomicInteger;
+
+        varReplacer3188 = 0;
+
+        specialinvoke $r0.<java.util.concurrent.atomic.AtomicInteger: void <init>(int)>(varReplacer3188);
+
+        <org.apache.sshd.common.util.SecurityUtils: java.util.concurrent.atomic.AtomicInteger MAX_DHG_KEY_SIZE_HOLDER> = $r0;
+
+        return;
+    }
+}

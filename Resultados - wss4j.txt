@@ -1,0 +1,178 @@
+wss4j security common 2.3.0 - 10/06/2020
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 40
+
+	CogniCrypt found the following violations. For details see description above.
+	ConstraintError: 8
+	TypestateError: 1
+	NeverTypeOfError: 3
+	IncompleteOperationError: 13
+	RequiredPredicateError: 4
+	HardCodedError: 3
+=====================================================================
+[main] INFO crypto.analysis.CryptoScanner - Static Analysis took 3 seconds!
+[main] INFO crypto.HeadlessCryptoScanner - Analysis finished in 8.415 s
+
+
+wss4j security common 2.2.5 - 13/03/2020
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 40
+
+	CogniCrypt found the following violations. For details see description above.
+	ConstraintError: 8
+	TypestateError: 1
+	NeverTypeOfError: 3
+	IncompleteOperationError: 13
+	RequiredPredicateError: 4
+	HardCodedError: 3
+=====================================================================
+[main] INFO crypto.analysis.CryptoScanner - Static Analysis took 3 seconds!
+[main] INFO crypto.HeadlessCryptoScanner - Analysis finished in 8.415 s
+
+
+wss4j security common 2.2.4 - 20/07/2019
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 40
+
+	CogniCrypt found the following violations. For details see description above.
+	TypestateError: 1
+	ConstraintError: 8
+	RequiredPredicateError: 4
+	IncompleteOperationError: 13
+	HardCodedError: 3
+	NeverTypeOfError: 3
+=====================================================================
+[main] INFO crypto.analysis.CryptoScanner - Static Analysis took 3 seconds!
+[main] INFO crypto.HeadlessCryptoScanner - Analysis finished in 9.709 s
+
+
+wss4j security common 2.2.3 - 29/03/2019
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 40
+
+	CogniCrypt found the following violations. For details see description above.
+	NeverTypeOfError: 3
+	RequiredPredicateError: 4
+	IncompleteOperationError: 13
+	ConstraintError: 8
+	TypestateError: 1
+	HardCodedError: 3
+=====================================================================
+[main] INFO crypto.analysis.CryptoScanner - Static Analysis took 4 seconds!
+[main] INFO crypto.HeadlessCryptoScanner - Analysis finished in 9.162 s
+
+
+wss4j security common 2.2.2 - 12/06/2018
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 40
+
+	CogniCrypt found the following violations. For details see description above.
+	HardCodedError: 3
+	IncompleteOperationError: 13
+	RequiredPredicateError: 4
+	TypestateError: 1
+	ConstraintError: 8
+	NeverTypeOfError: 3
+=====================================================================
+[main] INFO crypto.analysis.CryptoScanner - Static Analysis took 4 seconds!
+[main] INFO crypto.HeadlessCryptoScanner - Analysis finished in 10.65 s
+
+
+wss4j security common 2.2.1 - 26/01/2018
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 40
+
+	CogniCrypt found the following violations. For details see description above.
+	TypestateError: 1
+	HardCodedError: 3
+	ConstraintError: 8
+	IncompleteOperationError: 13
+	RequiredPredicateError: 4
+	NeverTypeOfError: 3
+=====================================================================
+[main] INFO crypto.analysis.CryptoScanner - Static Analysis took 4 seconds!
+[main] INFO crypto.HeadlessCryptoScanner - Analysis finished in 10.16 s
+
+
+wss4j security common 2.2.0 - 29/08/2017
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 40
+
+	CogniCrypt found the following violations. For details see description above.
+	TypestateError: 1
+	HardCodedError: 3
+	ConstraintError: 8
+	IncompleteOperationError: 13
+	RequiredPredicateError: 4
+	NeverTypeOfError: 3
+=====================================================================
+[main] INFO crypto.analysis.CryptoScanner - Static Analysis took 3 seconds!
+[main] INFO crypto.HeadlessCryptoScanner - Analysis finished in 9.052 s
+
+
+wss4j security common 2.1.9 - 29/03/2017
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 42
+
+	CogniCrypt found the following violations. For details see description above.
+	NeverTypeOfError: 3
+	RequiredPredicateError: 4
+	ConstraintError: 8
+	TypestateError: 1
+	HardCodedError: 3
+	IncompleteOperationError: 13
+=====================================================================
+[main] INFO crypto.analysis.CryptoScanner - Static Analysis took 4 seconds!
+[main] INFO crypto.HeadlessCryptoScanner - Analysis finished in 10.12 s
+
+
+wss4j security common 2.0.10 - 05/12/2016
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 34
+
+	CogniCrypt found the following violations. For details see description above.
+	IncompleteOperationError: 8
+	ConstraintError: 5
+	RequiredPredicateError: 4
+	NeverTypeOfError: 3
+	HardCodedError: 3
+	TypestateError: 1
+=====================================================================
+[main] INFO crypto.analysis.CryptoScanner - Static Analysis took 4 seconds!
+[main] INFO crypto.HeadlessCryptoScanner - Analysis finished in 9.681 s
+
+
+wss4j security common 2.1.5 - 16/05/2016
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 42
+
+	CogniCrypt found the following violations. For details see description above.
+	TypestateError: 1
+	NeverTypeOfError: 3
+	RequiredPredicateError: 4
+	IncompleteOperationError: 13
+	ConstraintError: 8
+	HardCodedError: 3
+=====================================================================
+[main] INFO crypto.analysis.CryptoScanner - Static Analysis took 4 seconds!
+[main] INFO crypto.HeadlessCryptoScanner - Analysis finished in 9.722 s

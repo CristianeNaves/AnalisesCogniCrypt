@@ -1,0 +1,160 @@
+cayenne-crypto 4.2.M2 - 06/10/2020
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 9
+
+	CogniCrypt found the following violations. For details see description above.
+	TypestateError: 1
+	IncompleteOperationError: 6
+	RequiredPredicateError: 3
+=====================================================================
+[main] INFO crypto.analysis.CryptoScanner - Static Analysis took 3 seconds!
+[main] INFO crypto.HeadlessCryptoScanner - Analysis finished in 7.465 s
+
+
+cayenne-crypto 4.1 - 14/07/2020
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 9
+
+	CogniCrypt found the following violations. For details see description above.
+	IncompleteOperationError: 6
+	RequiredPredicateError: 3
+	TypestateError: 1
+=====================================================================
+[main] INFO crypto.analysis.CryptoScanner - Static Analysis took 2 seconds!
+[main] INFO crypto.HeadlessCryptoScanner - Analysis finished in 6.705 s
+
+
+cayenne-crypto 4.0.2 - 09/10/2019
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 9
+
+	CogniCrypt found the following violations. For details see description above.
+	RequiredPredicateError: 3
+	IncompleteOperationError: 6
+	TypestateError: 1
+=====================================================================
+[main] INFO crypto.analysis.CryptoScanner - Static Analysis took 3 seconds!
+[main] INFO crypto.HeadlessCryptoScanner - Analysis finished in 8.451 s
+
+
+cayenne-crypto 4.1.B1 - 07/05/2019
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 9
+
+	CogniCrypt found the following violations. For details see description above.
+	TypestateError: 1
+	RequiredPredicateError: 3
+	IncompleteOperationError: 3
+=====================================================================
+[main] INFO crypto.analysis.CryptoScanner - Static Analysis took 3 seconds!
+[main] INFO crypto.HeadlessCryptoScanner - Analysis finished in 7.152 s
+
+
+cayenne-crypto 4.0 - 06/08/2018
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 9
+
+	CogniCrypt found the following violations. For details see description above.
+	IncompleteOperationError: 3
+	RequiredPredicateError: 3
+	TypestateError: 1
+=====================================================================
+[main] INFO crypto.analysis.CryptoScanner - Static Analysis took 4 seconds!
+[main] INFO crypto.HeadlessCryptoScanner - Analysis finished in 10.06 s
+
+
+cayenne-crypto 4.0.RC1 - 18/04/2018
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 9
+
+	CogniCrypt found the following violations. For details see description above.
+	TypestateError: 1
+	RequiredPredicateError: 3
+	IncompleteOperationError: 3
+=====================================================================
+[main] INFO crypto.analysis.CryptoScanner - Static Analysis took 3 seconds!
+[main] INFO crypto.HeadlessCryptoScanner - Analysis finished in 6.860 s
+
+
+cayenne-crypto 4.0.B2 - 26/09/2017
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 9
+
+	CogniCrypt found the following violations. For details see description above.
+	TypestateError: 1
+	RequiredPredicateError: 3
+	IncompleteOperationError: 3
+=====================================================================
+[main] INFO crypto.analysis.CryptoScanner - Static Analysis took 3 seconds!
+[main] INFO crypto.HeadlessCryptoScanner - Analysis finished in 8.731 s
+
+
+cayenne-crypto 4.0.M5 - 24/02/2017
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 6
+
+	CogniCrypt found the following violations. For details see description above.
+	IncompleteOperationError: 2
+	RequiredPredicateError: 2
+=====================================================================
+[main] INFO crypto.analysis.CryptoScanner - Static Analysis took 1 seconds!
+[main] INFO crypto.HeadlessCryptoScanner - Analysis finished in 5.310 s
+
+
+cayenne-crypto 4.0.M4 - 06/10/2016
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 6
+
+	CogniCrypt found the following violations. For details see description above.
+	IncompleteOperationError: 2
+	RequiredPredicateError: 2
+=====================================================================
+[main] INFO crypto.analysis.CryptoScanner - Static Analysis took 1 seconds!
+[main] INFO crypto.HeadlessCryptoScanner - Analysis finished in 4.902 s
+
+
+cayenne-crypto 4.0.M3 - 08/02/2016
+
+======================= CogniCrypt Summary ==========================
+	Number of CrySL rules: 47
+	Number of Objects Analyzed: 6
+
+	CogniCrypt found the following violations. For details see description above.
+	IncompleteOperationError: 2
+	RequiredPredicateError: 2
+=====================================================================
+[main] INFO crypto.analysis.CryptoScanner - Static Analysis took 1 seconds!
+[main] INFO crypto.HeadlessCryptoScanner - Analysis finished in 5.381 s
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

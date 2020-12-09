@@ -1,0 +1,132 @@
+public abstract class org.apache.sshd.common.kex.AbstractDH extends java.lang.Object
+{
+    protected java.math.BigInteger K;
+    private byte[] K_array;
+
+    protected void <init>()
+    {
+        org.apache.sshd.common.kex.AbstractDH r0;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.kex.AbstractDH;
+
+        specialinvoke r0.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+    public static org.apache.sshd.common.kex.AbstractDH getInstance(java.lang.String) throws java.lang.Exception
+    {
+        java.lang.String r0, varReplacer714;
+        boolean $z0;
+        org.apache.sshd.common.kex.DH $r1;
+        org.apache.sshd.common.kex.ECDH $r2;
+
+        nop;
+
+        r0 := @parameter0: java.lang.String;
+
+        varReplacer714 = "ecdh-sha2-";
+
+        $z0 = virtualinvoke r0.<java.lang.String: boolean startsWith(java.lang.String)>(varReplacer714);
+
+        if $z0 == 0 goto label1;
+
+        $r2 = new org.apache.sshd.common.kex.ECDH;
+
+        specialinvoke $r2.<org.apache.sshd.common.kex.ECDH: void <init>()>();
+
+        return $r2;
+
+     label1:
+        $r1 = new org.apache.sshd.common.kex.DH;
+
+        specialinvoke $r1.<org.apache.sshd.common.kex.DH: void <init>()>();
+
+        return $r1;
+    }
+
+    public abstract void setF(byte[]);
+
+    public abstract byte[] getE() throws java.lang.Exception;
+
+    protected abstract byte[] calculateK() throws java.lang.Exception;
+
+    public byte[] getK() throws java.lang.Exception
+    {
+        org.apache.sshd.common.kex.AbstractDH r0;
+        java.math.BigInteger $r1, $r4;
+        byte[] $r2, $r3, $r5;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.kex.AbstractDH;
+
+        $r1 = r0.<org.apache.sshd.common.kex.AbstractDH: java.math.BigInteger K>;
+
+        if $r1 != null goto label1;
+
+        $r3 = virtualinvoke r0.<org.apache.sshd.common.kex.AbstractDH: byte[] calculateK()>();
+
+        r0.<org.apache.sshd.common.kex.AbstractDH: byte[] K_array> = $r3;
+
+        $r4 = new java.math.BigInteger;
+
+        $r5 = r0.<org.apache.sshd.common.kex.AbstractDH: byte[] K_array>;
+
+        specialinvoke $r4.<java.math.BigInteger: void <init>(byte[])>($r5);
+
+        r0.<org.apache.sshd.common.kex.AbstractDH: java.math.BigInteger K> = $r4;
+
+     label1:
+        $r2 = r0.<org.apache.sshd.common.kex.AbstractDH: byte[] K_array>;
+
+        return $r2;
+    }
+
+    public abstract org.apache.sshd.common.Digest getHash() throws java.lang.Exception;
+
+    protected static byte[] stripLeadingZeroes(byte[])
+    {
+        byte[] r0, r1;
+        int $i0, $i1, $i2, $i3, $i4, i6, varReplacer715;
+        byte $b5;
+
+        nop;
+
+        r0 := @parameter0: byte[];
+
+        i6 = 0;
+
+     label1:
+        $i0 = lengthof r0;
+
+        $i1 = $i0 - 1;
+
+        if i6 >= $i1 goto label2;
+
+        $b5 = r0[i6];
+
+        if $b5 != 0 goto label2;
+
+        i6 = i6 + 1;
+
+        goto label1;
+
+     label2:
+        $i2 = lengthof r0;
+
+        $i3 = $i2 - i6;
+
+        r1 = newarray (byte)[$i3];
+
+        $i4 = lengthof r1;
+
+        varReplacer715 = 0;
+
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>(r0, i6, r1, varReplacer715, $i4);
+
+        return r1;
+    }
+}

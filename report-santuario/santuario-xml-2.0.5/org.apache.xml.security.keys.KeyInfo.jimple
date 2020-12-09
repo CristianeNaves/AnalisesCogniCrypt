@@ -1,0 +1,2950 @@
+public class org.apache.xml.security.keys.KeyInfo extends org.apache.xml.security.utils.SignatureElementProxy
+{
+    private static org.slf4j.Logger log;
+    private java.util.List x509Datas;
+    private java.util.List encryptedKeys;
+    private static final java.util.List nullList;
+    private java.util.List storageResolvers;
+    private java.util.List internalKeyResolvers;
+    private boolean secureValidation;
+
+    public void <init>(org.w3c.dom.Document)
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.w3c.dom.Document r1;
+        java.util.List $r2;
+        java.util.ArrayList $r3;
+        java.lang.String $r4, r5, $r10, $r11, varReplacer2528, varReplacer2529;
+        int $i0;
+        org.w3c.dom.Element $r6;
+        java.lang.StringBuilder $r7, $r8, $r9;
+        null_type varReplacer2527, varReplacer2530;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r1 := @parameter0: org.w3c.dom.Document;
+
+        specialinvoke r0.<org.apache.xml.security.utils.SignatureElementProxy: void <init>(org.w3c.dom.Document)>(r1);
+
+        varReplacer2530 = null;
+
+        r0.<org.apache.xml.security.keys.KeyInfo: java.util.List x509Datas> = varReplacer2530;
+
+        varReplacer2527 = null;
+
+        r0.<org.apache.xml.security.keys.KeyInfo: java.util.List encryptedKeys> = varReplacer2527;
+
+        $r2 = <org.apache.xml.security.keys.KeyInfo: java.util.List nullList>;
+
+        r0.<org.apache.xml.security.keys.KeyInfo: java.util.List storageResolvers> = $r2;
+
+        $r3 = new java.util.ArrayList;
+
+        specialinvoke $r3.<java.util.ArrayList: void <init>()>();
+
+        r0.<org.apache.xml.security.keys.KeyInfo: java.util.List internalKeyResolvers> = $r3;
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void addReturnToSelf()>();
+
+        $r4 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: java.lang.String getBaseNamespace()>();
+
+        r5 = staticinvoke <org.apache.xml.security.utils.ElementProxy: java.lang.String getDefaultPrefix(java.lang.String)>($r4);
+
+        if r5 == null goto label1;
+
+        $i0 = virtualinvoke r5.<java.lang.String: int length()>();
+
+        if $i0 <= 0 goto label1;
+
+        $r6 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Element getElement()>();
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer2529 = "xmlns:";
+
+        $r8 = virtualinvoke $r7.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2529);
+
+        $r9 = virtualinvoke $r8.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(r5);
+
+        $r10 = virtualinvoke $r9.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        $r11 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: java.lang.String getBaseNamespace()>();
+
+        varReplacer2528 = "http://www.w3.org/2000/xmlns/";
+
+        interfaceinvoke $r6.<org.w3c.dom.Element: void setAttributeNS(java.lang.String,java.lang.String,java.lang.String)>(varReplacer2528, $r10, $r11);
+
+     label1:
+        return;
+    }
+
+    public void <init>(org.w3c.dom.Element, java.lang.String) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.w3c.dom.Element r1;
+        java.lang.String r2, varReplacer2535;
+        java.util.List $r3;
+        java.util.ArrayList $r4;
+        org.w3c.dom.Attr r5;
+        null_type varReplacer2531, varReplacer2533, varReplacer2534;
+        int varReplacer2532;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r1 := @parameter0: org.w3c.dom.Element;
+
+        r2 := @parameter1: java.lang.String;
+
+        specialinvoke r0.<org.apache.xml.security.utils.SignatureElementProxy: void <init>(org.w3c.dom.Element,java.lang.String)>(r1, r2);
+
+        varReplacer2533 = null;
+
+        r0.<org.apache.xml.security.keys.KeyInfo: java.util.List x509Datas> = varReplacer2533;
+
+        varReplacer2531 = null;
+
+        r0.<org.apache.xml.security.keys.KeyInfo: java.util.List encryptedKeys> = varReplacer2531;
+
+        $r3 = <org.apache.xml.security.keys.KeyInfo: java.util.List nullList>;
+
+        r0.<org.apache.xml.security.keys.KeyInfo: java.util.List storageResolvers> = $r3;
+
+        $r4 = new java.util.ArrayList;
+
+        specialinvoke $r4.<java.util.ArrayList: void <init>()>();
+
+        r0.<org.apache.xml.security.keys.KeyInfo: java.util.List internalKeyResolvers> = $r4;
+
+        varReplacer2534 = null;
+
+        varReplacer2535 = "Id";
+
+        r5 = interfaceinvoke r1.<org.w3c.dom.Element: org.w3c.dom.Attr getAttributeNodeNS(java.lang.String,java.lang.String)>(varReplacer2534, varReplacer2535);
+
+        if r5 == null goto label1;
+
+        varReplacer2532 = 1;
+
+        interfaceinvoke r1.<org.w3c.dom.Element: void setIdAttributeNode(org.w3c.dom.Attr,boolean)>(r5, varReplacer2532);
+
+     label1:
+        return;
+    }
+
+    public void setSecureValidation(boolean)
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        boolean z0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        z0 := @parameter0: boolean;
+
+        r0.<org.apache.xml.security.keys.KeyInfo: boolean secureValidation> = z0;
+
+        return;
+    }
+
+    public void setId(java.lang.String)
+    {
+        java.lang.String r0, varReplacer2536;
+        org.apache.xml.security.keys.KeyInfo r1;
+
+        nop;
+
+        r1 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r0 := @parameter0: java.lang.String;
+
+        if r0 == null goto label1;
+
+        varReplacer2536 = "Id";
+
+        virtualinvoke r1.<org.apache.xml.security.keys.KeyInfo: void setLocalIdAttribute(java.lang.String,java.lang.String)>(varReplacer2536, r0);
+
+     label1:
+        return;
+    }
+
+    public java.lang.String getId()
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        java.lang.String $r1, varReplacer2537;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        varReplacer2537 = "Id";
+
+        $r1 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: java.lang.String getLocalAttribute(java.lang.String)>(varReplacer2537);
+
+        return $r1;
+    }
+
+    public void addKeyName(java.lang.String)
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.apache.xml.security.keys.content.KeyName $r1;
+        org.w3c.dom.Document $r2;
+        java.lang.String r3;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r3 := @parameter0: java.lang.String;
+
+        $r1 = new org.apache.xml.security.keys.content.KeyName;
+
+        $r2 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Document getDocument()>();
+
+        specialinvoke $r1.<org.apache.xml.security.keys.content.KeyName: void <init>(org.w3c.dom.Document,java.lang.String)>($r2, r3);
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void add(org.apache.xml.security.keys.content.KeyName)>($r1);
+
+        return;
+    }
+
+    public void add(org.apache.xml.security.keys.content.KeyName)
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.apache.xml.security.keys.content.KeyName r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r1 := @parameter0: org.apache.xml.security.keys.content.KeyName;
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void appendSelf(org.apache.xml.security.utils.ElementProxy)>(r1);
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void addReturnToSelf()>();
+
+        return;
+    }
+
+    public void addKeyValue(java.security.PublicKey)
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.apache.xml.security.keys.content.KeyValue $r1;
+        org.w3c.dom.Document $r2;
+        java.security.PublicKey r3;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r3 := @parameter0: java.security.PublicKey;
+
+        $r1 = new org.apache.xml.security.keys.content.KeyValue;
+
+        $r2 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Document getDocument()>();
+
+        specialinvoke $r1.<org.apache.xml.security.keys.content.KeyValue: void <init>(org.w3c.dom.Document,java.security.PublicKey)>($r2, r3);
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void add(org.apache.xml.security.keys.content.KeyValue)>($r1);
+
+        return;
+    }
+
+    public void addKeyValue(org.w3c.dom.Element)
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.apache.xml.security.keys.content.KeyValue $r1;
+        org.w3c.dom.Document $r2;
+        org.w3c.dom.Element r3;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r3 := @parameter0: org.w3c.dom.Element;
+
+        $r1 = new org.apache.xml.security.keys.content.KeyValue;
+
+        $r2 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Document getDocument()>();
+
+        specialinvoke $r1.<org.apache.xml.security.keys.content.KeyValue: void <init>(org.w3c.dom.Document,org.w3c.dom.Element)>($r2, r3);
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void add(org.apache.xml.security.keys.content.KeyValue)>($r1);
+
+        return;
+    }
+
+    public void add(org.apache.xml.security.keys.content.keyvalues.DSAKeyValue)
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.apache.xml.security.keys.content.KeyValue $r1;
+        org.w3c.dom.Document $r2;
+        org.apache.xml.security.keys.content.keyvalues.DSAKeyValue r3;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r3 := @parameter0: org.apache.xml.security.keys.content.keyvalues.DSAKeyValue;
+
+        $r1 = new org.apache.xml.security.keys.content.KeyValue;
+
+        $r2 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Document getDocument()>();
+
+        specialinvoke $r1.<org.apache.xml.security.keys.content.KeyValue: void <init>(org.w3c.dom.Document,org.apache.xml.security.keys.content.keyvalues.DSAKeyValue)>($r2, r3);
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void add(org.apache.xml.security.keys.content.KeyValue)>($r1);
+
+        return;
+    }
+
+    public void add(org.apache.xml.security.keys.content.keyvalues.RSAKeyValue)
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.apache.xml.security.keys.content.KeyValue $r1;
+        org.w3c.dom.Document $r2;
+        org.apache.xml.security.keys.content.keyvalues.RSAKeyValue r3;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r3 := @parameter0: org.apache.xml.security.keys.content.keyvalues.RSAKeyValue;
+
+        $r1 = new org.apache.xml.security.keys.content.KeyValue;
+
+        $r2 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Document getDocument()>();
+
+        specialinvoke $r1.<org.apache.xml.security.keys.content.KeyValue: void <init>(org.w3c.dom.Document,org.apache.xml.security.keys.content.keyvalues.RSAKeyValue)>($r2, r3);
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void add(org.apache.xml.security.keys.content.KeyValue)>($r1);
+
+        return;
+    }
+
+    public void add(java.security.PublicKey)
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.apache.xml.security.keys.content.KeyValue $r1;
+        org.w3c.dom.Document $r2;
+        java.security.PublicKey r3;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r3 := @parameter0: java.security.PublicKey;
+
+        $r1 = new org.apache.xml.security.keys.content.KeyValue;
+
+        $r2 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Document getDocument()>();
+
+        specialinvoke $r1.<org.apache.xml.security.keys.content.KeyValue: void <init>(org.w3c.dom.Document,java.security.PublicKey)>($r2, r3);
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void add(org.apache.xml.security.keys.content.KeyValue)>($r1);
+
+        return;
+    }
+
+    public void add(org.apache.xml.security.keys.content.KeyValue)
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.apache.xml.security.keys.content.KeyValue r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r1 := @parameter0: org.apache.xml.security.keys.content.KeyValue;
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void appendSelf(org.apache.xml.security.utils.ElementProxy)>(r1);
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void addReturnToSelf()>();
+
+        return;
+    }
+
+    public void addMgmtData(java.lang.String)
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.apache.xml.security.keys.content.MgmtData $r1;
+        org.w3c.dom.Document $r2;
+        java.lang.String r3;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r3 := @parameter0: java.lang.String;
+
+        $r1 = new org.apache.xml.security.keys.content.MgmtData;
+
+        $r2 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Document getDocument()>();
+
+        specialinvoke $r1.<org.apache.xml.security.keys.content.MgmtData: void <init>(org.w3c.dom.Document,java.lang.String)>($r2, r3);
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void add(org.apache.xml.security.keys.content.MgmtData)>($r1);
+
+        return;
+    }
+
+    public void add(org.apache.xml.security.keys.content.MgmtData)
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.apache.xml.security.keys.content.MgmtData r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r1 := @parameter0: org.apache.xml.security.keys.content.MgmtData;
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void appendSelf(org.apache.xml.security.utils.ElementProxy)>(r1);
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void addReturnToSelf()>();
+
+        return;
+    }
+
+    public void add(org.apache.xml.security.keys.content.PGPData)
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.apache.xml.security.keys.content.PGPData r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r1 := @parameter0: org.apache.xml.security.keys.content.PGPData;
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void appendSelf(org.apache.xml.security.utils.ElementProxy)>(r1);
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void addReturnToSelf()>();
+
+        return;
+    }
+
+    public void addRetrievalMethod(java.lang.String, org.apache.xml.security.transforms.Transforms, java.lang.String)
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.apache.xml.security.keys.content.RetrievalMethod $r1;
+        org.w3c.dom.Document $r2;
+        java.lang.String r3, r5;
+        org.apache.xml.security.transforms.Transforms r4;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r3 := @parameter0: java.lang.String;
+
+        r4 := @parameter1: org.apache.xml.security.transforms.Transforms;
+
+        r5 := @parameter2: java.lang.String;
+
+        $r1 = new org.apache.xml.security.keys.content.RetrievalMethod;
+
+        $r2 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Document getDocument()>();
+
+        specialinvoke $r1.<org.apache.xml.security.keys.content.RetrievalMethod: void <init>(org.w3c.dom.Document,java.lang.String,org.apache.xml.security.transforms.Transforms,java.lang.String)>($r2, r3, r4, r5);
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void add(org.apache.xml.security.keys.content.RetrievalMethod)>($r1);
+
+        return;
+    }
+
+    public void add(org.apache.xml.security.keys.content.RetrievalMethod)
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.apache.xml.security.keys.content.RetrievalMethod r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r1 := @parameter0: org.apache.xml.security.keys.content.RetrievalMethod;
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void appendSelf(org.apache.xml.security.utils.ElementProxy)>(r1);
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void addReturnToSelf()>();
+
+        return;
+    }
+
+    public void add(org.apache.xml.security.keys.content.SPKIData)
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.apache.xml.security.keys.content.SPKIData r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r1 := @parameter0: org.apache.xml.security.keys.content.SPKIData;
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void appendSelf(org.apache.xml.security.utils.ElementProxy)>(r1);
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void addReturnToSelf()>();
+
+        return;
+    }
+
+    public void add(org.apache.xml.security.keys.content.X509Data)
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        java.util.List $r1, $r3;
+        org.apache.xml.security.keys.content.X509Data r2;
+        java.util.ArrayList $r4;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r2 := @parameter0: org.apache.xml.security.keys.content.X509Data;
+
+        $r1 = r0.<org.apache.xml.security.keys.KeyInfo: java.util.List x509Datas>;
+
+        if $r1 != null goto label1;
+
+        $r4 = new java.util.ArrayList;
+
+        specialinvoke $r4.<java.util.ArrayList: void <init>()>();
+
+        r0.<org.apache.xml.security.keys.KeyInfo: java.util.List x509Datas> = $r4;
+
+     label1:
+        $r3 = r0.<org.apache.xml.security.keys.KeyInfo: java.util.List x509Datas>;
+
+        interfaceinvoke $r3.<java.util.List: boolean add(java.lang.Object)>(r2);
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void appendSelf(org.apache.xml.security.utils.ElementProxy)>(r2);
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void addReturnToSelf()>();
+
+        return;
+    }
+
+    public void add(org.apache.xml.security.encryption.EncryptedKey) throws org.apache.xml.security.encryption.XMLEncryptionException
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        java.util.List $r1, $r3;
+        org.apache.xml.security.encryption.EncryptedKey r2;
+        org.apache.xml.security.encryption.XMLCipher r4;
+        org.w3c.dom.Element $r5;
+        java.util.ArrayList $r6;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r2 := @parameter0: org.apache.xml.security.encryption.EncryptedKey;
+
+        $r1 = r0.<org.apache.xml.security.keys.KeyInfo: java.util.List encryptedKeys>;
+
+        if $r1 != null goto label1;
+
+        $r6 = new java.util.ArrayList;
+
+        specialinvoke $r6.<java.util.ArrayList: void <init>()>();
+
+        r0.<org.apache.xml.security.keys.KeyInfo: java.util.List encryptedKeys> = $r6;
+
+     label1:
+        $r3 = r0.<org.apache.xml.security.keys.KeyInfo: java.util.List encryptedKeys>;
+
+        interfaceinvoke $r3.<java.util.List: boolean add(java.lang.Object)>(r2);
+
+        r4 = staticinvoke <org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher getInstance()>();
+
+        $r5 = virtualinvoke r4.<org.apache.xml.security.encryption.XMLCipher: org.w3c.dom.Element martial(org.apache.xml.security.encryption.EncryptedKey)>(r2);
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void appendSelf(org.w3c.dom.Node)>($r5);
+
+        return;
+    }
+
+    public void addDEREncodedKeyValue(java.security.PublicKey) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.apache.xml.security.keys.content.DEREncodedKeyValue $r1;
+        org.w3c.dom.Document $r2;
+        java.security.PublicKey r3;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r3 := @parameter0: java.security.PublicKey;
+
+        $r1 = new org.apache.xml.security.keys.content.DEREncodedKeyValue;
+
+        $r2 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Document getDocument()>();
+
+        specialinvoke $r1.<org.apache.xml.security.keys.content.DEREncodedKeyValue: void <init>(org.w3c.dom.Document,java.security.PublicKey)>($r2, r3);
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void add(org.apache.xml.security.keys.content.DEREncodedKeyValue)>($r1);
+
+        return;
+    }
+
+    public void add(org.apache.xml.security.keys.content.DEREncodedKeyValue)
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.apache.xml.security.keys.content.DEREncodedKeyValue r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r1 := @parameter0: org.apache.xml.security.keys.content.DEREncodedKeyValue;
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void appendSelf(org.apache.xml.security.utils.ElementProxy)>(r1);
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void addReturnToSelf()>();
+
+        return;
+    }
+
+    public void addKeyInfoReference(java.lang.String) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.apache.xml.security.keys.content.KeyInfoReference $r1;
+        org.w3c.dom.Document $r2;
+        java.lang.String r3;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r3 := @parameter0: java.lang.String;
+
+        $r1 = new org.apache.xml.security.keys.content.KeyInfoReference;
+
+        $r2 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Document getDocument()>();
+
+        specialinvoke $r1.<org.apache.xml.security.keys.content.KeyInfoReference: void <init>(org.w3c.dom.Document,java.lang.String)>($r2, r3);
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void add(org.apache.xml.security.keys.content.KeyInfoReference)>($r1);
+
+        return;
+    }
+
+    public void add(org.apache.xml.security.keys.content.KeyInfoReference)
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.apache.xml.security.keys.content.KeyInfoReference r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r1 := @parameter0: org.apache.xml.security.keys.content.KeyInfoReference;
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void appendSelf(org.apache.xml.security.utils.ElementProxy)>(r1);
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void addReturnToSelf()>();
+
+        return;
+    }
+
+    public void addUnknownElement(org.w3c.dom.Element)
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.w3c.dom.Element r1;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r1 := @parameter0: org.w3c.dom.Element;
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void appendSelf(org.w3c.dom.Node)>(r1);
+
+        virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: void addReturnToSelf()>();
+
+        return;
+    }
+
+    public int lengthKeyName()
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        int $i0;
+        java.lang.String varReplacer2538, varReplacer2539;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        varReplacer2538 = "http://www.w3.org/2000/09/xmldsig#";
+
+        varReplacer2539 = "KeyName";
+
+        $i0 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: int length(java.lang.String,java.lang.String)>(varReplacer2538, varReplacer2539);
+
+        return $i0;
+    }
+
+    public int lengthKeyValue()
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        int $i0;
+        java.lang.String varReplacer2540, varReplacer2541;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        varReplacer2540 = "http://www.w3.org/2000/09/xmldsig#";
+
+        varReplacer2541 = "KeyValue";
+
+        $i0 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: int length(java.lang.String,java.lang.String)>(varReplacer2540, varReplacer2541);
+
+        return $i0;
+    }
+
+    public int lengthMgmtData()
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        int $i0;
+        java.lang.String varReplacer2542, varReplacer2543;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        varReplacer2542 = "http://www.w3.org/2000/09/xmldsig#";
+
+        varReplacer2543 = "MgmtData";
+
+        $i0 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: int length(java.lang.String,java.lang.String)>(varReplacer2542, varReplacer2543);
+
+        return $i0;
+    }
+
+    public int lengthPGPData()
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        int $i0;
+        java.lang.String varReplacer2544, varReplacer2545;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        varReplacer2544 = "http://www.w3.org/2000/09/xmldsig#";
+
+        varReplacer2545 = "PGPData";
+
+        $i0 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: int length(java.lang.String,java.lang.String)>(varReplacer2544, varReplacer2545);
+
+        return $i0;
+    }
+
+    public int lengthRetrievalMethod()
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        int $i0;
+        java.lang.String varReplacer2546, varReplacer2547;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        varReplacer2546 = "http://www.w3.org/2000/09/xmldsig#";
+
+        varReplacer2547 = "RetrievalMethod";
+
+        $i0 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: int length(java.lang.String,java.lang.String)>(varReplacer2546, varReplacer2547);
+
+        return $i0;
+    }
+
+    public int lengthSPKIData()
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        int $i0;
+        java.lang.String varReplacer2548, varReplacer2549;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        varReplacer2548 = "http://www.w3.org/2000/09/xmldsig#";
+
+        varReplacer2549 = "SPKIData";
+
+        $i0 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: int length(java.lang.String,java.lang.String)>(varReplacer2548, varReplacer2549);
+
+        return $i0;
+    }
+
+    public int lengthX509Data()
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        java.util.List $r1, $r2;
+        int $i0, $i1;
+        java.lang.String varReplacer2550, varReplacer2551;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        $r1 = r0.<org.apache.xml.security.keys.KeyInfo: java.util.List x509Datas>;
+
+        if $r1 == null goto label1;
+
+        $r2 = r0.<org.apache.xml.security.keys.KeyInfo: java.util.List x509Datas>;
+
+        $i1 = interfaceinvoke $r2.<java.util.List: int size()>();
+
+        return $i1;
+
+     label1:
+        varReplacer2550 = "http://www.w3.org/2000/09/xmldsig#";
+
+        varReplacer2551 = "X509Data";
+
+        $i0 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: int length(java.lang.String,java.lang.String)>(varReplacer2550, varReplacer2551);
+
+        return $i0;
+    }
+
+    public int lengthDEREncodedKeyValue()
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        int $i0;
+        java.lang.String varReplacer2552, varReplacer2553;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        varReplacer2552 = "http://www.w3.org/2009/xmldsig11#";
+
+        varReplacer2553 = "DEREncodedKeyValue";
+
+        $i0 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: int length(java.lang.String,java.lang.String)>(varReplacer2552, varReplacer2553);
+
+        return $i0;
+    }
+
+    public int lengthKeyInfoReference()
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        int $i0;
+        java.lang.String varReplacer2554, varReplacer2555;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        varReplacer2554 = "http://www.w3.org/2009/xmldsig11#";
+
+        varReplacer2555 = "KeyInfoReference";
+
+        $i0 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: int length(java.lang.String,java.lang.String)>(varReplacer2554, varReplacer2555);
+
+        return $i0;
+    }
+
+    public int lengthUnknownElement()
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.w3c.dom.Element $r1;
+        short $s0;
+        java.lang.String $r2, varReplacer2556;
+        boolean $z0;
+        int i1;
+        org.w3c.dom.Node r3;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        i1 = 0;
+
+        $r1 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Element getElement()>();
+
+        r3 = interfaceinvoke $r1.<org.w3c.dom.Element: org.w3c.dom.Node getFirstChild()>();
+
+     label1:
+        if r3 == null goto label3;
+
+        $s0 = interfaceinvoke r3.<org.w3c.dom.Node: short getNodeType()>();
+
+        if $s0 != 1 goto label2;
+
+        $r2 = interfaceinvoke r3.<org.w3c.dom.Node: java.lang.String getNamespaceURI()>();
+
+        varReplacer2556 = "http://www.w3.org/2000/09/xmldsig#";
+
+        $z0 = virtualinvoke $r2.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2556);
+
+        if $z0 == 0 goto label2;
+
+        i1 = i1 + 1;
+
+     label2:
+        r3 = interfaceinvoke r3.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+
+        goto label1;
+
+     label3:
+        return i1;
+    }
+
+    public org.apache.xml.security.keys.content.KeyName itemKeyName(int) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.w3c.dom.Node $r1;
+        int i0;
+        org.w3c.dom.Element r2;
+        org.apache.xml.security.keys.content.KeyName $r3;
+        java.lang.String $r4, varReplacer2557;
+        null_type varReplacer2558;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        i0 := @parameter0: int;
+
+        $r1 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Node getFirstChild()>();
+
+        varReplacer2557 = "KeyName";
+
+        r2 = staticinvoke <org.apache.xml.security.utils.XMLUtils: org.w3c.dom.Element selectDsNode(org.w3c.dom.Node,java.lang.String,int)>($r1, varReplacer2557, i0);
+
+        if r2 == null goto label1;
+
+        $r3 = new org.apache.xml.security.keys.content.KeyName;
+
+        $r4 = r0.<org.apache.xml.security.keys.KeyInfo: java.lang.String baseURI>;
+
+        specialinvoke $r3.<org.apache.xml.security.keys.content.KeyName: void <init>(org.w3c.dom.Element,java.lang.String)>(r2, $r4);
+
+        return $r3;
+
+     label1:
+        varReplacer2558 = null;
+
+        return varReplacer2558;
+    }
+
+    public org.apache.xml.security.keys.content.KeyValue itemKeyValue(int) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.w3c.dom.Node $r1;
+        int i0;
+        org.w3c.dom.Element r2;
+        org.apache.xml.security.keys.content.KeyValue $r3;
+        java.lang.String $r4, varReplacer2559;
+        null_type varReplacer2560;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        i0 := @parameter0: int;
+
+        $r1 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Node getFirstChild()>();
+
+        varReplacer2559 = "KeyValue";
+
+        r2 = staticinvoke <org.apache.xml.security.utils.XMLUtils: org.w3c.dom.Element selectDsNode(org.w3c.dom.Node,java.lang.String,int)>($r1, varReplacer2559, i0);
+
+        if r2 == null goto label1;
+
+        $r3 = new org.apache.xml.security.keys.content.KeyValue;
+
+        $r4 = r0.<org.apache.xml.security.keys.KeyInfo: java.lang.String baseURI>;
+
+        specialinvoke $r3.<org.apache.xml.security.keys.content.KeyValue: void <init>(org.w3c.dom.Element,java.lang.String)>(r2, $r4);
+
+        return $r3;
+
+     label1:
+        varReplacer2560 = null;
+
+        return varReplacer2560;
+    }
+
+    public org.apache.xml.security.keys.content.MgmtData itemMgmtData(int) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.w3c.dom.Node $r1;
+        int i0;
+        org.w3c.dom.Element r2;
+        org.apache.xml.security.keys.content.MgmtData $r3;
+        java.lang.String $r4, varReplacer2562;
+        null_type varReplacer2561;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        i0 := @parameter0: int;
+
+        $r1 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Node getFirstChild()>();
+
+        varReplacer2562 = "MgmtData";
+
+        r2 = staticinvoke <org.apache.xml.security.utils.XMLUtils: org.w3c.dom.Element selectDsNode(org.w3c.dom.Node,java.lang.String,int)>($r1, varReplacer2562, i0);
+
+        if r2 == null goto label1;
+
+        $r3 = new org.apache.xml.security.keys.content.MgmtData;
+
+        $r4 = r0.<org.apache.xml.security.keys.KeyInfo: java.lang.String baseURI>;
+
+        specialinvoke $r3.<org.apache.xml.security.keys.content.MgmtData: void <init>(org.w3c.dom.Element,java.lang.String)>(r2, $r4);
+
+        return $r3;
+
+     label1:
+        varReplacer2561 = null;
+
+        return varReplacer2561;
+    }
+
+    public org.apache.xml.security.keys.content.PGPData itemPGPData(int) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.w3c.dom.Node $r1;
+        int i0;
+        org.w3c.dom.Element r2;
+        org.apache.xml.security.keys.content.PGPData $r3;
+        java.lang.String $r4, varReplacer2564;
+        null_type varReplacer2563;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        i0 := @parameter0: int;
+
+        $r1 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Node getFirstChild()>();
+
+        varReplacer2564 = "PGPData";
+
+        r2 = staticinvoke <org.apache.xml.security.utils.XMLUtils: org.w3c.dom.Element selectDsNode(org.w3c.dom.Node,java.lang.String,int)>($r1, varReplacer2564, i0);
+
+        if r2 == null goto label1;
+
+        $r3 = new org.apache.xml.security.keys.content.PGPData;
+
+        $r4 = r0.<org.apache.xml.security.keys.KeyInfo: java.lang.String baseURI>;
+
+        specialinvoke $r3.<org.apache.xml.security.keys.content.PGPData: void <init>(org.w3c.dom.Element,java.lang.String)>(r2, $r4);
+
+        return $r3;
+
+     label1:
+        varReplacer2563 = null;
+
+        return varReplacer2563;
+    }
+
+    public org.apache.xml.security.keys.content.RetrievalMethod itemRetrievalMethod(int) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.w3c.dom.Node $r1;
+        int i0;
+        org.w3c.dom.Element r2;
+        org.apache.xml.security.keys.content.RetrievalMethod $r3;
+        java.lang.String $r4, varReplacer2566;
+        null_type varReplacer2565;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        i0 := @parameter0: int;
+
+        $r1 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Node getFirstChild()>();
+
+        varReplacer2566 = "RetrievalMethod";
+
+        r2 = staticinvoke <org.apache.xml.security.utils.XMLUtils: org.w3c.dom.Element selectDsNode(org.w3c.dom.Node,java.lang.String,int)>($r1, varReplacer2566, i0);
+
+        if r2 == null goto label1;
+
+        $r3 = new org.apache.xml.security.keys.content.RetrievalMethod;
+
+        $r4 = r0.<org.apache.xml.security.keys.KeyInfo: java.lang.String baseURI>;
+
+        specialinvoke $r3.<org.apache.xml.security.keys.content.RetrievalMethod: void <init>(org.w3c.dom.Element,java.lang.String)>(r2, $r4);
+
+        return $r3;
+
+     label1:
+        varReplacer2565 = null;
+
+        return varReplacer2565;
+    }
+
+    public org.apache.xml.security.keys.content.SPKIData itemSPKIData(int) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.w3c.dom.Node $r1;
+        int i0;
+        org.w3c.dom.Element r2;
+        org.apache.xml.security.keys.content.SPKIData $r3;
+        java.lang.String $r4, varReplacer2568;
+        null_type varReplacer2567;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        i0 := @parameter0: int;
+
+        $r1 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Node getFirstChild()>();
+
+        varReplacer2568 = "SPKIData";
+
+        r2 = staticinvoke <org.apache.xml.security.utils.XMLUtils: org.w3c.dom.Element selectDsNode(org.w3c.dom.Node,java.lang.String,int)>($r1, varReplacer2568, i0);
+
+        if r2 == null goto label1;
+
+        $r3 = new org.apache.xml.security.keys.content.SPKIData;
+
+        $r4 = r0.<org.apache.xml.security.keys.KeyInfo: java.lang.String baseURI>;
+
+        specialinvoke $r3.<org.apache.xml.security.keys.content.SPKIData: void <init>(org.w3c.dom.Element,java.lang.String)>(r2, $r4);
+
+        return $r3;
+
+     label1:
+        varReplacer2567 = null;
+
+        return varReplacer2567;
+    }
+
+    public org.apache.xml.security.keys.content.X509Data itemX509Data(int) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        java.util.List $r1, $r6;
+        org.w3c.dom.Node $r2;
+        int i0;
+        org.w3c.dom.Element r3;
+        org.apache.xml.security.keys.content.X509Data $r4, $r8;
+        java.lang.String $r5, varReplacer2570;
+        java.lang.Object $r7;
+        null_type varReplacer2569;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        i0 := @parameter0: int;
+
+        $r1 = r0.<org.apache.xml.security.keys.KeyInfo: java.util.List x509Datas>;
+
+        if $r1 == null goto label1;
+
+        $r6 = r0.<org.apache.xml.security.keys.KeyInfo: java.util.List x509Datas>;
+
+        $r7 = interfaceinvoke $r6.<java.util.List: java.lang.Object get(int)>(i0);
+
+        $r8 = (org.apache.xml.security.keys.content.X509Data) $r7;
+
+        return $r8;
+
+     label1:
+        $r2 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Node getFirstChild()>();
+
+        varReplacer2570 = "X509Data";
+
+        r3 = staticinvoke <org.apache.xml.security.utils.XMLUtils: org.w3c.dom.Element selectDsNode(org.w3c.dom.Node,java.lang.String,int)>($r2, varReplacer2570, i0);
+
+        if r3 == null goto label2;
+
+        $r4 = new org.apache.xml.security.keys.content.X509Data;
+
+        $r5 = r0.<org.apache.xml.security.keys.KeyInfo: java.lang.String baseURI>;
+
+        specialinvoke $r4.<org.apache.xml.security.keys.content.X509Data: void <init>(org.w3c.dom.Element,java.lang.String)>(r3, $r5);
+
+        return $r4;
+
+     label2:
+        varReplacer2569 = null;
+
+        return varReplacer2569;
+    }
+
+    public org.apache.xml.security.encryption.EncryptedKey itemEncryptedKey(int) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        java.util.List $r1, $r6;
+        org.w3c.dom.Node $r2;
+        int i0, varReplacer2571;
+        org.w3c.dom.Element r3;
+        org.apache.xml.security.encryption.XMLCipher r4;
+        org.apache.xml.security.encryption.EncryptedKey $r5, $r8;
+        java.lang.Object $r7;
+        null_type varReplacer2572, varReplacer2574;
+        java.lang.String varReplacer2573;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        i0 := @parameter0: int;
+
+        $r1 = r0.<org.apache.xml.security.keys.KeyInfo: java.util.List encryptedKeys>;
+
+        if $r1 == null goto label1;
+
+        $r6 = r0.<org.apache.xml.security.keys.KeyInfo: java.util.List encryptedKeys>;
+
+        $r7 = interfaceinvoke $r6.<java.util.List: java.lang.Object get(int)>(i0);
+
+        $r8 = (org.apache.xml.security.encryption.EncryptedKey) $r7;
+
+        return $r8;
+
+     label1:
+        $r2 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Node getFirstChild()>();
+
+        varReplacer2573 = "EncryptedKey";
+
+        r3 = staticinvoke <org.apache.xml.security.utils.XMLUtils: org.w3c.dom.Element selectXencNode(org.w3c.dom.Node,java.lang.String,int)>($r2, varReplacer2573, i0);
+
+        if r3 == null goto label2;
+
+        r4 = staticinvoke <org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.XMLCipher getInstance()>();
+
+        varReplacer2571 = 4;
+
+        varReplacer2572 = null;
+
+        virtualinvoke r4.<org.apache.xml.security.encryption.XMLCipher: void init(int,java.security.Key)>(varReplacer2571, varReplacer2572);
+
+        $r5 = virtualinvoke r4.<org.apache.xml.security.encryption.XMLCipher: org.apache.xml.security.encryption.EncryptedKey loadEncryptedKey(org.w3c.dom.Element)>(r3);
+
+        return $r5;
+
+     label2:
+        varReplacer2574 = null;
+
+        return varReplacer2574;
+    }
+
+    public org.apache.xml.security.keys.content.DEREncodedKeyValue itemDEREncodedKeyValue(int) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.w3c.dom.Node $r1;
+        int i0;
+        org.w3c.dom.Element r2;
+        org.apache.xml.security.keys.content.DEREncodedKeyValue $r3;
+        java.lang.String $r4, varReplacer2575;
+        null_type varReplacer2576;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        i0 := @parameter0: int;
+
+        $r1 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Node getFirstChild()>();
+
+        varReplacer2575 = "DEREncodedKeyValue";
+
+        r2 = staticinvoke <org.apache.xml.security.utils.XMLUtils: org.w3c.dom.Element selectDs11Node(org.w3c.dom.Node,java.lang.String,int)>($r1, varReplacer2575, i0);
+
+        if r2 == null goto label1;
+
+        $r3 = new org.apache.xml.security.keys.content.DEREncodedKeyValue;
+
+        $r4 = r0.<org.apache.xml.security.keys.KeyInfo: java.lang.String baseURI>;
+
+        specialinvoke $r3.<org.apache.xml.security.keys.content.DEREncodedKeyValue: void <init>(org.w3c.dom.Element,java.lang.String)>(r2, $r4);
+
+        return $r3;
+
+     label1:
+        varReplacer2576 = null;
+
+        return varReplacer2576;
+    }
+
+    public org.apache.xml.security.keys.content.KeyInfoReference itemKeyInfoReference(int) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.w3c.dom.Node $r1;
+        int i0;
+        org.w3c.dom.Element r2;
+        org.apache.xml.security.keys.content.KeyInfoReference $r3;
+        java.lang.String $r4, varReplacer2577;
+        null_type varReplacer2578;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        i0 := @parameter0: int;
+
+        $r1 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Node getFirstChild()>();
+
+        varReplacer2577 = "KeyInfoReference";
+
+        r2 = staticinvoke <org.apache.xml.security.utils.XMLUtils: org.w3c.dom.Element selectDs11Node(org.w3c.dom.Node,java.lang.String,int)>($r1, varReplacer2577, i0);
+
+        if r2 == null goto label1;
+
+        $r3 = new org.apache.xml.security.keys.content.KeyInfoReference;
+
+        $r4 = r0.<org.apache.xml.security.keys.KeyInfo: java.lang.String baseURI>;
+
+        specialinvoke $r3.<org.apache.xml.security.keys.content.KeyInfoReference: void <init>(org.w3c.dom.Element,java.lang.String)>(r2, $r4);
+
+        return $r3;
+
+     label1:
+        varReplacer2578 = null;
+
+        return varReplacer2578;
+    }
+
+    public org.w3c.dom.Element itemUnknownElement(int)
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.w3c.dom.Element $r1, $r3;
+        short $s0;
+        java.lang.String $r2, varReplacer2580;
+        boolean $z0;
+        int i1, i2;
+        org.w3c.dom.Node r4;
+        null_type varReplacer2579;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        i1 := @parameter0: int;
+
+        i2 = 0;
+
+        $r1 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Element getElement()>();
+
+        r4 = interfaceinvoke $r1.<org.w3c.dom.Element: org.w3c.dom.Node getFirstChild()>();
+
+     label1:
+        if r4 == null goto label3;
+
+        $s0 = interfaceinvoke r4.<org.w3c.dom.Node: short getNodeType()>();
+
+        if $s0 != 1 goto label2;
+
+        $r2 = interfaceinvoke r4.<org.w3c.dom.Node: java.lang.String getNamespaceURI()>();
+
+        varReplacer2580 = "http://www.w3.org/2000/09/xmldsig#";
+
+        $z0 = virtualinvoke $r2.<java.lang.String: boolean equals(java.lang.Object)>(varReplacer2580);
+
+        if $z0 == 0 goto label2;
+
+        i2 = i2 + 1;
+
+        if i2 != i1 goto label2;
+
+        $r3 = (org.w3c.dom.Element) r4;
+
+        return $r3;
+
+     label2:
+        r4 = interfaceinvoke r4.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+
+        goto label1;
+
+     label3:
+        varReplacer2579 = null;
+
+        return varReplacer2579;
+    }
+
+    public boolean isEmpty()
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.w3c.dom.Node $r1;
+        boolean $z0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        $r1 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Node getFirstChild()>();
+
+        if $r1 != null goto label1;
+
+        $z0 = 1;
+
+        goto label2;
+
+     label1:
+        $z0 = 0;
+
+     label2:
+        return $z0;
+    }
+
+    public boolean containsKeyName()
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        int $i0;
+        boolean $z0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        $i0 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: int lengthKeyName()>();
+
+        if $i0 <= 0 goto label1;
+
+        $z0 = 1;
+
+        goto label2;
+
+     label1:
+        $z0 = 0;
+
+     label2:
+        return $z0;
+    }
+
+    public boolean containsKeyValue()
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        int $i0;
+        boolean $z0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        $i0 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: int lengthKeyValue()>();
+
+        if $i0 <= 0 goto label1;
+
+        $z0 = 1;
+
+        goto label2;
+
+     label1:
+        $z0 = 0;
+
+     label2:
+        return $z0;
+    }
+
+    public boolean containsMgmtData()
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        int $i0;
+        boolean $z0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        $i0 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: int lengthMgmtData()>();
+
+        if $i0 <= 0 goto label1;
+
+        $z0 = 1;
+
+        goto label2;
+
+     label1:
+        $z0 = 0;
+
+     label2:
+        return $z0;
+    }
+
+    public boolean containsPGPData()
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        int $i0;
+        boolean $z0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        $i0 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: int lengthPGPData()>();
+
+        if $i0 <= 0 goto label1;
+
+        $z0 = 1;
+
+        goto label2;
+
+     label1:
+        $z0 = 0;
+
+     label2:
+        return $z0;
+    }
+
+    public boolean containsRetrievalMethod()
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        int $i0;
+        boolean $z0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        $i0 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: int lengthRetrievalMethod()>();
+
+        if $i0 <= 0 goto label1;
+
+        $z0 = 1;
+
+        goto label2;
+
+     label1:
+        $z0 = 0;
+
+     label2:
+        return $z0;
+    }
+
+    public boolean containsSPKIData()
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        int $i0;
+        boolean $z0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        $i0 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: int lengthSPKIData()>();
+
+        if $i0 <= 0 goto label1;
+
+        $z0 = 1;
+
+        goto label2;
+
+     label1:
+        $z0 = 0;
+
+     label2:
+        return $z0;
+    }
+
+    public boolean containsUnknownElement()
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        int $i0;
+        boolean $z0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        $i0 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: int lengthUnknownElement()>();
+
+        if $i0 <= 0 goto label1;
+
+        $z0 = 1;
+
+        goto label2;
+
+     label1:
+        $z0 = 0;
+
+     label2:
+        return $z0;
+    }
+
+    public boolean containsX509Data()
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        int $i0;
+        boolean $z0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        $i0 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: int lengthX509Data()>();
+
+        if $i0 <= 0 goto label1;
+
+        $z0 = 1;
+
+        goto label2;
+
+     label1:
+        $z0 = 0;
+
+     label2:
+        return $z0;
+    }
+
+    public boolean containsDEREncodedKeyValue()
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        int $i0;
+        boolean $z0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        $i0 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: int lengthDEREncodedKeyValue()>();
+
+        if $i0 <= 0 goto label1;
+
+        $z0 = 1;
+
+        goto label2;
+
+     label1:
+        $z0 = 0;
+
+     label2:
+        return $z0;
+    }
+
+    public boolean containsKeyInfoReference()
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        int $i0;
+        boolean $z0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        $i0 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: int lengthKeyInfoReference()>();
+
+        if $i0 <= 0 goto label1;
+
+        $z0 = 1;
+
+        goto label2;
+
+     label1:
+        $z0 = 0;
+
+     label2:
+        return $z0;
+    }
+
+    public java.security.PublicKey getPublicKey() throws org.apache.xml.security.keys.keyresolver.KeyResolverException
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.slf4j.Logger $r1, $r2, $r3, $r4, $r5, $r6, $r7, $r8;
+        boolean $z0, $z1, $z2, $z3;
+        java.security.PublicKey r9, r10;
+        java.lang.String varReplacer2581, varReplacer2582, varReplacer2584, varReplacer2585;
+        null_type varReplacer2583;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r9 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: java.security.PublicKey getPublicKeyFromInternalResolvers()>();
+
+        if r9 == null goto label2;
+
+        $r7 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $z3 = interfaceinvoke $r7.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z3 == 0 goto label1;
+
+        $r8 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        varReplacer2584 = "I could find a key using the per-KeyInfo key resolvers";
+
+        interfaceinvoke $r8.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2584);
+
+     label1:
+        return r9;
+
+     label2:
+        $r1 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $z0 = interfaceinvoke $r1.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z0 == 0 goto label3;
+
+        $r6 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        varReplacer2581 = "I couldn\'t find a key using the per-KeyInfo key resolvers";
+
+        interfaceinvoke $r6.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2581);
+
+     label3:
+        r10 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: java.security.PublicKey getPublicKeyFromStaticResolvers()>();
+
+        if r10 == null goto label5;
+
+        $r4 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $z2 = interfaceinvoke $r4.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z2 == 0 goto label4;
+
+        $r5 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        varReplacer2585 = "I could find a key using the system-wide key resolvers";
+
+        interfaceinvoke $r5.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2585);
+
+     label4:
+        return r10;
+
+     label5:
+        $r2 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $z1 = interfaceinvoke $r2.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z1 == 0 goto label6;
+
+        $r3 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        varReplacer2582 = "I couldn\'t find a key using the system-wide key resolvers";
+
+        interfaceinvoke $r3.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2582);
+
+     label6:
+        varReplacer2583 = null;
+
+        return varReplacer2583;
+    }
+
+    java.security.PublicKey getPublicKeyFromStaticResolvers() throws org.apache.xml.security.keys.keyresolver.KeyResolverException
+    {
+        java.util.Iterator r0, r6;
+        boolean $z0, $z1, $z2;
+        java.lang.Object $r1, $r7;
+        org.apache.xml.security.keys.keyresolver.KeyResolverSpi r2;
+        org.apache.xml.security.keys.KeyInfo r3;
+        java.lang.String r4;
+        short $s0;
+        java.util.List $r5;
+        org.apache.xml.security.keys.storage.StorageResolver r8;
+        org.w3c.dom.Element $r9;
+        java.security.PublicKey r10;
+        org.w3c.dom.Node r11;
+        null_type varReplacer2586;
+
+        nop;
+
+        r3 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r0 = staticinvoke <org.apache.xml.security.keys.keyresolver.KeyResolver: java.util.Iterator iterator()>();
+
+     label1:
+        $z0 = interfaceinvoke r0.<java.util.Iterator: boolean hasNext()>();
+
+        if $z0 == 0 goto label7;
+
+        $r1 = interfaceinvoke r0.<java.util.Iterator: java.lang.Object next()>();
+
+        r2 = (org.apache.xml.security.keys.keyresolver.KeyResolverSpi) $r1;
+
+        $z1 = r3.<org.apache.xml.security.keys.KeyInfo: boolean secureValidation>;
+
+        virtualinvoke r2.<org.apache.xml.security.keys.keyresolver.KeyResolverSpi: void setSecureValidation(boolean)>($z1);
+
+        r11 = virtualinvoke r3.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Node getFirstChild()>();
+
+        r4 = virtualinvoke r3.<org.apache.xml.security.keys.KeyInfo: java.lang.String getBaseURI()>();
+
+     label2:
+        if r11 == null goto label6;
+
+        $s0 = interfaceinvoke r11.<org.w3c.dom.Node: short getNodeType()>();
+
+        if $s0 != 1 goto label5;
+
+        $r5 = r3.<org.apache.xml.security.keys.KeyInfo: java.util.List storageResolvers>;
+
+        r6 = interfaceinvoke $r5.<java.util.List: java.util.Iterator iterator()>();
+
+     label3:
+        $z2 = interfaceinvoke r6.<java.util.Iterator: boolean hasNext()>();
+
+        if $z2 == 0 goto label5;
+
+        $r7 = interfaceinvoke r6.<java.util.Iterator: java.lang.Object next()>();
+
+        r8 = (org.apache.xml.security.keys.storage.StorageResolver) $r7;
+
+        $r9 = (org.w3c.dom.Element) r11;
+
+        r10 = virtualinvoke r2.<org.apache.xml.security.keys.keyresolver.KeyResolverSpi: java.security.PublicKey engineLookupAndResolvePublicKey(org.w3c.dom.Element,java.lang.String,org.apache.xml.security.keys.storage.StorageResolver)>($r9, r4, r8);
+
+        if r10 == null goto label4;
+
+        return r10;
+
+     label4:
+        goto label3;
+
+     label5:
+        r11 = interfaceinvoke r11.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+
+        goto label2;
+
+     label6:
+        goto label1;
+
+     label7:
+        varReplacer2586 = null;
+
+        return varReplacer2586;
+    }
+
+    java.security.PublicKey getPublicKeyFromInternalResolvers() throws org.apache.xml.security.keys.keyresolver.KeyResolverException
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        java.util.List $r1, $r7;
+        java.util.Iterator r2, r8;
+        boolean $z0, $z1, $z2, $z3;
+        java.lang.Object $r3, $r9;
+        org.apache.xml.security.keys.keyresolver.KeyResolverSpi r4;
+        org.slf4j.Logger $r5, $r14;
+        java.lang.String r6, $r17, $r19, varReplacer2588;
+        short $s0;
+        org.apache.xml.security.keys.storage.StorageResolver r10;
+        org.w3c.dom.Element $r11;
+        java.security.PublicKey r12;
+        java.lang.StringBuilder $r13, $r15, $r18;
+        java.lang.Class $r16;
+        org.w3c.dom.Node r20;
+        null_type varReplacer2587;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        $r1 = r0.<org.apache.xml.security.keys.KeyInfo: java.util.List internalKeyResolvers>;
+
+        r2 = interfaceinvoke $r1.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $z0 = interfaceinvoke r2.<java.util.Iterator: boolean hasNext()>();
+
+        if $z0 == 0 goto label8;
+
+        $r3 = interfaceinvoke r2.<java.util.Iterator: java.lang.Object next()>();
+
+        r4 = (org.apache.xml.security.keys.keyresolver.KeyResolverSpi) $r3;
+
+        $r5 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $z1 = interfaceinvoke $r5.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z1 == 0 goto label2;
+
+        $r14 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $r13 = new java.lang.StringBuilder;
+
+        specialinvoke $r13.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer2588 = "Try ";
+
+        $r15 = virtualinvoke $r13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2588);
+
+        $r16 = virtualinvoke r4.<java.lang.Object: java.lang.Class getClass()>();
+
+        $r17 = virtualinvoke $r16.<java.lang.Class: java.lang.String getName()>();
+
+        $r18 = virtualinvoke $r15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r17);
+
+        $r19 = virtualinvoke $r18.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r14.<org.slf4j.Logger: void debug(java.lang.String)>($r19);
+
+     label2:
+        $z2 = r0.<org.apache.xml.security.keys.KeyInfo: boolean secureValidation>;
+
+        virtualinvoke r4.<org.apache.xml.security.keys.keyresolver.KeyResolverSpi: void setSecureValidation(boolean)>($z2);
+
+        r20 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Node getFirstChild()>();
+
+        r6 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: java.lang.String getBaseURI()>();
+
+     label3:
+        if r20 == null goto label7;
+
+        $s0 = interfaceinvoke r20.<org.w3c.dom.Node: short getNodeType()>();
+
+        if $s0 != 1 goto label6;
+
+        $r7 = r0.<org.apache.xml.security.keys.KeyInfo: java.util.List storageResolvers>;
+
+        r8 = interfaceinvoke $r7.<java.util.List: java.util.Iterator iterator()>();
+
+     label4:
+        $z3 = interfaceinvoke r8.<java.util.Iterator: boolean hasNext()>();
+
+        if $z3 == 0 goto label6;
+
+        $r9 = interfaceinvoke r8.<java.util.Iterator: java.lang.Object next()>();
+
+        r10 = (org.apache.xml.security.keys.storage.StorageResolver) $r9;
+
+        $r11 = (org.w3c.dom.Element) r20;
+
+        r12 = virtualinvoke r4.<org.apache.xml.security.keys.keyresolver.KeyResolverSpi: java.security.PublicKey engineLookupAndResolvePublicKey(org.w3c.dom.Element,java.lang.String,org.apache.xml.security.keys.storage.StorageResolver)>($r11, r6, r10);
+
+        if r12 == null goto label5;
+
+        return r12;
+
+     label5:
+        goto label4;
+
+     label6:
+        r20 = interfaceinvoke r20.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+
+        goto label3;
+
+     label7:
+        goto label1;
+
+     label8:
+        varReplacer2587 = null;
+
+        return varReplacer2587;
+    }
+
+    public java.security.cert.X509Certificate getX509Certificate() throws org.apache.xml.security.keys.keyresolver.KeyResolverException
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.slf4j.Logger $r1, $r2, $r3, $r4, $r5, $r6, $r7, $r8;
+        boolean $z0, $z1, $z2, $z3;
+        java.security.cert.X509Certificate r9, r10;
+        java.lang.String varReplacer2589, varReplacer2590, varReplacer2591, varReplacer2593;
+        null_type varReplacer2592;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r9 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: java.security.cert.X509Certificate getX509CertificateFromInternalResolvers()>();
+
+        if r9 == null goto label2;
+
+        $r7 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $z3 = interfaceinvoke $r7.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z3 == 0 goto label1;
+
+        $r8 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        varReplacer2589 = "I could find a X509Certificate using the per-KeyInfo key resolvers";
+
+        interfaceinvoke $r8.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2589);
+
+     label1:
+        return r9;
+
+     label2:
+        $r1 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $z0 = interfaceinvoke $r1.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z0 == 0 goto label3;
+
+        $r6 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        varReplacer2591 = "I couldn\'t find a X509Certificate using the per-KeyInfo key resolvers";
+
+        interfaceinvoke $r6.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2591);
+
+     label3:
+        r10 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: java.security.cert.X509Certificate getX509CertificateFromStaticResolvers()>();
+
+        if r10 == null goto label5;
+
+        $r4 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $z2 = interfaceinvoke $r4.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z2 == 0 goto label4;
+
+        $r5 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        varReplacer2593 = "I could find a X509Certificate using the system-wide key resolvers";
+
+        interfaceinvoke $r5.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2593);
+
+     label4:
+        return r10;
+
+     label5:
+        $r2 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $z1 = interfaceinvoke $r2.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z1 == 0 goto label6;
+
+        $r3 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        varReplacer2590 = "I couldn\'t find a X509Certificate using the system-wide key resolvers";
+
+        interfaceinvoke $r3.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2590);
+
+     label6:
+        varReplacer2592 = null;
+
+        return varReplacer2592;
+    }
+
+    java.security.cert.X509Certificate getX509CertificateFromStaticResolvers() throws org.apache.xml.security.keys.keyresolver.KeyResolverException
+    {
+        org.slf4j.Logger $r0, $r8;
+        boolean $z0, $z1, $z2;
+        org.apache.xml.security.keys.KeyInfo r1;
+        java.lang.String r2, $r12, varReplacer2594, varReplacer2596;
+        java.util.Iterator r3;
+        java.lang.Object $r4;
+        org.apache.xml.security.keys.keyresolver.KeyResolverSpi r5;
+        java.security.cert.X509Certificate r6;
+        java.lang.StringBuilder $r7, $r9, $r10, $r11;
+        int $i0;
+        null_type varReplacer2595;
+
+        nop;
+
+        r1 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        $r0 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $z0 = interfaceinvoke $r0.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z0 == 0 goto label1;
+
+        $r8 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $r7 = new java.lang.StringBuilder;
+
+        specialinvoke $r7.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer2596 = "Start getX509CertificateFromStaticResolvers() with ";
+
+        $r9 = virtualinvoke $r7.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2596);
+
+        $i0 = staticinvoke <org.apache.xml.security.keys.keyresolver.KeyResolver: int length()>();
+
+        $r10 = virtualinvoke $r9.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($i0);
+
+        varReplacer2594 = " resolvers";
+
+        $r11 = virtualinvoke $r10.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2594);
+
+        $r12 = virtualinvoke $r11.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r8.<org.slf4j.Logger: void debug(java.lang.String)>($r12);
+
+     label1:
+        r2 = virtualinvoke r1.<org.apache.xml.security.keys.KeyInfo: java.lang.String getBaseURI()>();
+
+        r3 = staticinvoke <org.apache.xml.security.keys.keyresolver.KeyResolver: java.util.Iterator iterator()>();
+
+     label2:
+        $z2 = interfaceinvoke r3.<java.util.Iterator: boolean hasNext()>();
+
+        if $z2 == 0 goto label4;
+
+        $r4 = interfaceinvoke r3.<java.util.Iterator: java.lang.Object next()>();
+
+        r5 = (org.apache.xml.security.keys.keyresolver.KeyResolverSpi) $r4;
+
+        $z1 = r1.<org.apache.xml.security.keys.KeyInfo: boolean secureValidation>;
+
+        virtualinvoke r5.<org.apache.xml.security.keys.keyresolver.KeyResolverSpi: void setSecureValidation(boolean)>($z1);
+
+        r6 = specialinvoke r1.<org.apache.xml.security.keys.KeyInfo: java.security.cert.X509Certificate applyCurrentResolver(java.lang.String,org.apache.xml.security.keys.keyresolver.KeyResolverSpi)>(r2, r5);
+
+        if r6 == null goto label3;
+
+        return r6;
+
+     label3:
+        goto label2;
+
+     label4:
+        varReplacer2595 = null;
+
+        return varReplacer2595;
+    }
+
+    private java.security.cert.X509Certificate applyCurrentResolver(java.lang.String, org.apache.xml.security.keys.keyresolver.KeyResolverSpi) throws org.apache.xml.security.keys.keyresolver.KeyResolverException
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        short $s0;
+        java.util.List $r1;
+        java.util.Iterator r2;
+        boolean $z0;
+        java.lang.Object $r3;
+        org.apache.xml.security.keys.storage.StorageResolver r4;
+        org.apache.xml.security.keys.keyresolver.KeyResolverSpi r5;
+        java.lang.String r6;
+        org.w3c.dom.Element $r7;
+        java.security.cert.X509Certificate r8;
+        org.w3c.dom.Node r9;
+        null_type varReplacer2597;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r6 := @parameter0: java.lang.String;
+
+        r5 := @parameter1: org.apache.xml.security.keys.keyresolver.KeyResolverSpi;
+
+        r9 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Node getFirstChild()>();
+
+     label1:
+        if r9 == null goto label5;
+
+        $s0 = interfaceinvoke r9.<org.w3c.dom.Node: short getNodeType()>();
+
+        if $s0 != 1 goto label4;
+
+        $r1 = r0.<org.apache.xml.security.keys.KeyInfo: java.util.List storageResolvers>;
+
+        r2 = interfaceinvoke $r1.<java.util.List: java.util.Iterator iterator()>();
+
+     label2:
+        $z0 = interfaceinvoke r2.<java.util.Iterator: boolean hasNext()>();
+
+        if $z0 == 0 goto label4;
+
+        $r3 = interfaceinvoke r2.<java.util.Iterator: java.lang.Object next()>();
+
+        r4 = (org.apache.xml.security.keys.storage.StorageResolver) $r3;
+
+        $r7 = (org.w3c.dom.Element) r9;
+
+        r8 = virtualinvoke r5.<org.apache.xml.security.keys.keyresolver.KeyResolverSpi: java.security.cert.X509Certificate engineLookupResolveX509Certificate(org.w3c.dom.Element,java.lang.String,org.apache.xml.security.keys.storage.StorageResolver)>($r7, r6, r4);
+
+        if r8 == null goto label3;
+
+        return r8;
+
+     label3:
+        goto label2;
+
+     label4:
+        r9 = interfaceinvoke r9.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+
+        goto label1;
+
+     label5:
+        varReplacer2597 = null;
+
+        return varReplacer2597;
+    }
+
+    java.security.cert.X509Certificate getX509CertificateFromInternalResolvers() throws org.apache.xml.security.keys.keyresolver.KeyResolverException
+    {
+        org.slf4j.Logger $r0, $r7, $r10, $r17;
+        boolean $z0, $z1, $z2, $z3;
+        org.apache.xml.security.keys.KeyInfo r1;
+        java.lang.String r2, $r13, $r15, $r21, varReplacer2598, varReplacer2599, varReplacer2600;
+        java.util.List $r3;
+        java.util.Iterator r4;
+        java.lang.Object $r5;
+        org.apache.xml.security.keys.keyresolver.KeyResolverSpi r6;
+        java.security.cert.X509Certificate r8;
+        java.lang.StringBuilder $r9, $r11, $r14, $r16, $r18, $r19, $r20;
+        java.lang.Class $r12;
+        int $i0;
+        null_type varReplacer2601;
+
+        nop;
+
+        r1 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        $r0 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $z0 = interfaceinvoke $r0.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z0 == 0 goto label1;
+
+        $r17 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $r16 = new java.lang.StringBuilder;
+
+        specialinvoke $r16.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer2599 = "Start getX509CertificateFromInternalResolvers() with ";
+
+        $r18 = virtualinvoke $r16.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2599);
+
+        $i0 = virtualinvoke r1.<org.apache.xml.security.keys.KeyInfo: int lengthInternalKeyResolver()>();
+
+        $r19 = virtualinvoke $r18.<java.lang.StringBuilder: java.lang.StringBuilder append(int)>($i0);
+
+        varReplacer2598 = " resolvers";
+
+        $r20 = virtualinvoke $r19.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2598);
+
+        $r21 = virtualinvoke $r20.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r17.<org.slf4j.Logger: void debug(java.lang.String)>($r21);
+
+     label1:
+        r2 = virtualinvoke r1.<org.apache.xml.security.keys.KeyInfo: java.lang.String getBaseURI()>();
+
+        $r3 = r1.<org.apache.xml.security.keys.KeyInfo: java.util.List internalKeyResolvers>;
+
+        r4 = interfaceinvoke $r3.<java.util.List: java.util.Iterator iterator()>();
+
+     label2:
+        $z3 = interfaceinvoke r4.<java.util.Iterator: boolean hasNext()>();
+
+        if $z3 == 0 goto label5;
+
+        $r5 = interfaceinvoke r4.<java.util.Iterator: java.lang.Object next()>();
+
+        r6 = (org.apache.xml.security.keys.keyresolver.KeyResolverSpi) $r5;
+
+        $r7 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $z1 = interfaceinvoke $r7.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z1 == 0 goto label3;
+
+        $r10 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer2600 = "Try ";
+
+        $r11 = virtualinvoke $r9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2600);
+
+        $r12 = virtualinvoke r6.<java.lang.Object: java.lang.Class getClass()>();
+
+        $r13 = virtualinvoke $r12.<java.lang.Class: java.lang.String getName()>();
+
+        $r14 = virtualinvoke $r11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r13);
+
+        $r15 = virtualinvoke $r14.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r10.<org.slf4j.Logger: void debug(java.lang.String)>($r15);
+
+     label3:
+        $z2 = r1.<org.apache.xml.security.keys.KeyInfo: boolean secureValidation>;
+
+        virtualinvoke r6.<org.apache.xml.security.keys.keyresolver.KeyResolverSpi: void setSecureValidation(boolean)>($z2);
+
+        r8 = specialinvoke r1.<org.apache.xml.security.keys.KeyInfo: java.security.cert.X509Certificate applyCurrentResolver(java.lang.String,org.apache.xml.security.keys.keyresolver.KeyResolverSpi)>(r2, r6);
+
+        if r8 == null goto label4;
+
+        return r8;
+
+     label4:
+        goto label2;
+
+     label5:
+        varReplacer2601 = null;
+
+        return varReplacer2601;
+    }
+
+    public javax.crypto.SecretKey getSecretKey() throws org.apache.xml.security.keys.keyresolver.KeyResolverException
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.slf4j.Logger $r1, $r2, $r3, $r4, $r5, $r6, $r7, $r8;
+        boolean $z0, $z1, $z2, $z3;
+        javax.crypto.SecretKey r9, r10;
+        java.lang.String varReplacer2602, varReplacer2603, varReplacer2605, varReplacer2606;
+        null_type varReplacer2604;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r9 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: javax.crypto.SecretKey getSecretKeyFromInternalResolvers()>();
+
+        if r9 == null goto label2;
+
+        $r7 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $z3 = interfaceinvoke $r7.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z3 == 0 goto label1;
+
+        $r8 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        varReplacer2606 = "I could find a secret key using the per-KeyInfo key resolvers";
+
+        interfaceinvoke $r8.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2606);
+
+     label1:
+        return r9;
+
+     label2:
+        $r1 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $z0 = interfaceinvoke $r1.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z0 == 0 goto label3;
+
+        $r6 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        varReplacer2605 = "I couldn\'t find a secret key using the per-KeyInfo key resolvers";
+
+        interfaceinvoke $r6.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2605);
+
+     label3:
+        r10 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: javax.crypto.SecretKey getSecretKeyFromStaticResolvers()>();
+
+        if r10 == null goto label5;
+
+        $r4 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $z2 = interfaceinvoke $r4.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z2 == 0 goto label4;
+
+        $r5 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        varReplacer2602 = "I could find a secret key using the system-wide key resolvers";
+
+        interfaceinvoke $r5.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2602);
+
+     label4:
+        return r10;
+
+     label5:
+        $r2 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $z1 = interfaceinvoke $r2.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z1 == 0 goto label6;
+
+        $r3 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        varReplacer2603 = "I couldn\'t find a secret key using the system-wide key resolvers";
+
+        interfaceinvoke $r3.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2603);
+
+     label6:
+        varReplacer2604 = null;
+
+        return varReplacer2604;
+    }
+
+    javax.crypto.SecretKey getSecretKeyFromStaticResolvers() throws org.apache.xml.security.keys.keyresolver.KeyResolverException
+    {
+        java.util.Iterator r0, r6;
+        boolean $z0, $z1, $z2;
+        java.lang.Object $r1, $r7;
+        org.apache.xml.security.keys.keyresolver.KeyResolverSpi r2;
+        org.apache.xml.security.keys.KeyInfo r3;
+        java.lang.String r4;
+        short $s0;
+        java.util.List $r5;
+        org.apache.xml.security.keys.storage.StorageResolver r8;
+        org.w3c.dom.Element $r9;
+        javax.crypto.SecretKey r10;
+        org.w3c.dom.Node r11;
+        null_type varReplacer2607;
+
+        nop;
+
+        r3 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r0 = staticinvoke <org.apache.xml.security.keys.keyresolver.KeyResolver: java.util.Iterator iterator()>();
+
+     label1:
+        $z0 = interfaceinvoke r0.<java.util.Iterator: boolean hasNext()>();
+
+        if $z0 == 0 goto label7;
+
+        $r1 = interfaceinvoke r0.<java.util.Iterator: java.lang.Object next()>();
+
+        r2 = (org.apache.xml.security.keys.keyresolver.KeyResolverSpi) $r1;
+
+        $z1 = r3.<org.apache.xml.security.keys.KeyInfo: boolean secureValidation>;
+
+        virtualinvoke r2.<org.apache.xml.security.keys.keyresolver.KeyResolverSpi: void setSecureValidation(boolean)>($z1);
+
+        r11 = virtualinvoke r3.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Node getFirstChild()>();
+
+        r4 = virtualinvoke r3.<org.apache.xml.security.keys.KeyInfo: java.lang.String getBaseURI()>();
+
+     label2:
+        if r11 == null goto label6;
+
+        $s0 = interfaceinvoke r11.<org.w3c.dom.Node: short getNodeType()>();
+
+        if $s0 != 1 goto label5;
+
+        $r5 = r3.<org.apache.xml.security.keys.KeyInfo: java.util.List storageResolvers>;
+
+        r6 = interfaceinvoke $r5.<java.util.List: java.util.Iterator iterator()>();
+
+     label3:
+        $z2 = interfaceinvoke r6.<java.util.Iterator: boolean hasNext()>();
+
+        if $z2 == 0 goto label5;
+
+        $r7 = interfaceinvoke r6.<java.util.Iterator: java.lang.Object next()>();
+
+        r8 = (org.apache.xml.security.keys.storage.StorageResolver) $r7;
+
+        $r9 = (org.w3c.dom.Element) r11;
+
+        r10 = virtualinvoke r2.<org.apache.xml.security.keys.keyresolver.KeyResolverSpi: javax.crypto.SecretKey engineLookupAndResolveSecretKey(org.w3c.dom.Element,java.lang.String,org.apache.xml.security.keys.storage.StorageResolver)>($r9, r4, r8);
+
+        if r10 == null goto label4;
+
+        return r10;
+
+     label4:
+        goto label3;
+
+     label5:
+        r11 = interfaceinvoke r11.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+
+        goto label2;
+
+     label6:
+        goto label1;
+
+     label7:
+        varReplacer2607 = null;
+
+        return varReplacer2607;
+    }
+
+    javax.crypto.SecretKey getSecretKeyFromInternalResolvers() throws org.apache.xml.security.keys.keyresolver.KeyResolverException
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        java.util.List $r1, $r7;
+        java.util.Iterator r2, r8;
+        boolean $z0, $z1, $z2, $z3;
+        java.lang.Object $r3, $r9;
+        org.apache.xml.security.keys.keyresolver.KeyResolverSpi r4;
+        org.slf4j.Logger $r5, $r14;
+        java.lang.String r6, $r17, $r19, varReplacer2609;
+        short $s0;
+        org.apache.xml.security.keys.storage.StorageResolver r10;
+        org.w3c.dom.Element $r11;
+        javax.crypto.SecretKey r12;
+        java.lang.StringBuilder $r13, $r15, $r18;
+        java.lang.Class $r16;
+        org.w3c.dom.Node r20;
+        null_type varReplacer2608;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        $r1 = r0.<org.apache.xml.security.keys.KeyInfo: java.util.List internalKeyResolvers>;
+
+        r2 = interfaceinvoke $r1.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $z0 = interfaceinvoke r2.<java.util.Iterator: boolean hasNext()>();
+
+        if $z0 == 0 goto label8;
+
+        $r3 = interfaceinvoke r2.<java.util.Iterator: java.lang.Object next()>();
+
+        r4 = (org.apache.xml.security.keys.keyresolver.KeyResolverSpi) $r3;
+
+        $r5 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $z1 = interfaceinvoke $r5.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z1 == 0 goto label2;
+
+        $r14 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $r13 = new java.lang.StringBuilder;
+
+        specialinvoke $r13.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer2609 = "Try ";
+
+        $r15 = virtualinvoke $r13.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2609);
+
+        $r16 = virtualinvoke r4.<java.lang.Object: java.lang.Class getClass()>();
+
+        $r17 = virtualinvoke $r16.<java.lang.Class: java.lang.String getName()>();
+
+        $r18 = virtualinvoke $r15.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r17);
+
+        $r19 = virtualinvoke $r18.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r14.<org.slf4j.Logger: void debug(java.lang.String)>($r19);
+
+     label2:
+        $z2 = r0.<org.apache.xml.security.keys.KeyInfo: boolean secureValidation>;
+
+        virtualinvoke r4.<org.apache.xml.security.keys.keyresolver.KeyResolverSpi: void setSecureValidation(boolean)>($z2);
+
+        r20 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Node getFirstChild()>();
+
+        r6 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: java.lang.String getBaseURI()>();
+
+     label3:
+        if r20 == null goto label7;
+
+        $s0 = interfaceinvoke r20.<org.w3c.dom.Node: short getNodeType()>();
+
+        if $s0 != 1 goto label6;
+
+        $r7 = r0.<org.apache.xml.security.keys.KeyInfo: java.util.List storageResolvers>;
+
+        r8 = interfaceinvoke $r7.<java.util.List: java.util.Iterator iterator()>();
+
+     label4:
+        $z3 = interfaceinvoke r8.<java.util.Iterator: boolean hasNext()>();
+
+        if $z3 == 0 goto label6;
+
+        $r9 = interfaceinvoke r8.<java.util.Iterator: java.lang.Object next()>();
+
+        r10 = (org.apache.xml.security.keys.storage.StorageResolver) $r9;
+
+        $r11 = (org.w3c.dom.Element) r20;
+
+        r12 = virtualinvoke r4.<org.apache.xml.security.keys.keyresolver.KeyResolverSpi: javax.crypto.SecretKey engineLookupAndResolveSecretKey(org.w3c.dom.Element,java.lang.String,org.apache.xml.security.keys.storage.StorageResolver)>($r11, r6, r10);
+
+        if r12 == null goto label5;
+
+        return r12;
+
+     label5:
+        goto label4;
+
+     label6:
+        r20 = interfaceinvoke r20.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+
+        goto label3;
+
+     label7:
+        goto label1;
+
+     label8:
+        varReplacer2608 = null;
+
+        return varReplacer2608;
+    }
+
+    public java.security.PrivateKey getPrivateKey() throws org.apache.xml.security.keys.keyresolver.KeyResolverException
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.slf4j.Logger $r1, $r2, $r3, $r4, $r5, $r6, $r7, $r8;
+        boolean $z0, $z1, $z2, $z3;
+        java.security.PrivateKey r9, r10;
+        null_type varReplacer2610;
+        java.lang.String varReplacer2611, varReplacer2612, varReplacer2613, varReplacer2614;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r9 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: java.security.PrivateKey getPrivateKeyFromInternalResolvers()>();
+
+        if r9 == null goto label2;
+
+        $r7 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $z3 = interfaceinvoke $r7.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z3 == 0 goto label1;
+
+        $r8 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        varReplacer2613 = "I could find a private key using the per-KeyInfo key resolvers";
+
+        interfaceinvoke $r8.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2613);
+
+     label1:
+        return r9;
+
+     label2:
+        $r1 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $z0 = interfaceinvoke $r1.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z0 == 0 goto label3;
+
+        $r6 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        varReplacer2612 = "I couldn\'t find a secret key using the per-KeyInfo key resolvers";
+
+        interfaceinvoke $r6.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2612);
+
+     label3:
+        r10 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: java.security.PrivateKey getPrivateKeyFromStaticResolvers()>();
+
+        if r10 == null goto label5;
+
+        $r4 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $z2 = interfaceinvoke $r4.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z2 == 0 goto label4;
+
+        $r5 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        varReplacer2611 = "I could find a private key using the system-wide key resolvers";
+
+        interfaceinvoke $r5.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2611);
+
+     label4:
+        return r10;
+
+     label5:
+        $r2 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $z1 = interfaceinvoke $r2.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z1 == 0 goto label6;
+
+        $r3 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        varReplacer2614 = "I couldn\'t find a private key using the system-wide key resolvers";
+
+        interfaceinvoke $r3.<org.slf4j.Logger: void debug(java.lang.String)>(varReplacer2614);
+
+     label6:
+        varReplacer2610 = null;
+
+        return varReplacer2610;
+    }
+
+    java.security.PrivateKey getPrivateKeyFromStaticResolvers() throws org.apache.xml.security.keys.keyresolver.KeyResolverException
+    {
+        java.util.Iterator r0;
+        boolean $z0, $z1;
+        java.lang.Object $r1;
+        org.apache.xml.security.keys.keyresolver.KeyResolverSpi r2;
+        org.apache.xml.security.keys.KeyInfo r3;
+        java.lang.String r4;
+        short $s0;
+        org.w3c.dom.Element $r5;
+        java.security.PrivateKey r6;
+        org.w3c.dom.Node r7;
+        null_type varReplacer2615, varReplacer2616;
+
+        nop;
+
+        r3 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r0 = staticinvoke <org.apache.xml.security.keys.keyresolver.KeyResolver: java.util.Iterator iterator()>();
+
+     label1:
+        $z0 = interfaceinvoke r0.<java.util.Iterator: boolean hasNext()>();
+
+        if $z0 == 0 goto label5;
+
+        $r1 = interfaceinvoke r0.<java.util.Iterator: java.lang.Object next()>();
+
+        r2 = (org.apache.xml.security.keys.keyresolver.KeyResolverSpi) $r1;
+
+        $z1 = r3.<org.apache.xml.security.keys.KeyInfo: boolean secureValidation>;
+
+        virtualinvoke r2.<org.apache.xml.security.keys.keyresolver.KeyResolverSpi: void setSecureValidation(boolean)>($z1);
+
+        r7 = virtualinvoke r3.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Node getFirstChild()>();
+
+        r4 = virtualinvoke r3.<org.apache.xml.security.keys.KeyInfo: java.lang.String getBaseURI()>();
+
+     label2:
+        if r7 == null goto label4;
+
+        $s0 = interfaceinvoke r7.<org.w3c.dom.Node: short getNodeType()>();
+
+        if $s0 != 1 goto label3;
+
+        $r5 = (org.w3c.dom.Element) r7;
+
+        varReplacer2616 = null;
+
+        r6 = virtualinvoke r2.<org.apache.xml.security.keys.keyresolver.KeyResolverSpi: java.security.PrivateKey engineLookupAndResolvePrivateKey(org.w3c.dom.Element,java.lang.String,org.apache.xml.security.keys.storage.StorageResolver)>($r5, r4, varReplacer2616);
+
+        if r6 == null goto label3;
+
+        return r6;
+
+     label3:
+        r7 = interfaceinvoke r7.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+
+        goto label2;
+
+     label4:
+        goto label1;
+
+     label5:
+        varReplacer2615 = null;
+
+        return varReplacer2615;
+    }
+
+    java.security.PrivateKey getPrivateKeyFromInternalResolvers() throws org.apache.xml.security.keys.keyresolver.KeyResolverException
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        java.util.List $r1;
+        java.util.Iterator r2;
+        boolean $z0, $z1, $z2;
+        java.lang.Object $r3;
+        org.apache.xml.security.keys.keyresolver.KeyResolverSpi r4;
+        org.slf4j.Logger $r5, $r10;
+        java.lang.String r6, $r13, $r15, varReplacer2619;
+        short $s0;
+        org.w3c.dom.Element $r7;
+        java.security.PrivateKey r8;
+        java.lang.StringBuilder $r9, $r11, $r14;
+        java.lang.Class $r12;
+        org.w3c.dom.Node r16;
+        null_type varReplacer2617, varReplacer2618;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        $r1 = r0.<org.apache.xml.security.keys.KeyInfo: java.util.List internalKeyResolvers>;
+
+        r2 = interfaceinvoke $r1.<java.util.List: java.util.Iterator iterator()>();
+
+     label1:
+        $z0 = interfaceinvoke r2.<java.util.Iterator: boolean hasNext()>();
+
+        if $z0 == 0 goto label6;
+
+        $r3 = interfaceinvoke r2.<java.util.Iterator: java.lang.Object next()>();
+
+        r4 = (org.apache.xml.security.keys.keyresolver.KeyResolverSpi) $r3;
+
+        $r5 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $z1 = interfaceinvoke $r5.<org.slf4j.Logger: boolean isDebugEnabled()>();
+
+        if $z1 == 0 goto label2;
+
+        $r10 = <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log>;
+
+        $r9 = new java.lang.StringBuilder;
+
+        specialinvoke $r9.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer2619 = "Try ";
+
+        $r11 = virtualinvoke $r9.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer2619);
+
+        $r12 = virtualinvoke r4.<java.lang.Object: java.lang.Class getClass()>();
+
+        $r13 = virtualinvoke $r12.<java.lang.Class: java.lang.String getName()>();
+
+        $r14 = virtualinvoke $r11.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r13);
+
+        $r15 = virtualinvoke $r14.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        interfaceinvoke $r10.<org.slf4j.Logger: void debug(java.lang.String)>($r15);
+
+     label2:
+        $z2 = r0.<org.apache.xml.security.keys.KeyInfo: boolean secureValidation>;
+
+        virtualinvoke r4.<org.apache.xml.security.keys.keyresolver.KeyResolverSpi: void setSecureValidation(boolean)>($z2);
+
+        r16 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: org.w3c.dom.Node getFirstChild()>();
+
+        r6 = virtualinvoke r0.<org.apache.xml.security.keys.KeyInfo: java.lang.String getBaseURI()>();
+
+     label3:
+        if r16 == null goto label5;
+
+        $s0 = interfaceinvoke r16.<org.w3c.dom.Node: short getNodeType()>();
+
+        if $s0 != 1 goto label4;
+
+        $r7 = (org.w3c.dom.Element) r16;
+
+        varReplacer2618 = null;
+
+        r8 = virtualinvoke r4.<org.apache.xml.security.keys.keyresolver.KeyResolverSpi: java.security.PrivateKey engineLookupAndResolvePrivateKey(org.w3c.dom.Element,java.lang.String,org.apache.xml.security.keys.storage.StorageResolver)>($r7, r6, varReplacer2618);
+
+        if r8 == null goto label4;
+
+        return r8;
+
+     label4:
+        r16 = interfaceinvoke r16.<org.w3c.dom.Node: org.w3c.dom.Node getNextSibling()>();
+
+        goto label3;
+
+     label5:
+        goto label1;
+
+     label6:
+        varReplacer2617 = null;
+
+        return varReplacer2617;
+    }
+
+    public void registerInternalKeyResolver(org.apache.xml.security.keys.keyresolver.KeyResolverSpi)
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        org.apache.xml.security.keys.keyresolver.KeyResolverSpi r1;
+        java.util.List $r2;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r1 := @parameter0: org.apache.xml.security.keys.keyresolver.KeyResolverSpi;
+
+        $r2 = r0.<org.apache.xml.security.keys.KeyInfo: java.util.List internalKeyResolvers>;
+
+        interfaceinvoke $r2.<java.util.List: boolean add(java.lang.Object)>(r1);
+
+        return;
+    }
+
+    int lengthInternalKeyResolver()
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        java.util.List $r1;
+        int $i0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        $r1 = r0.<org.apache.xml.security.keys.KeyInfo: java.util.List internalKeyResolvers>;
+
+        $i0 = interfaceinvoke $r1.<java.util.List: int size()>();
+
+        return $i0;
+    }
+
+    org.apache.xml.security.keys.keyresolver.KeyResolverSpi itemInternalKeyResolver(int)
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        int i0;
+        java.util.List $r1;
+        java.lang.Object $r2;
+        org.apache.xml.security.keys.keyresolver.KeyResolverSpi $r3;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        i0 := @parameter0: int;
+
+        $r1 = r0.<org.apache.xml.security.keys.KeyInfo: java.util.List internalKeyResolvers>;
+
+        $r2 = interfaceinvoke $r1.<java.util.List: java.lang.Object get(int)>(i0);
+
+        $r3 = (org.apache.xml.security.keys.keyresolver.KeyResolverSpi) $r2;
+
+        return $r3;
+    }
+
+    public void addStorageResolver(org.apache.xml.security.keys.storage.StorageResolver)
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        java.util.List $r1, $r2, $r4;
+        org.apache.xml.security.keys.storage.StorageResolver r3;
+        java.util.ArrayList $r5;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        r3 := @parameter0: org.apache.xml.security.keys.storage.StorageResolver;
+
+        $r2 = r0.<org.apache.xml.security.keys.KeyInfo: java.util.List storageResolvers>;
+
+        $r1 = <org.apache.xml.security.keys.KeyInfo: java.util.List nullList>;
+
+        if $r2 != $r1 goto label1;
+
+        $r5 = new java.util.ArrayList;
+
+        specialinvoke $r5.<java.util.ArrayList: void <init>()>();
+
+        r0.<org.apache.xml.security.keys.KeyInfo: java.util.List storageResolvers> = $r5;
+
+     label1:
+        $r4 = r0.<org.apache.xml.security.keys.KeyInfo: java.util.List storageResolvers>;
+
+        interfaceinvoke $r4.<java.util.List: boolean add(java.lang.Object)>(r3);
+
+        return;
+    }
+
+    public java.lang.String getBaseLocalName()
+    {
+        org.apache.xml.security.keys.KeyInfo r0;
+        java.lang.String varReplacer2620;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.keys.KeyInfo;
+
+        varReplacer2620 = "KeyInfo";
+
+        return varReplacer2620;
+    }
+
+    static void <clinit>()
+    {
+        org.slf4j.Logger $r0;
+        java.util.ArrayList $r1, r2;
+        java.util.List $r3;
+        null_type varReplacer2621;
+        int varReplacer2622;
+
+        nop;
+
+        $r0 = staticinvoke <org.slf4j.LoggerFactory: org.slf4j.Logger getLogger(java.lang.Class)>(class "Lorg/apache/xml/security/keys/KeyInfo;");
+
+        <org.apache.xml.security.keys.KeyInfo: org.slf4j.Logger log> = $r0;
+
+        $r1 = new java.util.ArrayList;
+
+        varReplacer2622 = 1;
+
+        specialinvoke $r1.<java.util.ArrayList: void <init>(int)>(varReplacer2622);
+
+        r2 = $r1;
+
+        varReplacer2621 = null;
+
+        interfaceinvoke r2.<java.util.List: boolean add(java.lang.Object)>(varReplacer2621);
+
+        $r3 = staticinvoke <java.util.Collections: java.util.List unmodifiableList(java.util.List)>(r2);
+
+        <org.apache.xml.security.keys.KeyInfo: java.util.List nullList> = $r3;
+
+        return;
+    }
+}

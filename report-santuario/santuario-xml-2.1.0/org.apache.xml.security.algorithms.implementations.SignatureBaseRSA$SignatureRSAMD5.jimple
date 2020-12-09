@@ -1,0 +1,30 @@
+public class org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSAMD5 extends org.apache.xml.security.algorithms.implementations.SignatureBaseRSA
+{
+
+    public void <init>() throws org.apache.xml.security.signature.XMLSignatureException
+    {
+        org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSAMD5 r0;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSAMD5;
+
+        specialinvoke r0.<org.apache.xml.security.algorithms.implementations.SignatureBaseRSA: void <init>()>();
+
+        return;
+    }
+
+    public java.lang.String engineGetURI()
+    {
+        org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSAMD5 r0;
+        java.lang.String varReplacer1934;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.algorithms.implementations.SignatureBaseRSA$SignatureRSAMD5;
+
+        varReplacer1934 = "http://www.w3.org/2001/04/xmldsig-more#rsa-md5";
+
+        return varReplacer1934;
+    }
+}

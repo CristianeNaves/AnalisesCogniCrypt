@@ -1,0 +1,58 @@
+public class org.apache.sshd.common.signature.SignatureRSA extends org.apache.sshd.common.signature.AbstractSignature
+{
+
+    public void <init>()
+    {
+        org.apache.sshd.common.signature.SignatureRSA r0;
+        java.lang.String varReplacer724;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.signature.SignatureRSA;
+
+        varReplacer724 = "SHA1withRSA";
+
+        specialinvoke r0.<org.apache.sshd.common.signature.AbstractSignature: void <init>(java.lang.String)>(varReplacer724);
+
+        return;
+    }
+
+    public byte[] sign() throws java.lang.Exception
+    {
+        org.apache.sshd.common.signature.SignatureRSA r0;
+        java.security.Signature $r1;
+        byte[] $r2;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.signature.SignatureRSA;
+
+        $r1 = r0.<org.apache.sshd.common.signature.SignatureRSA: java.security.Signature signature>;
+
+        $r2 = virtualinvoke $r1.<java.security.Signature: byte[] sign()>();
+
+        return $r2;
+    }
+
+    public boolean verify(byte[]) throws java.lang.Exception
+    {
+        org.apache.sshd.common.signature.SignatureRSA r0;
+        java.security.Signature $r1;
+        boolean $z0;
+        byte[] r2, r3;
+
+        nop;
+
+        r0 := @this: org.apache.sshd.common.signature.SignatureRSA;
+
+        r2 := @parameter0: byte[];
+
+        r3 = virtualinvoke r0.<org.apache.sshd.common.signature.SignatureRSA: byte[] extractSig(byte[])>(r2);
+
+        $r1 = r0.<org.apache.sshd.common.signature.SignatureRSA: java.security.Signature signature>;
+
+        $z0 = virtualinvoke $r1.<java.security.Signature: boolean verify(byte[])>(r3);
+
+        return $z0;
+    }
+}

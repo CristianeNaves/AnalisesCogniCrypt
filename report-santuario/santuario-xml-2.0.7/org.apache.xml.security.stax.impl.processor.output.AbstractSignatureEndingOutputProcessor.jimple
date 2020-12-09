@@ -1,0 +1,533 @@
+public abstract class org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor extends org.apache.xml.security.stax.ext.AbstractBufferingOutputProcessor
+{
+    private java.util.List signaturePartDefList;
+
+    public void <init>(org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor) throws org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor r0;
+        org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor r1;
+        java.util.List $r2;
+
+        nop;
+
+        r0 := @this: org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor;
+
+        r1 := @parameter0: org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor;
+
+        specialinvoke r0.<org.apache.xml.security.stax.ext.AbstractBufferingOutputProcessor: void <init>()>();
+
+        $r2 = virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureOutputProcessor: java.util.List getSignaturePartDefList()>();
+
+        r0.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: java.util.List signaturePartDefList> = $r2;
+
+        return;
+    }
+
+    public void processHeaderEvent(org.apache.xml.security.stax.ext.OutputProcessorChain) throws javax.xml.stream.XMLStreamException, org.apache.xml.security.exceptions.XMLSecurityException
+    {
+        org.apache.xml.security.stax.ext.OutputProcessorChain r0, r2;
+        org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor r1;
+        javax.xml.namespace.QName $r4, $r7, $r23, $r28, $r30, $r35, $r36, $r41, $r43, $r49, $r50, $r53, $r69, $r72, $r74, $r90, $r93, $r97, $r98, $r104, $r106, $r109, $r112, $r113, $r114, $r116, $r117;
+        java.lang.String $r5, $r11, r20, $r21, r27, $r40, $r44, $r57, $r64, $r67, $r70, r86, $r95, r101, $r110, $r115, varReplacer4699, varReplacer4703, varReplacer4705, varReplacer4708, varReplacer4715, varReplacer4717, varReplacer4718;
+        org.apache.xml.security.stax.ext.stax.XMLSecAttribute $r6, $r29, $r45, $r71, $r96, $r105, $r111;
+        org.apache.xml.security.stax.ext.stax.XMLSecStartElement r8;
+        org.apache.xml.security.stax.impl.algorithms.SignatureAlgorithmFactory $r9;
+        org.apache.xml.security.stax.ext.XMLSecurityProperties $r10, $r19, $r26, $r32, $r47, $r52, $r94;
+        org.apache.xml.security.stax.impl.algorithms.SignatureAlgorithm r12;
+        org.apache.xml.security.stax.ext.OutboundSecurityContext $r13, $r15;
+        java.lang.Object $r14, $r17, $r54, r87;
+        org.apache.xml.security.stax.securityToken.SecurityTokenProvider r16;
+        org.apache.xml.security.stax.securityToken.OutboundSecurityToken r18;
+        boolean $z1, $z3, $z6, $z7, $z8, $z9, $z12, $z14;
+        org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor$SignedInfoProcessor r22;
+        java.util.Iterator r34;
+        byte[] $r39, $r75, r118;
+        org.apache.xml.security.stax.securityToken.SecurityTokenConstants$KeyIdentifier $r46, $r48;
+        java.lang.StringBuilder $r56, $r58, $r63, $r65, $r66, $r129, $r130;
+        java.lang.Throwable $r79, $r81, r84, r85;
+        java.util.ArrayList r83, r88, r89, r92, r103, r108, r119, $r120, $r126, $r127, $r128, $r131, $r132, $r134;
+        java.util.List $r99;
+        org.apache.xml.security.stax.impl.SignaturePartDef r100;
+        org.apache.xml.security.exceptions.XMLSecurityException $r121, $r122, $r123, $r124, $r125;
+        org.apache.commons.codec.binary.Base64 $r133;
+        java.lang.Exception $r135, $r136;
+        java.security.Key $r137, $r138;
+        int varReplacer4691, varReplacer4692, varReplacer4693, varReplacer4694, varReplacer4696, varReplacer4697, varReplacer4698, varReplacer4700, varReplacer4702, varReplacer4704, varReplacer4706, varReplacer4709, varReplacer4710, varReplacer4711, varReplacer4712, varReplacer4713, varReplacer4716, varReplacer4720;
+        null_type varReplacer4695, varReplacer4701, varReplacer4707, varReplacer4714, varReplacer4719;
+
+        nop;
+
+        r1 := @this: org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor;
+
+        r0 := @parameter0: org.apache.xml.security.stax.ext.OutputProcessorChain;
+
+        r2 = interfaceinvoke r0.<org.apache.xml.security.stax.ext.OutputProcessorChain: org.apache.xml.security.stax.ext.OutputProcessorChain createSubChain(org.apache.xml.security.stax.ext.OutputProcessor)>(r1);
+
+        $r120 = new java.util.ArrayList;
+
+        varReplacer4691 = 1;
+
+        specialinvoke $r120.<java.util.ArrayList: void <init>(int)>(varReplacer4691);
+
+        r83 = $r120;
+
+        $r4 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName ATT_NULL_Id>;
+
+        varReplacer4719 = null;
+
+        $r5 = staticinvoke <org.apache.xml.security.stax.impl.util.IDGenerator: java.lang.String generateID(java.lang.String)>(varReplacer4719);
+
+        $r6 = virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: org.apache.xml.security.stax.ext.stax.XMLSecAttribute createAttribute(javax.xml.namespace.QName,java.lang.String)>($r4, $r5);
+
+        interfaceinvoke r83.<java.util.List: boolean add(java.lang.Object)>($r6);
+
+        $r7 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName TAG_dsig_Signature>;
+
+        varReplacer4704 = 1;
+
+        r8 = virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: org.apache.xml.security.stax.ext.stax.XMLSecStartElement createStartElementAndOutputAsEvent(org.apache.xml.security.stax.ext.OutputProcessorChain,javax.xml.namespace.QName,boolean,java.util.List)>(r2, $r7, varReplacer4704, r83);
+
+     label01:
+        $r9 = staticinvoke <org.apache.xml.security.stax.impl.algorithms.SignatureAlgorithmFactory: org.apache.xml.security.stax.impl.algorithms.SignatureAlgorithmFactory getInstance()>();
+
+        $r10 = virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: org.apache.xml.security.stax.ext.XMLSecurityProperties getSecurityProperties()>();
+
+        $r11 = virtualinvoke $r10.<org.apache.xml.security.stax.ext.XMLSecurityProperties: java.lang.String getSignatureAlgorithm()>();
+
+        r12 = virtualinvoke $r9.<org.apache.xml.security.stax.impl.algorithms.SignatureAlgorithmFactory: org.apache.xml.security.stax.impl.algorithms.SignatureAlgorithm getSignatureAlgorithm(java.lang.String)>($r11);
+
+     label02:
+        goto label05;
+
+     label03:
+        $r81 := @caughtexception;
+
+        r84 = $r81;
+
+        $r121 = new org.apache.xml.security.exceptions.XMLSecurityException;
+
+        $r135 = (java.lang.Exception) r84;
+
+        specialinvoke $r121.<org.apache.xml.security.exceptions.XMLSecurityException: void <init>(java.lang.Exception)>($r135);
+
+        throw $r121;
+
+     label04:
+        $r79 := @caughtexception;
+
+        r85 = $r79;
+
+        $r122 = new org.apache.xml.security.exceptions.XMLSecurityException;
+
+        $r136 = (java.lang.Exception) r85;
+
+        specialinvoke $r122.<org.apache.xml.security.exceptions.XMLSecurityException: void <init>(java.lang.Exception)>($r136);
+
+        throw $r122;
+
+     label05:
+        $r13 = interfaceinvoke r0.<org.apache.xml.security.stax.ext.OutputProcessorChain: org.apache.xml.security.stax.ext.OutboundSecurityContext getSecurityContext()>();
+
+        varReplacer4699 = "PROP_USE_THIS_TOKEN_ID_FOR_SIGNATURE";
+
+        $r14 = interfaceinvoke $r13.<org.apache.xml.security.stax.ext.OutboundSecurityContext: java.lang.Object get(java.lang.String)>(varReplacer4699);
+
+        r86 = (java.lang.String) $r14;
+
+        if r86 != null goto label06;
+
+        $r123 = new org.apache.xml.security.exceptions.XMLSecurityException;
+
+        varReplacer4717 = "stax.keyNotFound";
+
+        specialinvoke $r123.<org.apache.xml.security.exceptions.XMLSecurityException: void <init>(java.lang.String)>(varReplacer4717);
+
+        throw $r123;
+
+     label06:
+        $r15 = interfaceinvoke r0.<org.apache.xml.security.stax.ext.OutputProcessorChain: org.apache.xml.security.stax.ext.OutboundSecurityContext getSecurityContext()>();
+
+        r16 = interfaceinvoke $r15.<org.apache.xml.security.stax.ext.OutboundSecurityContext: org.apache.xml.security.stax.securityToken.SecurityTokenProvider getSecurityTokenProvider(java.lang.String)>(r86);
+
+        if r16 != null goto label07;
+
+        $r124 = new org.apache.xml.security.exceptions.XMLSecurityException;
+
+        varReplacer4718 = "stax.keyNotFound";
+
+        specialinvoke $r124.<org.apache.xml.security.exceptions.XMLSecurityException: void <init>(java.lang.String)>(varReplacer4718);
+
+        throw $r124;
+
+     label07:
+        $r17 = interfaceinvoke r16.<org.apache.xml.security.stax.securityToken.SecurityTokenProvider: java.lang.Object getSecurityToken()>();
+
+        r18 = (org.apache.xml.security.stax.securityToken.OutboundSecurityToken) $r17;
+
+        if r18 != null goto label08;
+
+        $r125 = new org.apache.xml.security.exceptions.XMLSecurityException;
+
+        varReplacer4705 = "stax.keyNotFound";
+
+        specialinvoke $r125.<org.apache.xml.security.exceptions.XMLSecurityException: void <init>(java.lang.String)>(varReplacer4705);
+
+        throw $r125;
+
+     label08:
+        $r19 = virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: org.apache.xml.security.stax.ext.XMLSecurityProperties getSecurityProperties()>();
+
+        r20 = virtualinvoke $r19.<org.apache.xml.security.stax.ext.XMLSecurityProperties: java.lang.String getSignatureAlgorithm()>();
+
+        r87 = interfaceinvoke r18.<org.apache.xml.security.stax.securityToken.OutboundSecurityToken: java.security.Key getSecretKey(java.lang.String)>(r20);
+
+        $r21 = "http://www.w3.org/2000/09/xmldsig#hmac-sha1";
+
+        $z1 = virtualinvoke $r21.<java.lang.String: boolean equals(java.lang.Object)>(r20);
+
+        if $z1 == 0 goto label09;
+
+        $r137 = (java.security.Key) r87;
+
+        $r75 = interfaceinvoke $r137.<java.security.Key: byte[] getEncoded()>();
+
+        r87 = staticinvoke <org.apache.xml.security.stax.ext.XMLSecurityUtils: javax.crypto.SecretKey prepareSecretKey(java.lang.String,byte[])>(r20, $r75);
+
+     label09:
+        $r138 = (java.security.Key) r87;
+
+        interfaceinvoke r12.<org.apache.xml.security.stax.impl.algorithms.SignatureAlgorithm: void engineInitSign(java.security.Key)>($r138);
+
+        r22 = virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor$SignedInfoProcessor newSignedInfoProcessor(org.apache.xml.security.stax.impl.algorithms.SignatureAlgorithm,org.apache.xml.security.stax.ext.stax.XMLSecStartElement,org.apache.xml.security.stax.ext.OutputProcessorChain)>(r12, r8, r2);
+
+        $r23 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName TAG_dsig_SignedInfo>;
+
+        varReplacer4706 = 0;
+
+        varReplacer4707 = null;
+
+        virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: org.apache.xml.security.stax.ext.stax.XMLSecStartElement createStartElementAndOutputAsEvent(org.apache.xml.security.stax.ext.OutputProcessorChain,javax.xml.namespace.QName,boolean,java.util.List)>(r2, $r23, varReplacer4706, varReplacer4707);
+
+        $r126 = new java.util.ArrayList;
+
+        varReplacer4711 = 1;
+
+        specialinvoke $r126.<java.util.ArrayList: void <init>(int)>(varReplacer4711);
+
+        r88 = $r126;
+
+        $r26 = virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: org.apache.xml.security.stax.ext.XMLSecurityProperties getSecurityProperties()>();
+
+        r27 = virtualinvoke $r26.<org.apache.xml.security.stax.ext.XMLSecurityProperties: java.lang.String getSignatureCanonicalizationAlgorithm()>();
+
+        $r28 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName ATT_NULL_Algorithm>;
+
+        $r29 = virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: org.apache.xml.security.stax.ext.stax.XMLSecAttribute createAttribute(javax.xml.namespace.QName,java.lang.String)>($r28, r27);
+
+        interfaceinvoke r88.<java.util.List: boolean add(java.lang.Object)>($r29);
+
+        $r30 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName TAG_dsig_CanonicalizationMethod>;
+
+        varReplacer4702 = 0;
+
+        virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: org.apache.xml.security.stax.ext.stax.XMLSecStartElement createStartElementAndOutputAsEvent(org.apache.xml.security.stax.ext.OutputProcessorChain,javax.xml.namespace.QName,boolean,java.util.List)>(r2, $r30, varReplacer4702, r88);
+
+        $r32 = virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: org.apache.xml.security.stax.ext.XMLSecurityProperties getSecurityProperties()>();
+
+        $z3 = virtualinvoke $r32.<org.apache.xml.security.stax.ext.XMLSecurityProperties: boolean isAddExcC14NInclusivePrefixes()>();
+
+        if $z3 == 0 goto label10;
+
+        $r67 = "http://www.w3.org/2001/10/xml-exc-c14n#";
+
+        $z12 = virtualinvoke $r67.<java.lang.String: boolean equals(java.lang.Object)>(r27);
+
+        if $z12 == 0 goto label10;
+
+        $r127 = new java.util.ArrayList;
+
+        varReplacer4710 = 1;
+
+        specialinvoke $r127.<java.util.ArrayList: void <init>(int)>(varReplacer4710);
+
+        r89 = $r127;
+
+        $r69 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName ATT_NULL_PrefixList>;
+
+        $r70 = virtualinvoke r22.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor$SignedInfoProcessor: java.lang.String getInclusiveNamespacePrefixes()>();
+
+        $r71 = virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: org.apache.xml.security.stax.ext.stax.XMLSecAttribute createAttribute(javax.xml.namespace.QName,java.lang.String)>($r69, $r70);
+
+        interfaceinvoke r89.<java.util.List: boolean add(java.lang.Object)>($r71);
+
+        $r72 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName TAG_c14nExcl_InclusiveNamespaces>;
+
+        varReplacer4712 = 1;
+
+        virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: org.apache.xml.security.stax.ext.stax.XMLSecStartElement createStartElementAndOutputAsEvent(org.apache.xml.security.stax.ext.OutputProcessorChain,javax.xml.namespace.QName,boolean,java.util.List)>(r2, $r72, varReplacer4712, r89);
+
+        $r74 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName TAG_c14nExcl_InclusiveNamespaces>;
+
+        virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: void createEndElementAndOutputAsEvent(org.apache.xml.security.stax.ext.OutputProcessorChain,javax.xml.namespace.QName)>(r2, $r74);
+
+     label10:
+        $r90 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName TAG_dsig_CanonicalizationMethod>;
+
+        virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: void createEndElementAndOutputAsEvent(org.apache.xml.security.stax.ext.OutputProcessorChain,javax.xml.namespace.QName)>(r2, $r90);
+
+        $r128 = new java.util.ArrayList;
+
+        varReplacer4696 = 1;
+
+        specialinvoke $r128.<java.util.ArrayList: void <init>(int)>(varReplacer4696);
+
+        r92 = $r128;
+
+        $r93 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName ATT_NULL_Algorithm>;
+
+        $r94 = virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: org.apache.xml.security.stax.ext.XMLSecurityProperties getSecurityProperties()>();
+
+        $r95 = virtualinvoke $r94.<org.apache.xml.security.stax.ext.XMLSecurityProperties: java.lang.String getSignatureAlgorithm()>();
+
+        $r96 = virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: org.apache.xml.security.stax.ext.stax.XMLSecAttribute createAttribute(javax.xml.namespace.QName,java.lang.String)>($r93, $r95);
+
+        interfaceinvoke r92.<java.util.List: boolean add(java.lang.Object)>($r96);
+
+        $r97 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName TAG_dsig_SignatureMethod>;
+
+        varReplacer4713 = 0;
+
+        virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: org.apache.xml.security.stax.ext.stax.XMLSecStartElement createStartElementAndOutputAsEvent(org.apache.xml.security.stax.ext.OutputProcessorChain,javax.xml.namespace.QName,boolean,java.util.List)>(r2, $r97, varReplacer4713, r92);
+
+        $r98 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName TAG_dsig_SignatureMethod>;
+
+        virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: void createEndElementAndOutputAsEvent(org.apache.xml.security.stax.ext.OutputProcessorChain,javax.xml.namespace.QName)>(r2, $r98);
+
+        $r99 = r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: java.util.List signaturePartDefList>;
+
+        r34 = interfaceinvoke $r99.<java.util.List: java.util.Iterator iterator()>();
+
+     label11:
+        $z14 = interfaceinvoke r34.<java.util.Iterator: boolean hasNext()>();
+
+        if $z14 == 0 goto label15;
+
+        $r54 = interfaceinvoke r34.<java.util.Iterator: java.lang.Object next()>();
+
+        r100 = (org.apache.xml.security.stax.impl.SignaturePartDef) $r54;
+
+        $z8 = virtualinvoke r100.<org.apache.xml.security.stax.impl.SignaturePartDef: boolean isExternalResource()>();
+
+        if $z8 == 0 goto label12;
+
+        r101 = virtualinvoke r100.<org.apache.xml.security.stax.impl.SignaturePartDef: java.lang.String getSigRefId()>();
+
+        goto label14;
+
+     label12:
+        $z9 = virtualinvoke r100.<org.apache.xml.security.stax.impl.SignaturePartDef: boolean isGenerateXPointer()>();
+
+        if $z9 == 0 goto label13;
+
+        $r129 = new java.lang.StringBuilder;
+
+        specialinvoke $r129.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer4715 = "#xpointer(id(\'";
+
+        $r63 = virtualinvoke $r129.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer4715);
+
+        $r64 = virtualinvoke r100.<org.apache.xml.security.stax.impl.SignaturePartDef: java.lang.String getSigRefId()>();
+
+        $r65 = virtualinvoke $r63.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r64);
+
+        varReplacer4708 = "\'))";
+
+        $r66 = virtualinvoke $r65.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer4708);
+
+        r101 = virtualinvoke $r66.<java.lang.StringBuilder: java.lang.String toString()>();
+
+        goto label14;
+
+     label13:
+        $r130 = new java.lang.StringBuilder;
+
+        specialinvoke $r130.<java.lang.StringBuilder: void <init>()>();
+
+        varReplacer4703 = "#";
+
+        $r56 = virtualinvoke $r130.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>(varReplacer4703);
+
+        $r57 = virtualinvoke r100.<org.apache.xml.security.stax.impl.SignaturePartDef: java.lang.String getSigRefId()>();
+
+        $r58 = virtualinvoke $r56.<java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)>($r57);
+
+        r101 = virtualinvoke $r58.<java.lang.StringBuilder: java.lang.String toString()>();
+
+     label14:
+        $r131 = new java.util.ArrayList;
+
+        varReplacer4709 = 1;
+
+        specialinvoke $r131.<java.util.ArrayList: void <init>(int)>(varReplacer4709);
+
+        r103 = $r131;
+
+        $r104 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName ATT_NULL_URI>;
+
+        $r105 = virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: org.apache.xml.security.stax.ext.stax.XMLSecAttribute createAttribute(javax.xml.namespace.QName,java.lang.String)>($r104, r101);
+
+        interfaceinvoke r103.<java.util.List: boolean add(java.lang.Object)>($r105);
+
+        $r106 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName TAG_dsig_Reference>;
+
+        varReplacer4693 = 0;
+
+        virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: org.apache.xml.security.stax.ext.stax.XMLSecStartElement createStartElementAndOutputAsEvent(org.apache.xml.security.stax.ext.OutputProcessorChain,javax.xml.namespace.QName,boolean,java.util.List)>(r2, $r106, varReplacer4693, r103);
+
+        virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: void createTransformsStructureForSignature(org.apache.xml.security.stax.ext.OutputProcessorChain,org.apache.xml.security.stax.impl.SignaturePartDef)>(r2, r100);
+
+        $r132 = new java.util.ArrayList;
+
+        varReplacer4697 = 1;
+
+        specialinvoke $r132.<java.util.ArrayList: void <init>(int)>(varReplacer4697);
+
+        r108 = $r132;
+
+        $r109 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName ATT_NULL_Algorithm>;
+
+        $r110 = virtualinvoke r100.<org.apache.xml.security.stax.impl.SignaturePartDef: java.lang.String getDigestAlgo()>();
+
+        $r111 = virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: org.apache.xml.security.stax.ext.stax.XMLSecAttribute createAttribute(javax.xml.namespace.QName,java.lang.String)>($r109, $r110);
+
+        interfaceinvoke r108.<java.util.List: boolean add(java.lang.Object)>($r111);
+
+        $r112 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName TAG_dsig_DigestMethod>;
+
+        varReplacer4698 = 0;
+
+        virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: org.apache.xml.security.stax.ext.stax.XMLSecStartElement createStartElementAndOutputAsEvent(org.apache.xml.security.stax.ext.OutputProcessorChain,javax.xml.namespace.QName,boolean,java.util.List)>(r2, $r112, varReplacer4698, r108);
+
+        $r113 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName TAG_dsig_DigestMethod>;
+
+        virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: void createEndElementAndOutputAsEvent(org.apache.xml.security.stax.ext.OutputProcessorChain,javax.xml.namespace.QName)>(r2, $r113);
+
+        $r114 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName TAG_dsig_DigestValue>;
+
+        varReplacer4694 = 0;
+
+        varReplacer4695 = null;
+
+        virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: org.apache.xml.security.stax.ext.stax.XMLSecStartElement createStartElementAndOutputAsEvent(org.apache.xml.security.stax.ext.OutputProcessorChain,javax.xml.namespace.QName,boolean,java.util.List)>(r2, $r114, varReplacer4694, varReplacer4695);
+
+        $r115 = virtualinvoke r100.<org.apache.xml.security.stax.impl.SignaturePartDef: java.lang.String getDigestValue()>();
+
+        virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: void createCharactersAndOutputAsEvent(org.apache.xml.security.stax.ext.OutputProcessorChain,java.lang.String)>(r2, $r115);
+
+        $r116 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName TAG_dsig_DigestValue>;
+
+        virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: void createEndElementAndOutputAsEvent(org.apache.xml.security.stax.ext.OutputProcessorChain,javax.xml.namespace.QName)>(r2, $r116);
+
+        $r117 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName TAG_dsig_Reference>;
+
+        virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: void createEndElementAndOutputAsEvent(org.apache.xml.security.stax.ext.OutputProcessorChain,javax.xml.namespace.QName)>(r2, $r117);
+
+        goto label11;
+
+     label15:
+        $r35 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName TAG_dsig_SignedInfo>;
+
+        virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: void createEndElementAndOutputAsEvent(org.apache.xml.security.stax.ext.OutputProcessorChain,javax.xml.namespace.QName)>(r2, $r35);
+
+        interfaceinvoke r2.<org.apache.xml.security.stax.ext.OutputProcessorChain: void removeProcessor(org.apache.xml.security.stax.ext.OutputProcessor)>(r22);
+
+        $r36 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName TAG_dsig_SignatureValue>;
+
+        varReplacer4700 = 0;
+
+        varReplacer4701 = null;
+
+        virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: org.apache.xml.security.stax.ext.stax.XMLSecStartElement createStartElementAndOutputAsEvent(org.apache.xml.security.stax.ext.OutputProcessorChain,javax.xml.namespace.QName,boolean,java.util.List)>(r2, $r36, varReplacer4700, varReplacer4701);
+
+        r118 = virtualinvoke r22.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor$SignedInfoProcessor: byte[] getSignatureValue()>();
+
+        $r133 = new org.apache.commons.codec.binary.Base64;
+
+        $r39 = newarray (byte)[1];
+
+        $r39[0] = 10;
+
+        varReplacer4692 = 76;
+
+        specialinvoke $r133.<org.apache.commons.codec.binary.Base64: void <init>(int,byte[])>(varReplacer4692, $r39);
+
+        $r40 = virtualinvoke $r133.<org.apache.commons.codec.binary.Base64: java.lang.String encodeToString(byte[])>(r118);
+
+        virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: void createCharactersAndOutputAsEvent(org.apache.xml.security.stax.ext.OutputProcessorChain,java.lang.String)>(r2, $r40);
+
+        $r41 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName TAG_dsig_SignatureValue>;
+
+        virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: void createEndElementAndOutputAsEvent(org.apache.xml.security.stax.ext.OutputProcessorChain,javax.xml.namespace.QName)>(r2, $r41);
+
+        $r134 = new java.util.ArrayList;
+
+        varReplacer4716 = 1;
+
+        specialinvoke $r134.<java.util.ArrayList: void <init>(int)>(varReplacer4716);
+
+        r119 = $r134;
+
+        $r43 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName ATT_NULL_Id>;
+
+        varReplacer4714 = null;
+
+        $r44 = staticinvoke <org.apache.xml.security.stax.impl.util.IDGenerator: java.lang.String generateID(java.lang.String)>(varReplacer4714);
+
+        $r45 = virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: org.apache.xml.security.stax.ext.stax.XMLSecAttribute createAttribute(javax.xml.namespace.QName,java.lang.String)>($r43, $r44);
+
+        interfaceinvoke r119.<java.util.List: boolean add(java.lang.Object)>($r45);
+
+        $r46 = <org.apache.xml.security.stax.securityToken.SecurityTokenConstants: org.apache.xml.security.stax.securityToken.SecurityTokenConstants$KeyIdentifier KeyIdentifier_NoKeyInfo>;
+
+        $r47 = virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: org.apache.xml.security.stax.ext.XMLSecurityProperties getSecurityProperties()>();
+
+        $r48 = virtualinvoke $r47.<org.apache.xml.security.stax.ext.XMLSecurityProperties: org.apache.xml.security.stax.securityToken.SecurityTokenConstants$KeyIdentifier getSignatureKeyIdentifier()>();
+
+        $z6 = virtualinvoke $r46.<org.apache.xml.security.stax.securityToken.SecurityTokenConstants$KeyIdentifier: boolean equals(java.lang.Object)>($r48);
+
+        if $z6 != 0 goto label16;
+
+        $r50 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName TAG_dsig_KeyInfo>;
+
+        varReplacer4720 = 0;
+
+        virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: org.apache.xml.security.stax.ext.stax.XMLSecStartElement createStartElementAndOutputAsEvent(org.apache.xml.security.stax.ext.OutputProcessorChain,javax.xml.namespace.QName,boolean,java.util.List)>(r2, $r50, varReplacer4720, r119);
+
+        $r52 = virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: org.apache.xml.security.stax.ext.XMLSecurityProperties getSecurityProperties()>();
+
+        $z7 = virtualinvoke $r52.<org.apache.xml.security.stax.ext.XMLSecurityProperties: boolean isUseSingleCert()>();
+
+        virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: void createKeyInfoStructureForSignature(org.apache.xml.security.stax.ext.OutputProcessorChain,org.apache.xml.security.stax.securityToken.OutboundSecurityToken,boolean)>(r2, r18, $z7);
+
+        $r53 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName TAG_dsig_KeyInfo>;
+
+        virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: void createEndElementAndOutputAsEvent(org.apache.xml.security.stax.ext.OutputProcessorChain,javax.xml.namespace.QName)>(r2, $r53);
+
+     label16:
+        $r49 = <org.apache.xml.security.stax.ext.XMLSecurityConstants: javax.xml.namespace.QName TAG_dsig_Signature>;
+
+        virtualinvoke r1.<org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor: void createEndElementAndOutputAsEvent(org.apache.xml.security.stax.ext.OutputProcessorChain,javax.xml.namespace.QName)>(r2, $r49);
+
+        return;
+
+        catch java.security.NoSuchAlgorithmException from label01 to label02 with label03;
+        catch java.security.NoSuchProviderException from label01 to label02 with label04;
+    }
+
+    protected abstract org.apache.xml.security.stax.impl.processor.output.AbstractSignatureEndingOutputProcessor$SignedInfoProcessor newSignedInfoProcessor(org.apache.xml.security.stax.impl.algorithms.SignatureAlgorithm, org.apache.xml.security.stax.ext.stax.XMLSecStartElement, org.apache.xml.security.stax.ext.OutputProcessorChain) throws org.apache.xml.security.exceptions.XMLSecurityException;
+
+    protected abstract void createTransformsStructureForSignature(org.apache.xml.security.stax.ext.OutputProcessorChain, org.apache.xml.security.stax.impl.SignaturePartDef) throws javax.xml.stream.XMLStreamException, org.apache.xml.security.exceptions.XMLSecurityException;
+
+    protected abstract void createKeyInfoStructureForSignature(org.apache.xml.security.stax.ext.OutputProcessorChain, org.apache.xml.security.stax.securityToken.OutboundSecurityToken, boolean) throws javax.xml.stream.XMLStreamException, org.apache.xml.security.exceptions.XMLSecurityException;
+}
